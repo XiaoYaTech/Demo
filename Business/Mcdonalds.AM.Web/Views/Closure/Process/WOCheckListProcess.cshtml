@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_WOCheckList" place-holder="8"></top-nav>
+<cheking-point project-id="projectId" flow-code="Closure_WOCheckList" refresh="checkPointRefresh"></cheking-point>
+<closure-upload-wochecklist editable="false" project-id="projectId"></closure-upload-wochecklist>
+<store-basic-info project="ClosureInfo" code="ClosureInfo.USCode"></store-basic-info>
+<closure-write-off-data datas="entity"></closure-write-off-data>
+<notification-message project-id="projectId"
+    flow-code="Closure"
+    sub-flow-code="Closure_WOCheckList"
+    node-id="entity.Id"
+    uscode="ClosureInfo.USCode"></notification-message>
+
+<attachments ref-table-name="ClosureWOCheckList"
+    project-id="{{projectId}}"
+    flow-code="Closure_WOCheckList"
+    editable="true"></attachments>
+
+<approval-records workflow-type="Closure" ref-table-id="entity.Id" ref-table-name="ClosureWOCheckList"></approval-records>
+<comment comments="entity.Comments" title="[[[意见]]]" editable="true"></comment>
+<project-history page-url="/closure/Main#/WOCheckList/Process/View?projectId={{projectId}}" project-id="projectId" table-name="ClosureWOCheckList" title=" WO Checklist History" has-template="false" title-name="WOCheckList"></project-history>
+
+<div class="form-actions ta_c">
+    <button type="button" ng-disabled="submiting" class="btn btn-lg btn-red" ng-click="ApproverSubmit('Approve')">[[[批复]]]</button>
+    <button type="button" ng-disabled="submiting" class="btn btn-lg btn-orange" ng-click="ApproverSubmit('Return')"><span class="fa fa-mail-reply"></span>[[[退回]]]</button>
+</div>

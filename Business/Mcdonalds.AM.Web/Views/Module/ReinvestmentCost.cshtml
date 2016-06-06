@@ -1,0 +1,944 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10">
+    <style>
+        table[id="TableCost"] tr td:first-child {
+            text-align: left;
+        }
+
+        table[id="TableCost"] tr th {
+            text-align: center;
+        }
+    </style>
+    <div class="panel-heading">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title" ng-show="!isCheckPage">
+                Reinvestment Cost
+            </span>
+            <span class="panel-title" ng-show="isCheckPage">
+                Reinvestment Actual Checking
+            </span>
+            <div class="panel-tools" ng-show="editable" style="margin-top:10px;line-height:0px;">
+                <span ng-show="!isCheckPage">Norm Type:</span>
+                &nbsp;&nbsp;
+                @*<select class="form-control" style="width:150px;display: inline-block" ng-model="source.NormType" ng-disabled="!editable" ng-show="!isCheckPage">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                            <option value="1">Reimage-IS (>= 8 year)</option>
+                            <option value="2">Reimage-IS (< 8 year)</option>
+                            <option value="3">Reimage - China Design - IS</option>
+                            <option value="4">Reimage-DT (>= 8 year)</option>
+                            <option value="5">Reimage-DT (< 8 year)</option>
+                            <option value="6">Reimage - China Design - DT</option>
+                            <option value="7">Rebuild (no norm)</option>
+                            <option value="8">Renewal (no morm)</option>
+                            <option value="9">Major Lease Change (no morm)</option>
+                    </select>*@
+
+                <div style="width:120px; display: inline-block;position:absolute;" ng-hide="hideNormType">
+                    <dict-selector parent-code="NormType"
+                                   selected-code="source.NormType"
+                                   selected-dict="SelectedNormType"
+                                   editable="editable"
+                                   dict-filter="normTypeFilter"
+                                   default-select="true"></dict-selector>
+                </div>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <span ng-show="!isCheckPage" style="margin-left:120px;">|</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-sm btn-default" id="downLoadTemplate" ng-click="saveBasicInfo()" ng-show="!isCheckPage">
+                    <span class=" fa fa-cloud-download">
+                    </span>
+                    请先下载模板
+                </a>
+                <a class="btn btn-sm btn-default" id="downLoadTemplate" href="{{downLoadTemplateUrl}}" ng-show="isCheckPage">
+                    <span class="fa fa-cloud-download"></span>
+                    请先下载模板
+                </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                <button plupload-simple
+                        type="button"
+                        class="btn btn-sm btn-default"
+                        upload-url="{{uploadApi}}"
+                        before-upload="beforeUploadFA"
+                        upload-finished="uploadFAFinish"
+                        error-msg="请上传正确的模板">
+                    <span class='fa fa-cloud-upload'></span>
+                    结果上传
+                </button>
+            </div>
+            <span class="clear"></span>
+        </div>
+        <div class="panel-body form-horizontal" ng-show="!isCheckPage">
+            <table width="100%">
+                <tr>
+                    <td class="text-center" valign="top">
+                        <label class="control-label">Item:</label>
+                    </td>
+                    <td class="text-center" valign="top">
+                        <div class="">
+                            Construction Reinvestment FA Tool
+                        </div>
+                    </td>
+                    <td class="text-center" valign="top">
+                        <label class="control-label">Uploaded By:</label>
+                    </td>
+                    <td class="text-center" valign="top">
+                        <div class="">
+                            {{source.ReinCostUser}}
+                        </div>
+                    </td>
+                    <td class="text-center" valign="top">
+                        <label class="control-label">Upload Date:</label>
+                    </td>
+                    <td class="text-center" valign="top">
+                        <div class="">
+                            {{source.ReinCostTime | date:"yyyy-MM-dd"}}
+                        </div>
+                    </td>
+                    <td class="text-center" valign="top">
+                        <label class="col-xs-1 control-label">Status</label>
+                    </td>
+                    <td class="text-center" valign="top">
+                        <div class="pd_t_7">
+                            生效
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <br />
+            @*<div class="form-group">
+
+                    <label class="col-xs-1 control-label">Item:</label>
+                    <div class="col-xs-3 pd_t_7">
+                        Construction Reinvestment FA Tool
+                    </div>
+                    <label class="col-xs-2 control-label">Uploaded By:</label>
+                    <div class="col-xs-1 pd_t_7">
+                        {{source.UploadedBy}}
+                    </div>
+                    <label class="col-xs-2 control-label">Upload Date:</label>
+                    <div class="col-xs-2 pd_t_7">
+                        {{source.UploadDate | date:"yyyy-MM-dd"}}
+                    </div>
+                    <label class="col-xs-1 control-label">Status</label>
+                    <div class="col-xs-1 pd_t_7">
+                        生效
+                    </div>
+                </div>*@
+            <div class="pd_0_15">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="40%" colspan="2">Item</th>
+                            <th class="text-center" width="20%">Norm</th>
+                            <th class="text-center" width="20%">Budget</th>
+                            <th class="text-center" width="20%">Variance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-tree-branch" colspan="2">RE Cost</td>
+                            <td class="text-center">{{source.RECostNorm | money}}</td>
+                            <td class="text-center">{{source.RECostBudget | money}}</td>
+                            <td class="text-center">{{source.RECostVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf" width="5%">&nbsp;</td>
+                            <td class="table-tree-leaf-node">DT Building(DT建筑及外立面)</td>
+                            <td class="text-center">{{source.WallOnyDTNorm | money}}</td>
+                            <td class="text-center">{{source.WallOnyDTBudget | money}}</td>
+                            <td class="text-center">{{source.WallOnyDTVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-branch" colspan="2">LHI</td>
+                            <td class="text-center">{{source.LHINorm | money}}</td>
+                            <td class="text-center">{{source.LHIBudget | money}}</td>
+                            <td class="text-center">{{source.LHIVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Architect/Engineering/structure fees(建筑/机电/结构-设计费)</td>
+                            <td class="text-center">{{source.AESFeesNorm | money}}</td>
+                            <td class="text-center">{{source.AESFeesBudget | money}}</td>
+                            <td class="text-center">{{source.AESFeesVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Survey /test fees (测量/检测费)</td>
+                            <td class="text-center">{{source.SurveyTestFeesNorm | money}}</td>
+                            <td class="text-center">{{source.SurveyTestFeesBudget | money}}</td>
+                            <td class="text-center">{{source.SurveyTestFeesVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Permits/utility fees(许可证/公用事业费)</td>
+                            <td class="text-center">{{source.PermitsUtilityFeesNorm | money}}</td>
+                            <td class="text-center">{{source.PermitsUtilityFeesBudget | money}}</td>
+                            <td class="text-center">{{source.PermitsUtilityFeesVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Demolition cost(拆除费用)</td>
+                            <td class="text-center">{{source.DemolitionCostNorm | money}}</td>
+                            <td class="text-center">{{source.DemolitionCostBudget | money}}</td>
+                            <td class="text-center">{{source.DemolitionCostVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Site development cost(埸地发展费)</td>
+                            <td class="text-center">{{source.SiteDevelopmentCostNorm | money}}</td>
+                            <td class="text-center">{{source.SiteDevelopmentCostBudget | money}}</td>
+                            <td class="text-center">{{source.SiteDevelopmentCostVariance | money}}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Building construction cost(物业施工费用)</td>
+                            <td class="text-center">{{source.BuildingConstructionCostNorm | money}}</td>
+                            <td class="text-center">{{source.BuildingConstructionCostBudget | money}}</td>
+                            <td class="text-center">{{source.BuildingConstructionCostVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">General contract work(总承包)</td>
+                            <td class="text-center">{{source.GeneralContractWorkNorm | money}}</td>
+                            <td class="text-center">{{source.GeneralContractWorkBudget | money}}</td>
+                            <td class="text-center">{{source.GeneralContractWorkVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Interior decoration (内部装修承包)</td>
+                            <td class="text-center">{{source.InteriorDecorationNorm | money}}</td>
+                            <td class="text-center">{{source.InteriorDecorationBudget | money}}</td>
+                            <td class="text-center">{{source.InteriorDecorationVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Electrical sub-contract excluding lighting fixture(电承包-不包括灯具)</td>
+                            <td class="text-center">{{source.ESCELFNorm | money}}</td>
+                            <td class="text-center">{{source.ESCELFBudget | money}}</td>
+                            <td class="text-center">{{source.ESCELFVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Electrical Lighting Fixture(电承包-灯具)</td>
+                            <td class="text-center">{{source.ELFNorm | money}}</td>
+                            <td class="text-center">{{source.ELFBudget | money}}</td>
+                            <td class="text-center">{{source.ELFVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Plumbing & sanitation sub-constract(给排水承包)</td>
+                            <td class="text-center">{{source.PSSCNorm | money}}</td>
+                            <td class="text-center">{{source.PSSCBudget | money}}</td>
+                            <td class="text-center">{{source.PSSCVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">HVAC sub-contract(空调机组安装和管道承包，不含空调机组设备费用)</td>
+                            <td class="text-center">{{source.HVACSubContractNorm | money}}</td>
+                            <td class="text-center">{{source.HVACSubContractBudget | money}}</td>
+                            <td class="text-center">{{source.HVACSubContractVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Fire protection service(消防)</td>
+                            <td class="text-center">{{source.FireProtectionServiceNorm | money}}</td>
+                            <td class="text-center">{{source.FireProtectionServiceBudget | money}}</td>
+                            <td class="text-center">{{source.FireProtectionServiceVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Environment protection(环境保护工程,含化粪池/隔油池/油烟净化器等费用)</td>
+                            <td class="text-center">{{source.EnvironmentProtectionNorm | money}}</td>
+                            <td class="text-center">{{source.EnvironmentProtectionBudget | money}}</td>
+                            <td class="text-center">{{source.EnvironmentProtectionVariance | money}}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="table-tree-branch" colspan="2">ESSD</td>
+                            <td class="text-center">{{source.ESSDNorm | money}}</td>
+                            <td class="text-center">{{source.ESSDBudget | money}}</td>
+                            <td class="text-center">{{source.ESSDVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Signage (招牌)</td>
+                            <td class="text-center">{{source.SignageNorm | money}}</td>
+                            <td class="text-center">{{source.SignageBudget | money}}</td>
+                            <td class="text-center">{{source.SignageVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Equipment (设备)</td>
+                            <td class="text-center">{{source.EquipmentNorm | money}}</td>
+                            <td class="text-center">{{source.EquipmentBudget | money}}</td>
+                            <td class="text-center">{{source.EquipmentVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-tree-leaf">&nbsp;</td>
+                            <td class="table-tree-leaf-node">Seating package(座位)</td>
+                            <td class="text-center">{{source.SeatingPackageNorm | money}}</td>
+                            <td class="text-center">{{source.SeatingPackageBudget | money}}</td>
+                            <td class="text-center">{{source.SeatingPackageVariance | money}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="table-tree-leaf-last">&nbsp;</td>
+                            <td class="table-tree-leaf-node-last">Décor (装饰品、指示牌等)</td>
+                            <td class="text-center">{{source.DecorNorm | money}}</td>
+                            <td class="text-center">{{source.DecorBudget | money}}</td>
+                            <td class="text-center">{{source.DecorVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_McCafe_RE Cost</td>
+                            <td class="text-center">{{source.REMcCafeRECostNorm | money}}</td>
+                            <td class="text-center">{{source.REMcCafeRECostBudget | money}}</td>
+                            <td class="text-center">{{source.REMcCafeRECostVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_McCafe_LHI</td>
+                            <td class="text-center">{{source.REMcCafeLHINorm | money}}</td>
+                            <td class="text-center">{{source.REMcCafeLHIBudget | money}}</td>
+                            <td class="text-center">{{source.REMcCafeLHIVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_McCafe_ESSD</td>
+                            <td class="text-center">{{source.REMcCafeESSDNorm | money}}</td>
+                            <td class="text-center">{{source.REMcCafeESSDBudget | money}}</td>
+                            <td class="text-center">{{source.REMcCafeESSDVariance | money}}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">Reinvestment_McCafe_Total</td>
+                            <td class="text-center">{{source.REMcCafeTotalNorm | money}}</td>
+                            <td class="text-center">{{source.REMcCafeTotalBudget | money}}</td>
+                            <td class="text-center">{{source.REMcCafeTotalVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_Remote Kiosk_RE Cost</td>
+                            <td class="text-center">{{source.RERemoteKioskRECostNorm | money}}</td>
+                            <td class="text-center">{{source.RERemoteKioskRECostBudget | money}}</td>
+                            <td class="text-center">{{source.RERemoteKioskRECostVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_Remote Kiosk_LHI</td>
+                            <td class="text-center">{{source.RERemoteKioskLHINorm | money}}</td>
+                            <td class="text-center">{{source.RERemoteKioskLHIBudget | money}}</td>
+                            <td class="text-center">{{source.RERemoteKioskLHIVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_Remote Kiosk_ESSD</td>
+                            <td class="text-center">{{source.RERemoteKioskESSDNorm | money}}</td>
+                            <td class="text-center">{{source.RERemoteKioskESSDBudget | money}}</td>
+                            <td class="text-center">{{source.RERemoteKioskESSDVariance | money}}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">Reinvestment_Remote Kiosk_Total</td>
+                            <td class="text-center">{{source.RERemoteKioskTotalNorm | money}}</td>
+                            <td class="text-center">{{source.RERemoteKioskTotalBudget | money}}</td>
+                            <td class="text-center">{{source.RERemoteKioskTotalVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_Attached Kiosk_RE Cost</td>
+                            <td class="text-center">{{source.REAttachedKioskRECostNorm | money}}</td>
+                            <td class="text-center">{{source.REAttachedKioskRECostBudget | money}}</td>
+                            <td class="text-center">{{source.REAttachedKioskRECostVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_Attached Kiosk_LHI</td>
+                            <td class="text-center">{{source.REAttachedKioskLHINorm | money}}</td>
+                            <td class="text-center">{{source.REAttachedKioskLHIBudget | money}}</td>
+                            <td class="text-center">{{source.REAttachedKioskLHIVariance | money}}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">Reinvestment_Attached Kiosk_ESSD</td>
+                            <td class="text-center">{{source.REAttachedKiosESSDNorm | money}}</td>
+                            <td class="text-center">{{source.REAttachedKiosESSDBudget | money}}</td>
+                            <td class="text-center">{{source.REAttachedKiosESSDVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_Attached Kiosk_Total</td>
+                            <td class="text-center">{{source.REAttachedKiosTotalNorm | money}}</td>
+                            <td class="text-center">{{source.REAttachedKiosTotalBudget | money}}</td>
+                            <td class="text-center">{{source.REAttachedKiosTotalVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_MDS_RE Cost</td>
+                            <td class="text-center">{{source.REMDSRECostNorm | money}}</td>
+                            <td class="text-center">{{source.REMDSRECostBudget | money}}</td>
+                            <td class="text-center">{{source.REMDSRECostVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_MDS_LHI</td>
+                            <td class="text-center">{{source.REMDSLHINorm | money}}</td>
+                            <td class="text-center">{{source.REMDSLHIBudget | money}}</td>
+                            <td class="text-center">{{source.REMDSLHIVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_MDS_ESSD</td>
+                            <td class="text-center">{{source.REMDSESSDNorm | money}}</td>
+                            <td class="text-center">{{source.REMDSESSDBudget | money}}</td>
+                            <td class="text-center">{{source.REMDSESSDVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Reinvestment_MDS_Total</td>
+                            <td class="text-center">{{source.REMDSTotalNorm | money}}</td>
+                            <td class="text-center">{{source.REMDSTotalBudget | money}}</td>
+                            <td class="text-center">{{source.REMDSTotalVariance | money}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Total Reinvestment</td>
+                            <td class="text-center">{{source.TotalReinvestmentNorm | money}}</td>
+                            <td class="text-center">{{source.TotalReinvestmentBudget | money}}</td>
+                            <td class="text-center">{{source.TotalReinvestmentVariance | money}}</td>
+                        </tr>
+                        @*<tr>
+                                <td>Total Sales Building Reinvestment</td>
+                                <td class="text-center">&nbsp;</td>
+                                <td class="text-center">{{source.TotalSalBldingInvstBudget | money}}</td>
+                                <td class="text-center">{{source.TotalSalBldingInvstBudgetVariance | money}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Non Sales Building Reinvestment</td>
+                                <td class="text-center">{{source.TotalReinvestmentNorm | money}}</td>
+                                <td class="text-center">{{source.TotalReinvestmentBudget | money}}</td>
+                                <td class="text-center">{{source.TotalReinvestmentVariance | money}}</td>
+                            </tr>*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel-body clearfix" ng-show="isCheckPage">
+            <table id="TableCost" class="table table-bordered">
+                <tr>
+                    <th width="30%" colspan="2"></th>
+                    <th width="10%">Budget</th>
+                    <th width="10%">PM Actual</th>
+                    <th width="10%">PM Act. vs Budget</th>
+                    <th width="10%">Variance %</th>
+                    <th width="10%">Finance Act.</th>
+                    <th width="10%">FA Act.VS Budget</th>
+                    <th width="10%">Variance %</th>
+                </tr>
+                <tr>
+                    <td class="table-tree-branch" colspan="2">RE Cost</td>
+                    <td>{{source.RECostBudget | money}}</td>
+                    <td>{{source.RECostPMAct | money}}</td>
+                    <td>
+                        {{recostVar = PMActVSBudget(source.RECostPMAct,source.RECostBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar , source.RECostBudget)| numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.RECostFAAct | money}}
+                    </td>
+                    <td>
+                        {{recostVarFA = PMActVSBudget(source.RECostFAAct,source.RECostBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVarFA,source.RECostBudget)| numberCustom:1}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf-last" width="5%">&nbsp;</td>
+                    <td width="25%" class="table-tree-leaf-node-last">DT Building(DT建筑及外立面)</td>
+                    <td>{{source.WallOnyDTBudget | money}}</td>
+                    <td>{{source.WallOnyDTPMAct | money}}</td>
+                    <td>
+                        {{recostVar1 = PMActVSBudget(source.WallOnyDTPMAct,source.WallOnyDTBudget) | money}}
+                    </td>
+                    <td>
+                        {{abc = Variance(recostVar1 , source.WallOnyDTBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.WallOnyDTFAAct | money}}
+                    </td>
+                    <td>
+                        @*{{recostVar1FA = PMActVSBudget(source.WallOnyDTFAAct,source.WallOnyDTBudget) | money}}*@
+                    </td>
+                    <td>
+                        @*{{Variance(recostVar1FA,source.WallOnyDTBudget)| money}}*@
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-tree-branch" colspan="2">LHI</td>
+                    <td>{{source.LHIBudget| money}}</td>
+                    <td>{{source.LHIPMAct| money}}</td>
+                    <td>
+                        {{recostVar2 = PMActVSBudget(source.LHIPMAct,source.LHIBudget)| money}}
+                    </td>
+                    <td>
+                        <span ng-show="!!recostVar2">
+                            {{Variance(recostVar2 , source.LHIBudget) | numberCustom:1}}
+                        </span>
+                    </td>
+                    <td>
+                        {{source.LHIFAAct | money}}
+                    </td>
+                    <td>
+                        {{recostVar2FA = PMActVSBudget(source.LHIFAAct,source.LHIBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar2FA,source.LHIBudget) | numberCustom:1}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Architect/Engineering/structure fees(建筑/机电/结构-设计费)</td>
+                    <td>{{source.AESFeesBudget | money}}</td>
+                    <td>{{source.AESFeesPMAct | money}}</td>
+                    <td>
+                        {{recostVar3 = PMActVSBudget(source.AESFeesPMAct,source.AESFeesBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar3 , source.AESFeesBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.AESFeesFAAct | money}}
+                    </td>
+                    <td>
+                        -@*{{recostVar3FA = PMActVSBudget(source.AESFeesFAAct,source.AESFeesBudget) | money}}*@
+                    </td>
+                    <td>
+                        -@*{{Variance(recostVar3FA,source.AESFeesBudget)| money}}*@
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Survey /test fees (测量/检测费)</td>
+                    <td>{{source.SurveyTestFeesBudget | money}}</td>
+                    <td>{{source.SurveyTestFeesPMAct | money}}</td>
+                    <td>
+                        {{recostVar4 = PMActVSBudget(source.SurveyTestFeesPMAct,source.SurveyTestFeesBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar4 , source.SurveyTestFeesBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.SurveyTestFeesFAAct | money}}
+                    </td>
+                    <td>
+                        -@*{{recostVar4FA = PMActVSBudget(source.SurveyTestFeesFAAct,source.SurveyTestFeesBudget) | money}}*@
+                    </td>
+                    <td>
+                        -@*{{Variance(recostVar4FA,source.SurveyTestFeesBudget)| money}}*@
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Permits/utility fees(许可证/公用事业费)</td>
+                    <td>{{source.PermitsUtilityFeesBudget | money}}</td>
+                    <td>{{source.PermitsUtilityFeesPMAct | money}}</td>
+                    <td>
+                        {{recostVar5 = PMActVSBudget(source.PermitsUtilityFeesPMAct,source.PermitsUtilityFeesBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar5 , source.PermitsUtilityFeesBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.PermitsUtilityFeesFAAct | money}}
+                    </td>
+                    <td>
+                        -@*{{recostVar5FA = PMActVSBudget(source.PermitsUtilityFeesFAAct,source.PermitsUtilityFeesBudget) | money}}*@
+                    </td>
+                    <td>
+                        -@*{{Variance(recostVar5FA,source.PermitsUtilityFeesBudget)| money}}*@
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Demolition cost(拆除费用)</td>
+                    <td>{{source.DemolitionCostBudget | money}}</td>
+                    <td>{{source.DemolitionCostPMAct | money}}</td>
+                    <td>
+                        {{recostVar6 = PMActVSBudget(source.DemolitionCostPMAct,source.DemolitionCostBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar6 , source.DemolitionCostBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.DemolitionCostFAAct | money}}
+                    </td>
+                    <td>
+                        -@*{{recostVar6FA = PMActVSBudget(source.DemolitionCostFAAct,source.DemolitionCostBudget) | money}}*@
+                    </td>
+                    <td>
+                        -@*{{Variance(recostVar6FA,source.DemolitionCostBudget)| money}}*@
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Site development cost(埸地发展费)</td>
+                    <td>{{source.SiteDevelopmentCostBudget | money}}</td>
+                    <td>{{source.SiteDevelopmentCostPMAct | money}}</td>
+                    <td>
+                        {{recostVar7 = PMActVSBudget(source.DemolitionCostPMAct,source.SiteDevelopmentCostBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar7 , source.SiteDevelopmentCostBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.SiteDevelopmentCostFAAct | money}}
+                    </td>
+                    <td>
+                        -@*{{recostVar7FA = PMActVSBudget(source.SiteDevelopmentCostFAAct,source.SiteDevelopmentCostBudget) | money}}*@
+                    </td>
+                    <td>
+                        -@*{{Variance(recostVar7FA,source.SiteDevelopmentCostBudget)| money}}*@
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Building construction cost(物业施工费用)</td>
+                    <td>{{source.BuildingConstructionCostBudget | money}}</td>
+                    <td>{{source.BuildingConstructionCostPMAct | money}}</td>
+                    <td>
+                        {{recostVar8 = PMActVSBudget(source.BuildingConstructionCostPMAct,source.BuildingConstructionCostBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar8 , source.BuildingConstructionCostBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.BuildingConstructionCostFAAct | money}}
+                    </td>
+                    <td>
+                        -@* {{recostVar8FA = PMActVSBudget(source.BuildingConstructionCostFAAct,source.BuildingConstructionCostBudget) | money}}*@
+                    </td>
+                    <td>
+                        -@*{{Variance(recostVar8FA,source.BuildingConstructionCostBudget)| money}}*@
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">General contract work(总承包)</td>
+                    <td>{{source.GeneralContractWorkBudget | money}}</td>
+                    <td>{{source.GeneralContractWorkPMAct | money}}</td>
+                    <td>
+                        {{recostVar9 = PMActVSBudget(source.GeneralContractWorkPMAct,source.GeneralContractWorkBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar9 , source.GeneralContractWorkBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.GeneralContractWorkFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Interior decoration (内部装修承包)</td>
+                    <td>{{source.InteriorDecorationBudget | money}}</td>
+                    <td>{{source.InteriorDecorationPMAct | money}}</td>
+                    <td>
+                        {{recostVar10 = PMActVSBudget(source.InteriorDecorationPMAct,source.InteriorDecorationBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar10 , source.InteriorDecorationBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.InteriorDecorationFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Electrical sub-contract excluding lighting fixture(电承包-不包括灯具)</td>
+                    <td>{{source.ESCELFBudget | money}}</td>
+                    <td>{{source.ESCELFPMAct | money}}</td>
+                    <td>
+                        {{recostVar11 = PMActVSBudget(source.ESCELFPMAct,source.ESCELFBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar11 , source.ESCELFBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.ESCELFFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Electrical Lighting Fixture(电承包-灯具)</td>
+                    <td>{{source.ELFBudget | money}}</td>
+                    <td>{{source.ELFPMAct | money}}</td>
+                    <td>
+                        {{recostVar12 = PMActVSBudget(source.ELFPMAct,source.ELFBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar12 , source.ELFBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.ELFFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Plumbing & sanitation sub-constract(给排水承包)</td>
+                    <td>{{source.PSSCBudget | money}}</td>
+                    <td>{{source.PSSCPMAct | money}}</td>
+                    <td>
+                        {{recostVar13 = PMActVSBudget(source.PSSCPMAct,source.PSSCBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar13 , source.PSSCBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.PSSCFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">HVAC sub-contract(空调机组安装和管道承包，不含空调机组设备费用)</td>
+                    <td>{{source.HVACSubContractBudget | money}}</td>
+                    <td>{{source.HVACSubContractPMAct | money}}</td>
+                    <td>
+                        {{recostVar14 = PMActVSBudget(source.HVACSubContractPMAct,source.HVACSubContractBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar14 , source.HVACSubContractBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.HVACSubContractFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Fire protection service(消防)</td>
+                    <td>{{source.FireProtectionServiceBudget | money}}</td>
+                    <td>{{source.FireProtectionServicePMAct | money}}</td>
+                    <td>
+                        {{recostVar15 = PMActVSBudget(source.FireProtectionServicePMAct,source.FireProtectionServiceBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar15 , source.FireProtectionServiceBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.FireProtectionServiceFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf-last">&nbsp;</td>
+                    <td class="table-tree-leaf-node-last">Environment protection(环境保护工程,含化粪池/隔油池/油烟净化器等费用)</td>
+                    <td>{{source.EnvironmentProtectionBudget | money}}</td>
+                    <td>{{source.EnvironmentProtectionPMAct | money}}</td>
+                    <td>
+                        {{recostVar16 = PMActVSBudget(source.EnvironmentProtectionPMAct,source.EnvironmentProtectionBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar16 , source.EnvironmentProtectionBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.EnvironmentProtectionFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="table-tree-branch" colspan="2">ESSD</td>
+                    <td>{{source.ESSDBudget | money}}</td>
+                    <td>{{source.ESSDPMAct | money}}</td>
+                    <td>
+                        {{recostVar17 = PMActVSBudget(source.ESSDPMAct,source.ESSDBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar17 , source.ESSDBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.ESSDFAAct | money}}
+                    </td>
+                    <td>
+                        {{recostVar17FA = PMActVSBudget(source.ESSDFAAct,source.ESSDBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar17FA , source.ESSDBudget) | numberCustom:1}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Signage (招牌)</td>
+                    <td>{{source.SignageBudget | money}}</td>
+                    <td>{{source.SignagePMAct | money}}</td>
+                    <td>
+                        {{recostVar18 = PMActVSBudget(source.SignagePMAct,source.SignageBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar18 , source.SignageBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.SignageFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Equipment（设备）</td>
+                    <td>{{source.EquipmentBudget| money}}</td>
+                    <td>{{source.EquipmentPMAct| money}}</td>
+                    <td>
+                        {{recostVar19 = PMActVSBudget(source.EquipmentPMAct , source.EquipmentBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar19 , source.EquipmentBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.EquipmentFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">Seating package(座位)</td>
+                    <td>{{source.SeatingPackageBudget| money}}</td>
+                    <td>{{source.SeatingPackagePMAct| money}}</td>
+                    <td>
+                        {{recostVar20 = PMActVSBudget(source.SeatingPackagePMAct , source.SeatingPackageBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar20 , source.SeatingPackageBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.SeatingPackageFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="table-tree-leaf-last">&nbsp;</td>
+                    <td class="table-tree-leaf-node-last">Décor (装饰品、指示牌等)</td>
+                    <td>{{source.DecorBudget| money}}</td>
+                    <td>{{source.DecorPMAct| money}}</td>
+                    <td>
+                        {{recostVar21 = PMActVSBudget(source.DecorPMAct , source.DecorBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar21 , source.DecorBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.DecorFAAct | money}}
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Total Reinvestment</td>
+                    <td>{{source.TotalReinvestmentBudget| money}}</td>
+                    <td>{{source.TotalReinvestmentPMAct| money}}</td>
+                    <td>
+                        {{recostVar22 = PMActVSBudget(source.TotalReinvestmentPMAct , source.TotalReinvestmentBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar22 , source.TotalReinvestmentBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.TotalReinvestmentFAAct | money}}
+                    </td>
+                    <td>
+                        {{recostVar22FA = PMActVSBudget(source.TotalReinvestmentFAAct , source.TotalReinvestmentBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar22FA , source.TotalReinvestmentBudget) | numberCustom:1}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Total Sales Building Reinvestment</td>
+                    <td>{{source.TotalSalBldingInvstBudget| money}}</td>
+                    <td>{{source.TotalSalBldingInvstBudgetPMAct| money}}</td>
+                    <td>
+                        {{recostVar23 = PMActVSBudget(source.TotalSalBldingInvstBudgetPMAct , source.TotalSalBldingInvstBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar23 , source.TotalSalBldingInvstBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.TotalSalBldingInvstAccntAct | money}}
+                    </td>
+                    <td>
+                        -@*{{recostVar23FA = PMActVSBudget(source.TotalSalBldingInvstBudgetPMAct , source.TotalSalBldingInvstBudget) | money}}*@
+                    </td>
+                    <td>
+                        -@*{{Variance(recostVar23FA , source.TotalReinvestmentBudget) | numberCustom:1}}*@
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Total Non Sales Building Reinvestment</td>
+                    <td>{{source.TotalNonSalBldingInvstBudget| money}}</td>
+                    <td>{{source.TotalNonSalBldingInvstBudgetPMAct| money}}</td>
+                    <td>
+                        {{recostVar24 = PMActVSBudget(source.TotalNonSalBldingInvstBudgetPMAct , source.TotalNonSalBldingInvstBudget) | money}}
+                    </td>
+                    <td>
+                        {{Variance(recostVar24 , source.TotalNonSalBldingInvstBudget) | numberCustom:1}}
+                    </td>
+                    <td>
+                        {{source.TotalNonSalBldingInvstAccntAct | money}}
+                    </td>
+                    <td>
+                        -@*{{recostVar23FA = PMActVSBudget(source.TotalSalBldingInvstBudgetPMAct , source.TotalSalBldingInvstBudget) | money}}*@
+                    </td>
+                    <td>
+                        -@*{{Variance(recostVar23FA , source.TotalReinvestmentBudget) | numberCustom:1}}*@
+                    </td>
+                </tr>
+            </table>
+
+            <div class="panel panel-black mg_t_10">
+                <div class="panel-heading">
+                    <span class="panel-icon"></span>
+                    <span class="panel-title">
+                        Reinvestment Variance Explanation
+                    </span>
+                </div>
+                <div class="panel-body form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-xs-4">FA Actual vs Budget (RE Cost)> +-5%</label>
+                        <div class="col-xs-8 pd_t_7">
+                            {{source.ExpFAActVsReCost}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4">FA Actual vs Budget (LHI)> +-5%</label>
+                        <div class="col-xs-8 pd_t_7">
+                            {{source.ExpFAActVsLHI}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4">FA Actual vs Budget (ESSD)> +-5%</label>
+                        <div class="col-xs-8 pd_t_7">
+                            {{source.ExpFAActVsESSD}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4">FA Actual vs Budget (Total)> +-5%</label>
+                        <div class="col-xs-8 pd_t_7">
+                            {{source.ExpFAActVsTotal}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

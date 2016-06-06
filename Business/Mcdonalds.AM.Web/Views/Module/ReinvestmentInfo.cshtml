@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmFinRev">
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                Re-investment Info
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">GB Date</label>
+                <div class="col-xs-2 pd_t_7">
+                    <p class="input-group">
+                        {{source.GBDate|date:"yyyy-MM-dd"}}
+                        @*<input type="text" class="form-control" name="GBDate" ng-model="source.GBDate" datepicker-popup="yyyy/MM/dd" ng-required="true" is-open="openedGBDate" close-text="Close" ng-disabled="!editable" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-disabled="!editable" ng-click="open($event,'openedGBDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>*@
+                    </p>
+                    @*<div ng-show="$parent.$submited||frmFinRev.GBDate.$dirty">
+                            <span class="ng-error" ng-show="frmFinRev.GBDate.$error.required">[[[必须填写]]]</span>
+                        </div>*@
+                </div>
+                <label class="col-xs-2 control-label">Completion Date</label>
+                <div class="col-xs-2 pd_t_7">
+                    <p class="input-group">
+                        {{source.ConsCompletionDate|date:"yyyy-MM-dd"}}
+                        @*<input type="date" class="form-control" name="ConsCompletionDate" ng-required="true" ng-model="source.ConsCompletionDate" datepicker-popup="{{format}}" is-open="openedConstructionCompletionDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" ng-disabled="!editable" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-disabled="!editable" ng-click="open($event,'openedConstructionCompletionDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>*@
+                    </p>
+                    @*<div ng-show="$parent.$submited||frmFinRev.ConsCompletionDate.$dirty">
+                            <span class="ng-error" ng-show="frmFinRev.ConsCompletionDate.$error.required">[[[必须填写]]]</span>
+                        </div>*@
+                </div>
+                <label class="col-xs-2 control-label">Design Concept</label>
+                <div class="col-xs-2 pd_t_7">
+                    <p class="input-group">
+                        {{source.NewDesignTypeDisplay}}
+                        @* <input type="text" class="form-control" name="ReopenDate" ng-required="true" ng-model="source.ReopenDate" datepicker-popup="{{format}}" is-open="openedReopenDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" ng-disabled="!editable" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-disabled="!editable" ng-click="open($event,'openedReopenDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>*@
+                    </p>
+                    @*<div ng-show="$parent.$submited||frmFinRev.ReopenDate.$dirty">
+                            <span class="ng-error" ng-show="frmFinRev.ReopenDate.$error.required">[[[必须填写]]]</span>
+                        </div>*@
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Existing Seat Number</label>
+                <div class="col-xs-2 pd_t_7">
+                    {{storeBasicInfo.StoreSTLocation.TotalSeatsNo}}
+                    @*<input name="DesignSeatNo" type="text" valnumber class="form-control" ng-model="source.DesignSeatNo" ng-disabled="!editable" />
+                        <div ng-show="$parent.$submited||frmFinRev.DesignSeatNo.$dirty">
+                            <span class="ng-error" ng-show="frmFinRev.DesignSeatNo.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>*@
+                </div>
+                <label class="col-xs-2 control-label">Estimated Seat Number</label>
+                <div class="col-xs-2 pd_t_7">
+                    @*< <input type="text" class="form-control" ng-model="source.EstimatedSeatNo" ng-disabled="!editable" />*@
+                    {{source.EstimatedSeatNo}}
+                </div>
+
+                <label class="col-xs-2 control-label">Right Sizing Seat Number</label>
+                <div class="col-xs-2 pd_t_7">
+                    {{source.RightSizingSeatNo}}
+                    @*<input name="RightSizingSeatNo" type="text" valnumber class="form-control" ng-model="source.RightSizingSeatNo" ng-disabled="!editable" />
+                        <div ng-show="$parent.$submited||frmFinRev.RightSizingSeatNo.$dirty">
+                            <span class="ng-error" ng-show="frmFinRev.RightSizingSeatNo.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>*@
+
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Existing Operation Size</label>
+                <div class="col-xs-2 pd_t_7">
+                    @*<input type="text" class="form-control" ng-model="source.NewOperationSize" ng-disabled="!editable" />*@
+                    {{storeBasicInfo.StoreSTLocation.TotalArea}}
+                </div>
+
+                <label class="col-xs-2 control-label">Existing Kitchen Size</label>
+                <div class="col-xs-2 pd_t_7">
+                    @*<input type="text" class="form-control" ng-model="source.NewKitchenSize" ng-disabled="!editable" />*@
+                    {{storeBasicInfo.StoreSTLocation.KitchenArea}}
+                </div>
+
+                <label class="col-xs-2 control-label">Existing Attached Kiosk</label>
+                <div class="col-xs-2 pd_t_7">
+                    @*<select class="form-control" ng-model="source.NewAttachedKiosk" ng-options="o.value as o.text for o in alternativeOptions" ng-disabled="!editable">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>*@
+                    {{storeBasicInfo.AttachedBeCount}}
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Existing Remote Kioisk</label>
+                <div class="col-xs-2 pd_t_7">
+                    @*<select class="form-control" ng-model="source.NewRemoteKiosk" ng-options="o.value as o.text for o in alternativeOptions" ng-disabled="!editable">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>*@
+                    {{storeBasicInfo.RemoteBeCount}}
+                </div>
+
+                <label class="col-xs-2 control-label">Existing McCafe</label>
+                <div class="col-xs-2 pd_t_7">
+                    @*<select class="form-control" ng-model="source.NewMcCafe" ng-options="o.value as o.text for o in alternativeOptions" ng-disabled="!editable">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>*@
+                    {{storeBasicInfo.MCCafeCount}}
+                </div>
+
+                <label class="col-xs-2 control-label">Existing MDS</label>
+                <div class="col-xs-2 pd_t_7">
+                    @* <select class="form-control" ng-model="source.NewMDS" ng-options="o.value as o.text for o in alternativeOptions" ng-disabled="!editable">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>*@
+                    {{storeBasicInfo.MDSBeCount}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

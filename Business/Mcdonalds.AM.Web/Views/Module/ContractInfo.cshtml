@@ -1,0 +1,590 @@
+﻿@{
+    Layout = null;
+}
+<form name="formContract">
+    <div>
+        <div class="form-horizontal mg_t_10">
+            <div class="form-group" style="margin-top: 5px; margin-left: 20px">
+                <label class="control-label col-xs-2">[[[编辑选项]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    <div>
+                        <label>
+                            <input type="radio" ng-model="contract.EditMode" name="EditMode" ng-disabled="!editable || !contract.contractEditable||!enableSelectEditMode" value="EDIT" required />
+                            [[[编辑]]]</label>
+                        &nbsp;&nbsp;
+                        <label>
+                            <input type="radio" ng-model="contract.EditMode" name="EditMode" ng-disabled="!editable || !contract.contractEditable||!enableSelectEditMode" value="ADD" required />
+                            [[[新增]]]</label>
+                    </div>
+                    <err-msgs field="formContract.EditMode" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+        </div>
+        <lease-change ng-show="showRevisionInfo" source="RevisionInfo" is-edit="false" title="{{title}}"></lease-change>
+        <div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">[[[联系人信息]]]
+                </span>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">[[[甲方全称]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-if="editable && contract.contractEditable && enableEditSpecial">
+                            <input type="text" class="form-control" name="PartyAFullName" ng-model="contract.PartyAFullName" required />
+                            <err-msgs field="formContract.PartyAFullName" submited="$parent.$submited"></err-msgs>
+                        </div>
+                        <div ng-if="!editable || !contract.contractEditable || !enableEditSpecial">
+                            <input type="text" class="form-control" name="PartyAFullName" ng-model="contract.PartyAFullName" disabled />
+                        </div>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[合同方名称]]]</label>
+                    <div class="col-xs-6">
+                        <dict-selector name="McDLegalEntity" parent-code="175" selected-code="contract.McDLegalEntity" selected-dict="McDLegalEntityDict" editable="editable&&contract.contractEditable"></dict-selector>
+                        <err-msgs field="formContract.McDLegalEntity" submited="$parent.$submited"></err-msgs>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">[[[麦当劳实体]]]</label>
+                    <div class="col-xs-2">
+                        <dict-selector name="McDOwnership" parent-code="302" selected-code="contract.McDOwnership" selected-dict="McDOwnershipDict" editable="editable&&contract.contractEditable"></dict-selector>
+                        <err-msgs field="formContract.McDOwnership" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[业主联系人]]]</label>
+                    <div class="col-xs-2">
+                        <input type="text" class="form-control" name="ContactPerson" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.ContactPerson" required />
+                        <err-msgs field="formContract.ContactPerson" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[联系方式]]]</label>
+                    <div class="col-xs-2">
+                        <input type="text" class="form-control" name="ContactMode" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.ContactMode" required />
+                        <err-msgs field="formContract.ContactMode" submited="$parent.$submited"></err-msgs>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">[[[合同信息]]]
+                </span>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">[[[租赁类型]]]</label>
+                    <div class="col-xs-2">
+                        <select chosen="{{editable&&contract.contractEditable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}"
+                            name="RentType"
+                            ng-if="editable&&contract.contractEditable"
+                            ng-required="true"
+                            class="form-control"
+                            ng-model="contract.RentType"
+                            ng-options="r as r for r in RentTypes">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <input type="text" class="form-control" disabled ng-if="!editable||!contract.contractEditable" ng-model="contract.RentType" />
+                        <err-msgs field="formContract.RentType" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[租赁面积]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-if="editable && contract.contractEditable && enableEditSpecial">
+                            <input type="text" required valnumber name="totalLeasedArea" class="form-control" ng-model="contract.TotalLeasedArea" />
+                            <err-msgs field="formContract.totalLeasedArea" submited="$parent.$submited"></err-msgs>
+                        </div>
+                        <div ng-if="!editable || !contract.contractEditable || !enableEditSpecial">
+                            <input type="text" valnumber name="totalLeasedArea" class="form-control" disabled ng-model="contract.TotalLeasedArea" />
+                        </div>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[租赁/土地购置期限]]]（Years)</label>
+                    <div class="col-xs-2">
+                        <input type="text" name="leasePurchaseTerm" required class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.LeasePurchaseTerm" />
+                        <err-msgs field="formContract.leasePurchaseTerm" submited="$parent.$submited"></err-msgs>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">[[[合同类型]]]</label>
+                    <div class="col-xs-2">
+                        <dict-selector name="LeasePurchase" parent-code="148" selected-code="contract.LeasePurchase" selected-dict="LeasePurchaseDict" editable="editable&&contract.contractEditable"></dict-selector>
+                        <err-msgs field="formContract.LeasePurchase" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[预计合同起始日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control" name="StartDate" aria-readonly="true" ng-disabled="!editable || !contract.contractEditable"
+                                onfocus="this.blur()" ng-model="contract.StartDate" datepicker-popup="{{format}}" is-open="showStartDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn" ng-show="editable && contract.contractEditable">
+                                <button type="button" class="btn btn-default" ng-click="openDate($event,'showStartDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <err-msgs field="formContract.StartDate" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[合同起始年]]]</label>
+                    <div class="col-xs-2">
+                        {{contract.StartYear}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">[[[租金起付日]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control" name="RentCommencementDate" ng-disabled="!editable || !contract.contractEditable"
+                                onfocus="this.blur()" ng-model="contract.RentCommencementDate" datepicker-popup="{{format}}" is-open="showRentCommencementDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn" ng-show="editable && contract.contractEditable">
+                                <button type="button" class="btn btn-default" ng-click="openDate($event,'showRentCommencementDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <err-msgs field="formContract.RentCommencementDate" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[预计合同到期日期]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-if="editable && contract.contractEditable && enableEditSpecial">
+                            <p class="input-group">
+                                <input type="text" class="form-control" name="EndDate" onfocus="this.blur()"
+                                    ng-model="contract.EndDate" datepicker-popup="{{format}}" is-open="showEndDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                <span class="input-group-btn" ng-show="editable && contract.contractEditable && enableEditSpecial">
+                                    <button type="button" class="btn btn-default" ng-click="openDate($event,'showEndDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                            <err-msgs field="formContract.EndDate" submited="$parent.$submited" is-open="showEndDate"></err-msgs>
+                        </div>
+                        <div ng-if="!editable || !contract.contractEditable || !enableEditSpecial">
+                            <input type="text" class="form-control" disabled ng-model="contract.EndDate" datepicker-popup="{{format}}" />
+                        </div>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[合同到期年]]]</label>
+                    <div class="col-xs-2">
+                        {{contract.EndYear}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">[[[续租通知最迟提交日]]]</label>
+                    <div class="col-xs-2">
+                        <input type="text" required name="DeadlineToNotice" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.DeadlineToNotice" />
+                        <err-msgs field="formContract.DeadlineToNotice" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[2010年起合同是否有修订]]]</label>
+                    <div class="col-xs-2 pd_t_7">
+                        <label>
+                            <input type="radio" name="Changedafter2010" required ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.Changedafter2010" />
+                            [[[Yes]]]</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" name="Changedafter2010" required ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.Changedafter2010" />
+                        [[[No]]]</label>
+                        <err-msgs field="formContract.Changedafter2010" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[免租期]]]</label>
+                    <div class="col-xs-2">
+                        <input type="text" class="form-control" name="FreeRentalPeriod" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.FreeRentalPeriod" required />
+                        <err-msgs field="formContract.FreeRentalPeriod" submited="$parent.$submited"></err-msgs>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">[[[租金构成]]]</label>
+                    <div class="col-xs-10">
+                        <div ng-if="editable && contract.contractEditable && enableEditSpecial">
+                            <textarea rows="5" class="form-control" name="RentStructure" required ng-model="contract.RentStructure" />
+                            <err-msgs field="formContract.RentStructure" submited="$parent.$submited"></err-msgs>
+                        </div>
+                        <div ng-if="!editable || !contract.contractEditable || !enableEditSpecial">
+                            <textarea rows="5" class="form-control" disabled required ng-model="contract.RentStructure" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">[[[提前解约条款]]]</label>
+                    <div class="col-xs-2 pd_t_7">
+                        <label>
+                            <input type="radio" required ng-disabled="!editable || !contract.contractEditable" name="WithEarlyTerminationClause" ng-value="1" ng-model="contract.WithEarlyTerminationClause" />
+                            [[[Yes]]]</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" required ng-disabled="!editable || !contract.contractEditable" name="WithEarlyTerminationClause" ng-value="0" ng-model="contract.WithEarlyTerminationClause" />
+                        [[[No]]]</label>
+                        <err-msgs field="formContract.WithEarlyTerminationClause" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[排他协议]]]</label>
+                    <div class="col-xs-2 pd_t_7">
+                        <label>
+                            <input type="radio" name="ExclusivityClause" required ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.ExclusivityClause" />
+                            [[[Yes]]]</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" name="ExclusivityClause" required ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.ExclusivityClause" />
+                        [[[No]]]</label>
+                        <err-msgs field="formContract.ExclusivityClause" submited="$parent.$submited"></err-msgs>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="contract.WithEarlyTerminationClause">
+                    <label class="col-xs-2 control-label">[[[提前解约描述]]]</label>
+                    <div class="col-xs-10">
+                        <textarea rows="5" required name="EarlyTerminationClauseDetail" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.EarlyTerminationClauseDetail" />
+                        <err-msgs field="formContract.EarlyTerminationClauseDetail" submited="$parent.$parent.$submited"></err-msgs>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">[[[付款信息]]]
+                </span>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">[[[租金支付对象]]]</label>
+                    <div class="col-xs-2">
+                        <input type="text" required name="RentalPaidto" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.RentalPaidto" />
+                        <err-msgs field="formContract.RentalPaidto" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[租金支付方式]]]</label>
+                    <div class="col-xs-2">
+                        <dict-selector name="RentPaymentArrangement" parent-code="303" selected-code="contract.RentPaymentArrangement" selected-dict="RentPaymentArrangementDict" editable="editable&&contract.contractEditable"></dict-selector>
+                        @*<input type="text" required name="RentPaymentArrangement" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.RentPaymentArrangement" />*@
+                        <err-msgs field="formContract.RentPaymentArrangement" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[保证金]]]</label>
+                    <div class="col-xs-2 pd_t_7">
+                        <label>
+                            <input type="radio" required name="HasDeposit" ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.HasDeposit" />
+                            [[[Yes]]]</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" required name="HasDeposit" ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.HasDeposit" />
+                        [[[No]]]</label>
+                        <err-msgs field="formContract.HasDeposit" submited="$parent.$submited"></err-msgs>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="contract.HasDeposit">
+                    <label class="col-xs-2 control-label">[[[保证金金额]]]</label>
+                    <div class="col-xs-2">
+                        <input type="text" required name="depositAmount" number-show="money" valnumber class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.DepositAmount" />
+                        <err-msgs field="formContract.depositAmount" submited="$parent.$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[保证金可退]]]</label>
+                    <div class="col-xs-2 pd_t_7">
+                        <label>
+                            <input type="radio" required name="Refundable" ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.Refundable" />
+                            [[[Yes]]]</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" required name="Refundable" ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.Refundable" />
+                        [[[No]]]</label>
+                        <err-msgs field="formContract.Refundable" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label" ng-if="contract.Refundable">[[[保证金退还日期]]]</label>
+                    <div class="col-xs-2" ng-if="contract.Refundable">
+                        <input type="text" required name="RefundableDate" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.RefundableDate" />
+                        <err-msgs field="formContract.RefundableDate" submited="$parent.$submited"></err-msgs>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">[[[滞纳金条款]]]</label>
+                    <div class="col-xs-2 pd_t_7">
+                        <label>
+                            <input type="radio" required name="WithPenaltyClause" ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.WithPenaltyClause" />
+                            [[[Yes]]]</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" required name="WithPenaltyClause" ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.WithPenaltyClause" />
+                        [[[No]]]</label>
+                        <err-msgs field="formContract.WithPenaltyClause" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[银行保函]]]</label>
+                    <div class="col-xs-2 pd_t_7">
+                        <label>
+                            <input type="radio" required name="HasBankGuarantee" ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.HasBankGuarantee" />
+                            [[[Yes]]]</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" required name="HasBankGuarantee" ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.HasBankGuarantee" />
+                        [[[No]]]</label>
+                        <err-msgs field="formContract.HasBankGuarantee" submited="$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label" ng-if="contract.HasBankGuarantee">[[[银行保函编号]]]</label>
+                    <div class="col-xs-2" ng-if="contract.HasBankGuarantee">
+                        <input type="text" required name="BGNumber" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.BGNumber" />
+                        <err-msgs field="formContract.BGNumber" submited="$parent.$parent.$submited"></err-msgs>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="contract.HasBankGuarantee">
+                    <label class="col-xs-2 control-label">[[[银行保函额]]]</label>
+                    <div class="col-xs-2">
+                        <input type="text" required number-show="money" name="BGAmount" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.BGAmount" />
+                        <err-msgs field="formContract.BGAmount" submited="$parent.$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[银行保函起始日]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control" ng-disabled="!editable || !contract.contractEditable" name="BGCommencementDate" onfocus="this.blur()" aria-readonly="true" is-open="$parent.showBGCommencementDate" ng-model="contract.BGCommencementDate" datepicker-popup="{{format}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn" ng-show="editable && contract.contractEditable">
+                                <button type="button" class="btn btn-default" ng-click="openDate($event,'showBGCommencementDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <err-msgs field="formContract.BGCommencementDate" submited="$parent.$parent.$submited"></err-msgs>
+                    </div>
+                    <label class="col-xs-2 control-label">[[[银行保函终止日]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control" ng-disabled="!editable || !contract.contractEditable" name="BGEndDate" onfocus="this.blur()" aria-readonly="true" is-open="$parent.showBGEndDate" ng-model="contract.BGEndDate" datepicker-popup="{{format}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn" ng-show="editable && contract.contractEditable">
+                                <button type="button" class="btn btn-default" ng-click="openDate($event,'showBGEndDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <err-msgs field="formContract.BGEndDate" submited="$parent.$parent.$submited"></err-msgs>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-black mg_t_10" ng-if="flowCode!='Renewal_ContractInfo'">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">[[[修订信息]]]
+                </span>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <tr ng-if="revisions.length>0 || (editable && contract.contractEditable)">
+                        <th width="20" ng-if="editable && contract.contractEditable && enableEditRevision" ng-show="false">
+                            <a ng-click="addRevision()"><span class="fa fa-plus"></span></a>
+                        </th>
+                        <th width="15%">[[[修订日期]]]</th>
+                        <th>[[[合同类型]]]</th>
+                    </tr>
+                </table>
+                <div ng-form name="frmRevision" ng-repeat="revision in revisions" ng-if="!revision.IsHistory">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="20" ng-if="editable && contract.contractEditable && enableEditRevision" ng-show="false">
+                                <a ng-click="$parent.removeRevision(revision)"><span class="fa fa-minus"></span></a>
+                            </td>
+                            <td width="15%">
+                                <div ng-if="editable && contract.contractEditable && enableEditRevision">
+                                    <p class="input-group">
+                                        <input type="text" name="ChangeDate" class="form-control" onfocus="this.blur()" aria-readonly="true" ng-model="revision.ChangeDate"
+                                            datepicker-popup="yyyy-MM-dd" is-open="$parent.$parent['showChangeDate'+$index]" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                        <span class="input-group-btn" ng-show="editable && contract.contractEditable && enableEditRevision">
+                                            <button type="button" class="btn btn-default" ng-click="openDate($event,'showChangeDate'+$index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                    <err-msgs field="frmRevision.ChangeDate" submited="$root.$submited"></err-msgs>
+                                </div>
+                                <div ng-if="!editable || !contract.contractEditable || !enableEditRevision">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control" disabled ng-model="revision.ChangeDate" datepicker-popup="yyyy-MM-dd" />
+                                    </p>
+                                </div>
+                            </td>
+                            <td class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-xs-3">
+                                        <input type="checkbox" ng-disabled="!editable || !contract.contractEditable || !enableEditRevision" ng-model="revision.Rent" ng-true-value="Y" ng-false-value="N" ng-change="revisionCheckChange(revision,revision.Rent)" />
+                                        [[[租金变更]]]
+                                    </label>
+                                    <div class="col-xs-9" ng-if="revision.Rent=='Y'">
+                                        <div class="col-xs-6">
+                                            <div>[[[原租金构成]]]</div>
+                                            <textarea rows="5" class="form-control mg_t_10" ng-model="revision.RentStructureOld" disabled="disabled"></textarea>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div>[[[新租金构成]]]</div>
+                                            <textarea rows="5" class="form-control mg_t_10" name="RentStructureNew" ng-model="revision.RentStructureNew" required maxlength="500" ng-disabled="!editable || !contract.contractEditable || !enableEditRevision"></textarea>
+                                            <err-msgs field="frmRevision.RentStructureNew" submited="$root.$submited"></err-msgs>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3">
+                                        <input type="checkbox" ng-disabled="!editable || !contract.contractEditable || !enableEditRevision" ng-model="revision.Size" ng-true-value="Y" ng-false-value="N" ng-change="revisionCheckChange(revision,revision.Size)" />
+                                        [[[红线变更]]]
+                                    </label>
+                                    <div class="col-xs-9" ng-if="revision.Size=='Y'">
+                                        <label class="col-xs-3 control-label">[[[原红线面积（平方米）]]]</label>
+                                        <div class="col-xs-3">
+                                            <input type="text" class="form-control" ng-model="revision.RedlineAreaOld" disabled="disabled" />
+                                        </div>
+                                        <label class="col-xs-3 control-label">[[[新红线面积 （平方米）]]]</label>
+                                        <div class="col-xs-3">
+                                            <input type="text" class="form-control" name="RedlineAreaNew" required number-show valnumber ng-model="revision.RedlineAreaNew" ng-disabled="!editable || !contract.contractEditable || !enableEditRevision" />
+                                            <err-msgs field="frmRevision.RedlineAreaNew" submited="$root.$submited"></err-msgs>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3">
+                                        <input type="checkbox" ng-disabled="!editable || !contract.contractEditable || !enableEditRevision" ng-model="revision.LeaseTerm" ng-true-value="Y" ng-false-value="N" ng-change="revisionCheckChange(revision,revision.LeaseTerm)" />
+                                        [[[租赁期限变更]]]
+                                    </label>
+                                    <div class="col-xs-9" ng-if="revision.LeaseTerm=='Y'">
+                                        <label class="col-xs-3 control-label">[[[原租约到期日期（年月日）]]]</label>
+                                        <div class="col-xs-3">
+                                            <input type="text" class="form-control" value="{{revision.LeaseChangeExpiryOld|date:'yyyy-MM-dd'}}" disabled="disabled" />
+                                        </div>
+                                        <label class="col-xs-3 control-label">[[[新租约到期日期（年月日）]]]</label>
+                                        <div class="col-xs-3">
+                                            <p class="input-group">
+                                                <input type="text" class="form-control" onfocus="this.blur()" ng-disabled="!editable || !contract.contractEditable || !enableEditRevision" aria-readonly="true" name="LeaseChangeExpiryNew" ng-model="revision.LeaseChangeExpiryNew" datepicker-popup="yyyy-MM-dd" is-open="$parent.$parent.$parent['showLCE'+$index]" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                                <span class="input-group-btn" ng-show="editable && contract.contractEditable && enableEditRevision">
+                                                    <button type="button" class="btn btn-default" ng-click="openDate($event,'showLCE'+$index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                </span>
+                                            </p>
+                                            <err-msgs field="frmRevision.LeaseChangeExpiryNew" submited="$root.$submited"></err-msgs>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3">
+                                        <input type="checkbox" ng-disabled="!editable || !contract.contractEditable || !enableEditRevision" ng-model="revision.Entity" ng-true-value="Y" ng-false-value="N" ng-change="revisionCheckChange(revision,revision.Entity)" />
+                                        [[[业主方变更]]]
+                                    </label>
+                                    <div class="col-xs-9" ng-if="revision.Entity=='Y'">
+                                        <label class="col-xs-3 control-label">[[[原租约业主]]]</label>
+                                        <div class="col-xs-3">
+                                            <input type="text" class="form-control" ng-model="revision.LandlordOld" disabled="disabled" />
+                                        </div>
+                                        <label class="col-xs-3 control-label">[[[新租约业主]]]</label>
+                                        <div class="col-xs-3">
+                                            <input type="text" class="form-control" name="LandlordNew" ng-model="revision.LandlordNew" required ng-disabled="!editable || !contract.contractEditable || !enableEditRevision" />
+                                            <err-msgs field="frmRevision.LandlordNew" submited="$root.$submited"></err-msgs>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3">
+                                        <input type="checkbox" ng-disabled="!editable || !contract.contractEditable || !enableEditRevision" ng-model="revision.Others" ng-true-value="Y" ng-false-value="N" ng-change="revisionCheckChange(revision,revision.Others)" />
+                                        [[[其他]]]
+                                    </label>
+                                    <div class="col-xs-9" ng-if="revision.Others=='Y'">
+                                        <textarea rows="5" maxlength="500" class="form-control" ng-model="revision.OthersDescription" name="OthersDescription" required ng-disabled="!editable || !contract.contractEditable || !enableEditRevision"></textarea>
+                                        <err-msgs field="frmRevision.OthersDescription" submited="$root.$submited"></err-msgs>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-if="revision.Rent=='Y'||revision.Size=='Y'||revision.LeaseTerm=='Y'||revision.Entity=='Y'||revision.Others=='Y'">
+                            <td colspan="3">
+                                <div>[[[描述]]]</div>
+                                <textarea rows="5" maxlength="500" class="form-control mg_t_10" name="Description" ng-model="revision.Description" required ng-disabled="!editable || !contract.contractEditable || !enableEditRevision"></textarea>
+                                <err-msgs field="frmRevision.Description" submited="$root.$submited"></err-msgs>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div ng-if="editable" ng-switch on="flowCode">
+            <div ng-switch-when="Closure_ContractInfo">
+                <attachments ref-table-name="ProjectContractInfo"
+                    project-id="{{projectId}}"
+                    flow-code="{{flowCode}}"
+                    editable="{{editable}}"
+                    ref-table-id="{{contract.Id}}"
+                    upload-set="['b728ce63-92d2-4773-8e05-d0def6bbe2f5']"
+                    show-contract="true"></attachments>
+            </div>
+            <div ng-switch-when="Renewal_ContractInfo">
+                <attachments ref-table-name="ProjectContractInfo"
+                    project-id="{{projectId}}"
+                    flow-code="{{flowCode}}"
+                    editable="{{editable}}"
+                    ref-table-id="{{contract.Id}}"
+                    upload-set="['4d8002c0-d5f1-4bb5-b756-7fe9dc25a019']"
+                    show-contract="true"></attachments>
+            </div>
+            <div ng-switch-when="Rebuild_ContractInfo">
+                <attachments ref-table-name="ProjectContractInfo"
+                    project-id="{{projectId}}"
+                    flow-code="{{flowCode}}"
+                    editable="{{editable}}"
+                    ref-table-id="{{contract.Id}}"
+                    upload-set="['cb98ef0b-5793-4b4c-bd29-58272fffda22']"
+                    show-contract="true"></attachments>
+            </div>
+            <div ng-switch-when="MajorLease_ContractInfo">
+                <attachments ref-table-name="ProjectContractInfo"
+                    project-id="{{projectId}}"
+                    flow-code="{{flowCode}}"
+                    editable="{{editable}}"
+                    ref-table-id="{{contract.Id}}"
+                    upload-set="['89186470-945b-417b-82a8-2dbc9b0df09b']"
+                    show-contract="true"></attachments>
+            </div>
+        </div>
+        <div ng-if="!editable">
+            <attachments ref-table-name="ProjectContractInfo"
+                project-id="{{projectId}}"
+                flow-code="{{flowCode}}"
+                editable="{{editable}}"
+                ref-table-id="{{contract.Id}}"
+                show-contract="true"></attachments>
+        </div>
+
+        <div class="panel panel-black mg_t_10 hide">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">[[[租赁历史]]]
+                </span>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>[[[合同编号]]]
+                        </th>
+                        <th>[[[合同类型]]]
+                        </th>
+                        <th>[[[租赁面积]]]
+                        </th>
+                        <th>[[[租赁/土地购置期限]]]
+                        </th>
+                        <th>[[[预计合同起始]]]
+                        </th>
+                        <th>[[[预计合同到期]]]
+                        </th>
+                        <th>[[[合同起始年]]]
+                        </th>
+                        <th>[[[合同到期年]]]
+                        </th>
+                        <th>[[[租赁类型]]]
+                        </th>
+                        <th>[[[续租通知最迟提交日]]]
+                        </th>
+                        <th>[[[租金起付日]]]
+                        </th>
+                        <th>[[[附件]]]
+                        </th>
+                    </tr>
+
+                    <tr ng-repeat="history in contracts">
+                        <td>
+                            <a ng-click="$parent.editContract(history)">{{history.StoreCode+'-'+history.StartYear}}</a>
+                        </td>
+                        <td>{{history.LeasePurchase}}
+                        </td>
+                        <td>{{history.TotalLeasedArea}}
+                        </td>
+                        <td>{{history.LeasePurchaseTerm}}
+                        </td>
+                        <td>{{history.StartDate|date:'yyyy-MM-dd'}}
+                        </td>
+                        <td>{{history.EndDate|date:'yyyy-MM-dd'}}
+                        </td>
+                        <td>{{history.StartYear}}
+                        </td>
+                        <td>{{history.EndYear}}
+                        </td>
+                        <td>{{history.RentType}}
+                        </td>
+                        <td>{{history.DeadlineToNotice|date:'yyyy-MM-dd'}}
+                        </td>
+                        <td>{{history.RentCommencementDate|date:'yyyy-MM-dd'}}
+                        </td>
+                        <td>
+                            <a>[[[附件]]](0)</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>

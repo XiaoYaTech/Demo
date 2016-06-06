@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{81337CC1-8771-4BCD-A30C-C5C4E76FEF68}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mcdonalds.AM.Services</RootNamespace>
+    <AssemblyName>Mcdonalds.AM.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ephtmltopdf">
+      <HintPath>..\References\ephtmltopdf.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlRenderer">
+      <HintPath>..\References\HtmlRenderer.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.5, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MyExcel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\MyExcel.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=1.2.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NTTMNC.BPM.Fx.K2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=befa8c51f2db76f2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\NTTMNC.BPM.Fx.K2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NTTMNC.BPM.Fx.K2.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\NTTMNC.BPM.Fx.K2.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="SourceCode.Workflow.Client, Version=4.0.0.0, Culture=neutral, PublicKeyToken=16a2c5aaaa1b130d, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\GAC\SourceCode.Workflow.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.0.0\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="clientaccesspolicy.xml" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="crossdomain.xml" />
+    <None Include="Properties\PublishProfiles\Cary_Local.pubxml" />
+    <None Include="Properties\PublishProfiles\Cary_Mcdonalds.AM.Services.pubxml" />
+    <None Include="Properties\PublishProfiles\Dev_Publish.pubxml" />
+    <None Include="Properties\PublishProfiles\Kevin_Publish.pubxml" />
+    <None Include="Properties\PublishProfiles\Stephen_Publish.pubxml" />
+    <Content Include="HtmlTemplates\GBMemoTemplate.html" />
+    <Content Include="HtmlTemplates\RebuildPackageTemplate.html" />
+    <Content Include="HtmlTemplates\ReimageTemplate.html" />
+    <Content Include="HtmlTemplates\RenewalLegalApprovalTemplate.html" />
+    <Content Include="HtmlTemplates\RenewalTemplate.html" />
+    <Content Include="HtmlTemplates\ReopenMemoTemplate.html" />
+    <Content Include="HtmlTemplates\TempClosureReopenMemo.html" />
+    <Content Include="HtmlTemplates\TempClosureTemplate.html" />
+    <Content Include="HtmlTemplates\MajorLeaseTemplate.html" />
+    <Content Include="HtmlTemplates\DefaultTemplate3.html" />
+    <Content Include="HtmlTemplates\DefaultTemplate2.html" />
+    <Content Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="HtmlTemplates\ClosureMemo.html" />
+    <Content Include="HtmlTemplates\DefaultTemplate.html" />
+    <Content Include="HtmlTemplates\mcd_logo.png" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <None Include="Service References\EmailServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\EmailServiceReference\configuration.svcinfo" />
+    <None Include="Service References\EmailServiceReference\EmailService1.disco" />
+    <Content Include="Service References\EmailServiceReference\Mcdonalds.AM.Services.EmailServiceReference.EmailSendingResultType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\EmailServiceReference\EmailService1.wsdl" />
+    <None Include="Service References\EmailServiceReference\EmailService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EmailServiceReference\EmailService41.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EmailServiceReference\EmailService42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EmailServiceReference\EmailService43.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EmailServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="SystemCode.xml" />
+    <Content Include="Template\2014 FA Tool Update for Existing Store_20140707.xlsx" />
+    <Content Include="Template\Executive Summary_Template_v20130908.xlsx" />
+    <Content Include="Template\FA Write-off Tool_Template_v20130907.xlsx" />
+    <Content Include="Template\2014 FA Tool Update for Existing Store_20140902.xlsx" />
+    <Content Include="Template\RebuildCover_Template_v20130910.xlsx" />
+    <Content Include="Template\Renewal_LLNegotiationRecord_Template.xlsx" />
+    <Content Include="Template\RenewalCover_Template_v20130922.xlsx" />
+    <Content Include="Template\Write-off Tool.xlsx" />
+    <Content Include="Template\Reimage Summary.xlsx" />
+    <Content Include="Template\CommentsList_Template .xlsx" />
+    <Content Include="Template\Store Closure Cover_Template_ v20120716.xlsx" />
+    <Content Include="Template\ReimageCover_Template_v20130910.xlsx" />
+    <Content Include="Temp\Readme.txt" />
+    <Content Include="UploadFiles\UploadFiles.txt" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\Closure\ClosureHandler.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\Cryptography.cs" />
+    <Compile Include="Common\CurrentUser.cs" />
+    <Compile Include="Common\EmailTemplateCode.cs" />
+    <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\ExcelHanlder.cs" />
+    <Compile Include="Common\HtmlConversionUtility.cs" />
+    <Compile Include="Common\MailHelper.cs" />
+    <Compile Include="Common\UserPositionHandler.cs" />
+    <Compile Include="Common\ZipHandle.cs" />
+    <Compile Include="Controllers\ActionLogController.cs" />
+    <Compile Include="Controllers\ApproveDialogUserController.cs" />
+    <Compile Include="Controllers\AttachmentController.cs" />
+    <Compile Include="Controllers\AttachmentsMemoController.cs" />
+    <Compile Include="Controllers\Closure\ClosureMemoController.cs" />
+    <Compile Include="Controllers\DLController.cs" />
+    <Compile Include="Controllers\EmailCommentsController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Controllers\ContractRevisionController.cs" />
+    <Compile Include="Controllers\ExcelTemplateController.cs" />
+    <Compile Include="Controllers\FlowInfoController.cs" />
+    <Compile Include="Controllers\K2CallbackController.cs" />
+    <Compile Include="Controllers\MajorLease\MajorLeaseController.cs" />
+    <Compile Include="Controllers\ModNoticesController.cs" />
+    <Compile Include="Controllers\NodeInfoController.cs" />
+    <Compile Include="Controllers\NotificationMessageController.cs" />
+    <Compile Include="Controllers\ProjectCommentController.cs" />
+    <Compile Include="Controllers\ProjectUsersController.cs" />
+    <Compile Include="Controllers\Closure\ClosureController.cs" />
+    <Compile Include="Controllers\Closure\ClosureExecutiveSummaryController.cs" />
+    <Compile Include="Controllers\Closure\ClosurePackageController.cs" />
+    <Compile Include="Controllers\Closure\ClosureToolController.cs" />
+    <Compile Include="Controllers\Closure\ClosureWOCheckListController.cs" />
+    <Compile Include="Controllers\Closure\ConsInvtCheckingController.cs" />
+    <Compile Include="Controllers\Closure\LegalReviewController.cs" />
+    <Compile Include="Controllers\DictionaryController.cs" />
+    <Compile Include="Controllers\MatertrackController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\Rebuild\RebuildController.cs" />
+    <Compile Include="Controllers\Reimage\ReimageController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\RemindController.cs" />
+    <Compile Include="Controllers\RemindRegisterController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalAnalysisController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalConfirmLetterController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalClearanceReportController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalConsInfoController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalContractInfoController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalGBMemoController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalInfoController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalLegalApprovalController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalLetterController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalLLNegotiationController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalPackageController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalSiteInfoController.cs" />
+    <Compile Include="Controllers\Renewal\RenewalToolController.cs" />
+    <Compile Include="Controllers\ReopenMemoController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\SiteInfoController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Controllers\StoreSTLLRecordController.cs" />
+    <Compile Include="Controllers\SystemController.cs" />
+    <Compile Include="Controllers\TempClosure\TempClosureLegalReviewController.cs" />
+    <Compile Include="Controllers\TempClosure\TempClosureMemoController.cs" />
+    <Compile Include="Controllers\TempClosure\TempClosurePackageController.cs" />
+    <Compile Include="Controllers\TempClosure\TempClosureController.cs" />
+    <Compile Include="Controllers\TempClosure\TempClosureReopenMemoController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Entities\RenewalEmail.cs" />
+    <Compile Include="Entities\TaskItemsCountModel.cs" />
+    <Compile Include="Entities\WorkflowEmailComment.cs" />
+    <Compile Include="Entities\WorkflowStepInfo.cs" />
+    <Compile Include="Entities\MCDAMReturnObject.cs" />
+    <Compile Include="Entities\TempClosureEmail.cs" />
+    <Compile Include="Filters\ExceptionLogFilterAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\TaskWorkController.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\EmailServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Workflows\Closure\WFClosureLegalReview.cs" />
+    <Compile Include="Workflows\Closure\WFClosurePackage.cs" />
+    <Compile Include="Workflows\Closure\WFClosureTool.cs" />
+    <Compile Include="Workflows\Closure\WFClosureWOCheckList.cs" />
+    <Compile Include="Workflows\Closure\WFConsInvtChecking.cs" />
+    <Compile Include="Workflows\Framework\BPMHelper.cs" />
+    <Compile Include="Workflows\Framework\Enums\BPMEnums.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\web.config" />
+    <Content Include="Template\FA Tool.xlsx" />
+    <Content Include="Template\FAWrite-off Tool_Template_v20140702.xlsx" />
+    <Content Include="Template\MajorLeaseChangeCover_Template_v20130910.xlsx" />
+    <Content Include="Template\Store Closure Tool_Template_ v20140619.xlsx" />
+    <Content Include="Template\Closure Tool.xlsx" />
+    <Content Include="Template\Executive Summary.xlsx" />
+    <Content Include="Template\Renewal Analysis.xlsx" />
+    <Content Include="Template\Renewal Tool.xlsx" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="UploadFilesPMT\Common\" />
+    <Folder Include="Views\Closure\" />
+    <Folder Include="Views\ExcelTemplate\" />
+    <Folder Include="Views\MajorLease\" />
+    <Folder Include="Views\Reimage\" />
+    <Folder Include="Views\SiteInfo\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\EmailServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mcdonalds.AM.ApiProxy\Mcdonalds.AM.ApiCaller.csproj">
+      <Project>{8e6acc7b-79b6-4fb0-99c2-e4b9c31a8d5c}</Project>
+      <Name>Mcdonalds.AM.ApiCaller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mcdonalds.AM.DataAccess\Mcdonalds.AM.DataAccess.csproj">
+      <Project>{fa8b1a33-73f0-46df-a880-77aa86f4b4e8}</Project>
+      <Name>Mcdonalds.AM.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Shell32">
+      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

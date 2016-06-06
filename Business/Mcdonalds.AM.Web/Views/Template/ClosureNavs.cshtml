@@ -1,0 +1,19 @@
+﻿@{
+    Layout = null;
+}  
+<div class="nav-project">
+    <a class="nav-project-item" 
+        ng-mouseenter="$parent.loadOperators(nav,projectId)"
+        tooltip-html-unsafe="{{nav.operatorHTML}}"
+        tooltip-placement="bottom"
+        ng-repeat="nav in closureNavs" 
+        ng-href="{{nav.Linked?nav.Href:'#'}}" ng-class ="{'active':nav.IsSelected,'first':$index==0}"
+    >   
+        <span ng-show="nav.Linked">
+            <span ng-class="{true: 'fa fa-check finished', false: 'fa fa-times'}[nav.IsFinished]"></span>
+            <span class="nav-project-item-title">{{nav.NameZHCN}}</span>
+        </span>  
+        <img src="~/Content/Images/loading.gif" ng-show="!nav.Linked" />     
+    </a>
+    <a class="clear"></a>
+</div>

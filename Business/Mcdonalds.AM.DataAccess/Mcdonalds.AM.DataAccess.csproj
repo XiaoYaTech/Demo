@@ -1,0 +1,1027 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA8B1A33-73F0-46DF-A880-77AA86F4B4E8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mcdonalds.AM.DataAccess</RootNamespace>
+    <AssemblyName>Mcdonalds.AM.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.0.4.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.0.4\lib\net20\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 12.0\Visual Studio Tools for Office\PIA\Office14\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NTTMNC.BPM.Fx.K2">
+      <HintPath>..\..\References\NTTMNC.BPM.Fx.K2.dll</HintPath>
+    </Reference>
+    <Reference Include="NTTMNC.BPM.Fx.K2.Services">
+      <HintPath>..\..\References\NTTMNC.BPM.Fx.K2.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionLog.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActionType.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApproveDialogUser.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Attachment.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AttachmentRequirement.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AttachmentsMemo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AttachmentsMemoProcessInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CityProvince.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureConsInvtChecking.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureContractInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureContractRefund.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureExecutiveSummary.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureLegalReview.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureMemo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureMemoReason.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureNatureType.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosurePackage.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureTool.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureToolImpactOtherStore.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosureWOCheckList.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common\DataConverter.cs" />
+    <Compile Include="Common\ClosureNodes.cs" />
+    <Compile Include="Common\EFIntercepterLogging.cs" />
+    <Compile Include="Common\Excel\ClosureCoverExcelData.cs" />
+    <Compile Include="Common\Excel\ClosureExecutiveSummaryExcelData.cs" />
+    <Compile Include="Common\Excel\ClosureToolExcelData.cs" />
+    <Compile Include="Common\Excel\ClosureWOCheckListExcelData.cs" />
+    <Compile Include="Common\Excel\CommentsListExcelData.cs" />
+    <Compile Include="Common\Excel\ExcelDataBase.cs" />
+    <Compile Include="Common\Excel\ExcelDataInputDirector.cs" />
+    <Compile Include="Common\Excel\ExcelDataImportDirector.cs" />
+    <Compile Include="Common\Excel\ExcelToolHandler.cs" />
+    <Compile Include="Common\Excel\FinancialPreAnalysisExcelData.cs" />
+    <Compile Include="Common\Excel\MajorLeaseChangeCoverExcelData.cs" />
+    <Compile Include="Common\Excel\RebuildCoverExcelData.cs" />
+    <Compile Include="Common\Excel\ReimageCoverExcelData.cs" />
+    <Compile Include="Common\Excel\ReimageSummaryExcelData.cs" />
+    <Compile Include="Common\Excel\ReinvestmentCostExcelData.cs" />
+    <Compile Include="Common\Excel\RenewalAnalysisExcelData.cs" />
+    <Compile Include="Common\Excel\RenewalLLNegotiationRecordData.cs" />
+    <Compile Include="Common\Excel\RenewalCoverExcelData.cs" />
+    <Compile Include="Common\Excel\RenewalToolExcelData.cs" />
+    <Compile Include="Common\Excel\TempClosureCoverExcelData.cs" />
+    <Compile Include="Common\Excel\WriteOffAmountExcelData.cs" />
+    <Compile Include="Common\Extensions\StringExtension.cs" />
+    <Compile Include="Common\ObjectCopy.cs" />
+    <Compile Include="Common\ParameterRebinder.cs" />
+    <Compile Include="Common\PluploadHandler.cs" />
+    <Compile Include="Common\PredicateBuilder.cs" />
+    <Compile Include="Common\SiteFilePath.cs" />
+    <Compile Include="Common\SiteInfo.cs" />
+    <Compile Include="Common\Utils.cs" />
+    <Compile Include="Constants\PackageRoleCode.cs" />
+    <Compile Include="Constants\PositionCodeConstants.cs" />
+    <Compile Include="Constants\RoleName.cs" />
+    <Compile Include="Constants\ScheduleAction.cs" />
+    <Compile Include="Constants\TaskUrl.cs" />
+    <Compile Include="Constants\RegionScope.cs" />
+    <Compile Include="DataModels\Condition\SearchNoticeCondition.cs" />
+    <Compile Include="DataModels\Condition\TaskWorkCondition.cs" />
+    <Compile Include="DataModels\ProjectTeamMembers.cs" />
+    <Compile Include="DataSync_AM_LDW_StoreStatus.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreAssetHandover.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreAssetHandoverAttachment.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreBEContractInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreBEInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreContractInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreContractInfoAttached.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreContractRevision.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreMMInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreSTLicense.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreSTLLRecord.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreSTLocation.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreSTMonthlyFinaceInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreSTMonthlyFinaceInfoTTM.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_StoreSTNegotiation.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_AM_PMT_SyncRecord.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_LDW_AM_BEInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_LDW_AM_STBEMonthSales.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_LDW_AM_STFinanceData.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_LDW_AM_STFinanceData2.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_LDW_AM_STMonthlyFinaceInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_Dictionary.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_Employee.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_Organization.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_Position.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreAssetHandover.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreAssetHandoverAttachment.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreBasicInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreBEContractInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreBEInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreContractInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreContractInfoAttached.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreContractRevision.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreDevelop.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreMMInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreOps.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreSTLicense.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreSTLLRecord.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreSTLocation.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreSTMonthlyFinaceInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreSTMonthlyFinaceInfoTTM.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_StoreSTNegotiation.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_SyncRecord.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_SysRole.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_SysRolePositionMap.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_SysRoleUserMap.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSync_PMT_AM_UserData.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataTransferObjects\ApproveUsers.cs" />
+    <Compile Include="DataTransferObjects\CheckPoint.cs" />
+    <Compile Include="DataTransferObjects\ConsInfoDTO.cs" />
+    <Compile Include="DataTransferObjects\FinancialPreanalysisDto.cs" />
+    <Compile Include="DataTransferObjects\NotificationMsg.cs" />
+    <Compile Include="DataTransferObjects\NotificationSearchCondition.cs" />
+    <Compile Include="DataTransferObjects\PackageHoldingDto.cs" />
+    <Compile Include="DataTransferObjects\PostCreateWorkflow.cs" />
+    <Compile Include="DataTransferObjects\PostDL.cs" />
+    <Compile Include="DataTransferObjects\PostEditProjects.cs" />
+    <Compile Include="DataTransferObjects\PostMemo.cs" />
+    <Compile Include="DataTransferObjects\PostProjectTeam.cs" />
+    <Compile Include="DataTransferObjects\PostStoreContractModel.cs" />
+    <Compile Include="DataTransferObjects\PostWorkflowData.cs" />
+    <Compile Include="DataTransferObjects\ProjectContractDto.cs" />
+    <Compile Include="DataTransferObjects\ProjectContractRevisionDTO.cs" />
+    <Compile Include="DataTransferObjects\ProjectEditResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataTransferObjects\ProjectHistory.cs" />
+    <Compile Include="DataTransferObjects\PostSimpleWorkflowData.cs" />
+    <Compile Include="DataTransferObjects\ProjectDto.cs" />
+    <Compile Include="DataTransferObjects\Renewal\RenewalAnalysisDTO.cs" />
+    <Compile Include="DataTransferObjects\Renewal\RenewalLegalApprovalDTO.cs" />
+    <Compile Include="DataTransferObjects\Renewal\RenewalPackageDTO.cs" />
+    <Compile Include="DataTransferObjects\Renewal\RenewalToolDTO.cs" />
+    <Compile Include="DataTransferObjects\Report\ReportGridGetData.cs" />
+    <Compile Include="DataTransferObjects\Report\SimpleTable.cs" />
+    <Compile Include="DataTransferObjects\Report\SimpleTemplate.cs" />
+    <Compile Include="DataTransferObjects\Report\TemplateDetail.cs" />
+    <Compile Include="DataTransferObjects\Report\TemplateField.cs" />
+    <Compile Include="DataTransferObjects\Report\TemplateTable.cs" />
+    <Compile Include="DataTransferObjects\SelectItem.cs" />
+    <Compile Include="DataTransferObjects\TaskWorkOperator.cs" />
+    <Compile Include="DataTransferObjects\TTMFinanceData.cs" />
+    <Compile Include="Entities\ApproveDialogUser.cs" />
+    <Compile Include="Entities\AttachmentsMemo.cs" />
+    <Compile Include="Entities\AttachmentsMemoProcessInfo.cs" />
+    <Compile Include="Entities\BaseWFEntity.cs" />
+    <Compile Include="Entities\Closure\LDW_FinanceData.cs" />
+    <Compile Include="Entities\DataSync\DataSync_LDW_AM_STFinanceData.cs" />
+    <Compile Include="Entities\DataSync\DataSync_LDW_AM_STFinanceData2.cs" />
+    <Compile Include="Entities\DataSync\DataSync_LDW_AM_STMonthlyFinaceInfo.cs" />
+    <Compile Include="Entities\DataSync_LDW_AM_STMonthlyFinaceInfo.cs" />
+    <Compile Include="Entities\DLEntity\V_AM_DL_Closure.cs" />
+    <Compile Include="Entities\DLEntity\V_AM_DL_MajorLeaseChange.cs" />
+    <Compile Include="Entities\DLEntity\V_AM_DL_Rebuild.cs" />
+    <Compile Include="Entities\DLEntity\V_AM_DL_Reimage.cs" />
+    <Compile Include="Entities\DLEntity\V_AM_DL_Renewal.cs" />
+    <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\EstimatedVsActualConstruction.cs" />
+    <Compile Include="Entities\FinanceData.cs" />
+    <Compile Include="Entities\FinancialPreanalysis.cs" />
+    <Compile Include="Entities\HoldingStatusChangeLog.cs" />
+    <Compile Include="Entities\MajorLease\MajorLeaseGBMemo.cs" />
+    <Compile Include="Entities\NecessaryNoticeConfig.cs" />
+    <Compile Include="Entities\Notification.cs" />
+    <Compile Include="Entities\NotificationMessage.cs" />
+    <Compile Include="Entities\ProjectNode.cs" />
+    <Compile Include="Entities\ProjectProgress.cs" />
+    <Compile Include="Entities\Rebuild\GBMemo.cs" />
+    <Compile Include="Entities\MajorLease\MajorLeaseConsInvtChecking.cs" />
+    <Compile Include="Entities\ProjectContractInfo.cs" />
+    <Compile Include="Entities\ProjectContractRevision.cs" />
+    <Compile Include="Entities\ProjectStatusChangeLog.cs" />
+    <Compile Include="Entities\Rebuild\RebuildConsInfo.cs" />
+    <Compile Include="Entities\Rebuild\RebuildConsInvtChecking.cs" />
+    <Compile Include="Entities\Rebuild\RebuildFinancAnalysis.cs" />
+    <Compile Include="Entities\Rebuild\RebuildInfo.cs" />
+    <Compile Include="Entities\Rebuild\RebuildLegalReview.cs" />
+    <Compile Include="Entities\Rebuild\RebuildPackage.cs" />
+    <Compile Include="Entities\Reimage\ReimageGBMemo.cs" />
+    <Compile Include="Entities\Reimage\ReimageConsInvtChecking.cs" />
+    <Compile Include="Entities\Reimage\ReimagePackage.cs" />
+    <Compile Include="Entities\Reimage\ReimageSummary.cs" />
+    <Compile Include="Entities\Renewal\RenewalClearanceReport.cs" />
+    <Compile Include="Entities\Renewal\RenewalConfirmLetter.cs" />
+    <Compile Include="Entities\Renewal\RenewalConsInfo.cs" />
+    <Compile Include="Entities\Renewal\RenewalContractInfo.cs" />
+    <Compile Include="Entities\Renewal\RenewalGBMemo.cs" />
+    <Compile Include="Entities\Renewal\RenewalInfo.cs" />
+    <Compile Include="Entities\Renewal\RenewalLLNegotiation.cs" />
+    <Compile Include="Entities\Renewal\RenewalLLNegotiationRecord.cs" />
+    <Compile Include="Entities\Renewal\RenewalPackage.cs" />
+    <Compile Include="Entities\Renewal\RenewalLetter.cs" />
+    <Compile Include="Entities\Renewal\RenewalTool.cs" />
+    <Compile Include="Entities\Renewal\RenewalLegalApproval.cs" />
+    <Compile Include="Entities\Renewal\RenewalAnalysis.cs" />
+    <Compile Include="Entities\Renewal\RenewalSiteInfo.cs" />
+    <Compile Include="Entities\Renewal\RenewalToolFinMeasureInput.cs" />
+    <Compile Include="Entities\Renewal\RenewalToolFinMeasureOutput.cs" />
+    <Compile Include="Entities\Renewal\RenewalToolWriteOffAndReinCost.cs" />
+    <Compile Include="Entities\ReopenMemo.cs" />
+    <Compile Include="Entities\RolePositonUser.cs" />
+    <Compile Include="Entities\ScheduleLog.cs" />
+    <Compile Include="Entities\StoreCM.cs" />
+    <Compile Include="Entities\StoreProfitabilityAndLeaseInfo.cs" />
+    <Compile Include="Entities\StoreSTLocationHistory.cs" />
+    <Compile Include="Entities\TempClosure\TempClosureMemo.cs" />
+    <Compile Include="Entities\TempClosure\TempClosurePackage.cs" />
+    <Compile Include="Entities\TempClosure\TempClosureReopenMemo.cs" />
+    <Compile Include="Entities\VProjectComment.cs" />
+    <Compile Include="Entities\VStoreList.cs" />
+    <Compile Include="Entities\V_StorePositionRelation.cs" />
+    <Compile Include="EstimatedVsActualConstruction.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FieldConditionType.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FinancialPreanalysis.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GBMemo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HoldingStatus.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HoldingStatusChangeLog.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\I18N.cs" />
+    <Compile Include="Infrastructure\SystemLanguage.cs" />
+    <Compile Include="Common\TaskSource.cs" />
+    <Compile Include="DataModels\Condition\DictionaryCondition.cs" />
+    <Compile Include="DataModels\Condition\RemindCondition.cs" />
+    <Compile Include="DataModels\Condition\RemindRegisterCondition.cs" />
+    <Compile Include="DataTransferObjects\MaterTrackModel.cs" />
+    <Compile Include="DataTransferObjects\PagedDataSource.cs" />
+    <Compile Include="DataTransferObjects\Closure\PostClosureMemoModel.cs" />
+    <Compile Include="DataTransferObjects\Closure\PostClosureTool.cs" />
+    <Compile Include="DataTransferObjects\PostContractModel.cs" />
+    <Compile Include="DataTransferObjects\ProjectReminder.cs" />
+    <Compile Include="DataTransferObjects\ProjectTeamMember.cs" />
+    <Compile Include="DataTransferObjects\Closure\SimpleClosureImpactStore.cs" />
+    <Compile Include="DataTransferObjects\TopNavigator.cs" />
+    <Compile Include="DB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Dictionary.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeScope.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeTitle.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ActionLog.cs" />
+    <Compile Include="Entities\AttachmentRequirement.cs" />
+    <Compile Include="Entities\BaseAbstractEntity.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Closure\ClosureMemo.cs" />
+    <Compile Include="Entities\Closure\ClosureToolImpactOtherStore.cs" />
+    <Compile Include="Constants\NodeCode.cs" />
+    <Compile Include="Constants\ProjectAction.cs" />
+    <Compile Include="Constants\ProjectCommentAction.cs" />
+    <Compile Include="Constants\ProjectUserRoleCode.cs" />
+    <Compile Include="Entities\FlowInfo.cs" />
+    <Compile Include="Entities\MajorLease\MajorLeaseChangePackage.cs" />
+    <Compile Include="Entities\MajorLease\MajorLeaseConsInfo.cs" />
+    <Compile Include="Entities\MajorLease\MajorLeaseFinancAnalysis.cs" />
+    <Compile Include="Entities\MajorLease\MajorLeaseInfo.cs" />
+    <Compile Include="Entities\MajorLease\MajorLeaseLegalReview.cs" />
+    <Compile Include="Entities\MajorLease\ReinvenstmentAmountType.cs" />
+    <Compile Include="Entities\ModNoticeReceivers.cs" />
+    <Compile Include="Entities\ModNotices.cs" />
+    <Compile Include="Entities\NodeInfo.cs" />
+    <Compile Include="Entities\ProjectInfo.cs" />
+    <Compile Include="Entities\Condition\ProjectCommentCondition.cs" />
+    <Compile Include="Constants\FlowCode.cs" />
+    <Compile Include="Entities\ProjectComment.cs" />
+    <Compile Include="Entities\Reimage\ReimageConsInfo.cs" />
+    <Compile Include="Entities\Reimage\ReimageInfo.cs" />
+    <Compile Include="Entities\ReinvestmentBasicInfo.cs" />
+    <Compile Include="Entities\ReinvestmentCost.cs" />
+    <Compile Include="Entities\Remind.cs" />
+    <Compile Include="Entities\StoreBEInfo.cs" />
+    <Compile Include="Entities\StoreContractInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entities\StoreContractRevision.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entities\StoreLeaseHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entities\StoreSTLLRecord.cs" />
+    <Compile Include="Entities\StoreBEContractInfo.cs" />
+    <Compile Include="Entities\StoreSTMonthlyFinaceInfo.cs" />
+    <Compile Include="Entities\StoreStoreBEInfo.cs" />
+    <Compile Include="Entities\ClosureProjectHandler.cs" />
+    <Compile Include="Entities\Closure\ClosureConsInvtChecking.cs" />
+    <Compile Include="Entities\Closure\ClosureExecutiveSummary.cs" />
+    <Compile Include="Entities\Closure\ClosurePackage.cs" />
+    <Compile Include="Entities\Attachment.cs" />
+    <Compile Include="Entities\Closure\ClosureInfo.cs" />
+    <Compile Include="Entities\Closure\ClosureLegalReview.cs" />
+    <Compile Include="Entities\Closure\ClosureTool.cs" />
+    <Compile Include="Entities\ProjectUsers.cs" />
+    <Compile Include="Entities\Closure\ClosureWOCheckList.cs" />
+    <Compile Include="Entities\Closure\Enum\ClosureProjectStatus.cs" />
+    <Compile Include="Entities\Closure\Enum\ClosureToolStatus.cs" />
+    <Compile Include="Entities\Closure\Enum\WOCheckListStatus.cs" />
+    <Compile Include="Entities\Dictionary.cs" />
+    <Compile Include="Entities\MaterTrack.cs" />
+    <Compile Include="Entities\StoreMMInfo.cs" />
+    <Compile Include="Entities\ProjectIdsInfo.cs" />
+    <Compile Include="Entities\RemindRegister.cs" />
+    <Compile Include="Entities\StoreSTLicense.cs" />
+    <Compile Include="Entities\Store.cs" />
+    <Compile Include="Entities\TaskWork.cs" />
+    <Compile Include="Entities\TempClosure\TempClosureInfo.cs" />
+    <Compile Include="Entities\TempClosure\TempClosureLegalReview.cs" />
+    <Compile Include="Entities\UserPosition.cs" />
+    <Compile Include="Entities\StoreAssetHandover.cs" />
+    <Compile Include="Entities\StoreAssetHandoverAttachment.cs" />
+    <Compile Include="Entities\StoreBasicInfo.cs" />
+    <Compile Include="Entities\StoreOp.cs" />
+    <Compile Include="Entities\WriteOffAmount.cs" />
+    <Compile Include="Entities\StoreContractInfoAttached.cs" />
+    <Compile Include="Entities\StoreSTNegotiation.cs" />
+    <Compile Include="Entities\StoreSTMonthlyFinaceInfoTTM.cs" />
+    <Compile Include="Enums\PrintFileType.cs" />
+    <Compile Include="FlowInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\ClientCookie.cs" />
+    <Compile Include="Interfaces\IWorkflowExtend.cs" />
+    <Compile Include="LDW_FinanceData.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MajorLeaseChangePackage.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MajorLeaseConsInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MajorLeaseConsInvtChecking.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MajorLeaseContractInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MajorLeaseFinancAnalysis.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MajorLeaseGBMemo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MajorLeaseInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MajorLeaseLegalReview.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaterTrack.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaterTrackType.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MiniMarket.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModNoticeReceivers.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModNotices.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NavInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NecessaryNoticeConfig.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NodeInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NodeType.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Notification.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationMessage.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataTransferObjects\SimpleEmployee.cs" />
+    <Compile Include="Position.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PositionScopeMap.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProcedureManager.cs" />
+    <Compile Include="Proc_GetProjectProcess_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_PrepareClosureMemo_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_ProjectHistory_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_SearchStoreEmployeeByRoleID_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_TtmhistoricalFinancialData_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectComment.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectCommentStatus.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectContractInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectContractRevision.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectIdsInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectNode.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectNodeStatus.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectProgress.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectStatus.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectStatusChangeLog.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectUsers.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyDef.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyValue.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RebuildConsInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RebuildConsInvtChecking.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RebuildFinancAnalysis.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RebuildInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RebuildLegalReview.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RebuildPackage.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReimageConsInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReimageConsInvtChecking.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReimageGBMemo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReimageInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReimagePackage.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReimageSummary.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReinvenstmentAmountType.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReinvestmentBasicInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReinvestmentCost.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Remind.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RemindRegister.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalAnalysis.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalClearanceReport.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalConfirmLetter.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalConsInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalGBMemo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalLegalApproval.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalLetter.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalLLNegotiation.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalLLNegotiationRecord.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalPackage.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalTool.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalToolFinMeasureInput.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalToolFinMeasureOutput.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RenewalToolWriteOffAndReinCost.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReopenMemo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportTableType.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Report\DBHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Report\ReportGenerator.cs" />
+    <Compile Include="Report\RPFieldSetting.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Report\RPHelp.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Report\RPSelectionSetting.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Report\RPTableSetting.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Report\RPTemplate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Report\RPTemplateFieldDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Report\RPTemplateTableDetail.cs" />
+    <Compile Include="RoleRelation.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RPFieldSetting.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RPSelectionSetting.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RPTableSetting.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RPTemplate.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RPTemplateFieldDetail.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RPTemplateTableDetail.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduleLog.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StartProcessLog.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreAssetHandover.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreAssetHandoverAttachment.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreBasicInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreBEContractInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreBEInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreCM.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreContractInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreContractInfoAttached.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreContractRevision.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreDevelop.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreMMInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreOps.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreProfitabilityAndLeaseInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreSTLicense.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreSTLLRecord.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreSTLocation.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreSTLocationHistory.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreSTMonthlyFinaceInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreSTMonthlyFinaceInfoTTM.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreSTNegotiation.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SyncRecord.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SysApplicationLog.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SysRole.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SysRolePositionMap.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SysRoleUserMap.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemCode.cs" />
+    <Compile Include="SysUserMMMap.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaskWork.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaskWorkStatus.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TempClosureInfo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TempClosureLegalReview.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TempClosureMemo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TempClosurePackage.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TempClosureReopenMemo.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Uf_GetChildOrg_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VFlowTask.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BaseView.cs" />
+    <Compile Include="Views\VFlowTask.cs" />
+    <Compile Include="Views\VProject.cs" />
+    <Compile Include="VProject.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VProjectComment.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VProjectNode.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VStoreList.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSysRight.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSysRoleRight.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_AM_DL_Closure.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_AM_DL_MajorLeaseChange.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_AM_DL_Rebuild.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_AM_DL_Reimage.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_AM_DL_Renewal.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Workflow\IWorkflowEntity.cs" />
+    <Compile Include="WriteOffAmount.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EntityDeploy Include="DB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DB.edmx</DependentUpon>
+      <LastGenOutput>DB.Context.cs</LastGenOutput>
+    </None>
+    <None Include="DB.edmx.diagram">
+      <DependentUpon>DB.edmx</DependentUpon>
+    </None>
+    <None Include="DB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DB.edmx</DependentUpon>
+      <LastGenOutput>DB.cs</LastGenOutput>
+    </None>
+    <Compile Include="Entities\StoreSTLocation.cs" />
+    <Compile Include="Entities\StoreDevelop.cs" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+</Project>

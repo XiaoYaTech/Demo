@@ -1,0 +1,373 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span style="font-weight:bold" class="panel-title">[[[项目列表]]] > {{projectId}} </span>
+        <span id="spStoreListUSCode" style="font-weight:bold"></span>
+        <div class="panel-tools">
+            <a href="javascript:void(0);" ng-click="back()" class="btn btn-sm btn-default">
+                <span class="fa fa-reply"></span>
+                [[[返回]]]
+            </a>
+        </div>
+        <span class="clear"></span>
+    </div>
+</div>
+
+<div ng-switch on="flowCode">
+    <div class="panel panel-orange mg_t_10" ng-switch-when="Closure">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[关店信息]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[项目类型]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    {{entity.ClosureTypeNameENUS}}
+                </div>
+                <label class="col-xs-2 control-label">[[[关店日期]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    {{entity.ActualCloseDate | date:"yyyy-MM-dd"}}
+                </div>
+                <label class="col-xs-2 control-label">[[[关店原因]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    {{entity.ClosureReasonNameENUS}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[合同到期日期]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    {{entity.LeaseExpireDate | date:"yyyy-MM-dd"}}
+                </div>
+                <label class="col-xs-2 control-label">[[[业主名称]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    {{entity.LandlordName}}
+                </div>
+                <label class="col-xs-2 control-label"></label>
+                <div class="col-xs-2 pd_t_7">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-orange mg_t_10" ng-switch-when="MajorLease">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[主要合同信息]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[项目类型]]]</label>
+                <div class="col-xs-2 pd_t_7">[[[主要合同]]]</div>
+                <label class="control-label col-xs-2">[[[美国编号]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.USCode}}</div>
+                <label class="control-label col-xs-2">[[[项目ID]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.ProjectId}}</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[开工日期]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    {{entity.GBDate | date:"yyyy-MM-dd"}}
+                </div>
+                <label class="control-label col-xs-2">[[[重开日期]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    {{entity.ReopenDate | date:"yyyy-MM-dd"}}
+                </div>
+                <label class="control-label col-xs-2">[[[项目创建日期]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.CreateTime | date:"yyyy-MM-dd"}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-orange mg_t_10" ng-switch-when="Rebuild">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[重建信息]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[项目类型]]]</label>
+                <div class="col-xs-2 pd_t_7">[[[重建]]]</div>
+                <label class="control-label col-xs-2">[[[美国编号]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.USCode}}</div>
+                <label class="control-label col-xs-2">[[[项目ID]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.ProjectId}}</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[临时关店日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.TempClosureDate | date:'yyyy-MM-dd'}}
+                </div>
+                <label class="control-label col-xs-2">[[[重开日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.ReopenDate | date:'yyyy-MM-dd'}}
+                </div>
+                <label class="control-label col-xs-2">[[[项目创建日期]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.CreateTime | date:'yyyy-MM-dd'}}</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[开工日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.GBDate | date:'yyyy-MM-dd'}}
+                </div>
+                <label class="control-label col-xs-2">[[[完工日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.ConstCompletionDate | date:'yyyy-MM-dd'}}
+                </div>
+                <label class="control-label col-xs-2"></label>
+                <div class="col-xs-2 pd_t_7"></div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-orange mg_t_10" ng-switch-when="Reimage">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[翻新信息]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[项目类型]]]</label>
+                <div class="col-xs-2 pd_t_7">[[[翻新]]]</div>
+                <label class="control-label col-xs-2">[[[美国编号]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.USCode}}</div>
+                <label class="control-label col-xs-2">[[[项目ID]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.ProjectId}}</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[开工日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.GBDate | date:"yyyy-MM-dd"}}
+                </div>
+                <label class="control-label col-xs-2">[[[重开日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.ReopenDate | date:"yyyy-MM-dd"}}
+                </div>
+                <label class="control-label col-xs-2">[[[项目创建日期]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.CreateDate | date:"yyyy-MM-dd"}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-orange mg_t_10" ng-switch-when="Renewal">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[续约信息]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[项目类型]]]</label>
+                <div class="col-xs-2 pd_t_7">[[[续约]]]</div>
+                <label class="control-label col-xs-2">[[[美国编号]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.USCode}}</div>
+                <label class="control-label col-xs-2">[[[项目ID]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.ProjectId}}</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[租赁日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.RenewalDate | date:"yyyy-MM-dd"}}
+                </div>
+                <label class="control-label col-xs-2">[[[优先级]]]</label>
+                <div class="col-xs-2">
+                    {{entity.Priority}}
+                </div>
+                <label class="control-label col-xs-2">[[[租赁年数]]]</label>
+                <div class="col-xs-2">
+                    {{entity.RenewalYears}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[项目创建日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.CreateTime | date:'yyyy-MM-dd'}}
+                </div>
+                <label class="control-label col-xs-2">[[[是否需要工程费用预估]]]</label>
+                <div class="col-xs-4 pd_t_7">
+                    <label>{{entity.NeedProjectCostEst | boolFilter}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-orange mg_t_10" ng-switch-when="TempClosure">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[临时关店信息]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[项目类型]]]</label>
+                <div class="col-xs-2 pd_t_7">[[[临时关店]]]</div>
+                <label class="control-label col-xs-2">[[[美国编号]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.USCode}}</div>
+                <label class="control-label col-xs-2">[[[项目ID]]]</label>
+                <div class="col-xs-2 pd_t_7">{{entity.ProjectId}}</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[预计临时关店日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.EstimatedTempClosureDate | date:'yyyy-MM-dd'}}
+                </div>
+                <label class="control-label col-xs-2">[[[实际临时关店日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.ActualTempClosureDate | date:'yyyy-MM-dd'}}
+                </div>
+                <label class="control-label col-xs-2">[[[预计重开日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.EstimatedReopenDate | date:'yyyy-MM-dd'}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[实际重开日期]]]</label>
+                <div class="col-xs-2">
+                    {{entity.ActualReopenDate | date:'yyyy-MM-dd'}}
+                </div>
+                <label class="control-label col-xs-2">[[[关店原因]]]</label>
+                <div class="col-xs-3">
+                    {{entity.ClosureReasonCode}}
+                </div>
+                <div class="col-xs-3">
+                    <div ng-show="entity.ClosureReasonCode==='Others'">
+                        {{entity.ClosureReasonRemark}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-orange mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">[[[查询]]]</span>
+    </div>
+    <div class="panel-body form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-xs-1">[[[表单]]]</label>
+            <div class="col-xs-2">
+                <div ng-show="IsFlowCodsComp">
+                    <select class="form-control" ng-model="Flow" ng-options="m.Code for m in FlowCodes">
+                        <option value="">[[[请选择]]]</option>
+                    </select>
+                </div>
+                <img src="~/Content/Images/loading.gif" ng-show="!IsFlowCodsComp" />
+            </div>
+            <label class="control-label col-xs-1">[[[创建人]]]:</label>
+            <div class="col-xs-2">
+                <div ng-show="IsCreatorComp">
+                    <select class="form-control" ng-model="Sender" ng-options="m.NameENUS for m in Creators">
+                        <option value="">[[[请选择]]]</option>
+                    </select>
+                </div>
+                <img src="~/Content/Images/loading.gif" ng-show="!IsCreatorComp" />
+            </div>
+            <label class="control-label col-xs-1" style="white-space:nowrap;">[[[创建日期]]]:</label>
+            <div class="col-xs-2">
+                <p class="input-group">
+                    <input type="text" class="form-control" ng-model="searchCondition.CreateDate" datepicker-popup="{{format}}" is-open="showCreateDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'showCreateDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+            <label style="float:left;margin-top:5px;">-</label>
+            <div class="col-xs-2">
+                <p class="input-group">
+                    <input type="text" class="form-control" ng-model="searchCondition.EndDate" datepicker-popup="{{format}}" is-open="showEndDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'showEndDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-1">[[[意见]]]:</label>
+            <div class="col-xs-6">
+                <input id="Title" ng-model="searchCondition.Title" class="form-control" />
+            </div>
+            <div class="col-xs-4 text-right">
+                <button class="btn btn-orange" ng-click="search()" ng-disabled="!ajaxFinished">[[[查询]]]</button>
+            </div>
+        </div>
+    </div>
+    @*<div class="form-actions ta_c" style="margin-top:20px;">
+        <button class="btn btn-orange" ng-click="search()" ng-disabled="!ajaxFinished">Search</button>
+    </div>*@
+</div>
+<div class="panel panel-orange mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span style="font-weight:bold" class="panel-title">[[[意见]]] </span>
+        <span id="spStoreListUSCode" style="font-weight:bold"></span>
+        <div class="panel-tools">
+            <button file-downloader file-link="{{packDownloadLink}}" before-download="download" class="btn btn-sm btn-default">
+                <span class="fa fa-cloud-download"></span>
+                [[[导出]]]
+            </button>
+        </div>
+        <span class="clear"></span>
+    </div>
+    <div class="panel-body pd_0">
+        <table class="table table-bordered">
+            <tr>
+                <th style="white-space:nowrap;">[[[表单]]]</th>
+                <th style="white-space:nowrap;">[[[意见]]]</th>
+                <th style="white-space:nowrap;">[[[创建人]]]</th>
+                <th style="white-space:nowrap;">[[[To]]]</th>
+                <th style="white-space:nowrap;">[[[创建日期]]]</th>
+                <th style="white-space:nowrap;">[[[是否阅读]]]</th>
+            </tr>
+            <tbody ng-show="$parent.ajaxFinished" ng-repeat="comment in list">
+                <tr>
+                    <td>{{comment.FlowCode}}</td>
+                    <td>{{comment.Message}}</td>
+                    <td>{{comment.SenderENUS}}</td>
+                    <td><span ng-show="!!comment.ReceiverCode">{{comment.ReceiverENUS}}</span></td>
+                    <td>{{comment.CreateTime | date:'yyyy-MM-dd'}}</td>
+                    <td>{{comment.HasRead | boolFilter}}</td>
+                </tr>
+            </tbody>
+            
+            <tbody ng-show="!ajaxFinished">
+                <tr>
+                    <td colspan="7" class="ta_c">
+                        <img src="~/Content/Images/loading.gif" />
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-show="ajaxFinished && list.length==0">
+                <tr>
+                    <td colspan="7">[[[当前没有数据]]]</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="table-paginate" ng-show="ajaxFinished && list.length>0">
+            <span>[[[当前第]]]{{pageIndex}}[[[页]]]/[[[共]]]{{numPages}}[[[页]]] [[[共]]]{{totalItems}}[[[条记录]]]</span>
+            <pagination 
+                total-items="totalItems" 
+                boundary-links="true" 
+                max-size="5" 
+                items-per-page="pageSize" 
+                ng-model="pageIndex" 
+                class="pagination-sm" 
+                previous-text="[[[上一页]]]" 
+                next-text="[[[下一页]]]" 
+                first-text="[[[首页]]]" 
+                last-text="[[[末页]]]" 
+                num-pages="numPages">
+            </pagination>
+        </div>
+    </div>
+</div>

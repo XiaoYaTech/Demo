@@ -1,0 +1,1302 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NTTMNC.BPM.Fx.K2.Services</name>
+    </assembly>
+    <members>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.BLL.K2UsersBLL">
+            <summary>
+            K2UsersBLL
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.BLL.K2UsersBLL.GetEntityByUserName(System.String)">
+            <summary>
+            通过工号获取用户实例
+            </summary>
+            <param name="userName">用户工号</param>
+            <returns>用户实例</returns>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.BLL.K2_MyApprovedBLL">
+            <summary>
+            K2_MyApprovedBLL
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.BLL.K2_MyApprovedBLL.GetPageList(System.Int32,System.String,System.Int32,System.Int32,System.Int32@,System.Collections.Hashtable)">
+            <summary>
+            分页获取待审批列表
+            </summary>
+            <param name="processType">流程类型</param>
+            <param name="pageIndex">当前页</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="pageCount">返回总数</param>
+            <param name="hash">查询条件HashTable</param>
+            <returns></returns>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.BLL.K2_MyLaunchBLL">
+            <summary>
+            K2_MyLaunchBLL
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.BLL.K2_MyLaunchBLL.GetPageList(System.Int32,System.Int32,System.Int32,System.Int32@,System.Collections.Hashtable)">
+            <summary>
+            分页获取待审批列表
+            </summary>
+            <param name="processType">流程类型</param>
+            <param name="pageIndex">当前页</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="pageCount">返回总数</param>
+            <param name="hash">查询条件HashTable</param>
+            <returns></returns>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.BLL.K2_ProcessInstanceBLL">
+            <summary>
+            K2_ProcessInstanceBLL
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.BLL.K2_ProcessInstanceBLL.IsExistsData(System.Int32,System.Int32,System.String)">
+            <summary>
+            判断指定人员是否对指定节点有审批权
+            </summary>
+            <param name="procInstId">流程实例ID</param>
+            <param name="actInstDestId">当前审批节点ID</param>
+            <param name="destination">当前审批人</param>
+            <returns>bool</returns>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext">
+            <summary>
+            K2ServiceContext
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.GetK2Connection(System.String)">
+            <summary>
+             获取K2 Connection 并且打开连接
+            </summary>
+            <returns>Connection</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.OpenProcessInstance(System.Int32,System.String)">
+            <summary>
+            Open the process instance by instance identifier.
+            </summary>
+            <param name="intProcInstId">The process instance identifier.</param>
+            <param name="strImpersonateUser">The impersonate user.</param>
+            <returns>ProcessInstance.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.OpenProcessInstance(System.String,System.String,SourceCode.Workflow.Client.Connection)">
+            <summary>
+            打开一个流程实例
+            </summary>
+            <param name="strImpersonateUser">模拟用户</param>
+            <param name="strSerialNumber">流程实例ID_当前节点ID</param>
+            <returns>流程实例</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.OpenProcessInstanceAndUpdateDataFields(System.Int32,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Opens the process instance and update data fields.打开一个流程实例并且更新对应的DataFields
+            </summary>
+            <param name="strImpersonateUser">The string impersonate user.模拟用户</param>
+            <param name="intProcInstId">The process instance identifier.</param>
+            <param name="list">The list.</param>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.OpenProcessInstanceAndUpdateDataFields(System.Int32,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField},SourceCode.Workflow.Client.ProcessInstance@)">
+            <summary>
+            打开一个流程实例并且更新对应的DataFields
+            </summary>
+            <param name="strImpersonateUser">模拟用户</param>
+            <param name="intProcInstId">The process instance identifier.</param>
+            <param name="list">The process data field list.</param>
+            <param name="processInstance">The process instance.</param>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.CreateProcessInstance(System.String,System.String)">
+            <summary>
+            根据流程全名创建一个流程实例
+            </summary>
+            <param name="strImpersonateUser">模拟用户</param>
+            <param name="strProcessFullName">流程全名</param>
+            <returns>ProcessInstance</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.OpenWorklistItem(System.String,System.String)">
+            <summary>
+            打开一个WorkListItem
+            </summary>
+            <param name="strImpersonateUser">模拟用户</param>
+            <param name="strSerialNumber">流程实例ID_当前节点ID</param>
+            <returns>WorklistItem</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.GetCurrentActivityName(System.String,System.String)">
+            <summary>
+            Gets the name of the current activity.
+            </summary>
+            <param name="strSerialNumber">The string serial number.</param>
+            <param name="strImpersonateUser">The string impersonate user.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.GetWorklistItemActions(System.String,System.String,System.String@)">
+            <summary>
+            获取流程节点所有Actions
+            </summary>
+            <param name="strImpersonateUser">模拟用户</param>
+            <param name="strSerialNumber">流程实例ID_当前节点ID</param>
+            <returns>List</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.StartProcess(System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            发起流程
+            </summary>
+            <param name="strImpersonateUser">模拟用户</param>
+            <param name="strProcessFullName">流程全名</param>
+            <param name="dataFieldCollection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.ExcuteWorklistItemAction(System.String,System.String,System.String)">
+            <summary>
+            执行Action
+            </summary>
+            <param name="strImpersonateUser">模拟用户</param>
+            <param name="strSerialNumber">流程实例ID_当前节点ID</param>
+            <param name="strActionName">ActionName</param>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.ReleaseK2Connection(SourceCode.Workflow.Client.Connection@)">
+            <summary>
+            Releases the k2 connection.释放K2连接
+            </summary>
+            <param name="conn">The connection.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.ReleaseWorklistItem(SourceCode.Workflow.Client.WorklistItem@)">
+            <summary>
+            Release the worklist item.释放worklist
+            </summary>
+            <param name="worklistItem">The worklist item.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.RedirectWorklistItem(System.String,System.String,System.String)">
+            <summary>
+            转签操作
+            </summary>
+            <param name="strImpersonateUser">模拟用户</param>
+            <param name="strSerialNumber">流程实例ID_当前节点ID</param>
+            <param name="strRedirctToUser">被转签人</param>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.GoToActivityWorklistItem(System.String,System.String,System.String)">
+            <summary>
+            GoTo操作
+            </summary>
+            <param name="strImpersonateUser">模拟用户</param>
+            <param name="strSerialNumber">流程实例ID_当前节点ID</param>
+            <param name="strGotoActivityName">跳转节点</param>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.ToDataFieldType(System.String)">
+            <summary>
+            Type string to the type of the data field.
+            </summary>
+            <param name="typeString">The type string.</param>
+            <returns>DataType.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.ToDataFieldTypeString(SourceCode.Workflow.Client.DataType)">
+            <summary>
+            To the data field type string.
+            </summary>
+            <param name="dfType">Type of the df.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.GetDataFields(System.Int32,System.String)">
+            <summary>
+            Gets the data field. 根据流程ID和流程用户获取流程 DataField
+            </summary>
+            <param name="intProcInstId">The process instance identifier.</param>
+            <param name="strImpersonateUser">The string impersonate user.</param>
+            <returns>IList&lt;ProcessDataField&gt;.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.GetDataFields(SourceCode.Workflow.Client.ProcessInstance)">
+            <summary>
+            Get the data field. 获取流程 DataField
+            </summary>
+            <param name="processInstance">The process instance.</param>
+            <returns>IList&lt;ProcessDataField&gt;.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.SetDataFields(SourceCode.Workflow.Client.ProcessInstance,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            循环对实例的DataField复制
+            </summary>
+            <param name="processInstance">流程实例</param>
+            <param name="list">The process data field list.</param>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.AddSecurityLabel(System.String)">
+            <summary>
+            Add the K2 security label.
+            </summary>
+            <param name="val">The value.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContext.RemoveSecurityLabel(System.String)">
+            <summary>
+            Remove the K2 security label.
+            </summary>
+            <param name="val">The value.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler">
+            <summary>
+            K2ServiceContextHandler
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.StartProcess(System.String,System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Start the process.发起流程接口
+            </summary>
+            <param name="ProcessCode">The process code.</param>
+            <param name="Guid">The unique identifier.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.StartProcess(System.String,System.String,System.String,SourceCode.Workflow.Client.ProcessInstance@,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            发起接口
+            </summary>
+            <param name="strProcessCode">流程代码</param>
+            <param name="strGuid">GUID字符串，方便发起后更新业务数据</param>
+            <param name="strEmployeeCode">发起员工工号</param>
+            <param name="strDataFields">DataFileds序列化结果</param>
+            <returns>
+            ReturnCode :200 ---- 发起成功
+            ReturnCode :以-100 开头 ---- 验证异常
+            ReturnCode :以-200 开头 ---- 数据库操作异常
+            ReturnCode :以-300 开头 ---- K2操作异常
+            </returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.ApprovalProcess(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Approvals the process.审批接口
+            </summary>
+            <param name="SerialNumber">The serial number.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <param name="EmployeeName">Name of the employee.</param>
+            <param name="RedirectToEmployeeCode">The redirect to employee code.</param>
+            <param name="ActionName">Name of the action.</param>
+            <param name="Comment">The comment.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.ApprovalProcess(System.String,System.String,System.String,System.String,System.String,System.String,SourceCode.Workflow.Client.ProcessInstance@,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            审批接口
+            </summary>
+            <param name="SerialNumber">SN</param>
+            <param name="EmployeeCode">当前审批人工号</param>
+            <param name="RedirectToEmployeeCode">转签/加签人员工工号</param>
+            <param name="ActionName">审批选项Value值</param>
+            <param name="Comment">审批意见</param>
+            <param name="DataFields">需要赋值的所有DataField序列化值</param>
+            <returns>
+            ReturnCode :200 ---- 审批成功
+            ReturnCode :以-100 开头 ---- 验证异常
+            ReturnCode :以-200 开头 ---- 数据库操作异常
+            ReturnCode :以-300 开头 ---- K2操作异常
+            </returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.OpenWorklistItem(System.String,System.String)">
+            <summary>
+            打开一个工作项
+            </summary>
+            <param name="SerialNumber">SN号</param>
+            <param name="EmployeeCode">当前审批人</param>
+            <returns>
+            ReturnCode :200 ---- 获取成功
+            ReturnCode :以-100 开头 ---- 验证异常
+            ReturnCode :以-200 开头 ---- 数据库操作异常
+            ReturnCode :以-300 开头 ---- K2操作异常
+            </returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetActionList(System.String,System.String)">
+            <summary>
+            获取所有审批选项
+            </summary>
+            <param name="SerialNumber">SN</param>
+            <param name="EmployeeCode">当前申请人工号</param>
+            <returns>
+            ReturnCode :200 ---- 获取成功
+            ReturnCode :以-100 开头 ---- 验证异常
+            ReturnCode :以-200 开头 ---- 数据库操作异常
+            ReturnCode :以-300 开头 ---- K2操作异常
+            </returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetCommentListByProcInstID(System.Int32)">
+            <summary>
+            获取审批记录
+            </summary>
+            <param name="ProcInstID">流程实例ID</param>
+            <returns>
+            ReturnCode :200 ---- 获取成功
+            ReturnCode :以-100 开头 ---- 验证异常
+            ReturnCode :以-200 开头 ---- 数据库操作异常
+            ReturnCode :以-300 开头 ---- K2操作异常
+            </returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetCurrentActivityName(System.Int32)">
+            <summary>
+            Gets the name of the current activity.根据流程实例ID获取当前审批节点名称
+            </summary>
+            <param name="procInstID">The process instance identifier.流程实例ID</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetCurrentActivityName(System.String,System.String)">
+            <summary>
+            获取当前审批节点名称
+            </summary>
+            <param name="SerialNumber">SN号</param>
+            <param name="EmployeeCode">当前审批人</param>
+            <returns>
+            ReturnCode :200 ---- 获取成功
+            ReturnCode :以-100 开头 ---- 验证异常
+            ReturnCode :以-200 开头 ---- 数据库操作异常
+            ReturnCode :以-300 开头 ---- K2操作异常
+            </returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetApprovalList(System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            获取指定员工待审批列表
+            </summary>
+            <param name="PageIndex">当前页数</param>
+            <param name="PageSize">每页显示数量</param>
+            <param name="ProcessName">流程名称</param>
+            <param name="Originator">发起人</param>
+            <param name="Folio">流程单号</param>
+            <param name="Destination">当前审批人</param>
+            <param name="StartDate">开始时间</param>
+            <param name="EndDate">结束时间</param>
+            <returns>
+            ReturnCode :200 ---- 获取成功
+            ReturnCode :以-100 开头 ---- 验证异常
+            ReturnCode :以-200 开头 ---- 数据库操作异常
+            ReturnCode :以-300 开头 ---- K2操作异常
+            </returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetMyLaunchPageList(System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            获取指定员工我已发起的流程列表
+            </summary>
+            <param name="PageIndex">当前页数</param>
+            <param name="PageSize">每页显示数量</param>
+            <param name="ProcessName">流程名称</param>
+            <param name="Originator">发起人</param>
+            <param name="Folio">流程单号</param>
+            <param name="Destination">当前审批人</param>
+            <param name="StartDate">开始时间</param>
+            <param name="EndDate">结束时间</param>
+            <returns>
+            ReturnCode :200 ---- 获取成功
+            ReturnCode :以-100 开头 ---- 验证异常
+            ReturnCode :以-200 开头 ---- 数据库操作异常
+            ReturnCode :以-300 开头 ---- K2操作异常
+            </returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetMyApprovedPageList(System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            我已处理的流程列表
+            </summary>
+            <param name="PageIndex">当前页数</param>
+            <param name="PageSize">每页显示数量</param>
+            <param name="EmployeeCode">当前员工工号</param>
+            <param name="ProcessName">流程名称</param>
+            <param name="Originator">发起人</param>
+            <param name="Folio">流程单号</param>
+            <param name="Destination">当前审批人</param>
+            <param name="StartDate">开始时间</param>
+            <param name="EndDate">结束时间</param>
+            <returns>
+            ReturnCode :200 ---- 获取成功
+            ReturnCode :以-100 开头 ---- 验证异常
+            ReturnCode :以-200 开头 ---- 数据库操作异常
+            ReturnCode :以-300 开头 ---- K2操作异常
+            </returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GoToActivityAndRecord(System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            Goes to activity worklist item.
+            </summary>
+            <param name="procInstID">The proc inst identifier.</param>
+            <param name="strGotoActivityName">Name of the string goto activity.</param>
+            <param name="actionUser">The action user.</param>
+            <param name="actionName">Name of the action.</param>
+            <returns>
+            JSON Type: NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject
+            {
+            ReturnData : 0 - 不成功， 1 - 成功
+            ReturnCode :200 ---- 获取成功
+            ReturnCode :以-100 开头 ---- 验证异常
+            ReturnCode :以-200 开头 ---- 数据库操作异常
+            ReturnCode :以-300 开头 ---- K2操作异常
+            }
+            </returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetProcessInstance(System.Int32)">
+            <summary>
+            Gets the process instance.
+            </summary>
+            <param name="procInstID">The process instance identifier.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetOnWayProcessInstance(System.Int32,System.String)">
+            <summary>
+            Gets the on way process instance.
+            </summary>
+            <param name="procInstID">The process instance identifier.</param>
+            <param name="employeeCode">The employee code.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.AddSign(System.String,System.String,System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            加签操作
+            </summary>
+            <param name="SerialNumber">SN</param>
+            <param name="EmployeeCode">当前审批人</param>
+            <param name="RedirectToEmployeeCode">加签人</param>
+            <param name="ActionName">Action</param>
+            <param name="DataFields"></param>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.RedirectSign(System.String,System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField},System.String)">
+            <summary>
+            转签操作
+            </summary>
+            <param name="SerialNumber">SN</param>
+            <param name="EmployeeCode">当前审批人</param>
+            <param name="RedirectToEmployeeCode">转签人</param>
+            <param name="DataFields">需要同时更新的DataField</param>
+            <param name="ActionName">Action</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.SetMessageInfo(System.String,System.String,System.String,System.Int32,System.String,NTTMNC.BPM.Fx.Core.AppSettings.MessageType,System.Boolean)">
+            <summary>
+            加转签,发送消息
+            </summary>
+            <param name="MessageViewUrl"></param>
+            <param name="receiverloginId"></param>
+            <param name="messageType"></param>
+            <param name="isAdd"></param>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.AuditProcess(System.String,System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Audits the process.正常审批
+            </summary>
+            <param name="SerialNumber">The serial number.</param>
+            <param name="EmployeeCode">The employee code.当前审批人</param>
+            <param name="ActionName">Name of the action.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.AuditProcess(System.String,System.String,System.String,SourceCode.Workflow.Client.ProcessInstance@,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            正常审批
+            </summary>
+            <param name="SerialNumber">SN</param>
+            <param name="EmployeeCode">当前审批人</param>
+            <param name="ActionName">Action</param>
+            <param name="processInstance">The process instance.</param>
+            <param name="DataFields">The data field.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.AddParticipate(System.Int32,System.String,System.Int32)">
+            <summary>
+            添加指定员工到权限表
+            </summary>
+            <param name="procInstID">流程实例ID</param>
+            <param name="employeeCode">员工工号</param>
+            <param name="employeeName">员工姓名</param>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GenerateServiceReturnObjectJSON(System.String,System.String,System.String)">
+            <summary>
+            生成返回对象序列化JSON格式
+            </summary>
+            <param name="retData">返回数据</param>
+            <param name="retCode">返回代码</param>
+            <param name="retDescription">返回描述</param>
+            <returns></returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GenerateServiceReturnObjectJSON(NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject)">
+            <summary>
+            Generate the service return object JSON.
+            </summary>
+            <param name="returnObject">The return object.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.AddServiceErrorLog(System.String,System.String,System.String,System.String,System.Exception)">
+            <summary>
+            增加错误日志
+            </summary>
+            <param name="employeeCode">操作人员工号</param>
+            <param name="errorCode">错误代码</param>
+            <param name="errorMessage"></param>
+            <param name="errorFunction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.TranslateMyLaunchList(System.Collections.Generic.List{NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyLaunchInfo})">
+            <summary>
+            转换我已发起的流程的状态
+            </summary>
+            <param name="orginalList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.TranslateMyApprovedList(System.Collections.Generic.List{NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyApprovedInfo})">
+            <summary>
+            转换我已审批的流程的状态
+            </summary>
+            <param name="orginalList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.DeserializeResultData``1(NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject)">
+            <summary>
+            Deserialize the result data.
+            </summary>
+            <typeparam name="T">The type</typeparam>
+            <param name="srvReturnObj">The service return object.</param>
+            <returns>T.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetProcessDataFields(System.String)">
+            <summary>
+            Get the process data fields.根据K2 SN和流程默认管理员帐号获取流程DataFields
+            </summary>
+            <param name="SerialNumber">The serial number.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetProcessDataFields(System.Int32)">
+            <summary>
+            Gets the process data fields.根据流程实例ID和流程默认管理员帐号获取流程DataFields
+            </summary>
+            <param name="ProcInstID">The process instance identifier.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetProcessDataFields(System.String,System.String)">
+            <summary>
+            Gets the process data fields.根据流程K2 SN号和可访问流程的帐号获取流程DataFields
+            </summary>
+            <param name="SerialNumber">The serial number.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.GetProcessDataFields(System.Int32,System.String)">
+            <summary>
+            Gets the process data fields.根据流程实例ID和可访问流程的帐号获取流程DataFields
+            </summary>
+            <param name="ProcInstID">The process instance identifier.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.SetProcessDataFields(System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Set the process data fields.根据流程K2Admin帐号更新流程DataFields
+            </summary>
+            <param name="SerialNumber">The serial number.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.SetProcessDataFields(System.Int32,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Sets the process data fields.根据流程K2Admin帐号更新流程DataFields
+            </summary>
+            <param name="ProcInstID">The process instance identifier.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.SetProcessDataFields(System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Set the process data fields.更新流程DataFields
+            </summary>
+            <param name="SerialNumber">The K2 serial number.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.SetProcessDataFields(System.Int32,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Set the process data fields.更新流程DataFields
+            </summary>
+            <param name="ProcInstID">The process instance identifier.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Common.K2ServiceContextHandler.IsNeedThrowException">
+            <summary>
+            Gets or sets a value indicating whether this instance is need throw exception.是否需要抛出异常
+            </summary>
+            <value><c>true</c> if this instance is need throw exception; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Common.Signature">
+            <summary>
+            Signature 签名工具类
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.Signature.Generate(System.String,System.String,System.String)">
+            <summary>
+            Generate Signature 生成签名
+            </summary>
+            <param name="data">签名数据除密钥外部分组成</param>
+            <param name="algorithm">算法</param>
+            <param name="key">密钥</param>
+            <returns>签名</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Common.Signature.VerifySig(System.String,System.String,System.String,System.String,System.String@)">
+            <summary>
+            Verify Signature 验证签名
+            </summary>
+            <param name="sig">原始签名</param>
+            <param name="data">签名数据</param>
+            <param name="algorithm">算法</param>
+            <param name="key">密钥</param>
+            <param name="rightSig">正确的签名</param>
+            <returns>是否通过验证</returns>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Configuration.ConfigEntities.ConfigurationK2ServicesSetting">
+            <summary>
+            ConfigurationK2ServicesSetting
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Configuration.ConfigEntities.ConfigurationK2ServicesSetting.MD5Key">
+            <summary>
+            Gets or sets the md5 key.
+            </summary>
+            <value>The md5 key.</value>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Configuration.ConfigEntities.ConfigurationK2ServicesSetting.FlowChartURI">
+            <summary>
+            Gets or sets the flow chart URL.配置查看流程图的URL地址 e.g. /ViewFlow/ViewFlow.aspx?ProcessID=@ProcInstID
+            </summary>
+            <value>The flow chart URL.</value>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Configuration.DBConfig">
+            <summary>
+            DBConfig
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Configuration.DBConfig.K2">
+            <summary>
+            从K2.config获取的配置信息
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Configuration.DBConfig.Web">
+            <summary>
+            从Web.config获取的配置信息
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Configuration.DBConfig.Inst">
+            <summary>
+            获取静态实例
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.DAL.K2UsersDAL">
+            <summary>
+            K2UsersDAL
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.DAL.K2UsersDAL.GetEntityByUserName(System.String)">
+            <summary>
+            通过工号获取用户实例
+            </summary>
+            <param name="userName">用户工号</param>
+            <returns>用户实例</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.DAL.K2UsersDAL.PreParameter(System.String,System.Object)">
+            <summary>
+            参数准备
+            </summary>
+            <param name="name">名称</param>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.DAL.K2_MyApprovedDAL">
+            <summary>
+            K2_MyApprovedDAL
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.DAL.K2_MyApprovedDAL.GetPageList(System.Int32,System.String,System.Int32,System.Int32,System.Int32@,System.Collections.Hashtable)">
+            <summary>
+            分页获取待审批列表
+            </summary>
+            <param name="processType">流程类型</param>
+            <param name="pageIndex">当前页</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="pageCount">返回总数</param>
+            <param name="hash">查询条件HashTable</param>
+            <returns></returns>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.DAL.K2_MyLaunchDAL">
+            <summary>
+            K2_MyLaunchDAL
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.DAL.K2_MyLaunchDAL.GetPageList(System.Int32,System.Int32,System.Int32,System.Int32@,System.Collections.Hashtable)">
+            <summary>
+            分页获取待审批列表
+            </summary>
+            <param name="processType">流程类型</param>
+            <param name="pageIndex">当前页</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="pageCount">返回总数</param>
+            <param name="hash">查询条件HashTable</param>
+            <returns></returns>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.DAL.K2_ProcessInstanceDAL">
+            <summary>
+            K2_ProcessInstanceDAL
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.DAL.K2_ProcessInstanceDAL.PreParameter(System.String,System.Object)">
+            <summary>
+            参数准备
+            </summary>
+            <param name="name">名称</param>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.DAL.K2_ProcessInstanceDAL.IsExistsData(System.Int32,System.Int32,System.String)">
+            <summary>
+            判断指定人员是否对指定节点有审批权
+            </summary>
+            <param name="procInstId">流程实例ID</param>
+            <param name="actInstDestId">当前审批节点ID</param>
+            <param name="destination">当前审批人</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.DAL.K2_ProcessInstanceDAL.GetProcessInstance(System.Int32)">
+            <summary>
+            Gets the process instance base information. 获取流程实例的基本信息
+            </summary>
+            <param name="procInstID">The proc inst identifier.</param>
+            <returns>K2ProcessInstanceInfo.</returns>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.K2FxReturnCodes">
+            <summary>
+            K2FxExceptionCodes
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Entity.ActionInfo">
+            <summary>
+            ActionInfo
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo">
+            <summary>
+            K2ProcessInstanceInfo
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo.GetFxProcessInfo(System.Boolean)">
+            <summary>
+            Get the framework process information.
+            </summary>
+            <param name="isNeedReload">if set to <c>true</c> [is need reload].</param>
+            <returns>K2_ProcessInfoInfo.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo.LoadFxProcessInfo">
+            <summary>
+            Load the framework process information.
+            </summary>
+            <returns><c>true</c> if load successful, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo.ProcInstID">
+            <summary>
+            流程实例ID
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo.ActInstDestID">
+            <summary>
+            当前审批节点ID
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo.StartDate">
+            <summary>
+            发起时间
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo.Originator">
+            <summary>
+            发起人工号
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo.Folio">
+            <summary>
+            流程单号
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo.ProcessName">
+            <summary>
+            流程名称
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo.ProcessCode">
+            <summary>
+            Gets or sets the process code.流程编码
+            </summary>
+            <value>The process code.</value>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo.ProcessStatus">
+            <summary>
+            流程状态
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2ProcessInstanceInfo.FlowChartURI">
+            <summary>
+            流程图链接
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Entity.K2UsersInfo">
+            <summary>
+            K2UsersInfo
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2UsersInfo.UserMobile">
+            <summary>
+            UserMobile
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyApprovedInfo">
+            <summary>
+            K2_MyApprovedInfo
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyApprovedInfo.ProcInstID">
+            <summary>
+            流程实例ID
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyApprovedInfo.ActInstDestID">
+            <summary>
+            当前审批节点ID
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyApprovedInfo.ProcessName">
+            <summary>
+            流程名称
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyApprovedInfo.Originator">
+            <summary>
+            发起人工号
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyApprovedInfo.Folio">
+            <summary>
+            流程单号
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyApprovedInfo.Destination">
+            <summary>
+            审批人工号
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyApprovedInfo.StartDate">
+            <summary>
+            发起时间
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyApprovedInfo.ProcessStatus">
+            <summary>
+            流程状态
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyApprovedInfo.DisplayStatus">
+            <summary>
+            流程显示状态
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyLaunchInfo">
+            <summary>
+            K2_MyLaunchInfo
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyLaunchInfo.ProcInstID">
+            <summary>
+            流程实例ID
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyLaunchInfo.ActInstDestID">
+            <summary>
+            当前审批节点ID
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyLaunchInfo.ProcessName">
+            <summary>
+            流程名称
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyLaunchInfo.Originator">
+            <summary>
+            发起人工号
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyLaunchInfo.Folio">
+            <summary>
+            流程单号
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyLaunchInfo.Destination">
+            <summary>
+            审批人工号
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyLaunchInfo.StartDate">
+            <summary>
+            发起时间
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyLaunchInfo.ProcessStatus">
+            <summary>
+            流程状态
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.K2_MyLaunchInfo.DisplayStatus">
+            <summary>
+            流程显示状态
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Entity.MyApprovedDataList">
+            <summary>
+            MyApprovedDataList
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.MyApprovedDataList.RecordCount">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.MyApprovedDataList.MyApprovedData">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Entity.MyLaunchDataList">
+            <summary>
+            MyLaunchDataList
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.MyLaunchDataList.RecordCount">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.MyLaunchDataList.MyLaunchData">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField">
+            <summary>
+            ProcessDataField
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject">
+            <summary>
+            ServiceReturnObject
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initialize a new instance of the <see cref="T:NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject"/> class.
+            </summary>
+            <param name="retData">The return data.返回数据</param>
+            <param name="retCode">The return code.返回代码</param>
+            <param name="retDescription">The return description.返回描述</param>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject.ReturnData">
+            <summary>
+            ReturnData
+            返回数据，如果是多条记录用;分割
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject.ReturnCode">
+            <summary>
+            ReturnCode
+            返回代码
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject.ReturnDescription">
+            <summary>
+            ReturnDescription
+            返回描述
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject.ErrorMessage">
+            <summary>
+            错误消息
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject.InnerErrorMessage">
+            <summary>
+            内部错误消息
+            </summary>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.Entity.ServiceReturnObject.StackTrace">
+            <summary>
+            堆栈消息
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.Entity.WorkListItemInfo">
+            <summary>
+            WorkListItemInfo
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.K2EventArgs">
+            <summary>
+            K2EventArgs
+            </summary>
+        </member>
+        <member name="T:NTTMNC.BPM.Fx.K2.Services.K2FxContext">
+            <summary>
+            K2FxContext
+            </summary>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.StartProcess(System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Start the process.发起接口
+            </summary>
+            <param name="ProcessCode">The process code.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>System.Int32.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.StartProcess(System.String,System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            发起接口
+            </summary>
+            <param name="ProcessCode">The process code.</param>
+            <param name="Guid">The unique identifier.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>System.Int32.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.StartProcessInst(System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Starts the process instance and return process ID.
+            </summary>
+            <param name="ProcessCode">The process code.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.StartProcessInst(System.String,System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Starts the process instance and return process ID.
+            </summary>
+            <param name="ProcessCode">The process code.</param>
+            <param name="Guid">The unique identifier.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.ApprovalProcess(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            审批接口
+            </summary>
+            <param name="SerialNumber">SN</param>
+            <param name="EmployeeCode">当前审批人工号</param>
+            <param name="RedirectToEmployeeCode">转签/加签人员工工号</param>
+            <param name="ActionName">审批选项Value值</param>
+            <param name="Comment">审批意见</param>
+            <param name="DataFields">需要赋值的所有DataField序列化值</param>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.OpenWorklistItem(System.String,System.String)">
+            <summary>
+            打开一个工作项
+            </summary>
+            <param name="SerialNumber">SN号</param>
+            <param name="EmployeeCode">当前审批人</param>
+            <returns>WorkListItemInfo.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetActionList(System.String,System.String)">
+            <summary>
+            获取所有审批选项
+            </summary>
+            <param name="SerialNumber">SN</param>
+            <param name="EmployeeCode">当前申请人工号</param>
+            <returns>List&lt;System.String&gt;.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetCommentListByProcInstID(System.Int32)">
+            <summary>
+            获取审批记录
+            </summary>
+            <param name="ProcInstID">流程实例ID</param>
+            <returns>List&lt;K2_Comment&gt;.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetCurrentActivityName(System.Int32)">
+            <summary>
+            Gets the name of the current activity.根据流程实例ID获取当前审批节点名称
+            </summary>
+            <param name="procInstID">The process instance identifier.流程实例ID</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetCurrentActivityName(System.String,System.String)">
+            <summary>
+            获取当前审批节点名称
+            </summary>
+            <param name="SerialNumber">SN号</param>
+            <param name="EmployeeCode">当前审批人</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetApprovalList(System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            获取指定员工待审批列表
+            </summary>
+            <param name="PageIndex">当前页数</param>
+            <param name="PageSize">每页显示数量</param>
+            <param name="ProcessName">流程名称</param>
+            <param name="Originator">发起人</param>
+            <param name="Folio">流程单号</param>
+            <param name="Destination">当前审批人</param>
+            <param name="StartDate">开始时间</param>
+            <param name="EndDate">结束时间</param>
+            <returns>List&lt;K2_WaitForApprovalInfo&gt;.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetMyLaunchPageList(System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            获取指定员工我已发起的流程列表
+            </summary>
+            <param name="PageIndex">当前页数</param>
+            <param name="PageSize">每页显示数量</param>
+            <param name="ProcessName">流程名称</param>
+            <param name="Originator">发起人</param>
+            <param name="Folio">流程单号</param>
+            <param name="Destination">当前审批人</param>
+            <param name="StartDate">开始时间</param>
+            <param name="EndDate">结束时间</param>
+            <returns>List&lt;K2_MyLaunchInfo&gt;.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetMyApprovedPageList(System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            我已处理的流程列表
+            </summary>
+            <param name="PageIndex">当前页数</param>
+            <param name="PageSize">每页显示数量</param>
+            <param name="EmployeeCode">当前员工工号</param>
+            <param name="ProcessName">流程名称</param>
+            <param name="Originator">发起人</param>
+            <param name="Folio">流程单号</param>
+            <param name="Destination">当前审批人</param>
+            <param name="StartDate">开始时间</param>
+            <param name="EndDate">结束时间</param>
+            <returns>List&lt;K2_MyApprovedInfo&gt;.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GoToActivityAndRecord(System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            Goes to activity worklist item.
+            </summary>
+            <param name="procInstID">The process instance identifier.</param>
+            <param name="strGotoActivityName">Name of the string goto activity.</param>
+            <param name="actionUser">The action user.</param>
+            <param name="actionName">Name of the action.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetProcessInstance(System.Int32)">
+            <summary>
+            Get the process instance.
+            </summary>
+            <param name="procInstID">The process instance identifier.</param>
+            <returns>ProcessInstance.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.ExecuteBeforeLaunchEvents">
+            <summary>
+            Execute the events before launch process.流程发起,审批前操作,调用preLaunch
+            </summary>
+            <returns><c>true</c> if pass verify, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.ExecuteAfterLaunchEvents(SourceCode.Workflow.Client.ProcessInstance,System.String,System.String)">
+            <summary>
+            Execute the events after process launch .在流程实例发起之后，处理K2FxContext类的AfterLaunch事件委托链。
+            </summary>
+            <param name="currProcInst">The current process instance.</param>
+            <param name="employeeCode">The employee code.</param>
+            <param name="action">The action.</param>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.RedirectSign(System.String,System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField},System.String)">
+            <summary>
+            转签操作
+            </summary>
+            <param name="SerialNumber">SN</param>
+            <param name="EmployeeCode">当前审批人</param>
+            <param name="RedirectToEmployeeCode">转签人</param>
+            <param name="DataFields">需要同时更新的DataField</param>
+            <param name="ActionName">Action</param>
+            <returns><c>true</c> if redirect succeed, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetProcessDataFields(System.String)">
+            <summary>
+            Get the process data fields.根据K2 SN和流程默认管理员帐号获取流程DataFields
+            </summary>
+            <param name="SerialNumber">The serial number.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetProcessDataFields(System.Int32)">
+            <summary>
+            Gets the process data fields.根据流程实例ID和流程默认管理员帐号获取流程DataFields
+            </summary>
+            <param name="ProcInstID">The process instance identifier.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetProcessDataFields(System.String,System.String)">
+            <summary>
+            Gets the process data fields.根据流程K2 SN号和可访问流程的帐号获取流程DataFields
+            </summary>
+            <param name="SerialNumber">The serial number.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.GetProcessDataFields(System.Int32,System.String)">
+            <summary>
+            Gets the process data fields.根据流程实例ID和可访问流程的帐号获取流程DataFields
+            </summary>
+            <param name="ProcInstID">The process instance identifier.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.SetProcessDataFields(System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Set the process data fields.根据流程K2Admin帐号更新流程DataFields
+            </summary>
+            <param name="SerialNumber">The serial number.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.SetProcessDataFields(System.Int32,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Sets the process data fields.根据流程K2Admin帐号更新流程DataFields
+            </summary>
+            <param name="ProcInstID">The process instance identifier.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.SetProcessDataFields(System.String,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Set the process data fields.更新流程DataFields
+            </summary>
+            <param name="SerialNumber">The K2 serial number.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="M:NTTMNC.BPM.Fx.K2.Services.K2FxContext.SetProcessDataFields(System.Int32,System.String,System.Collections.Generic.IList{NTTMNC.BPM.Fx.K2.Services.Entity.ProcessDataField})">
+            <summary>
+            Set the process data fields.更新流程DataFields
+            </summary>
+            <param name="ProcInstID">The process instance identifier.</param>
+            <param name="EmployeeCode">The employee code.</param>
+            <param name="DataFields">The data fields.</param>
+            <returns>ServiceReturnObject.</returns>
+        </member>
+        <member name="P:NTTMNC.BPM.Fx.K2.Services.K2FxContext.Current">
+            <summary>
+            当前类实例
+            </summary>
+        </member>
+        <member name="E:NTTMNC.BPM.Fx.K2.Services.K2FxContext.PreLaunch">
+            <summary>
+            当流程生成实例之前触发的事件
+            </summary>
+        </member>
+        <member name="E:NTTMNC.BPM.Fx.K2.Services.K2FxContext.AfterLaunch">
+            <summary>
+            当流程被发起并且实例生成之后触发的事件
+            </summary>
+        </member>
+    </members>
+</doc>

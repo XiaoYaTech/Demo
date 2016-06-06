@@ -1,0 +1,76 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_LLNegotiation" place-holder="11" ng-show="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="Renewal_LLNegotiation" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+<div class="panel panel-black mg_t_10" style="min-height:350px">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[业主谈判记录列表]]]
+        </span>
+        <div class="panel-tools" ng-show="!!lLNegotiation">
+            <button class="btn btn-sm btn-default" ng-click="createLLNegoRecord()">
+                <span class="fa fa-edit"></span>
+                [[[创建]]]
+            </button>
+            &nbsp;
+            <a class="btn btn-sm btn-default" ng-href="{{exportRecordsLink}}">
+                <span class="fa fa-exchange"></span>
+                [[[导出]]]
+            </a>
+        </div>
+        <span class="clear"></span>
+    </div>
+    <div class="panel-body pd_0">
+        <table class="table">
+            <tr>
+                <th>[[[序号]]]</th>
+                <th>[[[麦当劳方参与人]]]</th>
+                <th>[[[谈判内容]]]</th>
+                <th>[[[业主方参与人]]]</th>
+                <th>[[[谈判主题]]]</th>
+                <th>[[[地点]]]</th>
+                <th>[[[时间]]]</th>
+                <th>[[[操作]]]</th>
+            </tr>
+            <tr ng-repeat="record in records">
+                <td>{{$index+1}}</td>
+                <td><a ng-click="showRecord(record)">{{record.McdParticipants}}</a></td>
+                <td>
+                    <span class="cur_p" tooltip-html-unsafe="{{record.Content}}"
+                          tooltip-placement="bottom">
+                        {{record.Content|shortContent:10}}
+                    </span>
+                </td>
+                <td>{{record.LLParticipants}}</td>
+                <td>{{record.Topic}}</td>
+                <td>{{record.Location}}</td>
+                <td>{{record.Date | date:"yyyy-MM-dd"}}</td>
+                <td class="table-operations">
+                    <div>
+                        <a ng-click="$parent.deleteLLNegoRecord(record)">[[[删除]]]</a>
+                        <a ng-click="$parent.editLLNegoRecord(record)">[[[编辑]]]</a>
+                        <a ng-click="showRecord(record,true)">[[[附件]]]</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="table-paginate">
+            <span>[[[当前第]]]{{pageIndex}}[[[页/共]]]{{numPages}}[[[页 共]]]{{totalItems}}[[[条记录]]]</span>
+            <pagination total-items="totalItems" boundary-links="true" max-size="5" items-per-page="pageSize" ng-model="pageIndex" class="pagination-sm" previous-text="上一页" next-text="下一页" first-text="首页" last-text="末页" num-pages="numPages"></pagination>
+        </div>
+    </div>
+</div>
+<project-history project-id="projectId" table-name="RenewalLLNegotiation" title="[[[Renewal LLNegotiation History]]]"
+                 page-url="/Renewal/Main#/LLNegotiation/Process/View?projectId={{projectId}}"
+                 title-name="[[[Renewal LLNegotiation History]]]" ng-show="!isHistory" has-template="false"></project-history>
+<notification-message project-id="projectId"
+                      flow-code="Renewal"
+                      sub-flow-code="Renewal_LLNegotiation"
+                      node-id="lLNegotiation.Id"
+                      uscode="USCode"></notification-message>
+<attachments-memo project-id="projectId"
+                  flow-code="Renewal">
+</attachments-memo>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css?version=")@DateTime.Now.Ticks" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Style1/header.css?version=")@DateTime.Now.Ticks" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Style1/main.css?version=")@DateTime.Now.Ticks" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Style1/footer.css?version=")@DateTime.Now.Ticks" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-2.6.2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.masonry.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Editor/kindeditor-min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Editor/lang/zh_CN.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/expose178.js?version=")@DateTime.Now.Ticks" type="text/javascript"></script>
+    @MvcHtmlString.Create(ViewBag.ScriptPath)
+</head>
+
+<body>
+<form id="mainform" name="mainform" method="post">
+@*@RenderPage("~/Views/Shared/_Header.cshtml")*@
+
+<div class="MainBody">
+    <div class="Container">
+        @RenderBody()
+    </div>
+    
+</div>
+@*
+@RenderPage("~/Views/Shared/_Footer.cshtml")*@
+</form>
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="modal-header">
+    <h3 class="modal-title">[[[选择餐厅]]]</h3>
+</div>
+<div class="modal-body">
+    <form class="navbar-left form-horizontal" role="search">
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[餐厅编号]]]</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" ng-model="condition.code">
+            </div>
+            <label class="control-label col-xs-2">[[[餐厅名称]]]</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" ng-model="condition.name">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" class="btn btn-sm btn-warning" ng-click="search()">[[[查询]]]</button>
+            </div>
+        </div>      
+    </form>
+    <table class="table">
+        <tr>
+            <th>[[[US Code]]]</th>
+            <th>[[[Store Name_EN]]]</th>
+            <th>[[[Store Name_CN]]]</th>
+            <th>[[[City ZHCN]]]</th>
+            <th>[[[City ENUS]]]</th>
+        </tr>
+        <tr ng-repeat="store in list">
+            <td><a ng-click="ok(store)">{{store.StoreCode}}</a></td>
+            <td>{{store.NameENUS}}</td>
+            <td>{{store.NameZHCN}}</td>
+            <td>{{store.CityZHCN}}</td>
+            <td>{{store.CityENUS}}</td>
+
+        </tr>
+    </table>
+    <div class="table-paginate">
+        <span>当前第{{pageIndex}}页/共{{numPages}}页 共{{totalItems}}条记录</span>
+        <pagination total-items="totalItems" max-size="5" items-per-page="pageSize" num-pages="numPages" ng-model="pageIndex" on-page-change="onPageChange" class="pagination-sm" previous-text="上一页" next-text="下一页" first-text="首页" last-text="末页"></pagination>
+    </div>  
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+</div>
+
+

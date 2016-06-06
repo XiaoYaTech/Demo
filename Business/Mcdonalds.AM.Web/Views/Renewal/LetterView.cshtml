@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_Letter" place-holder="11" ng-show="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="Renewal_Letter" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+<store-basic-info code="info.USCode" workflow-type="Renewal_Letter" project="info" store="store"></store-basic-info>
+<attachments ref-table-name="RenewalLetter"
+    project-id="{{projectId}}"
+    is-history="isHistory"
+    flow-code="Renewal_Letter"
+    ref-table-id="{{letter.Id}}"
+    upload-set="viewUploadSet"
+    editable="{{savable}}"></attachments>
+<approval-records workflow-type="Renewal" ref-table-id="letter.Id" ref-table-name="RenewalLetter"></approval-records>
+<project-history project-id="projectId" table-name="RenewalLetter" title="[[[Renewal Letter History]]]"
+    page-url="/Renewal/Main#/Letter/Process/View?projectId={{projectId}}"
+    title-name="[[[Renewal Letter History]]]" ng-show="!isHistory" has-template="false"></project-history>
+<notification-message project-id="projectId"
+    flow-code="Renewal"
+    sub-flow-code="Renewal_Letter"
+    node-id="letter.Id"
+    uscode="info.USCode"></notification-message>
+<attachments-memo project-id="projectId"
+    flow-code="Renewal">
+</attachments-memo>
+<div class="form-actions ta_c" ng-if="!isHistory&&from!='useraction'">
+    <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-if="savable" ng-click="save()"><span class="fa fa-edit"></span>[[[保存]]]</button>
+    <button type="button" class="btn btn-lg btn-yellow" ng-disabled="acting" ng-if="editable" ng-click="edit()"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+    <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-if="recallable" ng-click="recall()">[[[撤回]]]</button>
+</div>

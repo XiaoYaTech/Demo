@@ -1,0 +1,145 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal-header">
+    <h3 class="modal-title">Package[[[呈递]]]</h3>
+</div>
+<div class="modal-body">
+    <p>[[[审批人]]]:</p>
+    <form class="form-horizontal" name="frmEditUser">
+        <div class="approve-dialog">
+            <div class="approve-group">
+                <span class="badge">1</span>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[Asset Manager]]]<i class="required-field">*</i></label>
+                    <div class="col-xs-4 pd_t_7" ng-show="approversLoaded">
+                        <select chosen="{disable_search:true}" id="selMarketMgr" class="form-control" required ng-model="entity.selMarketMgr" ng-options="m.NameENUS for m in MarketMgrList">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="!approversLoaded" />
+                    </div>
+                    <label class="control-label col-xs-2">Asset [[[Regional Manager]]]</label>
+                    <div class="col-xs-4 pd_t_7" ng-show="approversLoaded">
+                        <select chosen="{disable_search:true}" id="selRegionalMgr" class="form-control" ng-model="entity.selRegionalMgr" ng-options="m.NameENUS for m in RegionalMgrList">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!approversLoaded" />
+                </div>
+                <hr />
+            </div>
+            <div class="approve-group">
+                <span class="badge">2</span>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[MDD]]]<i class="required-field">*</i></label>
+                    <div class="col-xs-4 pd_t_7" ng-show="approversLoaded">
+                        <select chosen="{disable_search:true}" id="selDD" class="form-control" required ng-model="entity.selDD" ng-options="m.NameENUS for m in DDList">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!approversLoaded" />
+                    <label class="control-label col-xs-2">[[[GM]]]<i class="required-field">*</i></label>
+                    <div class="col-xs-4 pd_t_7" ng-show="approversLoaded">
+                        <select chosen="{disable_search:true}" id="selGM" class="form-control" required ng-model="entity.selGM" ng-options="m.NameENUS for m in GMList">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!approversLoaded" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[FC]]]<i class="required-field">*</i></label>
+                    <div class="col-xs-4 pd_t_7" ng-show="approversLoaded">
+                        <select chosen="{disable_search:true}" id="selFC" class="form-control" ng-model="entity.selFC" required ng-options="m.NameENUS for m in FCList">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!approversLoaded" />
+                    <label class="control-label col-xs-2">[[[RDD]]]</label>
+                    <div class="col-xs-4 pd_t_7" ng-show="approversLoaded">
+                        <select chosen="{disable_search:true}" id="selRDD" class="form-control" ng-model="entity.selRDD" ng-options="m.NameENUS for m in RDDList">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!approversLoaded" />
+                </div>
+                <hr />
+            </div>
+            <div class="approve-group">
+                <span class="badge">3</span>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[VPGM]]]<i class="required-field">*</i></label>
+                    <div class="col-xs-4 pd_t_7" ng-show="approversLoaded">
+                        <select chosen="{disable_search:true}" id="selVPGM" class="form-control" ng-model="entity.selVPGM" required ng-options="m.NameENUS for m in VPGMList">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!approversLoaded" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[Head of Development]]]<i class="required-field">*</i></label>
+                    <div class="col-xs-4 pd_t_7" ng-show="approversLoaded">
+                        <select chosen="{disable_search:true}" id="selCDO" class="form-control" ng-model="entity.selCDO" required ng-options="m.NameENUS for m in CDOList">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!approversLoaded" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[CFO]]]<i class="required-field">*</i></label>
+                    <div class="col-xs-4 pd_t_7" ng-show="approversLoaded">
+                        <select chosen="{disable_search:true}" id="selCFO" class="form-control" ng-model="entity.selCFO" required ng-options="m.NameENUS for m in CFOList">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!approversLoaded" />
+                </div>
+                <hr />
+            </div>
+            <div class="approve-group">
+                <span class="badge">4</span>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[Managing Director]]]<i class="required-field">*</i></label>
+                    <div class="col-xs-4 pd_t_7" ng-show="approversLoaded">
+                        <select chosen="{disable_search:true}" id="selDirector" class="form-control" ng-model="entity.selMngDirector" required ng-options="m.NameENUS for m in MngDirectorList">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!approversLoaded" />
+                </div>
+                <hr />
+            </div>
+            <div class="approve-group">
+                <h5>[[[抄送人：]]]</h5>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">[[[添加必要抄送人]]]<i class="required-field">*</i></label>
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                                <button type="button" class="input-group-addon" ng-click="selectNecessaryEmployee()" ng-disabled="!necessaryLoaded">[[[选择]]]</button>
+                                <input class="form-control" required onfocus="this.blur()" value="{{necessaryNoticeUsersName}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">[[[添加更多抄送对象]]]</label>
+                            <div class="col-xs-9">
+                                <div class="input-group">
+                                    <button type="button" class="input-group-addon" ng-click="selectEmployee()">[[[选择]]]</button>
+                                    <input class="form-control" readonly="readonly" value="{{noticeUsersName}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-primary" ng-disabled="frmEditUser.$invalid" ng-click="ok(scope)">[[[提交]]]</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+</div>
+
+

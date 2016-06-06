@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmRR" class="form-horizontal">
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">Relief Rent
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Relief Rent</label>
+                <div class="col-xs-4 pd_t_7">
+                    <div ng-show="editable">
+                        <input type="radio" name="my-radion" value="true" ng-model="RentRelief" ng-change="changeRentRelief()" />是
+                    <input type="radio" name="my-radion" value="false" ng-model="RentRelief" ng-change="changeRentRelief()" />否
+                    </div>
+                    <div ng-show="!editable">
+                        {{RentRelief=="true"?"是":"否"}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Relief Rent Start Date</label>
+                <div class="col-xs-4">
+                    <p class="input-group" ng-show="editable">
+                        <input type="text" class="form-control" ng-model="entity.RentReliefStartDate" datepicker-popup="yyyy-MM-dd" is-open="showRentReliefStartDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" onfocus="this.blur()" name="rentReliefStartDate" ng-disabled="RentRelief=='false'" required />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDate($event,'showRentReliefStartDate')" ng-disabled="RentRelief=='false'"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        <err-msgs field="frmRR.rentReliefStartDate" submited="$parent.$submited"></err-msgs>
+                    </p>
+                    <p class="input-group" ng-show="!editable">
+                        {{entity.RentReliefStartDate|date:"yyyy-MM-dd"}}
+                    </p>
+                </div>
+                <label class="col-xs-2 control-label">Relief Rent End Date</label>
+                <div class="col-xs-4">
+                    <p class="input-group" ng-show="editable">
+                        <input type="text" class="form-control" ng-model="entity.RentReliefEndDate" datepicker-popup="yyyy-MM-dd" is-open="showRentReliefEndDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" onfocus="this.blur()" name="rentReliefEndDate" ng-disabled="RentRelief=='false'" required />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDate($event,'showRentReliefEndDate')" ng-disabled="RentRelief=='false'"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        <err-msgs field="frmRR.rentReliefEndDate" submited="$parent.$submited"></err-msgs>
+                    </p>
+                    <p class="input-group" ng-show="!editable">
+                        {{entity.RentReliefEndDate|date:"yyyy-MM-dd"}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">Relief Rent Clause 
+            </span>
+        </div>
+        <div class="panel-body" ng-show="editable">
+            <textarea class="form-control" rows="4" ng-model="entity.RentReliefClause" name="rentReliefClause" ng-disabled="RentRelief=='false'" required></textarea>
+            <err-msgs field="frmRR.rentReliefClause" submited="$parent.$submited"></err-msgs>
+        </div>
+        <div class="panel-body" ng-show="!editable">
+            <pre class="pre">{{entity.RentReliefClause}}</pre>
+        </div>
+    </div>
+</form>

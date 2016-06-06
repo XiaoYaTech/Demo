@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+}
+<form class="form-horizontal" name="frmClosure">
+    <approved-package entity-id="entity.Id" flow-code="Closure" us-code="usCode" before-upload="beforeUpload()"></approved-package>
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">Closure</span>
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-xs-2 control-label">US Code</label>
+            <div class="col-xs-2 pd_t_7">{{usCode}}</div>
+            <label class="col-xs-2 control-label">Close date</label>
+
+            <div class="col-xs-2 pd_t_7">
+                <p class="input-group">
+                    <input type="text" name="CloseDate" class="form-control" ng-model="entity.CloseDate" datepicker-popup="{{format}}" is-open="$parent.showCloseDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled="!editable" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showCloseDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+                <err-msgs field="frmClosure.CloseDate" submited="$root.$submited"></err-msgs>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Closure Type</label>
+            <div class="col-xs-2 pd_t_7">
+                <dict-selector name="ClosureTypeCode" parent-code="ClosureType" editable="editable" selected-code="entity.ClosureTypeCode" selected-dict="$root.closureType" required="true"></dict-selector>
+
+            </div>
+            <label class="col-xs-2 control-label">Closure Resaon</label>
+            <div class="col-xs-2 pd_t_7">
+                <dict-selector name="ClosureReasonCode" parent-code="ClosureReasons" editable="editable" selected-code="entity.ClosureReasonCode" selected-dict="$root.closureReason" required="true"></dict-selector>
+            </div>
+            <div class="col-xs-4 pd_t_7">
+                <div ng-show="entity.ClosureReasonCode=='Others'" class="col-xs-12 pd_t_7">
+                    <textarea id="closureReasonRemark" rows="4" ng-model="entity.ClosureReasonRemark" class="form-control input-required" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Relocation</label>
+            <div class="col-xs-2">
+                <dict-selector name="Relocations" parent-code="Relocations" editable="editable" selected-code="entity.RelocationCode" selected-dict="$root.Relocations" required="true"></dict-selector>
+            </div>
+            <label class="col-xs-2 control-label">Relocated Pipeline ID</label>
+            <div class="col-xs-2">
+                <input type="text" ng-disabled="entity.RelocationCode !='Relocation1'&&!editable" class="form-control" ng-model="entity.RelocatedPipelineID" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Closure_WO_Total_Act.</label>
+            <div class="col-xs-2">
+                <input name="ClosureWOTotalAct" ng-model="entity.Closure_WO_Total_Act" type="text" class="form-control" required ng-disabled="!editable" />
+                <err-msgs field="frmClosure.ClosureWOTotalAct" submited="$root.$submited"></err-msgs>
+            </div>
+            <label class="col-xs-2 control-label">Closure_Compensation_Act.</label>
+            <div class="col-xs-2">
+                <input type="text" ng-model="entity.Closure_Compensation_Act" name="Closure_Compensation_Act" required class="form-control" ng-disabled="!editable" />
+                <err-msgs field="frmClosure.Closure_Compensation_Act" submited="$root.$submited"></err-msgs>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Closure_Closing_Cost_Act.</label>
+            <div class="col-xs-2">
+                <input ng-model="entity.Closure_ClosingCost_Act" name="Closure_Closing_Cost_Act" type="text" class="form-control" required ng-disabled="!editable" />
+                <err-msgs field="frmClosure.Closure_Closing_Cost_Act" submited="$root.$submited"></err-msgs>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-actions ta_c" ng-show="editable">
+        <button type="button" ng-disabled="submiting" class="btn btn-lg btn-orange" ng-click="save(frmClosure,false)" form-submit><span class="fa fa-paste"></span>暂存</button>
+        <button type="button" class="btn btn-lg btn-red" form-submit ng-click="save(frmClosure,true)"><span class="fa fa-check" form-submit></span>推送</button>
+    </div>
+</form>

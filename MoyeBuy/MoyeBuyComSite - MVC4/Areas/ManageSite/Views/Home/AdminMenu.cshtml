@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "管理菜单设置";
+    ViewBag.PageTitle = "管理菜单设置--->修改菜单";
+}
+<div class="MainNavDiv">
+    <span class="SelectedSpan" onclick="javascript:changeTable('main');">主菜单管理</span>
+    <span onclick="javascript:changeTable('sub');">子菜单管理</span>
+    <table border="1" cellpadding="0" cellspacing="0" width="100%" id="MainMenuTable">
+    <tr><td colspan="5">管理页主菜单</td><td><span onclick="javascript:addNewMenuRow('adminMenu');">添加</span></td></tr>
+        <tr>
+            <td>菜单顺序</td>
+            <td>显示名称</td>
+            <td>样式名称</td>
+            <td>菜单链接</td>
+            <td>打开连接模式</td>
+            <td>操作</td>
+        </tr>
+    @{
+        int i = 0;
+        List<Menu> Menus = (List<Menu>)ViewBag.listMenu;
+        if (Menus != null)
+        {
+            foreach (Menu menu in Menus)
+            {
+                if (menu.MenuType == "MainSubCategory")
+                {
+                    <tr>
+                        <td align=center>@(i + 1)<input type="hidden" name="MenuID@(i)" id="MenuID@(i)" value="@menu.MenuID" /></td>
+                        <td><input type="text" name="NavItem@(i)" id="NavItem@(i)" value="@menu.MenuName" maxlength="50" /></td>
+                        <td><input type="text" name="MenuStyle@(i)" id="MenuStyle@(i)" value="@menu.MenuClassName" maxlength="50" /></td>
+                        <td><input type="text" name="MenuUrl@(i)" id="MenuUrl@(i)" value=""  disabled/></td>
+                        <td>
+                            <select name="MenuTarget@(i)" id="MenuTarget@(i)" disabled>
+                            @if (menu.Target == "_blank")
+                            {
+                                <option value="_blank" selected="selected" >新窗口打开</option>
+                                <option  value="_self" >当前窗口打开</option>
+                            }
+                            else
+                            {
+                                <option value="_blank" >新窗口打开</option>
+                                <option  value="_self" selected="selected" >当前窗口打开</option>
+                            }
+                            </select>
+                        </td>
+                        <td>
+                            <span><a href="javascript:void(0);" onclick="javascript:delRow(this);">删除</a></span>
+                        </td>
+                    </tr>
+                            i++;
+
+                }
+            }
+        }
+         
+      }
+        </table>
+    <table id="SubMenuTable" border="1" cellpadding="0" cellspacing="0" width="100%">
+        <tr><td colspan="6">管理页子菜单</td></tr>
+        <tr>
+            <td colspan="5">
+                <select name="MainMenuSel" id="MainMenuSel" onchange="javascript:GetSubCategory(this);">
+                @{
+                    if (Menus != null)
+                    {
+                        <option value="">---请选择主菜单---</option>
+                        foreach (Menu menu in Menus)
+                        {
+                            if (menu.MenuType == "MainSubCategory")
+                            {
+                                <option value="@menu.MenuID">@menu.MenuName</option>
+                            }
+                        }
+                    }
+                 }
+                </select>
+            </td>
+            <td><span onclick="javascript:addNewMenuRow('adminSub');">添加</span></td>
+        </tr>
+        <tr>
+            <td>菜单顺序</td>
+            <td>显示名称</td>
+            <td>样式名称</td>
+            <td>菜单链接</td>
+            <td>打开连接模式</td>
+            <td>操作</td>
+        </tr>
+        @if (Menus != null)
+        {
+            
+            foreach (Menu menu in Menus)
+            {
+                if (menu.MenuType == "MainSubCategory" && menu.SubMenu != null)
+                {
+                    i = 0;
+                    foreach (Menu subMenu in menu.SubMenu)
+                    {
+                            <tr style="display:none;" id="@menu.MenuID">
+                            <td align=center>
+                                @(i + 1)
+                                <input type="hidden" name="MenuID@(i)" id="MenuID@(i)" value="@subMenu.MenuID" />
+                            </td>
+                            <td><input type="text" name="NavItem@(i)" id="NavItem@(i)" value="@subMenu.MenuName" maxlength="50" /></td>
+                            <td><input type="text" name="MenuStyle@(i)" id="MenuStyle@(i)" value="@subMenu.MenuClassName" maxlength="50" /></td>
+                            <td><input type="text" name="MenuUrl@(i)" id="MenuUrl@(i)" value="@subMenu.MenuUrl"  /></td>
+                            <td>
+                                <select name="MenuTarget@(i)" id="MenuTarget@(i)">
+                                @if (subMenu.Target.ToLower() == "_blank")
+                                {
+                                    <option value="_blank" selected="selected" >新窗口打开</option>
+                                    <option  value="_self" >当前窗口打开</option>
+                                }
+                                else
+                                {
+                                    <option value="_blank" >新窗口打开</option>
+                                    <option  value="_self" selected="selected" >当前窗口打开</option>
+                                }
+                                </select>
+                            </td>
+                            <td>
+                                <span><a href="javascript:void(0);" onclick="javascript:delRow(this);">删除</a></span>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+            }
+        }
+    </table>
+        <span class="SelectedSpan" style=" margin:5px 5px 5px 5px;" onclick="javascript:saveMenu();" ><a href="javascript:void(0);" >保存</a></span>
+</div>

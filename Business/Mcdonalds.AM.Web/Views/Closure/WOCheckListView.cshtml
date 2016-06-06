@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+<div ng-hide="isHistory">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_WOCheckList" place-holder="8"></top-nav>
+</div>
+<cheking-point ng-hide="isHistory" project-id="projectId" flow-code="Closure_WOCheckList" refresh="checkPointRefresh"></cheking-point>
+<closure-upload-wochecklist editable="false" project-id="projectId" entity-id="entityId"></closure-upload-wochecklist>
+<store-basic-info project="ClosureInfo" code="ClosureInfo.USCode"></store-basic-info>
+<closure-write-off-data datas="entity"></closure-write-off-data>
+
+<notification-message project-id="projectId"
+    flow-code="Closure"
+    sub-flow-code="Closure_WOCheckList"
+    node-id="entity.Id"
+    uscode="ClosureInfo.USCode"></notification-message>
+
+<attachments ref-table-name="ClosureWOCheckList"
+    project-id="{{projectId}}"
+    flow-code="Closure_WOCheckList"
+    editable="false"
+    ref-table-id="{{entityId}}"
+    is-history="isHistory"></attachments>
+
+@*<action-log project-id="projectId"></action-log>*@
+<approval-records workflow-type="Closure" ref-table-id="entity.Id" ref-table-name="ClosureWOCheckList"></approval-records>
+<div ng-hide="isHistory">
+    <project-history page-url="/closure/Main#/WOCheckList/Process/View?projectId={{projectId}}" project-id="projectId" table-name="ClosureWOCheckList" title=" WO Checklist History" has-template="false" title-name="WOCheckList"></project-history>
+
+    <div class="form-actions ta_c" ng-show="!isUserAction">
+        <button type="button" ng-show="enableEdit" class="btn btn-lg btn-yellow" ng-click="editWOCheckList()"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        <button type="button" ng-show="enableReCall" class="btn btn-lg btn-orange" ng-click="beginReCall(ClosureInfo)">[[[撤销]]]</button>
+
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal-header">
+    <h3 class="modal-title">[[[通知相关人]]]</h3>
+</div>
+<div class="modal-body">
+    <p>[[[该流程的开启通知及对应任务，会发送给下列人员]]]：</p>
+    <form class="form-horizontal" name="frmEditUser" novalidate>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Asset Rep.]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{team.AssetRep.UserNameENUS}}
+            </div>
+            <label class="control-label col-xs-2">[[[Asset Actor]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{team.AssetActor.UserNameENUS}}
+            </div>
+            <label class="control-label col-xs-2">[[[Market Asset Mgr.]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{team.AssetMgr.UserNameENUS}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Finance]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{team.Finance.UserNameENUS}}
+            </div>
+            <label class="control-label col-xs-2">[[[Legal]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{team.Legal.UserNameENUS}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[PM]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{team.PM.UserNameENUS}}
+            </div>
+            <label class="control-label col-xs-2">[[[Construction Manager]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{team.CM.UserNameENUS}}
+            </div>
+        </div>
+        @*<div class="form-group">
+            <label class="control-label col-xs-2">[[[添加必要抄送人]]]</label>
+            <div class="col-xs-8">
+                <div class="input-group">
+                    <button type="button" class="input-group-addon" ng-click="selectNecessary()" ng-disabled="loading">[[[选择]]]</button>
+                    <input class="form-control" required onfocus="this.blur()" value="{{necessaryNoticeUsersName}}" />
+                </div>
+            </div>
+        </div>
+        *@
+            <div class="form-group">
+                <label class="control-label col-xs-5">[[[如果需要发送通知给其他人员，请从下面列表中选择]]]</label>
+                <div class="col-xs-7">
+                    <div class="input-group">
+                        <input class="form-control" readonly="readonly" value="{{noticeUsersName}}" />
+                        <button type="button" class="input-group-addon" ng-click="selectEmployee()">[[[选择]]]</button>
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-primary" ng-click="ok()"
+        ng-disabled="frmEditUser.$invalid">
+        [[[提交]]]
+    </button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+</div>
+

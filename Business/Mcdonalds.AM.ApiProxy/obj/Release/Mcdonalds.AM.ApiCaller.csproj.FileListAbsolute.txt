@@ -1,0 +1,7 @@
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\bin\Release\Mcdonalds.AM.ApiCaller.dll
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\bin\Release\Mcdonalds.AM.ApiCaller.pdb
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\bin\Release\Newtonsoft.Json.dll
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\bin\Release\Newtonsoft.Json.xml
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\obj\Release\Mcdonalds.AM.ApiCaller.csprojResolveAssemblyReference.cache
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\obj\Release\Mcdonalds.AM.ApiCaller.dll
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\obj\Release\Mcdonalds.AM.ApiCaller.pdb

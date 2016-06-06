@@ -1,0 +1,120 @@
+﻿@{
+    Layout = null;
+}
+<div ng-hide="isHistory">
+    <span class="btn-project-message"></span>
+    <div class="project-message">
+        <div class="title">
+           [[[意见]]]
+        </div>
+        <div class="content">
+            <table class="table" width="100%">
+                <tr>
+                    <td class="text-left">
+                        {{SubFlow.NameENUS}}
+                    </td>
+                    <td class="text-right">
+                        <a href="javascript:void(0);" ng-click="gotoAllMsg()">[[[查看所有的留言]]]</a>
+                    </td>
+                </tr>
+                @*<tr>
+                    <td colspan="2">
+                        <div class="panel">
+                            <select class="form-control" ng-model="SubFlow" ng-options="m.Code for m in FlowCodes">
+                                <option value="">请选择</option>
+                            </select>
+                            <div class="input-group">
+                                <button type="button" class="input-group-addon" ng-click="selectEmployee()">[[[选择]]]</button>
+                                <input class="form-control" readonly="readonly" ng-click="selectEmployee()" value="{{noticeUsersName}}" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>*@
+                <tr>
+                    <td colspan="2">
+                        <div class="panel">
+                            <textarea rows="5" class="form-control" ng-model="MessageContent"></textarea>
+                        </div>
+                        <div style="float:right; margin-top:5px;">
+                            <input type="checkbox" ng-model="IsSendMail" />
+                            <span>
+                                [[[是否需要发送邮件通知]]]
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-show="IsSendMail">
+                    <td colspan="2">
+                        <div class="input-group">
+                            <button type="button" class="input-group-addon" ng-click="selectEmployee()">[[[选择邮件通知人]]]</button>
+                            <input class="form-control" readonly="readonly" ng-click="selectEmployee()" value="{{noticeUsersName}}" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right">
+                        <button ng-click="sendMsg()" class="btn btn-orange" ng-disabled="IsSend">[[[发送]]]</button>
+                    </td>
+                </tr>
+                @*<tr>
+                    <td colspan="2">
+                        <div class="panel input-group">
+                            <button class="btn" ng-class="SelBtnClassR && 'btn-orange'" ng-click="displayMsg('R')">收到的留言</button>
+                            <button class="btn" ng-class="SelBtnClassS && 'btn-orange'" ng-click="displayMsg('S')">发送的留言</button>
+                        </div>
+                    </td>
+                </tr>*@
+                <tr>
+                    <td colspan="2">
+                        <div class="input-group">
+                            <input type="checkbox" ng-model="MyComments" /> [[[My Comments]]]
+                            &nbsp;
+                            &nbsp;
+                            <input type="checkbox" ng-model="ApprovalRecords" /> [[[Approval Records]]]
+                            &nbsp;
+                            &nbsp;
+                            <input type="checkbox" ng-model="Others" /> [[[Others]]]
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="message-list">
+                            <table class="table table-striped" style=" margin:0px; padding:0px;" width="100%" cellpadding="0" cellspacing="0" ng-show="MessageList.length>0">
+                                <tr>
+                                    <td class="text-left" width="20%"><label class="control-label">[[[Sender]]]</label></td>
+                                    <td class="text-left" width="20%"><label class="control-label">[[[Receiver]]]</label></td>
+                                    <td class="text-left" width="40%"><label class="control-label">[[[Comment]]]</label></td>
+                                    <td class="text-left" width="20%"><label class="control-label">[[[CreateDate]]]</label></td>
+                                </tr>
+                                <tr ng-repeat="msg in MessageList">
+                                    <td>
+                                        <div title="{{msg.SenderENUS}}" style="white-space:nowrap;overflow:hidden; width:70px; text-overflow:ellipsis;">
+                                            {{msg.SenderENUS}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div title="{{msg.ReceiverENUS}}" style="white-space:nowrap; overflow:hidden; width:70px; text-overflow:ellipsis;">
+                                            {{msg.ReceiverENUS}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div title="{{msg.Message}}" style="white-space:nowrap; overflow:hidden; width:290px; text-overflow:ellipsis;">
+                                            {{msg.Message}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div title="{{msg.CreateTime}}" style="white-space:nowrap; overflow:hidden; width:70px; text-overflow:ellipsis;">
+                                            {{msg.CreateTime | date:"yyyy-MM-dd"}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <span ng-show="!MessageList || MessageList.length <= 0">[[[无数据]]]</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_Tool" place-holder="11" ng-if="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="Renewal_Tool" refresh="checkPointRefresh" ng-if="!isHistory"></cheking-point>
+<store-basic-info code="info.USCode" workflow-type="Renewal" project="info" store="store"></store-basic-info>
+<form name="frmTool">
+    <renewaltool-fin-measure-input editable="true"
+        sales-editable="false"
+        show-sales-editpart="false"
+        fin-measure-input="finMeasureInput"
+        year-months="yearMonths"
+        project-id="{{projectId}}"></renewaltool-fin-measure-input>
+    <renewaltool-writeoff-and-reincost editable="true" write-off-and-rein-cost="writeOffAndReinCost" has-reinvestment="info.NeedProjectCostEst"></renewaltool-writeoff-and-reincost>
+    <attachments ref-table-name="RenewalTool"
+        list="attachments"
+        project-id="{{projectId}}"
+        flow-code="Renewal_Tool"
+        ref-table-id="{{tool.Id}}"
+        upload-set="['016ea906-733b-4803-b30a-d2c3f6c252af']"
+        editable="true"></attachments>
+    <approval-records workflow-type="Renewal" ref-table-id="tool.Id" ref-table-name="RenewalTool"></approval-records>
+    <comment comments="projectComment" editable="true" title="[[[意见]]]"></comment>
+    <project-history project-id="projectId" table-name="RenewalTool" title="[[[Renewal Tool History]]]"
+        page-url="/Renewal/Main#/Tool/Process/View?projectId={{projectId}}"
+        title-name="[[[Renewal Tool History]]]" ng-if="!isHistory" has-template="false"></project-history>
+    <notification-message project-id="projectId"
+        flow-code="Renewal"
+        sub-flow-code="Renewal_Tool"
+        node-id="tool.Id"
+        uscode="info.USCode"></notification-message>
+    <attachments-memo project-id="projectId"
+        flow-code="Renewal">
+    </attachments-memo>
+    <div class="form-actions ta_c" ng-show="dataLoaded">
+        <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-click="save()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" form-submit ng-disabled="acting" ng-click="submit(frmTool)"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</form>

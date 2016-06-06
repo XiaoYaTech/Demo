@@ -1,0 +1,22 @@
+USE [MoyeBuyComLog]
+GO
+
+IF EXISTS (SELECT 1 FROM sys.all_objects WHERE NAME = 'usp_GetUserLogByUID')
+BEGIN
+	DROP PROCEDURE usp_GetUserLogByUID
+END
+GO
+
+CREATE PROCEDURE usp_GetUserLogByUID
+@UID nvarchar(30)
+AS
+BEGIN
+	IF @UID IS NOT NULL
+	BEGIN
+		SELECT * FROM tbl_SystemLog WHERE UpdatedByUserID = @UID
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tbl_SystemLog
+	END
+END

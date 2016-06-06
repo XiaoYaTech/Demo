@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            <span ng-show="panelTitle">{{panelTitle}}</span>
+            <span ng-show="!panelTile">[[[上传报废清单]]]</span>
+        </span>
+        <div class="panel-tools" ng-show="editable">
+            <a class="btn btn-sm btn-default" href="{{templateUrl}}" id="downloadWochecklistTpl">
+                <span class="fa fa-cloud-download"></span>
+                [[[请先下载Write Off模板]]]
+            </a>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;      
+                <button id="uploadWoCheckList"
+                    type="button"
+                    class="btn btn-sm btn-default"
+                    plupload-simple
+                    upload-url="api/ClosureWOCheckList/UploadTemplate/{{projectId}}"
+                    mm-types="[{title:'Excel Files',extensions:'xlsx'}]"
+                    upload-finished="uploadFinished"
+                    error-msg="[[[上传失败]]]">
+                    <span class='fa fa-cloud-upload'></span>
+                    [[[结果上传]]]
+                </button>
+            </span>
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+            <th>[[[项目]]]</th>
+            <th>[[[上传人]]]</th>
+            <th>[[[上传时间]]]</th>
+            <th>[[[状态]]]</th>
+            <th></th>
+        </tr>
+        <tr ng-show="!ajaxFinished">
+            <td colspan="5" class="ta_c">
+                <img src="~/Content/Images/loading.gif" />
+            </td>
+        </tr>
+        <tr ng-repeat="att in templateList" ng-show="ajaxFinished">
+            <td><a ng-href="{{att.FileURL}}">{{att.Name}}</a></td>
+            <td>{{att.CreatorNameENUS}}</td>
+            <td>{{att.CreateTime  | date:"yyyy-MM-dd"}}</td>
+            <td>{{att.IsAvailable}}</td>
+            <td><a ng-href="{{att.FileURL}}">[[[ [下载] ]]]</a></td>
+        </tr>
+    </table>
+</div>
+

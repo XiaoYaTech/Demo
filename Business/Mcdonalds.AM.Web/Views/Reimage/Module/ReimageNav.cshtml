@@ -1,0 +1,17 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="nav-project">
+    <a class="nav-project-item"
+       ng-mouseenter="$parent.loadOperators(nav,projectId)"
+       tooltip-html-unsafe="{{nav.operatorHTML}}"
+       tooltip-placement="bottom"
+       ng-repeat="nav in navs"
+       ng-href="{{nav.href}}" ng-class="{'active':nav.isSelected,'first':$index==0}">
+        <span ng-class="{true: 'fa fa-check', false: 'fa fa-times'}[nav.isFinished]"></span>
+        {{nav.nameZHCN}}
+    </a>
+    <a class="clear"></a>
+</div>

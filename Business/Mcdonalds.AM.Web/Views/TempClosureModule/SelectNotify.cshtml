@@ -1,0 +1,92 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal-header">
+    <h3 class="modal-title">[[[发送]]]</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="frmSelectApprovers" novalidate>
+        <div class="form-group">
+            <label class="control-label col-xs-3"><i class="required-field">*</i>Coordinator</label>
+            <div class="col-xs-3">
+                <select chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.MarketMgr" ng-options="m.NameENUS for m in data.MarketMgrs">
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+            <label class="control-label col-xs-3">[[[Regional Manager]]]</label>
+            <div class="col-xs-3">
+                <select id="selRegionalMgr" chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.RegionalMgr" ng-options="m.NameENUS for m in data.RegionalMgrs">
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-xs-3"><i class="required-field">*</i>MDD</label>
+            <div class="col-xs-3">
+                <select chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.MDD" ng-options="m.NameENUS for m in data.MDDs">
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+            <label class="control-label col-xs-3"><i class="required-field">*</i>GM</label>
+            <div class="col-xs-3">
+                <select id="selRegionalMgr" chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.GM" ng-options="m.NameENUS for m in data.GMs">
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-3"><i class="required-field">*</i>FC</label>
+            <div class="col-xs-3">
+                <select chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.FC" ng-options="m.NameENUS for m in data.FCs">
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-xs-3"><i class="required-field">*</i>[[[VPGM]]]</label>
+            <div class="col-xs-3">
+                <select chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.VPGM" required ng-options="m.NameENUS for m in data.VPGMs">
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group mg_t_10">
+            <label class="control-label col-xs-3">[[[抄送人]]]</label>
+        </div>  
+        <hr class="mg_t_-10" />    
+        <div class="form-group">
+            <label class="col-xs-3 control-label"><i class="required-field">*</i>MCCL Asset Manager</label>
+            <div class="col-xs-3">
+                <select chosen="{disable_search:true}" class="form-control" ng-show="!isLoading" ng-model="data.ProjectDto.ApproveUsers.MCCLAssetMgr" ng-options="m.NameENUS for m in data.MCCLAssetMgrs">
+                    <option value="">Select an option</option>
+                </select>
+                <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                <div>{{notifyUsersInfo.MCCLAssetMgr.Code}}</div>
+            </div>
+            <label class="col-xs-3 control-label"><i class="required-field">*</i>MCCL Asset Director</label>
+            <div class="col-xs-3">
+                <select chosen="{disable_search:true}" class="form-control" ng-show="!isLoading" ng-model="data.ProjectDto.ApproveUsers.MCCLAssetDtr" ng-options="m.NameENUS for m in data.MCCLAssetDirs">
+                    <option value="">Select an option</option>
+                </select>
+                <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                <div>{{notifyUsersInfo.MCCLAssetDtr.Code}}</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label">[[[添加更多抄送对象]]]</label>
+            <div class="col-xs-9">
+                <div class="input-group">
+                    <button type="button" class="input-group-addon" ng-click="selectEmployee()">[[[选择]]]</button>
+                    <input class="form-control" readonly="readonly" value="{{data.ProjectDto.ApproveUsers.NoticeUsers|NoticeUsersNameENUS}}" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-primary" ng-click="ok()">提交</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+</div>

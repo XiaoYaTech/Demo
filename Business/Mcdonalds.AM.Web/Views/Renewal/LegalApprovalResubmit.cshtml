@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_LegalApproval" place-holder="11" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="Renewal_LegalApproval" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    <store-basic-info code="info.USCode" workflow-type="Renewal_Letter" project="info" store="store"></store-basic-info>
+    <contact-info uscode="info.USCode" project-id="projectId"></contact-info>
+    <special-application entity="legalApproval" editable="true"></special-application>
+    <transaction-involve entity="legalApproval" editable="true"></transaction-involve>
+    <any-legal-concern entity="legalApproval" editable="true"></any-legal-concern>
+    <sox-audit entity="legalApproval" editable="true"></sox-audit>
+    <mater-tracking workflow-id="projectId" workflow-type="Renewal" node-id="legalApproval.Id" node-type="Renewal_LegalApproval"></mater-tracking>
+    <attachments ref-table-name="RenewalLegalApproval"
+        list="attachments"
+        project-id="{{projectId}}"
+        flow-code="Renewal_LegalApproval"
+        ref-table-id="{{legalApproval.Id}}"
+        upload-set="['e26669ad-a029-4eb5-9fdc-97e1add0f10d']"
+        show-contract="true"
+        editable="true"></attachments>
+    <attachments-memo project-id="projectId"
+        flow-code="Renewal">
+    </attachments-memo>
+    <approval-records workflow-type="Renewal" ref-table-id="legalApproval.Id" ref-table-name="RenewalLegalApproval"></approval-records>
+    <comment comments="projectComment" editable="true" title="[[[意见]]]"></comment>
+    <project-history project-id="projectId" table-name="RenewalLegalApproval" title="[[[Renewal LegalApproval History]]]"
+        page-url="/Renewal/Main#/LegalApproval/Process/View?projectId={{projectId}}"
+        title-name="[[[Renewal LegalApproval History]]]" ng-show="!isHistory" has-template="false"></project-history>
+    <notification-message project-id="projectId"
+        flow-code="Renewal"
+        sub-flow-code="Renewal_LegalApproval"
+        node-id="legalApproval.Id"
+        uscode="info.USCode"></notification-message>
+    <div class="form-actions ta_c">
+        <button type="button" class="btn btn-lg btn-warning" ng-disabled="acting" ng-click="save()"><span class="fa fa-check"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-warning" ng-disabled="acting" form-submit ng-click="resubmit(frmMain)"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</form>

@@ -1,0 +1,72 @@
+﻿@{
+    Layout = null;
+}
+  
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_LegalReview" place-holder="8"></top-nav>
+<cheking-point project-id="projectId" flow-code="Closure_LegalReview" refresh="checkPointRefresh"></cheking-point>
+<legal-review-store-basic-info project="ClosureInfo" code="ClosureInfo.USCode"></legal-review-store-basic-info>
+<notification-message project-id="projectId"
+    flow-code="Closure"
+    sub-flow-code="Closure_LegalReview"
+    node-id="legalView.Id"
+    uscode="ClosureInfo.USCode"></notification-message>
+<div id="divInfo2" class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">[[[关店信息]]]
+        </span>
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-xs-2 control-label">[[[项目类型]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{ClosureInfo.ClosureTypeNameZHCN}}
+            </div>
+            <label class="col-xs-2 control-label">[[[关店日期]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{ClosureInfo.ActualCloseDate | date:"yyyy-MM-dd"}}
+            </div>
+            <label class="col-xs-2 control-label">[[[关店原因]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{ClosureInfo.ClosureReasonNameZHCN}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">[[[租约到期日期]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{ClosureInfo.LeaseExpireDate | date:"yyyy-MM-dd"}}
+            </div>
+            <label class="col-xs-2 control-label">[[[Landlord Name]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{ClosureInfo.LandlordName}}
+            </div>
+            <label class="col-xs-2 control-label"></label>
+            <div class="col-xs-2 pd_t_7">
+            </div>
+        </div>
+    </div>
+</div>
+<contact-info uscode="ClosureInfo.USCode" project-id="projectId"></contact-info>
+<comment editable="true" required comments="legalView.LegalCommers" title="[[[法律意见]]]"></comment>
+<mater-tracking workflow-id="projectId" workflow-type="Closure" node-id="legalView.Id" node-type="Closure_LegalReview"></mater-tracking>
+
+
+<attachments ref-table-name="ClosureLegalReview"
+    project-id="{{projectId}}"
+    flow-code="Closure_LegalReview"
+    editable="false"
+    show-contract="true"
+    upload-set="['8b086d16-b65b-412f-9e81-013566f732ff']"
+    list="legalReviewAttachments"
+    upload-finish="uploadFinFinish(up,files)"
+    delete-finish="deleteAttachmentFinish(id,requirementId)"></attachments>
+<approval-records workflow-type="Closure" ref-table-id="legalView.Id" ref-table-name="ClosureLegalReview"></approval-records>
+
+<comment editable="true" required comments="legalView.Comments" title="[[[意见]]]"></comment>
+<project-history page-url="/closure/Main#/LegalReview/Process/View?projectId={{projectId}}" project-id="projectId" table-name="ClosureLegalReview" title=" ClosureLegalReview History" has-template="false" title-name="LegalReview"></project-history>
+
+<div class="form-actions ta_c">
+    <button type="button" ng-disabled="frmLegalReview.$invalid" class="btn btn-lg btn-red" ng-click="ApproverSubmit('Submit')">[[[结束]]]</button>
+    <button type="button" class="btn btn-lg btn-orange" ng-click="ApproverSubmit('Return')"><span class="fa fa-mail-reply"></span>[[[退回]]]</button>
+</div>

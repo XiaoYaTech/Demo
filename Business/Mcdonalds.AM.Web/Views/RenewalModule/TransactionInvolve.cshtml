@@ -1,0 +1,101 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="panel panel-black transaction_involve mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[If the transaction involves]]]
+        </span>
+    </div>
+    <div class="panel-body">
+        <table>
+            <colgroup>
+                <col width="20" />
+                <col />
+            </colgroup>
+            <tr>
+                <td colspan="2">
+                    <input type="checkbox" ng-model="entity.IsRecentTransfer" ng-disabled="!editable" />
+                    &nbsp;&nbsp;
+                    [[[Recent Transfer]]]
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="checkbox" ng-model="entity.IsIntermediaries" ng-disabled="!editable" />
+                    &nbsp;&nbsp;
+                    [[[Intermediaries]]]
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="checkbox" ng-model="entity.IsRelatedParties" ng-disabled="!editable" />
+                    &nbsp;&nbsp;
+                    [[[Related Parties]]]
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="checkbox" ng-model="entity.IsBroker" ng-disabled="!editable" />
+                    &nbsp;&nbsp;
+                    [[[Broker]]]
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="checkbox" ng-model="entity.IsPTTP" ng-disabled="!editable" />
+                    &nbsp;&nbsp;
+                    [[[Payment to third party]]]
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="checkbox" ng-model="entity.IsASIIWGO" ng-disabled="!editable" />
+                    &nbsp;&nbsp;
+                    [[[Agent's service includes Interaction with Government Officials]]]
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="checkbox" ng-model="entity.IsNoBLClause" ng-disabled="!editable" ng-change="noBLClauseChanged()" />
+                    &nbsp;&nbsp;
+                    [[[无利益冲突条款或合法性条款]]]
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="checkbox" ng-model="entity.IsOFAC" ng-disabled="!editable||!entity.IsNoBLClause" />
+                    &nbsp;&nbsp;
+                    [[[OFAC条款]]]
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="checkbox" ng-model="entity.IsAntiC" ng-disabled="!editable||!entity.IsNoBLClause" />
+                    &nbsp;&nbsp;
+                    [[[反腐败条款]]]
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="checkbox" ng-model="entity.IsBenefitConflict" ng-disabled="!editable||!entity.IsNoBLClause" />
+                    &nbsp;&nbsp;
+                    [[[利益冲突条款]]]
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="checkbox" ng-model="entity.NoneOfAbove" ng-disabled="!editable" />
+                    &nbsp;&nbsp;
+                    [[[None of Above]]]
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+

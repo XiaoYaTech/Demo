@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_Package" place-holder="11" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="Renewal_Package" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    <store-basic-info code="info.USCode" workflow-type="Renewal_Letter" project="info" store="store"></store-basic-info>
+    <key-measures analysis="analysis" fmoutput="finMeasureOutput"></key-measures>
+    <attachments ref-table-name="RenewalPackage"
+        list="attachments"
+        flow-code="Renewal_Package"
+        upload-set="['d7348acc-6e63-4194-b0a9-18eeff3d7bfc','4d8002c0-d5f1-4bb5-b756-7fe9dc25a019','95063830-6282-467c-a2fa-2cfea5e62c5b','2bde01aa-12e8-421d-9849-c358c7b7eca7']"
+        project-id="{{projectId}}"
+        ref-table-id="{{package.Id}}"
+        show-pack-download="true"
+        editable="true"></attachments>
+    <attachments-memo project-id="projectId"
+        flow-code="Renewal">
+    </attachments-memo>
+    <approval-records workflow-type="Renewal" ref-table-id="package.Id" ref-table-name="RenewalPackage"></approval-records>
+    <comment comments="projectComment" editable="true" title="[[[意见]]]"></comment>
+    <project-history project-id="projectId" table-name="RenewalPackage" title="[[[Renewal Package History]]]"
+        page-url="/Renewal/Main#/Package/Process/View?projectId={{projectId}}"
+        title-name="[[[Renewal Package History]]]" ng-show="!isHistory" has-template="false"></project-history>
+    <notification-message project-id="projectId"
+        flow-code="Renewal"
+        sub-flow-code="Renewal_Package"
+        node-id="package.Id"
+        uscode="info.USCode"></notification-message>
+    <div class="form-actions ta_c">
+        <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-click="save()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-disabled="acting" ng-click="submit(frmMain)"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</form>

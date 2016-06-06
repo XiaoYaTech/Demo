@@ -1,0 +1,8 @@
+﻿/*bootstrap fix start*/
+.col-sm-2{
+    width:13%;
+}
+/*bootstrap fix end*/
+.nav-project-item{
+    width:12.02%;
+}

@@ -1,0 +1,129 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="modal-header">
+    <h3 class="modal-title">[[[Record of negotiations]]]</h3>
+</div>
+<div class="modal-body">
+    <div class="panel panel-black mg_t_10" ng-hide="hideDetail">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[Lease changes due to Rebuild]]]
+            </span>
+            <span class="clear"></span>
+        </div>
+        <div class="panel-body ">
+            <div ng-form="" class="form-horizontal" name="frmNegoRec" role="form">
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[Meeting Date]]]</label>
+                    <div class="col-xs-4">
+                        <p class="input-group">
+                            <input type="text" required name="Date" ng-disabled="viewmode" class="form-control" ng-model="model.record.Date" datepicker-popup="yyyy-MM-dd" is-open="model.showDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-disabled="viewmode" ng-click="openDate($event,'showDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <div ng-show="$submited||frmNegoRec.Date.$dirty">
+                            <span class="ng-error" ng-show="frmNegoRec.Date.$error.required">[[[必须填写]]]</span>
+                        </div>
+                    </div>
+                    <label class="control-label col-xs-2">[[[Location]]]</label>
+                    <div class="col-xs-4">
+                        <input type="text" name="Location" required class="form-control" ng-disabled="viewmode" ng-model="model.record.Location" />
+                        <div ng-show="$submited||frmNegoRec.Location.$dirty">
+                            <span class="ng-error" ng-show="frmNegoRec.Location.$error.required">[[[必须填写]]]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[Mcd Participants]]]</label>
+                    <div class="col-xs-4">
+                        <input type="text" name="McdParticipants" required class="form-control" ng-disabled="viewmode" ng-model="model.record.McdParticipants" />
+                        <div ng-show="$submited||frmNegoRec.McdParticipants.$dirty">
+                            <span class="ng-error" ng-show="frmNegoRec.McdParticipants.$error.required">[[[必须填写]]]</span>
+                        </div>
+                    </div>
+                    <label class="control-label col-xs-2">[[[LL Participants]]]</label>
+                    <div class="col-xs-4">
+                        <input type="text" name="LLParticipants" required class="form-control" ng-disabled="viewmode" ng-model="model.record.LLParticipants" />
+                        <div ng-show="$submited||frmNegoRec.LLParticipants.$dirty">
+                            <span class="ng-error" ng-show="frmNegoRec.LLParticipants.$error.required">[[[必须填写]]]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[Topic]]]</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="Topic" required class="form-control" ng-disabled="viewmode" ng-model="model.record.Topic" />
+                        <div ng-show="$submited||frmNegoRec.Topic.$dirty">
+                            <span class="ng-error" ng-show="frmNegoRec.Topic.$error.required">[[[必须填写]]]</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[Content]]]</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <textarea rows="8" name="Content" required class="form-control" ng-disabled="viewmode" ng-maxlength="1000" ng-model="model.record.Content"></textarea>
+                        <div ng-show="$submited||frmNegoRec.Content.$dirty">
+                            <span class="ng-error" ng-show="frmNegoRec.Content.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmNegoRec.Content.$error.maxlength">[[[请输入1000字以内的文字]]]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[附件列表]]]
+            </span>
+            <div class="panel-tools" ng-hide="viewmode">
+                <button plupload-simple
+                        upload-url="api/renewalLLNegotiation/UploadRecordAttachment/{{model.record.Id}}"
+                        upload-finished="loadAttachments"
+                        error-msg="[[[请上传正确的文件]]]"
+                        class="btn btn-sm btn-default">
+                    <span class="fa fa-paperclip"></span>
+                    [[[上传附件]]]
+                </button>
+            </div>
+            <span class="clear"></span>
+        </div>
+        <div class="panel-body pd_0">
+            <table class="table">
+                <tr>
+                    <th>[[[No.]]]</th>
+                    <th>[[[Item]]]</th>
+                    <th>[[[Uploaded By]]]</th>
+                    <th>[[[Uploaded Date]]]</th>
+                    <th>[[[Operation]]]</th>
+                </tr>
+                <tr ng-repeat="attach in attachments">
+                    <td>{{$index+1}}</td>
+                    <td><span class="{{attach.Icon}}"></span><a ng-href="{{attach.downloadLink}}">{{attach.Name}}</a></td>
+                    <td>{{attach.CreatorNameENUS}}</td>
+                    <td>{{attach.CreateTime | date:"yyyy-MM-dd"}}</td>
+                    <td class="table-operations">
+                        <div>
+                            <a ng-href="{{attach.downloadLink}}">[[[下载]]]</a>
+                            <a ng-hide="viewmode" ng-click="$parent.deleteAttachment(attach.ID)">[[[删除]]]</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-orange" ng-hide="viewmode" form-submit ng-click="save(frmNegoRec)"><span class="fa fa-paste"></span>[[[保存]]]</button>
+    <button class="btn btn-sm btn-default" ng-click="cancel()">[[[取消]]]</button>
+</div>
+
+

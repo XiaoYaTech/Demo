@@ -1,0 +1,4 @@
+list.txt
+usp_AddUsedCardNo.sql
+usp_GenerateGiftCardNo.sql
+usp_GetGiftCardByNo.sql

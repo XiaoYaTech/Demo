@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "导航菜单设置";
+    ViewBag.PageTitle = "菜单管理--->添加菜单";
+}
+<div class="MainNavDiv">
+    <span class="SelectedSpan">导航菜单设置</span>
+    <span onclick="javascript:addNewMenuRow();">新加菜单项</span>
+    <table border="1" cellpadding="0" cellspacing="0" width="100%" id="MenuTable">
+    <tr><td colspan="6">网站导航主菜单</td></tr>
+        <tr>
+            <td>菜单顺序</td>
+            <td>显示名称</td>
+            <td>样式名称</td>
+            <td>菜单链接</td>
+            <td>打开连接模式</td>
+            <td>操作</td>
+        </tr>
+    @{
+        int i = 0;
+        List<Menu> Menus = (List<Menu>)ViewBag.listMenu;
+        if (Menus != null)
+        {
+            foreach (Menu menu in Menus)
+            {
+                if (menu.MenuType == "MainMenu")
+                {
+                    <tr>
+                        <td align=center>@(i + 1)<input type="hidden" name="MenuID@(i)" id="MenuID@(i)" value="@menu.MenuID" /></td>
+                        @if (i == 0)
+                        {
+                            <td><input type="text" name="NavItem@(i)" id="NavItem@(i)" value="@menu.MenuName" maxlength="50" readonly /></td>
+                            <td><input type="text" name="MenuStyle@(i)" id="MenuStyle@(i)" value="@menu.MenuClassName" maxlength="50" readonly /></td>
+                        }
+                        else
+                        {
+                            <td><input type="text" name="NavItem@(i)" id="NavItem@(i)" value="@menu.MenuName" maxlength="50" /></td>
+                            <td><input type="text" name="MenuStyle@(i)" id="MenuStyle@(i)" value="@menu.MenuClassName" maxlength="50" /></td>
+                        }
+                        <td><input type="text" name="MenuUrl@(i)" id="MenuUrl@(i)" value="@(menu.MenuUrl == "" ? "http://" : menu.MenuUrl)"  /></td>
+                        <td>
+                            <select name="MenuTarget@(i)" id="MenuTarget@(i)">
+                            @if (menu.Target == "_blank")
+                            {
+                                <option value="_blank" selected="selected" >新窗口打开</option>
+                                <option  value="_self" >当前窗口打开</option>
+                            }
+                            else
+                            {
+                                <option value="_blank" >新窗口打开</option>
+                                <option  value="_self" selected="selected" >当前窗口打开</option>
+                            }
+                            </select>
+                        </td>
+                        @if (i != 0)
+                        {
+                            <td><span><a href="javascript:void(0);" onclick="javascript:delRow(this);">删除</a></span></td>
+                        }
+                        else
+                        {
+                            <td><span>&nbsp;</span></td>
+                        }
+                    </tr>
+                    i++;
+                }
+            }
+        }
+         
+      }
+        </table>
+        <span class="SelectedSpan" style=" margin:5px 5px 5px 5px;" onclick="javascript:saveMenu('MenuTable');" ><a href="javascript:void(0);" >保存</a></span>
+</div>

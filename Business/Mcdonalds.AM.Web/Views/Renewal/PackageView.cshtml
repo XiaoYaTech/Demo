@@ -1,0 +1,31 @@
+﻿<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_Package" place-holder="11" ng-show="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="Renewal_Package" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+<store-basic-info code="info.USCode" workflow-type="Renewal_Letter" project="info" store="store"></store-basic-info>
+<key-measures analysis="analysis" fmoutput="finMeasureOutput"></key-measures>
+<attachments ref-table-name="RenewalPackage"
+    list="attachments"
+    project-id="{{projectId}}"
+    is-history="isHistory"
+    ref-table-id="{{package.Id}}"
+    flow-code="Renewal_Package"
+    upload-set="viewUploadSet"
+    show-pack-download="true"
+    editable="{{savable}}"></attachments>
+<approval-records workflow-type="Renewal" ref-table-id="package.Id" ref-table-name="RenewalPackage"></approval-records>
+<project-history project-id="projectId" table-name="RenewalPackage" title="[[[Renewal Package History]]]"
+    page-url="/Renewal/Main#/Package/Process/View?projectId={{projectId}}"
+    title-name="[[[Renewal Package History]]]" ng-show="!isHistory" has-template="false"></project-history>
+<notification-message project-id="projectId"
+    flow-code="Renewal"
+    sub-flow-code="Renewal_Package"
+    node-id="package.Id"
+    uscode="info.USCode"></notification-message>
+<attachments-memo project-id="projectId"
+    flow-code="Renewal">
+</attachments-memo>
+<div class="form-actions ta_c" ng-if="!isHistory&&from!='useraction'">
+    <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-if="savable" ng-click="save()"><span class="fa fa-edit"></span>[[[保存]]]</button>
+    <button type="button" class="btn btn-lg btn-yellow" ng-disabled="acting" ng-if="editable" ng-click="edit()"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+    <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-if="recallable" ng-click="recall()">[[[撤回]]]</button>
+</div>

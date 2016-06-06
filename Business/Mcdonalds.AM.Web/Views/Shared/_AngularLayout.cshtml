@@ -1,0 +1,24 @@
+﻿@using System.Web.Optimization;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.AngularApp = "xmlns:ng=\"http://angularjs.org\" id=\"ng-app\" ng-app=\"amApp\"";
+    ViewBag.AngularBody = "ng-cloak";
+}
+@section head{
+    @RenderSection("head",false)
+}
+@section scripts{    
+    @Scripts.Render("~/Scripts/Angular")
+    <script type="text/javascript" src="http://172.24.130.43:10081/Scripts/Modules.js"></script> 
+    <script type="text/javascript" src="http://172.24.130.43:10081/Scripts/ModuleTemplates.ashx"></script>   
+    @Scripts.Render("~/Scripts/Bootstrap")
+    @Scripts.Render("~/Scripts/Compoments")
+    @RenderSection("scripts",false)    
+}
+@RenderBody()
+@Html.Action("CoreTemplates","Template")
+<hr />
+<footer>
+    
+</footer>
+

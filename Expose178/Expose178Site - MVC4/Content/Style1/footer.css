@@ -1,0 +1,148 @@
+﻿.FooterService
+{
+    width:1210px;
+    margin:0px auto;
+    text-align:center;
+}
+.FooterService a
+{
+    color:#333333;
+}
+.FooterService a:hover
+{
+    color:#333333;
+    text-decoration:underline;
+}
+.FooterServiceContainer
+{
+    margin:0px auto;
+    width:1210px;
+}
+.Service
+{
+    float:left;
+    width:1210px;
+    border:1px solid #DDDDDD;
+    border-radius:5px 5px 5px 5px;
+    margin-bottom:20px;
+
+}
+.Service dl
+{
+    width:172px;
+    margin-left:20px;
+    padding-top:20px;
+    padding-bottom:20px;
+    float:left;
+}
+.Service dd
+{
+    line-height:20px;
+    min-height:110px;
+    margin-left:13px;
+    background-position:-230px -177px;
+    background-repeat:no-repeat;
+    background-image:url("/Content/Style1/Images/20120112B.png");
+}
+.Service dl b
+{
+    position:absolute;
+    display:block;
+    height:28px;
+    width:28px;
+    background-repeat:no-repeat;
+    background-image:url("/Content/Style1/Images/20120112B.png");
+}
+.s1 b
+{
+    background-position:0px -176px;
+}
+.s2 b
+{
+    background-position:-60px -176px;
+}
+.s3 b
+{
+    background-position:-30px -176px;
+}
+.s4 b
+{
+    background-position:-90px -176px;
+}
+.s5 b
+{
+    background-position:-120px -176px;
+}
+.s6 b
+{
+    background-position:0px -176px;
+}
+.Service dl dd div
+{
+    width:140px;
+    text-align:left;
+    padding-left:45px;
+}
+.Footer
+{
+    width:1210px;
+    margin:0px auto;
+}
+.Copyright
+{
+    float:left;
+    height:20px;
+    width:1210px;
+    text-align:center;
+}
+.Authentication
+{
+    float:left;
+    width:1210px;
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:20px;
+}
+.Authentication ul
+{
+    margin:0px auto;
+    width:718px;
+}
+.Authentication ul li
+{
+    float:left;
+    margin:0px 0px 0px 0px;
+    padding:0px 0px 0px 0px;
+}
+.Authentication b
+{    
+    width:117px;
+    height:40px;
+    display:block;
+    background-repeat:no-repeat;
+    background-image:url("/Content/Style1/Images/yx_foot_pic.png");
+}
+.logo1
+{
+    background-position:0px -293px;
+}
+.logo2
+{
+    background-position:0px -335px;
+}
+.logo3
+{
+    background-position:0px -419px;
+}
+.logo4
+{
+    background-position:0px -461px;
+}
+.logo5
+{
+    background-position:0px -377px;
+}
+.logo6
+{
+    background-position:0px -503px;
+}

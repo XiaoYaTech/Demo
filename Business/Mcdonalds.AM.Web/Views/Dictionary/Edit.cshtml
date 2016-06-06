@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/Libs/JQuery/jquery-1.10.2.min.js"></script>
+
+    <script src="~/Scripts/Libs/Angular/angular.min.js"></script>
+    <script type="text/javascript">
+        function DictionaryDetailsCtrl($scope, $http) {
+            $http.get(Utils.ServiceURI.Address() + 'api/dictionary/1/10/root').error(function (data) {
+                alert("error");
+
+            }).success(function (data1) {
+                $scope.dictionaryList = data1;
+                if (data1 != null && data1.length > 0) {
+
+                    $scope.dictionaryList.ParentCode = data1[0].ParentCode;
+                }
+
+            });
+        }
+    </script>
+    <title></title>
+</head>
+<body>
+    <div>
+    
+    </div>
+</body>
+</html>

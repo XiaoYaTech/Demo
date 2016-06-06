@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "添加商品";
+    ViewBag.PageTitle = "商品管理--->添加商品";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Areas/ManageSite/Scripts/Product.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";    
+}
+<div class="OptionContainer">
+    <table border="0">
+        <tr>
+            <td><span><a href ="@Url.Action("Index", "Product")">返回</a></span></td>
+        </tr>
+    </table>
+</div>
+<div class="ResultBody">
+    <table width="80%" cellspacing=0 cellpadding=5 >
+        <tr>
+            <td>产品ID:</td>
+            <td><input type="text" name="productID" id="productID" value="" disabled /></td>
+        </tr>
+        <tr>
+            <td>产品名称:</td>
+            <td><input type="text" name="productName" id="productName" value = "" maxlength="30" /><span style="color:Red;">*</span></td>
+        </tr>
+        <tr>
+            <td>规格:</td>
+            <td><input type="text" name="productSpec" id="productSpec" value=""  maxlength="50" /><span style="color:Red;">*</span></td>
+        </tr>
+        <tr>
+            <td>价格:</td>
+            <td><input type="text" name="productPrice" id="productPrice" value=""  maxlength="20" style="width:50px;"/>元<span style="color:Red;">*</span></td>
+        </tr>
+        <tr>
+            <td>市场价格:</td>
+            <td>
+                <input type="text" name="productMarketPrice" id="productMarketPrice" value=""  maxlength="20" style="width:50px;"/>元<span style="color:Red;">*</span>
+                是否为本站的5%?
+                <input type="checkbox" name="chkMarketPrice" id="chkMarketPrice" value="" style="width:20px; height:12px; border:0px;" />
+            </td>
+        </tr>
+        <tr>
+            <td>是否为热卖商品:</td>
+            <td><select id="isSellHot" name="isSellHot"><option value="">--请选择--</option><option value="1">是</option><option value="0">否</option></select><span style="color:Red;">*</span></td>
+        </tr>
+        <tr>
+            <td>是否立即出售:</td>
+            <td><select id="isOnSell" name="isOnSell"><option value="">--请选择--</option><option value="1">是</option><option value="0">否</option></select><span style="color:Red;">*</span></td>
+        </tr>
+        <tr>
+            <td>产品类别:</td>
+            <td>
+                <select id="productCategory" name="productCategory">
+                    <option value="">--请选择--</option>
+                    @{
+                        if (ViewBag.ListCategory != null)
+                        {
+                            foreach (var category in (IList<ProductCategory>)ViewBag.ListCategory)
+                            {
+                                <option value="@category.CategoryId">@category.CategoryName</option>
+                            }
+                        }
+                     }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>供应商:</td>
+            <td>
+                <select id="productSupplier" name="productSupplier">
+                    <option value="">--请选择--</option>
+                    @{
+                        if (ViewBag.ListSupplier != null)
+                        {
+                            foreach (var supplier in (IList<SupplierInfo>)ViewBag.ListSupplier)
+                            {
+                                <option value="@supplier.SupplierID">@supplier.SupplierName</option>
+                            }
+                        }
+                     }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>库存:</td>
+            <td><input type="text" id="productCount" name="productCount" value="9999" style="width:50px;" /></td>
+        </tr>
+        <tr>
+            <td>产品图片:</td>
+            <td>
+                <input type="text" id="productImgUrl" name="productImgUrl" value="" readonly="readonly" /> <input type="button" id="productImg" style="width:100px;" name="productImg" value="选择图片..." />
+                @*<input type="file" name="productImg" id="productImg" value="" />*@
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">产品详细描述:
+            
+            </td>
+            <td><textarea id="productDesc" name="productDesc" style="width:800px; height:700px;"></textarea></td>
+            
+        </tr>
+        <tr>
+            <td colspan="2">
+            <span class="spanbtn" ><a href="javascript:void(0);" id="btnSubmit" name="btnSubmit"  onclick="javascript:AddProd('');">提交</a></span>
+            <span class="spanbtn" ><a href ="@Url.Action("Index", "Product")">返回</a></span>
+            </td>
+        </tr>
+    </table>
+</div>

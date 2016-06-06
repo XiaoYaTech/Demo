@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "供应商";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Areas/ManageSite/Scripts/Supplier.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";    
+}
+<div class="OptionContainer"></div>
+<div class="ResultBody">
+@if (Model!=null)
+{
+    <table border="0" width="80%" cellpadding="0" cellspacing="0" class="detailtable">
+        <tr>
+            <th>供应商ID</th>
+            <th>名称</th>
+            <th>联系人</th>
+            <th>电话</th>
+            <th>传真</th>
+            <th>地址</th>
+            <th>更新时间</th>
+            <th>操作</th>
+        </tr>
+    @foreach (var supplier in (IList<MoyeBuy.Com.Model.SupplierInfo>)Model)
+    {
+        <tr>
+            <td>@supplier.SupplierID</td>
+            <td>@supplier.SupplierName</td>
+            <td>@supplier.SupplierPersonName</td>
+            <td>@supplier.SupplierPhoneNo</td>
+            <td>@supplier.SupplierFax</td>
+            <td>@supplier.SupplierAddress</td>
+            <td>@supplier.LastUpdatedDate.ToString("yyyy-MM-dd")</td>
+            <td><span onclick="javascript:delSupplier('@supplier.SupplierID');">删除</span><span onclick="javascript:showAddWindow('@supplier.SupplierID');">更新</span></td>
+        </tr>
+    }
+    </table>
+}
+    <span onclick="javascript:showAddWindow();">添加</span>
+    <div id="addSupplierDiv" name="addSupplierDiv" style="display:none;">
+        <input type="hidden" name="SupplierID" id="SupplierID" value="" />
+        <table id="addSupplierTabel" name="addSupplierTabel" border="0" cellpadding="5" cellspacing="0">
+            <tr>
+                <td valign="top">名称</td>
+                <td><input type="text" name="SupplierName" id="SupplierName" maxlength="100" value="" /></td>
+            </tr>
+            <tr>
+                <td valign="top">联系人</td>
+                <td><input type="text" id="SupplierPersonName" name="SupplierPersonName" maxlength="30" /></td>
+            </tr>
+            <tr>
+                <td valign="top">电话</td>
+                <td><input type="text" id="SupplierPhoneNo" name="SupplierPhoneNo" maxlength="30" /></td>
+            </tr>
+            <tr>
+                <td valign="top">传真</td>
+                <td><input type="text" id="SupplierFax" name="SupplierFax" maxlength="30" /></td>
+            </tr>
+            <tr>
+                <td valign="top">地址</td>
+                <td><textarea id="SupplierAddress" name="SupplierAddress" cols="35" rows="10" ></textarea></td>
+            </tr>
+        </table>
+    </div>
+</div>

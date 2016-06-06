@@ -1,0 +1,10 @@
+﻿2015-04-13 18:13:33,690 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15040102","toolId":"9e5c3c29-8ebf-4e6d-a839-d6a8e04a9e30","nodeInfo":{"Id":"2da4ec22-f37f-4efd-b3a9-665392d492ad","Code":"Renewal_Tool_Upload","ProgressRate":30.0,"CreateTime":"2014-09-28T18:02:04","CreateUserAccount":"system","FlowCode":"Renewal_Tool","NameZHCN":"文件上传","NameENUS":"Upload File","Type":1,"Sequence":2,"TemplateZHCN":"等待{0}上传文件","TemplateENUS":"Waiting for {0} to upload file","ClearStatus":false}}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-13 18:20:10,602 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15040102","toolId":"9e5c3c29-8ebf-4e6d-a839-d6a8e04a9e30","nodeInfo":{"Id":"2da4ec22-f37f-4efd-b3a9-665392d492ad","Code":"Renewal_Tool_Upload","ProgressRate":30.0,"CreateTime":"2014-09-28T18:02:04","CreateUserAccount":"system","FlowCode":"Renewal_Tool","NameZHCN":"文件上传","NameENUS":"Upload File","Type":1,"Sequence":2,"TemplateZHCN":"等待{0}上传文件","TemplateENUS":"Waiting for {0} to upload file","ClearStatus":false}}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+

@@ -1,0 +1,65 @@
+﻿@{
+    Layout = null;
+}
+
+<form class="form-horizontal" name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="TempClosure" sub-code="TempClosure_ClosurePackage" place-holder="4" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="TempClosure_ClosurePackage" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    <store-basic-info code="info.USCode" project="info" store="store"></store-basic-info>
+
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Closure Info]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[Closure Start Date]]]</label>
+                <div class="col-xs-4 pd_t_7">
+                    {{info.CreateTime | date:"yyyy-MM-dd"}}
+                </div>
+                <label class="col-xs-2 control-label">[[[Re-open Date]]]</label>
+                <div class="col-xs-4 pd_t_7">
+                    {{info.ActualReopenDate | date:'yyyy-MM-dd'}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[Lease Expire Date]]]</label>
+                <div class="col-xs-4 pd_t_7">
+                    {{TPCLS.LeaseExpireDate | date:'yyyy-MM-dd'}}
+                </div>
+                <label class="col-xs-2 control-label">[[[Landlord Name]]]</label>
+                <div class="col-xs-4 pd_t_7">
+                    {{TPCLS.LandlordName}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <relief-rent editable="true" entity="closurePackage"></relief-rent>
+    <attachments ref-table-name="TempClosurePackage"
+        list="packageAttachments"
+        project-id="{{projectId}}"
+        flow-code="TempClosure_ClosurePackage"
+        upload-finish="uploadAttachmentFinish(up,files)"
+        delete-finish="deleteAttachmentFinish(id,requirementId)"
+        before-pack-download="beforePackDownload()"
+        upload-set="['f1b36b8a-bfbb-4015-8c83-dda4f34956b2','dc1c194c-4a47-44a9-b465-21b89f629340']"
+        show-pack-download="true"
+        editable="true"></attachments>
+    <approval-records workflow-type="TempClosure" ref-table-id="closurePackage.Id" ref-table-name="TempClosurePackage"></approval-records>
+    <comment comments="projectComment" title="意见" editable="true"></comment>
+    <project-history project-id="projectId" table-name="TempClosurePackage" title="ClosurePackage History"
+        page-url="/TempClosure/Main#/ClosurePackage/Process/View?projectId={{projectId}}"
+        title-name="ClosurePackage" ng-show="!isHistory" has-template="false"></project-history>
+    <notification-message project-id="projectId"
+        flow-code="TempClosure"
+        sub-flow-code="{{subFlowCode}}"
+        node-id="closurePackage.Id"
+        uscode="info.USCode"></notification-message>
+    <div class="form-actions ta_c">
+        <button type="button" class="btn btn-lg btn-orange" ng-show="!edit" ng-disabled="acting" ng-click="saveClosurePackage()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" form-submit ng-disabled="acting" ng-click="submitClosurePackage(frmMain)"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</form>

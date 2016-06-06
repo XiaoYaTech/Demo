@@ -1,0 +1,10 @@
+USE [master];
+CREATE DATABASE MoyeBuyCom;
+
+CREATE DATABASE MoyeBuyComOrder;
+
+CREATE DATABASE MoyeBuyComServices;
+
+CREATE DATABASE MoyeBuyComLog;
+
+CREATE DATABASE GiftCardService;

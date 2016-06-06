@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="EmailMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActionLogs" nillable="true" type="tns:ArrayOfWorkflowActionLogForEmail" />
+      <xs:element minOccurs="0" name="Attachments" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AttachmentsDict" nillable="true" type="q1:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="BCC" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CC" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="EmailBodyValues" nillable="true" type="q2:ArrayOfKeyValueOfstringstring" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ExecutiveSummaryInfoDict" nillable="true" type="q3:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="IsFirstApproveStep" type="xs:boolean" />
+      <xs:element minOccurs="0" name="NeedRejectStep" type="xs:boolean" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="StoreBasicInfoDict" nillable="true" type="q4:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="TemplateCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="To" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EmailMessage" nillable="true" type="tns:EmailMessage" />
+  <xs:complexType name="ArrayOfWorkflowActionLogForEmail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkflowActionLogForEmail" nillable="true" type="tns:WorkflowActionLogForEmail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorkflowActionLogForEmail" nillable="true" type="tns:ArrayOfWorkflowActionLogForEmail" />
+  <xs:complexType name="WorkflowActionLogForEmail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Comments" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LogType" type="tns:ActionLogType" />
+      <xs:element minOccurs="0" name="OperationDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OperatorName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PositionNameENUS" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PositionNameZHCN" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkflowActionLogForEmail" nillable="true" type="tns:WorkflowActionLogForEmail" />
+  <xs:simpleType name="ActionLogType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Submit" />
+      <xs:enumeration value="Approval" />
+      <xs:enumeration value="Comments" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ActionLogType" nillable="true" type="tns:ActionLogType" />
+  <xs:complexType name="EmailSendingResultType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InnerErrorMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StackTrace" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Successful" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EmailSendingResultType" nillable="true" type="tns:EmailSendingResultType" />
+</xs:schema>

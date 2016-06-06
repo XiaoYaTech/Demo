@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<div class="table-project-detail ta_c" ng-if="linkFromList">
+    <project-node-info project-id="{{projectId}}" flow-code="{{flowCode}}" us-code="{{usCode}}" visible="true"></project-node-info>
+</div>
+<top-nav project-id="{{projectId}}" flow-code="{{flowCode}}" sub-code="Detail" ng-if="!linkFromList"></top-nav>
+<store-basic-info code="usCode" project="projectDetail" workflow-type="{{flowCode}}" store="store"></store-basic-info>
+<project-detail-info project-id="{{projectId}}" us-code="usCode" detail="projectDetail" store="store"></project-detail-info>
+<project-team us-code="usCode" project-id="{{projectId}}" flow-code="{{flowCode}}" team="team" views="views" editable="false" show-inner-edit="true"></project-team>
+<div class="panel panel-orange mg_t_10">
+    <div class="panel-heading clearfix">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[抄送人]]]
+        </span>
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="form-group" ng-show="viewerLoaded">
+            <div class="col-xs-2" ng-repeat="view in viewers" ng-class="{'mg_t_10':$index>5}">{{view.UserNameENUS||view.UserNameZHCN}}</div>                       
+        </div>
+        <div class="ta_c">
+            <img src="~/Content/Images/loading.gif" ng-show="!viewerLoaded" />
+            <span ng-show="viewerLoaded&&viewers.length==0">[[[暂无数据]]]</span>
+        </div>
+    </div>
+</div>

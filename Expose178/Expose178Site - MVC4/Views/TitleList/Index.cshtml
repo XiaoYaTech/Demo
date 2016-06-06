@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "文章列表";
+}
+<div>
+    <div>
+        <table>
+            <tr>
+                <td>标题</td>
+                <td>发表时间</td>
+            </tr>
+            @{
+                if (Model != null)
+                {
+                    foreach (var artTitle in (IList<Expose178.Com.Model.ArticleTitle>)Model)
+                    {
+                        <tr>
+                            <td><a href="@Url.Content("~/Article/" + @artTitle.ArticleID + ".html")">@artTitle.ArticleTile</a></td>
+                            <td>@artTitle.ArticleDate.ToString("yyyy-MM-dd")</td>
+                        </tr>
+                    }
+                }
+           }
+        </table>
+    </div>
+</div>

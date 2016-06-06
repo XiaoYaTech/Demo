@@ -1,0 +1,8 @@
+﻿
+@{
+    Layout = null;
+}
+<div ng-show="submited||field.$dirty">
+    <span class="ng-error" ng-show="field.$error.required">[[[必须填写]]]</span>
+    <span class="ng-error" ng-show="field.$error.valnumber">[[[请输入数字]]]</span>
+</div>

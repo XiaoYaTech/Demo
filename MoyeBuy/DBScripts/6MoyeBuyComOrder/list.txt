@@ -1,0 +1,7 @@
+list.txt
+OrderLookup.sql
+usp_AddOrderDetail.sql
+usp_AddUpdateAddressByAddressID.sql
+usp_AddUpdateOrderByOrderID.sql
+usp_GetOrderDetailInfoByOrderID.sql
+usp_GetOrderInfoByUID.sql

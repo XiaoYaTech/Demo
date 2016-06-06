@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+
+<div>
+    <span class="btn-project-memos"></span>
+    <div class="project-memos">
+        <div class="title">
+            附加Memo
+        </div>
+        <div class="content">
+            <table class="table">
+                <colgroup>
+                    <col width="20%" />
+                    <col width="50%" />
+                    <col width="30%" />
+                </colgroup>
+                <tr>
+                    <th>序号</th>
+                    <th>内容</th>
+                    @*<th>Opreation</th>*@
+                    <th>更新时间</th>
+                </tr>
+                <tr ng-repeat="memo in MemoList">
+                    <td><a ng-href="{{memo.Url}}" target="_self">{{$index+1}}</a></td>
+                    <td><a ng-href="{{memo.Url}}" target="_self">{{memo.Name}}</a></td>
+                    @*<td>
+                        <a ng-href="{{memo.Url}}" target="_self" class="btn btn-sm btn-orange">Notify</a>
+                    </td>*@
+                    <td>{{memo.NotifyDate | date:"yyyy-MM-dd"}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

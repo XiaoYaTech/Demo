@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">变更项目状态</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="frmEditUser" novalidate>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">项目状态</label>
+                <div class="col-xs-3">
+                    <select class="form-control" ng-show="!isLoading" ng-model="model.SelectedProjectStatus" ng-options="m.value as m.name for m in projectStatusOpts"></select>
+                    <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">Comments</label>
+                <div class="col-xs-9">
+                    <textarea class="form-control" rows="4" ng-model="model.Comment"></textarea>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">项目更变记录</label>
+            </div>
+            <div class="form-group">
+                <ul style="width: 95%">
+                    <li ng-repeat="log in changelogs">
+                        <span>{{log.CreatorNameENUS}}</span>
+                        <span>把Project状态从{{log.PrevStatusName}}修改为{{log.CurrStatusName}}</span>
+                        <span style="float: right">更改日期 {{log.CreateTime|date:"yyyy-MM-dd"}}</span>
+                        <br />
+                        @*<pre class="pre">{{log.Comment}}</pre>*@
+                        <p>
+                            {{log.Comment}}
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" ng-click="ok()"
+                ng-disabled="frmEditUser.$invalid">
+            确认
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+    </div>
+</div>

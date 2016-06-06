@@ -1,0 +1,117 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <step1 code="storeCode" store-valid="step1Finished" flow-code="Rebuild"></step1>
+    <div ng-style="{visibility:!step1Finished?'hidden':''}">
+        <store-basic-info code="storeCode" editable="true" workflow-type="Rebuild" store="storeBasicInfo"></store-basic-info>
+        <div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    [[[重建信息]]]
+                </span>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[项目类型]]]</label>
+                    <div class="col-xs-2 pd_t_7">[[[重建]]]</div>
+                    <label class="control-label col-xs-2">[[[美国编号]]]</label>
+                    <div class="col-xs-2 pd_t_7">{{entity.USCode}}</div>
+                    <label class="control-label col-xs-2">[[[项目创建时间]]]</label>
+                    <div class="col-xs-2 pd_t_7">{{entity.CreateDate | date:format}}</div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[临时关店日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control"
+                                   name="TempClosureDate"
+                                   ng-model="entity.TempClosureDate"
+                                   datepicker-popup="{{format}}"
+                                   is-open="openedTempClosureDate"
+                                   min-date="now"
+                                   datepicker-options="dateOptions"
+                                   date-disabled="disabled(date, mode)"
+                                   ng-required="false" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event,'openedTempClosureDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <div ng-show="$submited||frmMain.TempClosureDate.$dirty">
+                            <span class="ng-error" ng-show="frmMain.TempClosureDate.$error.required">[[[必须填写]]]</span>
+                        </div>
+                    </div>
+                    <label class="control-label col-xs-2">[[[重开日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control"
+                                   name="ReopenDate"
+                                   ng-model="entity.ReopenDate"
+                                   datepicker-popup="{{format}}"
+                                   is-open="openedReopenDate"
+                                   min-date="entity.ConstCompletionDate"
+                                   datepicker-options="dateOptions"
+                                   date-disabled="disabled(date, mode)"
+                                   ng-required="false" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event,'openedReopenDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <div ng-show="$submited||frmMain.ReopenDate.$dirty">
+                            <span class="ng-error" ng-show="frmMain.ReopenDate.$error.required">[[[必须填写]]]</span>
+                        </div>
+                    </div>
+                    <label class="control-label col-xs-2"></label>
+                    <div class="col-xs-2 pd_t_7"></div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[开工日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control"
+                                   name="GBDate"
+                                   ng-model="entity.GBDate"
+                                   datepicker-popup="{{format}}" is-open="openedGBDate"
+                                   min-date="entity.TempClosureDate"
+                                   datepicker-options="dateOptions"
+                                   date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event,'openedGBDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <div ng-show="$submited||frmMain.GBDate.$dirty">
+                            <span class="ng-error" ng-show="frmMain.GBDate.$error.required">[[[必须填写]]]</span>
+                        </div>
+                    </div>
+                    <label class="control-label col-xs-2">[[[完工日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control"
+                                   name="ConstCompletionDate"
+                                   ng-model="entity.ConstCompletionDate"
+                                   datepicker-popup="{{format}}" is-open="openedConstCompletionDate"
+                                   min-date="entity.GBDate"
+                                   datepicker-options="dateOptions"
+                                   date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event,'openedConstCompletionDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <div ng-show="$submited||frmMain.ConstCompletionDate.$dirty">
+                            <span class="ng-error" ng-show="frmMain.ConstCompletionDate.$error.required">[[[必须填写]]]</span>
+                        </div>
+                    </div>
+                    <label class="control-label col-xs-2"></label>
+                    <div class="col-xs-2 pd_t_7"></div>
+                </div>
+            </div>
+        </div>
+        <project-team us-code="storeCode" team="team" views="views" editable="true"></project-team>
+        <div class="form-actions ta_c pd_b_100">
+            <button type="button" ng-click="beginNoticeUsers(frmMain)" form-submit class="btn btn-lg btn-red"><span class="fa fa-check"></span>[[[下一步]]]</button>
+        </div>
+        <notify-users-modal visible="ShowNotifyUserModalDialog" team="team" us-code="storeCode" editable='true' flow-code="Rebuild" on-submit="submit(notifyUsersInfo)"></notify-users-modal>
+    </div>
+</form>

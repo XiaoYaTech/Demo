@@ -1,0 +1,58 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<div ng-hide="isHistory">
+    <top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_ClosureTool" place-holder="8"></top-nav>
+    <cheking-point project-id="projectId" flow-code="Closure_ClosureTool" refresh="checkPointRefresh"></cheking-point>
+</div>
+<closure-tool-store-basic-info project="ClosureInfo" code="ClosureInfo.USCode"></closure-tool-store-basic-info>
+<ttm-historical-financial-data editable="false" entity="entity" project-id="projectId" yearmonth="yearmonth"></ttm-historical-financial-data>
+
+<impact-on-other-stores editable="impactStoreEditable"
+    entity="entity"
+    impact-store1="selStore1"
+    impact-store2="selStore2"
+    code="ClosureInfo.USCode"></impact-on-other-stores>
+<decision-logic editable="decisionEditable" entity="entity" us-code="ClosureInfo.USCode" />
+<closure-write-off-data datas="woCheckList"></closure-write-off-data>
+@*<assets-inputs editable="false" inputs="entity.Compensation"></assets-inputs>*@
+<comment comments="entity.ConclusionComment" title="Comments and Conclusion" editable="false"></comment>
+<div class="panel panel-black mg_t_10" ng-show="isActor">
+    @*<div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">Genarate
+        </span>
+    </div>
+    *@
+        <div class="panel-body" style="border-top: solid 1px #ececec; text-align: center">
+            <span class="glyphicon glyphicon-info-sign"></span>&nbsp;[[[如果您已完成填写，请点击]]]
+            <button type="button" class="btn btn-sm btn-default" ng-click="genClosureTool()">
+                <span class="fa fa-bar-chart-o"></span>
+                [[[生成ClosureTool]]]
+            </button>
+        </div>
+</div>
+<attachments ref-table-name="ClosureTool"
+    project-id="{{projectId}}"
+    flow-code="Closure_ClosureTool"
+    editable="false"
+    ref-table-id="{{entityId}}"
+    is-history="isHistory"></attachments>
+
+<approval-records workflow-type="Closure" ref-table-id="entity.Id" ref-table-name="ClosureTool"></approval-records>
+
+<div ng-hide="isHistory">
+    <project-history page-url="/closure/Main#/ClosureTool/Process/View?projectId={{projectId}}" project-id="projectId" table-name="ClosureTool" title=" ClosureTool History" has-template="false" title-name="ClosureTool"></project-history>
+    <notification-message project-id="projectId"
+        flow-code="Closure"
+        sub-flow-code="Closure_ClosureTool"
+        node-id="entity.Id"
+        uscode="ClosureInfo.USCode"></notification-message>
+    @*<div class="form-actions ta_c" ng-hide="entity.IsProjectFreezed">
+        *@
+    <div class="form-actions ta_c" ng-hide="isUserAction">
+        <button type="button" ng-show="enableEdit" class="btn btn-lg btn-yellow" ng-click="editClosureTool()"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        <button type="button" ng-show="enableReCall" class="btn btn-lg btn-orange" ng-click="beginReCall(ClosureInfo)">[[[撤销]]]</button>
+    </div>
+    </div>

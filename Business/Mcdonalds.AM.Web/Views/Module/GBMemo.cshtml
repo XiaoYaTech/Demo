@@ -1,0 +1,145 @@
+﻿@{
+    Layout = null;
+}
+<table class=" table table-bordered" style="margin-top:10px;">
+    <tr>
+        <td class=" text-left" width="40%">Region(区域)/Market(市场)</td>
+        <td class="text-center" width="60%">{{GBMemo.Store.StoreBasicInfo.RegionZHCN}}/{{GBMemo.Store.StoreBasicInfo.MarketZHCN}}</td>
+    </tr>
+    <tr>
+        <td class=" text-left">Province(省份)/City(城市)</td>
+        <td class="text-center">{{GBMemo.Store.StoreBasicInfo.ProvinceZHCN}}/{{GBMemo.Store.StoreBasicInfo.CityZHCN}}</td>
+    </tr>
+    <tr>
+        <td class=" text-left">US Code(美国编号)</td>
+        <td class="text-center">{{GBMemo.Store.StoreBasicInfo.StoreCode}}</td>
+    </tr>
+    <tr>
+        <td class=" text-left">Store Name EN/CN(店铺名称 英文/中文)</td>
+        <td class="text-center">{{GBMemo.Store.StoreBasicInfo.NameZHCN}}</td>
+    </tr>
+    <tr>
+        <td class=" text-left">Store Re-image status(餐厅是否停业改造)</td>
+        <td class="text-center" rowspan="2" style="padding:0px;">
+            <table style="margin-bottom:0px; margin-left:20px;" width="100%">
+                <tr style="height:50px;">
+                    <td class="text-left" width="25%">Closed(关店)</td>
+                    <td class="text-center" width="25%">
+                        <input type="checkbox" ng-model="GBMemo.IsClosed" ng-disabled="!editable" ng-click="StoreReimageStatus('IsClosed')" />
+                    </td>
+                    <td class="text-left" width="25%">In-operation(营业)</td>
+                    <td class="text-center" width="25%">
+                        <input type="checkbox" ng-model="GBMemo.IsInOperation" ng-disabled="!editable" ng-click="StoreReimageStatus('IsInOperation')" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left">Mc Cafe</td>
+                    <td class="text-center">
+                        <input type="checkbox" ng-model="GBMemo.IsMcCafe" ng-disabled="!editable" />
+                    </td>
+                    <td class="text-left">Kiosk</td>
+                    <td class="text-center">
+                        <input type="checkbox" ng-model="GBMemo.IsKiosk" ng-disabled="!editable" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left">MDS</td>
+                    <td class="text-center">
+                        <input type="checkbox" ng-model="GBMemo.IsMDS" ng-disabled="!editable" />
+                    </td>
+                    <td class="text-left">24H</td>
+                    <td class="text-center">
+                        <input type="checkbox" ng-model="GBMemo.Is24Hour" ng-disabled="!editable" />
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class=" text-left">Projected Brand Extension(预估品牌拓展：如有新增则请填写)</td>
+    </tr>
+    <tr>
+        <td class=" text-left">Groundbreak Date (进场动工日期)</td>
+        <td class="text-center">
+            <p class="input-group text-center" style="width:200px">
+                <input type="text"
+                       class="form-control"
+                       name="GBDate"
+                       ng-required="true"
+                       ng-model="GBMemo.GBDate"
+                       datepicker-popup="{{format}}"
+                       is-open="openedGBDate"
+                       min-date="minDate"
+                       datepicker-options="dateOptions"
+                       date-disabled="disabled(date, mode)"
+                       close-text="Close"
+                       ng-disabled="!editable" readonly />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-disabled="!editable" ng-click="open($event,'openedGBDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+            <div ng-show="$submited||frmMain.GBDate.$dirty">
+                <span class="ng-error" ng-show="frmMain.GBDate.$error.required">[[[必须填写]]]</span>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class=" text-left">Projected Cons Finish Date(预估工程完成日期)</td>
+        <td class="text-center">
+            <p class="input-group text-center" style="width:200px">
+                <input type="text"
+                       class="form-control"
+                       name="ConstCompletionDate"
+                       ng-required="true"
+                       ng-model="GBMemo.ConstCompletionDate"
+                       datepicker-popup="{{format}}"
+                       is-open="openedConstCompletionDate"
+                       min-date="minDate"
+                       datepicker-options="dateOptions"
+                       date-disabled="disabled(date, mode)"
+                       close-text="Close"
+                       ng-disabled="!editable" readonly />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-disabled="!editable" ng-click="open($event,'openedConstCompletionDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+            <div ng-show="$submited||frmMain.ConstCompletionDate.$dirty">
+                <span class="ng-error" ng-show="frmMain.ConstCompletionDate.$error.required">[[[必须填写]]]</span>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class=" text-left">Projected Re-opening Date (预估重新开店日期)</td>
+        <td class="text-center">
+            <p class="input-group text-center" style="width:200px">
+                <input type="text"
+                       class="form-control"
+                       ng-required="false"
+                       ng-model="GBMemo.ReopenDate"
+                       datepicker-popup="{{format}}"
+                       is-open="openedReopenDate"
+                       min-date="minDate"
+                       datepicker-options="dateOptions"
+                       date-disabled="disabled(date, mode)"
+                       close-text="Close"
+                       ng-disabled="!editable" readonly />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-disabled="!editable" ng-click="open($event,'openedReopenDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class=" text-left" colspan="2">
+            <div class="content">
+                I hereby confirm that:<br />
+                本人在此确认:<br />
+                1）Business Case for Re-imaging process has been fully 已遵照政策完成餐厅改建方案审批流程；<br />
+                2）Construction bidding process has been fully complied;已遵照政策完成工程招议标流程；<br />
+                3）Construction contract has been signed;已签署《麦当劳餐厅建筑合同》；<br />
+                4）Contractors have produced the Contractor's Insurance Certificate for Public Liability and Workers Compensation in accordance with Clause#13 of the Construction Contract and that the Construction Manager(or his/her delegate) has personally inspeted and Checked the doucment and it in order;(if there's new version of contruction contract or insurance policy is issued and conflict with the original ones,please subject to the new version);<br />
+                工程经理（或其代理人）确认工程承建商按《麦当劳餐厅建筑合同》中第13条约定，已购买公众责任险和雇主责任险；且确认所有保险文件合乎要求。（如果有最新的合同版本或保险政策发布，并与原条款有冲突；则以最新合同版本或保险政策为准）；<br />
+                5）All construction related permits have been acquired 确认进场施工前所需要的相关证照已全部具备。            </div>
+        </td>
+    </tr>
+</table>

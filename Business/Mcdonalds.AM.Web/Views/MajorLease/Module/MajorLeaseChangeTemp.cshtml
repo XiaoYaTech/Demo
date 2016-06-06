@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[Major Lease Change]]]
+        </span>
+    </div>
+    <div class="form-group">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th width="30%">[[[Major Lease Changes Type]]]</th>
+                    <th width="70%">[[[Description]]]</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" id="rental" ng-model="rental" ng-disabled="!isEdit" /> [[[The Change of the rental]]]</td>
+                    <td><input type="text" class="form-control" ng-model="rentalDesc" ng-disabled="!isEdit" ng-show="rental" /></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="redline" ng-model="redline" ng-disabled="!isEdit" /> [[[The Change of red line]]]</td>
+                    <td><input type="text" class="form-control" ng-model="redlineDesc" ng-disabled="!isEdit" ng-show="redline" /></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="leaseterm" ng-model="leaseterm" ng-disabled="!isEdit" /> [[[The Change of lease term]]]</td>
+                    <td><input type="text" class="form-control" ng-model="leasetermDesc" ng-disabled="!isEdit" ng-show="leaseterm" /></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="landlord" ng-model="landlord" ng-disabled="!isEdit" /> [[[The change of Landlord]]]</td>
+                    <td><input type="text" class="form-control" ng-model="landlordDesc" ng-disabled="!isEdit" ng-show="landlord" /></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="others" ng-model="others" ng-disabled="!isEdit" /> [[[Others]]]</td>
+                    <td><input type="text" class="form-control" ng-model="othersDesc" ng-disabled="!isEdit" ng-show="others" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

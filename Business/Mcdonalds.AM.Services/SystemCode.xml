@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Codes>
+  <!--workflow-->
+  <Code Key="TempClosure" ZHCN="TempClosure" ENUS="TempClosure"></Code>
+  <Code Key="TempClosure_LegalReview" ZHCN="LegalReview" ENUS="LegalReview"></Code>
+  <Code Key="TempClosure_ClosurePackage" ZHCN="ClosurePackage" ENUS="ClosurePackage"></Code>
+  <Code key="TempClosure_ClosureMemo" ZHCN="Closure Memo" ENUS="Closure Memo"></Code>
+  <Code Key="TempClosure_GBMemo" ZHCN="GBMemo" ENUS="GBMemo"></Code>
+  <Code Key="MajorLease" ZHCN="MajorLease" ENUS="MajorLease"></Code>
+  <Code Key="MajorLease_LegalReview" ZHCN="LegalReview" ENUS="LegalReview"></Code>
+  <Code Key="Closure" ZHCN="关店流程" ENUS="Closure"></Code>
+  <Code Key="Closure_LegalReview" ZHCN="LegalReview" ENUS="LegalReview"></Code>
+  <Code Key="Closure_WOCheckList" ZHCN="WOCheckList" ENUS="WOCheckList"></Code>
+  <Code Key="Closure_ClosureTool" ZHCN="ClosureTool" ENUS="ClosureTool"></Code>
+  <Code Key="Closure_ExecutiveSummary" ZHCN="ExecutiveSummary" ENUS="ExecutiveSummary"></Code>
+  <!--project user role-->
+  <Code Key="View" ZHCN="View" ENUS="View"></Code>
+  <Code Key="Legal Counsel" ZHCN="Legal" ENUS="Legal"></Code>
+  <Code Key="Cons Mgr" ZHCN="CM" ENUS="CM"></Code>
+  <Code Key="Asset Mgr" ZHCN="Asset Manager" ENUS="Asset Manager"></Code>
+  <Code Key="Asset Actor" ZHCN="Asset Actor" ENUS="Asset Actor"></Code>
+  <Code Key="Asset Rep" ZHCN="Asset Rep" ENUS="Asset Rep"></Code>
+  <Code Key="Finance Team" ZHCN="Finance" ENUS="Finance"></Code>
+  <Code Key="PM" ZHCN="PM" ENUS="PM"></Code>
+  <!--package user role-->
+  <Code Key="MarketMgr" ZHCN="Market Mgr" ENUS="Market Mgr"></Code>
+  <Code Key="RegionalMgr" ZHCN="Regional Mgr" ENUS="Regional Mgr"></Code>
+  <Code Key="VPGM" ZHCN="VPGM" ENUS="VPGM"></Code>
+  <Code Key="DD" ZHCN="DD" ENUS="DD"></Code>
+  <Code Key="GM" ZHCN="GM" ENUS="GM"></Code>
+  <Code Key="FC" ZHCN="FC" ENUS="FC"></Code>
+  <Code Key="RDD" ZHCN="RDD" ENUS="RDD"></Code>
+  <Code Key="DevVP" ZHCN="DevVP" ENUS="DevVP"></Code>
+</Codes>

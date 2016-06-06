@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "商品类别";
+    ViewBag.PageTitle = "商品类别管理";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Areas/ManageSite/Scripts/ProductCategory.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";    
+}
+<div class="OptionContainer"></div>
+<div class="ResultBody">
+@if (Model!=null)
+{
+    <table border="0" width="80%" cellpadding="0" cellspacing="0" class="detailtable">
+        <tr>
+            <th>类别ID</th>
+            <th>类别名称</th>
+            <th>类别描述</th>
+            <th>更新时间</th>
+            <th>操作</th>
+        </tr>
+    @foreach (var category in (IList<MoyeBuy.Com.Model.ProductCategory>)Model)
+    {
+        <tr>
+            <td>@category.CategoryId</td>
+            <td>@category.CategoryName</td>
+            <td>@category.CategoryDesc</td>
+            <td>@category.LastUpdateDate.ToString("yyyy-MM-dd")</td>
+            <td><span onclick="javascript:delCategory('@category.CategoryId');">删除</span><span onclick="javascript:showAddWindow('@category.CategoryId');">更新</span></td>
+        </tr>
+    }
+    </table>
+}
+    <span onclick="javascript:showAddWindow();">添加</span>
+    <div id="addCategoryDiv" name="addCategoryDiv" style="display:none;">
+        <input type="hidden" name="CategoryID" id="CategoryID" value="" />
+        <table id="addCategoryTabel" name="addCategoryTabel" border="0" cellpadding="5" cellspacing="0">
+            <tr>
+                <td valign="top">类别名称</td>
+                <td><input type="text" name="CategoryName" id="CategoryName" maxlength="30" value="" /></td>
+            </tr>
+            <tr>
+                <td valign="top">描述</td>
+                <td><textarea id="CategoryDesc" name="CategoryDesc" cols="35" rows="10" ></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+</div>

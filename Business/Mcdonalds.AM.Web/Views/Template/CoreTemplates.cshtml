@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+<script type="text/html" id="tplTaskReminder">
+    <div class="task-reminder">
+        <div class="task-reminder-item"><a href="/Home/Main#/taskworkMore/0"><span class="fa fa-circle"></span>[[[任务]]] ({{TaskCount}})</a></div>
+        <div class="task-reminder-item">
+            <a href="/Remind/Main#/List">
+                <span class="fa fa-volume-off"></span>[[[通知]]] ({{ReminderCount}})
+            </a>
+        </div>
+        <div class="task-reminder-item">
+
+            <a href="/Notification/Main#/List">
+                <span class="fa fa-exclamation-triangle"></span>
+                [[[提醒]]] ({{NoticeCount}})
+            </a>
+        </div>
+        <div class="task-reminder-item"><a href="{{PMT_URL}}" target="_blank"  style="color: rgba(229, 58, 46, 1);">【PMT({{PMT_Total}})</a>:</div>
+        <div class="task-reminder-item">
+            <a href="{{PMT_URL}}" target="_blank" style="color: rgba(229, 58, 46, 1);">
+                <span></span>[[[待批复]]] ({{PMT_ApproveCount}})
+            </a>
+        </div>
+        <div class="task-reminder-item">
+            <a href="{{PMT_URL}}" target="_blank" style="color: rgba(229, 58, 46, 1);">
+                <span></span>[[[待处理]]] ({{PMT_DealCount}})
+            </a>
+        </div>
+        <div class="task-reminder-item">
+            <a href="{{PMT_URL}}" target="_blank" style="color: rgba(229, 58, 46, 1);">
+                <span></span>
+                [[[通知]]] ({{PMT_NotifyCount}})
+            </a>
+        </div>
+        <div class="task-reminder-item">
+            <a href="{{PMT_URL}}" target="_blank" style="color: rgba(229, 58, 46, 1);">
+                <span></span>
+                [[[提醒]]] ({{PMT_RemindCount}})】
+            </a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</script>

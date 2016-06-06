@@ -1,0 +1,24 @@
+﻿@using System.Web.Optimization;
+@{
+    Layout = "~/Views/Shared/_AngularLayout.cshtml";
+}
+
+@section scripts{
+
+    @Scripts.Render("~/Scripts/Apps/RebuildApp.js")
+    @Scripts.Render("~/Scripts/Services/Rebuild/RebuildService.js")
+    @Scripts.Render("~/Scripts/Services/SiteInfoService.js")
+    @Scripts.Render("~/Scripts/Modules/Rebuild.js")
+    @Scripts.Render("~/Scripts/Controllers/Rebuild/CreateController.js")
+    @Scripts.Render("~/Scripts/Controllers/Rebuild/LegalReviewController.js")
+    @Scripts.Render("~/Scripts/Controllers/Rebuild/FinanceAnalysisController.js")
+    @Scripts.Render("~/Scripts/Controllers/Rebuild/ConsInfoController.js")
+    @Scripts.Render("~/Scripts/Controllers/Rebuild/RebuildPackageController.js")
+    @Scripts.Render("~/Scripts/Controllers/Rebuild/ContractInfoController.js")
+    @Scripts.Render("~/Scripts/Controllers/Rebuild/SiteInfoController.js")
+    @Scripts.Render("~/Scripts/Controllers/Rebuild/ConsInvtCheckingController.js")
+    @Scripts.Render("~/Scripts/Controllers/Rebuild/TempClosureMemoController.js")
+    @Scripts.Render("~/Scripts/Controllers/Rebuild/ReopenMemoController.js")
+    @Scripts.Render("~/Scripts/Controllers/Rebuild/GBMemoController.js")
+}
+<div ng-view></div>

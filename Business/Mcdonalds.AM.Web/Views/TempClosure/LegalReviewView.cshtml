@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="TempClosure" sub-code="TempClosure_LegalReview" place-holder="4" ng-show="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="TempClosure_LegalReview" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+<store-basic-info code="info.USCode" workflow-type="TempClosure" project="info" store="store"></store-basic-info>
+
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">Closure Info
+        </span>
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Closure Start Date</label>
+            <div class="col-xs-4 pd_t_7">
+                {{info.ActualTempClosureDate | date:"yyyy-MM-dd"}}
+            </div>
+            <label class="col-xs-2 control-label">Re-open Date</label>
+            <div class="col-xs-4 pd_t_7">
+                {{info.ActualReopenDate | date:'yyyy-MM-dd'}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Lease Expire Date</label>
+            <div class="col-xs-4 pd_t_7">
+                {{TPCLS.LeaseExpireDate | date:'yyyy-MM-dd'}}
+            </div>
+            <label class="col-xs-2 control-label">Landlord Name</label>
+            <div class="col-xs-2 pd_t_7">
+                {{TPCLS.LandlordName}}
+            </div>
+        </div>
+    </div>
+</div>
+<attachments ref-table-name="TempClosureLegalReview"
+    list="legalReviewAttachments"
+    project-id="{{projectId}}"
+    editable="{{savable}}"
+    flow-code="TempClosure_LegalReview"
+    upload-set="viewUploadSet"
+    show-contract="true"
+    upload-finish="uploadAttachmentFinish(up,files)"
+    delete-finish="deleteAttachmentFinish(id,requirementId)"></attachments>
+<comment comments="legalReview.ReviewComment" editable="false" title="Legal Review Comments"></comment>
+<mater-tracking workflow-id="projectId" workflow-type="TempClosure" node-id="legalReview.Id" node-type="TempClosure_LegalReview"></mater-tracking>
+<approval-records workflow-type="TempClosure" ref-table-id="legalReview.Id" ref-table-name="TempClosureLegalReview"></approval-records>
+<comment comments="projectComment" editable="true" ng-if="savable" title="意见"></comment>
+<project-history project-id="projectId" table-name="TempClosureLegalReview" title="LegalReview History"
+    page-url="/TempClosure/Main#/LegalReview/Process/View?projectId={{projectId}}" has-template="false"
+    title-name="LegalReview" ng-show="!isHistory" has-template="false"></project-history>
+<notification-message project-id="projectId"
+    flow-code="TempClosure"
+    sub-flow-code="{{subFlowCode}}"
+    node-id="info.Id"
+    uscode="TPCLS.USCode"
+    ng-show="!isHistory"></notification-message>
+<div class="form-actions ta_c" ng-hide="isUserAction">
+    <button type="button" class="btn btn-lg btn-warning" ng-disabled="acting" ng-if="savable" ng-click="save()"><span class="fa fa-check"></span>[[[保存]]]</button>
+    <button type="button" class="btn btn-lg btn-yellow" ng-disabled="acting" ng-show="editable" ng-click="editLegalReview()"><span class="fa fa-check"></span>[[[编辑]]]</button>
+    <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-show="recallable" ng-click="recallLegalReview()"><span class="fa fa-check"></span>撤回</button>
+</div>

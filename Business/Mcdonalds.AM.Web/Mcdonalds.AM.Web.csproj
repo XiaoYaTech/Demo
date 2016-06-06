@@ -1,0 +1,1174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B2DC87B1-7B93-4CF3-A8C0-FEEEBE0CF280}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mcdonalds.AM.Web</RootNamespace>
+    <AssemblyName>Mcdonalds.AM.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TypeScriptVersion>1.0</TypeScriptVersion>
+    <CompileTypeScript>true</CompileTypeScript>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="i18n">
+      <HintPath>..\packages\I18N-beta.2.0.22\lib\net40\i18n.dll</HintPath>
+    </Reference>
+    <Reference Include="i18n.Domain">
+      <HintPath>..\packages\I18N-beta.2.0.22\lib\net40\i18n.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="i18n.PostBuild">
+      <HintPath>..\packages\I18N-beta.2.0.22\lib\net40\i18n.PostBuild.exe</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SourceCode.Workflow.Client, Version=4.0.0.0, Culture=neutral, PublicKeyToken=16a2c5aaaa1b130d, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\GAC\SourceCode.Workflow.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.0.0\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.0.0\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\angular-multi-select.css" />
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\bootstrap-datepicker.css" />
+    <Content Include="Content\bootstrap-override.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\default.css" />
+    <Content Include="Content\Images\avatar-mini.jpg" />
+    <Content Include="Content\Images\bg.png" />
+    <Content Include="Content\Images\bg\bg1.jpg" />
+    <Content Include="Content\Images\bg\bg2.jpg" />
+    <Content Include="Content\Images\bg\bg3.jpg" />
+    <Content Include="Content\Images\bg\bg4.jpg" />
+    <Content Include="Content\Images\bg\bg5.jpg" />
+    <Content Include="Content\Images\bg\bg6.jpg" />
+    <Content Include="Content\Images\bg\bg7.jpg" />
+    <Content Include="Content\Images\bg\bg8.jpg" />
+    <Content Include="Content\Images\bg\bg9.jpg" />
+    <Content Include="Content\Images\btn_attach_memo.jpg" />
+    <Content Include="Content\Images\btn_previous_version.jpg" />
+    <Content Include="Content\Images\chosen-sprite%402x.png" />
+    <Content Include="Content\Images\chosen-sprite.png" />
+    <Content Include="Content\chosen.css" />
+    <Content Include="Content\font-awesome-ie7.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\Images\comments.jpg" />
+    <Content Include="Content\Images\help-am.jpg" />
+    <Content Include="Content\Images\help-gap.jpg" />
+    <Content Include="Content\Images\icon.png" />
+    <Content Include="Content\Images\leftpanelbg.png" />
+    <Content Include="Content\Images\login-left.png" />
+    <Content Include="Content\Images\login-right.png" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\p1.jpg" />
+    <Content Include="Content\Images\p2.jpg" />
+    <Content Include="Content\Images\p3.jpg" />
+    <Content Include="Content\Images\p4.jpg" />
+    <Content Include="Content\Images\p5.jpg" />
+    <Content Include="Content\Images\p6.jpg" />
+    <Content Include="Content\Images\p7.jpg" />
+    <Content Include="Content\Images\p8.jpg" />
+    <Content Include="Content\Images\respond.proxy.gif" />
+    <Content Include="Content\Images\tree_branch.png" />
+    <Content Include="Content\Images\tree_leaf.png" />
+    <Content Include="Content\Images\tree_leaf_last.png" />
+    <Content Include="Content\me-pageloading.css" />
+    <Content Include="Content\plupload\Moxie.swf" />
+    <Content Include="Content\plupload\Moxie.xap" />
+    <Content Include="Content\site.css" />
+    <Content Include="Content\site.IE7.css" />
+    <Content Include="CurrentUserDefine.ashx" />
+    <Content Include="Error\LoginError.html" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\error.jpg" />
+    <Content Include="Images\mcd_logo.png" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="LoginTest.aspx" />
+    <Content Include="PortalTest.aspx" />
+    <Content Include="respond-proxy.html" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="ApiDelegate.ashx" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\Cary Chen.pubxml" />
+    <None Include="Properties\PublishProfiles\Cary_Local.pubxml" />
+    <None Include="Properties\PublishProfiles\Dev_Publish.pubxml" />
+    <None Include="Properties\PublishProfiles\Kevin_Publish.pubxml" />
+    <None Include="Properties\PublishProfiles\Stephen_Publish.pubxml" />
+    <Content Include="Content\bootstrap-switch.min.css" />
+    <Content Include="Scripts\Apps\StoreApp.js" />
+    <Content Include="Scripts\Controllers\MajorLease\ClosureMemoController.js" />
+    <Content Include="Scripts\Controllers\MajorLease\GBMemoController.js" />
+    <Content Include="Scripts\Controllers\MajorLease\ReopenMemoController.js" />
+    <Content Include="Scripts\Controllers\Reimage\ClosureMemoController.js" />
+    <Content Include="Scripts\Controllers\Reimage\SelectPackageController.js" />
+    <Content Include="Scripts\Controllers\Reimage\TempClosureMemoController.js" />
+    <Content Include="Scripts\Controllers\Renewal\ClosureMemoController.js" />
+    <Content Include="Scripts\Controllers\Renewal\GBMemoController.js" />
+    <Content Include="Scripts\Controllers\Renewal\ReopenMemoController.js" />
+    <Content Include="Scripts\Controllers\StoreList\StoreSummary.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-multi-select.js" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap-datepicker.js" />
+    <Content Include="Scripts\Libs\JQuery\plupload\i18n\zh_CN.js" />
+    <Content Include="Scripts\Libs\JQuery\plupload\plupload.full.min.js" />
+    <Content Include="Scripts\Libs\Knockout\knockout-3.2.0.js" />
+    <Content Include="Scripts\Libs\Knockout\ko.binders.js" />
+    <Content Include="Scripts\Modules\Inputs.js" />
+    <Content Include="Scripts\Modules\Validations.js" />
+    <Content Include="Scripts\Reports\AMReportor.js" />
+    <Content Include="Scripts\Reports\DataViewModel.js" />
+    <Content Include="Scripts\Reports\FormViewModel.js" />
+    <Content Include="Scripts\Services\financialPreAnalysisService.js" />
+    <Content Include="Scripts\Services\ReinvestmentInfoService.js" />
+    <Content Include="Scripts\Services\StoreProfitabilityAndLeaseInfoService.js" />
+    <Content Include="Scripts\Services\SummaryReinvestmentCost.js" />
+    <Content Include="Scripts\Utils\AppRun.js" />
+    <Content Include="Scripts\Apps\ClosureApp.js" />
+    <Content Include="Scripts\Apps\Demo\ContractDemoApp.js" />
+    <Content Include="Scripts\Apps\Demo\MaterTrackDemo.js" />
+    <Content Include="Scripts\Apps\Dictionary\HomeApps.js" />
+    <Content Include="Scripts\Apps\Dictionary\List.js" />
+    <Content Include="Scripts\Apps\Dictionary\NotificationApp.js" />
+    <Content Include="Scripts\Apps\Dictionary\RemindApps.js" />
+    <Content Include="Scripts\Apps\Dictionary\RemindRegisterApps.js" />
+    <Content Include="Scripts\Apps\MainApp.js" />
+    <Content Include="Scripts\Apps\MajorLeaseApp.js" />
+    <Content Include="Scripts\Apps\NoticesApp.js" />
+    <Content Include="Scripts\Apps\RebuildApp.js" />
+    <Content Include="Scripts\Apps\ReimageApp.js" />
+    <Content Include="Scripts\Apps\RenewalApp.js" />
+    <Content Include="Scripts\Apps\TempClosureApp.js" />
+    <Content Include="Scripts\Controllers\Closure\closureCommensController.js" />
+    <Content Include="Scripts\Controllers\Closure\closureLegalReviewController.js" />
+    <Content Include="Scripts\Controllers\Closure\closureMemoController.js" />
+    <Content Include="Scripts\Controllers\Closure\closurePackageController.js" />
+    <Content Include="Scripts\Controllers\Closure\closureToolController.js" />
+    <Content Include="Scripts\Controllers\Closure\consInvtCheckingController.js" />
+    <Content Include="Scripts\Controllers\Closure\ContractInfoController.js" />
+    <Content Include="Scripts\Controllers\Closure\CreateController.js" />
+    <Content Include="Scripts\Controllers\Closure\executiveSummaryController.js" />
+    <Content Include="Scripts\Controllers\Closure\Process\closureLegalReviewProcessController.js" />
+    <Content Include="Scripts\Controllers\Closure\Process\closureLegalReviewProcessEditController.js" />
+    <Content Include="Scripts\Controllers\Closure\Process\closurePackageProcessController.js" />
+    <Content Include="Scripts\Controllers\Closure\Process\closurePackageProcessEditController.js" />
+    <Content Include="Scripts\Controllers\Closure\Process\closureToolProcessController.js" />
+    <Content Include="Scripts\Controllers\Closure\Process\closureToolProcessEditController.js" />
+    <Content Include="Scripts\Controllers\Closure\Process\consInvtCheckingProcessController.js" />
+    <Content Include="Scripts\Controllers\Closure\Process\consInvtCheckingProcessEditController.js" />
+    <Content Include="Scripts\Controllers\Closure\Process\woCheckListProcessController.js" />
+    <Content Include="Scripts\Controllers\Closure\Process\woCheckListProcessEditController.js" />
+    <Content Include="Scripts\Controllers\Closure\View\closureLegalReviewViewController.js" />
+    <Content Include="Scripts\Controllers\Closure\View\closureMemoViewController.js" />
+    <Content Include="Scripts\Controllers\Closure\View\closurePackageViewController.js" />
+    <Content Include="Scripts\Controllers\Closure\View\closureToolViewController.js" />
+    <Content Include="Scripts\Controllers\Closure\View\consInvtCheckingViewController.js" />
+    <Content Include="Scripts\Controllers\Closure\View\contractInfoViewController.js" />
+    <Content Include="Scripts\Controllers\Closure\woCheckListController.js" />
+    <Content Include="Scripts\Controllers\Closure\woCheckListControllerView.js" />
+    <Content Include="Scripts\Controllers\CommentsListController.js" />
+    <Content Include="Scripts\Controllers\DictionaryController.js" />
+    <Content Include="Scripts\Apps\LoginApp.js" />
+    <Content Include="Scripts\Controllers\MajorLease\ConsInfoController.js" />
+    <Content Include="Scripts\Controllers\MajorLease\ConsInvtCheckingController.js" />
+    <Content Include="Scripts\Controllers\MajorLease\ContractInfoController.js" />
+    <Content Include="Scripts\Controllers\MajorLease\FinanceAnalysisController.js" />
+    <Content Include="Scripts\Controllers\MajorLease\leaseChangePackageController.js" />
+    <Content Include="Scripts\Controllers\MajorLease\LegalReviewController.js" />
+    <Content Include="Scripts\Controllers\MajorLease\MajorLeaseCreateController.js" />
+    <Content Include="Scripts\Controllers\MajorLease\SiteInfoController.js" />
+    <Content Include="Scripts\Controllers\Notices\mcd.am.notices.controller.js" />
+    <Content Include="Scripts\Controllers\NotificationController.js" />
+    <Content Include="Scripts\Controllers\ProjectList.js" />
+    <Content Include="Scripts\Controllers\Rebuild\TempClosureMemoController.js" />
+    <Content Include="Scripts\Controllers\Rebuild\ConsInfoController.js" />
+    <Content Include="Scripts\Controllers\Rebuild\ConsInvtCheckingController.js" />
+    <Content Include="Scripts\Controllers\Rebuild\ContractInfoController.js" />
+    <Content Include="Scripts\Controllers\Rebuild\CreateController.js" />
+    <Content Include="Scripts\Controllers\Rebuild\FinanceAnalysisController.js" />
+    <Content Include="Scripts\Controllers\Rebuild\GBMemoController.js" />
+    <Content Include="Scripts\Controllers\Rebuild\LegalReviewController.js" />
+    <Content Include="Scripts\Controllers\Rebuild\RebuildPackageController.js" />
+    <Content Include="Scripts\Controllers\Rebuild\ReopenMemoController.js" />
+    <Content Include="Scripts\Controllers\Rebuild\SiteInfoController.js" />
+    <Content Include="Scripts\Controllers\Reimage\ConsInfoController.js" />
+    <Content Include="Scripts\Controllers\Reimage\ConsInvtCheckingController.js" />
+    <Content Include="Scripts\Controllers\Reimage\GBMemoController.js" />
+    <Content Include="Scripts\Controllers\Reimage\ReimagePackageController.js" />
+    <Content Include="Scripts\Controllers\Reimage\ReimageCreateController.js" />
+    <Content Include="Scripts\Controllers\Reimage\ReimageSummaryController.js" />
+    <Content Include="Scripts\Controllers\Reimage\ReopenMemoController.js" />
+    <Content Include="Scripts\Controllers\Reimage\SiteInfoController.js" />
+    <Content Include="Scripts\Controllers\RemindController.js" />
+    <Content Include="Scripts\Controllers\RemindRegisterController.js" />
+    <Content Include="Scripts\Controllers\Renewal\AnalysisController.js" />
+    <Content Include="Scripts\Controllers\Renewal\ClearanceReportController.js" />
+    <Content Include="Scripts\Controllers\Renewal\ConfirmLetterController.js" />
+    <Content Include="Scripts\Controllers\Renewal\ConsInfoController.js" />
+    <Content Include="Scripts\Controllers\Renewal\ContractInfoController.js" />
+    <Content Include="Scripts\Controllers\Renewal\CreateController.js" />
+    <Content Include="Scripts\Controllers\Renewal\LegalApprovalController.js" />
+    <Content Include="Scripts\Controllers\Renewal\LetterController.js" />
+    <Content Include="Scripts\Controllers\Renewal\LLNegotiationController.js" />
+    <Content Include="Scripts\Controllers\Renewal\PackageController.js" />
+    <Content Include="Scripts\Controllers\Renewal\SiteInfoController.js" />
+    <Content Include="Scripts\Controllers\Renewal\ToolController.js" />
+    <Content Include="Scripts\Controllers\StoreList\Index.js" />
+    <Content Include="Scripts\Controllers\StoreList\StoreBE.js" />
+    <Content Include="Scripts\Controllers\StoreList\StoreConstruction.js" />
+    <Content Include="Scripts\Controllers\StoreList\StoreContractInfo.js" />
+    <Content Include="Scripts\Controllers\StoreList\StoreFinanceInfo.js" />
+    <Content Include="Scripts\Controllers\StoreList\StoreLicenses.js" />
+    <Content Include="Scripts\Controllers\StoreList\StoreManagement.js" />
+    <Content Include="Scripts\Controllers\StoreList\StoreOwnerContactInfo.js" />
+    <Content Include="Scripts\Controllers\StoreList\StoreRealEstate.js" />
+    <Content Include="Scripts\Controllers\StoreList\StoreTA.js" />
+    <Content Include="Scripts\Controllers\TaskWorkController.js" />
+    <Content Include="Scripts\Controllers\TaskWorkMoreController.js" />
+    <Content Include="Scripts\Controllers\TempClosure\ClosureMemoController.js" />
+    <Content Include="Scripts\Controllers\TempClosure\ClosurePackageController.js" />
+    <Content Include="Scripts\Controllers\TempClosure\CreateController.js" />
+    <Content Include="Scripts\Controllers\TempClosure\LegalReviewController.js" />
+    <Content Include="Scripts\Controllers\TempClosure\ReopenMemoController.js" />
+    <Content Include="Scripts\Directives\Closure\Navigation.js" />
+    <Content Include="Scripts\Directives\Reimage\ReimageDirective.js" />
+    <Content Include="Scripts\Filter\Closure.js" />
+    <Content Include="Scripts\Filter\Core.js" />
+    <Content Include="Scripts\Filter\DictionaryFilters.js" />
+    <Content Include="Scripts\global.js" />
+    <Content Include="Scripts\Libs\AjaxQueue.d.ts" />
+    <Content Include="Scripts\Libs\AjaxQueue.js" />
+    <Content Include="Scripts\Libs\Angular\angular.d.ts" />
+    <Content Include="Scripts\Libs\Angular\angular.js" />
+    <Content Include="Scripts\Libs\Angular\angular.min.js" />
+    <Content Include="Scripts\Libs\Angular\angular.min.js.map">
+      <DependentUpon>angular.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_af-na.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_af-za.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_af.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_am-et.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_am.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-001.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-ae.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-bh.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-dz.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-eg.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-iq.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-jo.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-kw.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-lb.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-ly.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-ma.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-om.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-qa.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-sa.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-sd.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-sy.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-tn.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar-ye.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ar.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_bg-bg.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_bg.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_bn-bd.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_bn-in.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_bn.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ca-ad.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ca-es.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ca.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_cs-cz.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_cs.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_da-dk.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_da.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_de-at.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_de-be.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_de-ch.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_de-de.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_de-li.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_de-lu.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_de.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_el-cy.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_el-gr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_el.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-as.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-au.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-bb.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-be.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-bm.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-bw.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-bz.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-ca.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-dsrt-us.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-dsrt.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-fm.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-gb.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-gu.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-gy.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-hk.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-ie.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-in.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-iso.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-jm.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-mh.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-mp.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-mt.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-mu.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-na.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-nz.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-ph.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-pk.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-pr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-pw.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-sg.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-tc.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-tt.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-um.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-us.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-vg.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-vi.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-za.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en-zw.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_en.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-419.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-ar.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-bo.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-cl.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-co.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-cr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-do.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-ea.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-ec.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-es.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-gq.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-gt.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-hn.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-ic.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-mx.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-ni.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-pa.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-pe.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-pr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-py.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-sv.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-us.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-uy.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es-ve.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_es.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_et-ee.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_et.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_eu-es.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_eu.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fa-af.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fa-ir.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fa.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fi-fi.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fi.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fil-ph.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fil.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-be.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-bf.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-bi.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-bj.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-bl.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-ca.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-cd.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-cf.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-cg.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-ch.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-ci.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-cm.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-dj.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-fr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-ga.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-gf.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-gn.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-gp.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-gq.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-km.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-lu.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-mc.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-mf.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-mg.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-ml.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-mq.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-ne.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-re.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr-yt.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_fr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_gl-es.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_gl.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_gsw-ch.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_gsw.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_gu-in.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_gu.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_he-il.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_he.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_hi-in.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_hi.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_hr-hr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_hr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_hu-hu.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_hu.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_id-id.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_id.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_in.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_is-is.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_is.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_it-it.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_it-sm.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_it.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_iw.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ja-jp.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ja.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_kn-in.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_kn.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ko-kr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ko.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ln-cd.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ln.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_lt-lt.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_lt.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_lv-lv.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_lv.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ml-in.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ml.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_mr-in.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_mr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ms-my.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ms.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_mt-mt.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_mt.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_nl-cw.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_nl-nl.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_nl-sx.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_nl.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_no.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_or-in.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_or.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_pl-pl.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_pl.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_pt-br.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_pt-pt.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_pt.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ro-ro.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ro.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ru-ru.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ru.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sk-sk.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sk.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sl-si.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sl.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sq-al.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sq.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sr-cyrl-rs.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sr-latn-rs.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sv-se.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sv.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sw-tz.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_sw.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ta-in.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ta.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_te-in.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_te.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_th-th.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_th.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_tl.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_tr-tr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_tr.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_uk-ua.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_uk.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ur-pk.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_ur.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_vi-vn.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_vi.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_zh-cn.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_zh-hans-cn.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_zh-hk.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_zh-tw.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_zh.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_zu-za.js" />
+    <Content Include="Scripts\Libs\Angular\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-animate.d.ts" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-animate.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-animate.min.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-animate.min.js.map" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-chosen.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-cookies.d.ts" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-cookies.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-cookies.min.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-cookies.min.js.map" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-csp.css" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-loader.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-loader.min.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-loader.min.js.map" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-mocks.d.ts" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-mocks.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-plupload.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-resource.d.ts" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-resource.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-resource.min.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-resource.min.js.map" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-route.d.ts" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-route.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-route.min.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-route.min.js.map" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-sanitize.d.ts" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-sanitize.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-sanitize.min.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-scenario.d.ts" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-scenario.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-touch.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-touch.min.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-touch.min.js.map" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-ui-bootstrap.d.ts" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-ui-bootstrap.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-ui-bootstrap.min.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-ui-bootstrap.min.js.map">
+      <DependentUpon>angular-ui-bootstrap.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Libs\Angular\Plugins\angular-uploadify.js" />
+    <Content Include="Scripts\Libs\Angular\Plugins\me-pageloading.js" />
+    <Content Include="Scripts\Libs\bloodhound.js" />
+    <Content Include="Scripts\Libs\bootstrap-typeahead.js" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap-switch.min.js" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap.js" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\Libs\fastclick.js" />
+    <Content Include="Scripts\Libs\JQuery\chosen.jquery.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery-1.10.2.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery-1.10.2.min.js.map">
+      <DependentUpon>jquery-1.10.2.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Libs\JQuery\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\Libs\JQuery\jquery.aSimpleTour.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery.d.ts" />
+    <Content Include="Scripts\Libs\JQuery\jquery.easing.min.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery.fileupload.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery.iframe-transport.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery.mixitup.min.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery.scrollTo.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery.tagsinput.min.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery.ui.widget.js" />
+    <None Include="Scripts\Libs\JQuery\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery.validate.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery.validate.min.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Libs\JQuery\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Libs\JQuery\uploadify\jquery.uploadify.js" />
+    <Content Include="Scripts\Libs\JQuery\uploadify\jquery.uploadify.min.js" />
+    <Content Include="Scripts\Libs\JQuery\uploadify\jquery.uploadify.min.js.map">
+      <DependentUpon>jquery.uploadify.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Libs\JQuery\uploadify\license.txt" />
+    <Content Include="Scripts\Libs\JQuery\uploadify\uploadify-cancel.png" />
+    <Content Include="Scripts\Libs\JQuery\uploadify\uploadify.css" />
+    <Content Include="Scripts\Libs\JQuery\uploadify\uploadify.php" />
+    <Content Include="Scripts\Libs\JQuery\uploadify\uploadify.swf" />
+    <Content Include="Scripts\Libs\LowIE\element.definition.js" />
+    <Content Include="Scripts\Libs\LowIE\html5shiv.min.js" />
+    <Content Include="Scripts\Libs\LowIE\JsExtentions.js" />
+    <Content Include="Scripts\Libs\LowIE\json2.js" />
+    <Content Include="Scripts\Libs\LowIE\matchmedia.addListener.js" />
+    <Content Include="Scripts\Libs\LowIE\matchmedia.polyfill.js" />
+    <Content Include="Scripts\Libs\LowIE\respond.min.js" />
+    <Content Include="Scripts\Libs\LowIE\respond.proxy.js" />
+    <Content Include="Scripts\Libs\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Libs\moment\moment-with-langs.js" />
+    <Content Include="Scripts\Libs\moment\moment-with-langs.min.js" />
+    <Content Include="Scripts\Libs\moment\moment.d.ts" />
+    <Content Include="Scripts\Libs\moment\moment.js" />
+    <Content Include="Scripts\Libs\moment\moment.min.js" />
+    <Content Include="Scripts\Libs\moxie.js" />
+    <Content Include="Scripts\Libs\plupload.dev.js" />
+    <Content Include="Scripts\Libs\snap.svg.js" />
+    <Content Include="Scripts\Modules\ApprovalDialog.js" />
+    <Content Include="Scripts\Modules\Closure.js" />
+    <Content Include="Scripts\Modules\Closure.ts" />
+    <Content Include="Scripts\Modules\Core.js" />
+    <Content Include="Scripts\Modules\Core.ts" />
+    <Content Include="Scripts\Modules\MajorLease.js" />
+    <Content Include="Scripts\Modules\Rebuild.js" />
+    <Content Include="Scripts\Modules\Reimage.js" />
+    <Content Include="Scripts\Modules\Renewal.js" />
+    <Content Include="Scripts\Modules\TempClosure.js" />
+    <Content Include="Scripts\Modules\TempClosure.ts" />
+    <Content Include="Scripts\portal.js" />
+    <Content Include="Scripts\Services\ApproveDialogUserService.js" />
+    <Content Include="Scripts\Services\AttachmentService.js" />
+    <Content Include="Scripts\Services\Closure\ClosureMemoService.js" />
+    <Content Include="Scripts\Services\Closure\ClosureToolService.js" />
+    <Content Include="Scripts\Services\Closure\CreateServices.js" />
+    <Content Include="Scripts\Services\CommentsListService.js" />
+    <Content Include="Scripts\Services\ContractRevisionService.js" />
+    <Content Include="Scripts\Services\ContractService.js" />
+    <Content Include="Scripts\Services\ContractService.ts" />
+    <Content Include="Scripts\Services\Core.js" />
+    <Content Include="Scripts\Services\DictionaryServices.js" />
+    <Content Include="Scripts\Services\ExcelService.js" />
+    <Content Include="Scripts\Services\FlowService.js" />
+    <Content Include="Scripts\Services\GBMemoService.js" />
+    <Content Include="Scripts\Services\MajorLease\MajorLeaseService.js" />
+    <Content Include="Scripts\Services\Notices\mcd.am.notices.service.js" />
+    <Content Include="Scripts\Services\ProjectService.js" />
+    <Content Include="Scripts\Services\ProjectUsersService.js" />
+    <Content Include="Scripts\Services\Rebuild\RebuildService.js" />
+    <Content Include="Scripts\Services\Reimage\ReimageService.js" />
+    <Content Include="Scripts\Services\RemindRegisterServices.js" />
+    <Content Include="Scripts\Services\RemindServices.js" />
+    <Content Include="Scripts\Services\Renewal\RenewalService.js" />
+    <Content Include="Scripts\Services\ReopenMemoService.js" />
+    <Content Include="Scripts\Services\SiteInfoService.js" />
+    <Content Include="Scripts\Services\StoreService.js" />
+    <Content Include="Scripts\Services\SystemService.js" />
+    <Content Include="Scripts\Services\TaskWorkService.js" />
+    <Content Include="Scripts\Services\NotificationService.js" />
+    <Content Include="Scripts\Services\TempClosure\TempClosureService.js" />
+    <Content Include="Scripts\Utils\CurrentUser.js" />
+    <Content Include="Scripts\Utils\CurrentUser.ts" />
+    <Content Include="Scripts\Utils\Utils.js" />
+    <Content Include="Scripts\Utils\Utils.ts" />
+    <Content Include="Scripts\Libs\Knockout\knockout.mapping.js" />
+    <Content Include="Scripts\Libs\Knockout\ko.components.js" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\Utils\ValidatePatterns.js" />
+    <Content Include="Views\Dictionary\Dictionarys.html" />
+    <Content Include="Views\Dictionary\phone-detail.html" />
+    <Content Include="Views\Dictionary\phone-list.html" />
+    <None Include="Views\StoreList\SummaryByRebuild.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiDelegate.ashx.cs">
+      <DependentUpon>ApiDelegate.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\AMHttpModule.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Common\WebApiUtility.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ClosureController.cs" />
+    <Compile Include="Controllers\ClosureModuleController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\SystemController.cs" />
+    <Compile Include="Controllers\MajorLeaseController.cs" />
+    <Compile Include="Controllers\MajorLeaseModuleController.cs" />
+    <Compile Include="Controllers\NoticesController.cs" />
+    <Compile Include="Controllers\RebuildController.cs" />
+    <Compile Include="Controllers\RebuildModuleController.cs" />
+    <Compile Include="Controllers\ReimageController.cs" />
+    <Compile Include="Controllers\ReimageModuleController.cs" />
+    <Compile Include="Controllers\RenewalController.cs" />
+    <Compile Include="Controllers\RenewalModuleController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Controllers\DictionaryController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\RedirectController.cs" />
+    <Compile Include="Controllers\RemindController.cs" />
+    <Compile Include="Controllers\RemindRegisterController.cs" />
+    <Compile Include="Controllers\TaskWorkController.cs" />
+    <Compile Include="Controllers\TempClosureController.cs" />
+    <Compile Include="Controllers\TempClosureModuleController.cs" />
+    <Compile Include="Controllers\TemplateController.cs" />
+    <Compile Include="Controllers\TestPortalController.cs" />
+    <Compile Include="Controllers\StoreListController.cs" />
+    <Compile Include="Core\McdAMContext.cs" />
+    <Compile Include="Core\Cryptography.cs" />
+    <Compile Include="Core\UserInfo.cs" />
+    <Compile Include="CurrentUserDefine.ashx.cs">
+      <DependentUpon>CurrentUserDefine.ashx</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Filter\BasicAuthAttribute.cs" />
+    <Compile Include="Filter\McdAMI18NFilter.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LoginTest.aspx.cs">
+      <DependentUpon>LoginTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginTest.aspx.designer.cs">
+      <DependentUpon>LoginTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BaseTemplate.cs" />
+    <Compile Include="PortalTest.aspx.cs">
+      <DependentUpon>PortalTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PortalTest.aspx.designer.cs">
+      <DependentUpon>PortalTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Views\Dictionary\List.cshtml" />
+    <Content Include="Views\Dictionary\Edit.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Closure\ClosureMemo.cshtml" />
+    <Content Include="Views\Closure\ClosurePackage.cshtml" />
+    <Content Include="Views\Closure\ClosureTool.cshtml" />
+    <Content Include="Views\Closure\ContractInfo.cshtml" />
+    <Content Include="Views\Closure\Create.cshtml" />
+    <Content Include="Views\Closure\ExecutiveSummary.cshtml" />
+    <Content Include="Views\Closure\LegalReview.cshtml" />
+    <Content Include="Views\Home\ProjectList.cshtml" />
+    <Content Include="Views\Closure\Main.cshtml" />
+    <Content Include="Views\Closure\WOCheckList.cshtml" />
+    <Content Include="Views\Closure\WOCheckListView.cshtml" />
+    <Content Include="Views\Excel\FA Write-off Tool_Template_v20130907.xlsx" />
+    <Content Include="Views\Remind\Main.cshtml" />
+    <Content Include="Views\Remind\List.cshtml" />
+    <Content Include="Views\RemindRegister\Index.cshtml" />
+    <Content Include="Views\RemindRegister\List.cshtml" />
+    <Content Include="Views\Template\NoticeUsers.cshtml" />
+    <Content Include="Views\Template\SelectStore.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\List.cshtml" />
+    <Content Include="Views\Dictionary\Index.cshtml" />
+    <Content Include="Views\Home\Home2.cshtml" />
+    <Content Include="Views\TaskWork\Index.cshtml" />
+    <Content Include="Views\Shared\_AngularLayout.cshtml" />
+    <Content Include="Views\StoreList\Index.cshtml" />
+    <Content Include="Views\Template\ClosureNavs.cshtml" />
+    <Content Include="Views\Closure\View\LegalReviewView.cshtml" />
+    <Content Include="Views\Closure\View\ClosurePackageView.cshtml" />
+    <Content Include="Views\Closure\View\ClosureToolView.cshtml" />
+    <Content Include="Views\Closure\View\ExecutiveSummaryView.cshtml" />
+    <Content Include="Views\Closure\View\ContractInfoView.cshtml" />
+    <Content Include="Views\Closure\Process\WOCheckListProcess.cshtml" />
+    <Content Include="Views\Closure\Process\LegalReviewProcess.cshtml" />
+    <Content Include="Views\Closure\Process\LegalReviewProcessEdit.cshtml" />
+    <Content Include="Views\Closure\Process\WOCheckListProcessEdit.cshtml" />
+    <Content Include="Views\Closure\Process\ClosureToolProcess.cshtml" />
+    <Content Include="Views\Closure\Process\ClosureToolProcessEdit.cshtml" />
+    <Content Include="Views\Closure\Process\ExecutiveSummaryProcess.cshtml" />
+    <Content Include="Views\Closure\Process\ExecutiveSummaryProcessEdit.cshtml" />
+    <Content Include="Views\Closure\Process\ClosurePackageProcessEdit.cshtml" />
+    <Content Include="Views\Closure\Process\ClosurePackageProcess.cshtml" />
+    <Content Include="Views\Closure\View\ClosureMemoView.cshtml" />
+    <Content Include="Views\Shared\_WebLayout.cshtml" />
+    <Content Include="Views\Home\MaterTrackDemo.cshtml" />
+    <Content Include="Views\Module\MaterTracking.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Closure\ConsInvtChecking.cshtml" />
+    <Content Include="Views\TaskWork\List.cshtml" />
+    <Content Include="Views\ClosureModule\UploadWoChecklist.cshtml" />
+    <Content Include="Views\ClosureModule\WriteOffData.cshtml" />
+    <Content Include="Views\Module\Comment.cshtml" />
+    <Content Include="Views\Module\ApprovalRecords.cshtml" />
+    <Content Include="Views\Module\ProjectHistory.cshtml" />
+    <Content Include="Views\ClosureModule\DecisionLogic.cshtml" />
+    <Content Include="Views\ClosureModule\AssetsInputs.cshtml" />
+    <Content Include="Views\Template\CoreTemplates.cshtml" />
+    <Content Include="Views\TaskWork\MoreList.cshtml" />
+    <Content Include="Views\Module\Step1.cshtml" />
+    <Content Include="Views\Module\StoreBasicInfo.cshtml" />
+    <Content Include="Views\Template\ProjectAdvanceSearch.cshtml" />
+    <Content Include="Views\ClosureModule\TTMHistoricalFinancialData.cshtml" />
+    <Content Include="Views\ClosureModule\ImpactOnOtherStores.cshtml" />
+    <Content Include="Views\Module\CheckingPoint.cshtml" />
+    <Content Include="Views\Home\ProjectDetail.cshtml" />
+    <Content Include="Views\Module\ActionLog.cshtml" />
+    <Content Include="Views\Module\ContactInfo.cshtml" />
+    <Content Include="Views\TempClosure\Create.cshtml" />
+    <Content Include="Views\MajorLease\Main.cshtml" />
+    <Content Include="Views\MajorLease\Create.cshtml" />
+    <Content Include="Views\Closure\ProjectDetail.cshtml" />
+    <Content Include="Views\Module\ProjectTeam.cshtml" />
+    <Content Include="Views\Module\ContractInfo.cshtml" />
+    <Content Include="Views\Home\ContractInfoDemo.cshtml" />
+    <Content Include="Views\ClosureModule\ClosureMemo.cshtml" />
+    <Content Include="Views\Template\ClosurePackageSelApprover.cshtml" />
+    <Content Include="Views\Reimage\Create.cshtml" />
+    <Content Include="Views\Reimage\Main.cshtml" />
+    <Content Include="Views\Module\NoticeUsers.cshtml" />
+    <Content Include="Views\MajorLease\Module\MajorLeaseChangeTemp.cshtml" />
+    <Content Include="Views\MajorLease\LegalReview.cshtml" />
+    <Content Include="Views\Module\ShowMessage.cshtml" />
+    <Content Include="Views\Closure\View\ConsInvtCheckingView.cshtml" />
+    <Content Include="Views\Closure\Process\ConsInvtCheckingProcessEdit.cshtml" />
+    <Content Include="Views\Closure\Process\ConsInvtCheckingProcess.cshtml" />
+    <Content Include="Views\Reimage\ConsInfo.cshtml" />
+    <Content Include="Views\Reimage\Module\ReimageNav.cshtml" />
+    <Content Include="Views\Module\ReinvestmentBasicInfo.cshtml" />
+    <Content Include="Views\ClosureModule\UploadConsInvtChecking.cshtml" />
+    <Content Include="Views\MajorLease\Module\MajorLeaseNav.cshtml" />
+    <Content Include="Views\Module\Confirm.cshtml" />
+    <Content Include="Views\Module\ReinvestmentCost.cshtml" />
+    <Content Include="Views\MajorLease\FinanceAnalysis.cshtml" />
+    <Content Include="Views\Module\WriteOffAmount.cshtml" />
+    <Content Include="Views\TempClosure\Main.cshtml" />
+    <Content Include="Views\Module\Attachments.cshtml" />
+    <Content Include="Views\ClosureModule\StoreBasicInfoCreationView.cshtml" />
+    <Content Include="Views\MajorLease\ConsInfo.cshtml" />
+    <Content Include="Views\MajorLease\Module\ReinvenstmentAmountType.cshtml" />
+    <Content Include="Views\ClosureModule\LegalReviewStoreBasicInfo.cshtml" />
+    <Content Include="Views\ClosureModule\ClosureToolStoreBasicInfo.cshtml" />
+    <Content Include="Views\Module\ReinvstCostAndWriteOff.cshtml" />
+    <Content Include="Views\TempClosure\LegalReview.cshtml" />
+    <Content Include="Views\TempClosure\LegalReviewView.cshtml" />
+    <Content Include="Views\TempClosure\LegalReviewApproval.cshtml" />
+    <Content Include="Views\TempClosure\LegalReviewResubmit.cshtml" />
+    <Content Include="Views\Module\TopNav.cshtml" />
+    <Content Include="Views\MajorLease\LeaseChangePackage.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\Notices\List.cshtml" />
+    <Content Include="Views\Notices\Main.cshtml" />
+    <Content Include="Views\Notices\Detail.cshtml" />
+    <Content Include="Views\MajorLease\ContractInfo.cshtml" />
+    <Content Include="Views\MajorLease\SiteInfo.cshtml" />
+    <Content Include="Views\TempClosure\ClosurePackageView.cshtml" />
+    <Content Include="Views\TempClosure\ClosurePackage.cshtml" />
+    <Content Include="Views\Module\SiteInfo.cshtml" />
+    <Content Include="Views\MajorLease\ConsInvtChecking.cshtml" />
+    <Content Include="Views\TempClosureModule\SelectApprovers.cshtml" />
+    <Content Include="Views\Template\ClosureWOCheckListSelApprover.cshtml" />
+    <Content Include="Views\TempClosure\ClosurePackageApproval.cshtml" />
+    <Content Include="Views\TempClosure\ClosurePackageResubmit.cshtml" />
+    <Content Include="Views\Template\ClosureToolSelApprover.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Template\Recall.cshtml" />
+    <Content Include="Views\Template\LegalReviewSelApprover.cshtml" />
+    <Content Include="Views\Template\ConsInvtCheckingSelApprover.cshtml" />
+    <Content Include="Views\Module\ReCall.cshtml" />
+    <Content Include="Views\TempClosure\ClosureMemo.cshtml" />
+    <Content Include="Views\TempClosureModule\ClosureMemo.cshtml" />
+    <Content Include="Views\TempClosureModule\ClosureMemoView.cshtml" />
+    <Content Include="Views\TempClosure\ClosureMemoView.cshtml" />
+    <Content Include="Views\TempClosureModule\LegalSubmitPopup.cshtml" />
+    <Content Include="Views\Module\ContractAttachments.cshtml" />
+    <Content Include="Views\TempClosure\ReopenMemo.cshtml" />
+    <Content Include="Views\TempClosure\ReopenMemoView.cshtml" />
+    <Content Include="Views\Module\BlockUI.cshtml" />
+    <Content Include="Views\MajorLease\ProjectDetail.cshtml" />
+    <Content Include="Views\TempClosure\ProjectDetail.cshtml" />
+    <Content Include="Views\MajorLease\Module\ApproveDialog.cshtml" />
+    <Content Include="Views\TempClosure\ClosurePackageUpload.cshtml" />
+    <Content Include="Views\Module\ProjectStatusDialog.cshtml" />
+    <Content Include="Views\Module\ProjectNodeInfo.cshtml" />
+    <Content Include="Views\Module\EditProjectPackage.cshtml" />
+    <Content Include="Views\Rebuild\Main.cshtml" />
+    <Content Include="Views\Rebuild\ConsInfo.cshtml" />
+    <Content Include="Views\Rebuild\ConsInvtChecking.cshtml" />
+    <Content Include="Views\Rebuild\ContractInfo.cshtml" />
+    <Content Include="Views\Rebuild\Create.cshtml" />
+    <Content Include="Views\Rebuild\FinanceAnalysis.cshtml" />
+    <Content Include="Views\Rebuild\RebuildPackage.cshtml" />
+    <Content Include="Views\Rebuild\LegalReview.cshtml" />
+    <Content Include="Views\Rebuild\ProjectDetail.cshtml" />
+    <Content Include="Views\Rebuild\SiteInfo.cshtml" />
+    <Content Include="Views\Rebuild\Module\ApproveDialog.cshtml" />
+    <Content Include="Views\Rebuild\Module\RebuildNav.cshtml" />
+    <None Include="Scripts\Libs\JQuery\jquery-1.10.2.intellisense.js" />
+    <Content Include="Views\Renewal\Create.cshtml" />
+    <Content Include="Views\Renewal\Main.cshtml" />
+    <Content Include="Views\MajorLeaseModule\StoreBasicInfo.cshtml" />
+    <Content Include="Views\TempClosureModule\StoreBasicInfo.cshtml" />
+    <Content Include="Views\RenewalModule\StoreBasicInfo.cshtml" />
+    <Content Include="Views\Renewal\Letter.cshtml" />
+    <Content Include="Views\RebuildModule\StoreBasicInfo.cshtml" />
+    <Content Include="Views\Renewal\LLNegotiation.cshtml" />
+    <Content Include="Views\RenewalModule\NegotiationRecord.cshtml" />
+    <Content Include="Views\Reimage\Module\ApproveDialog.cshtml" />
+    <Content Include="Views\Renewal\ConsInfo.cshtml" />
+    <Content Include="Views\Renewal\LetterApproval.cshtml" />
+    <Content Include="Views\Renewal\LetterResubmit.cshtml" />
+    <Content Include="Views\Renewal\LetterView.cshtml" />
+    <Content Include="Views\Renewal\Tool.cshtml" />
+    <Content Include="Views\Renewal\LLNegotiationView.cshtml" />
+    <Content Include="Views\Renewal\ConsInfoView.cshtml" />
+    <Content Include="Views\Module\ReinvestmentInfo.cshtml" />
+    <Content Include="Views\Module\StoreProfitabilityAndLeaseInfo.cshtml" />
+    <Content Include="Views\Module\FinancialPreanalysis.cshtml" />
+    <Content Include="Views\RenewalModule\ApprovalDialog\ConsInfo.cshtml" />
+    <Content Include="Views\Renewal\ConsInfoApproval.cshtml" />
+    <Content Include="Views\Renewal\ConsInfoResubmit.cshtml" />
+    <Content Include="Views\Renewal\ToolView.cshtml" />
+    <Content Include="Views\RenewalModule\RenewalToolFinMeasureInput.cshtml" />
+    <Content Include="Views\Rebuild\Module\RebuildLeaseChangeTemp.cshtml" />
+    <Content Include="Views\RenewalModule\RenewalToolWriteOffAndReinCost.cshtml" />
+    <Content Include="Views\RenewalModule\RenewalToolFinMeasureOutput.cshtml" />
+    <Content Include="Views\Module\KeyMeasuresInfo.cshtml" />
+    <Content Include="Views\ReimageModule\IsCDOApproveInfo.cshtml" />
+    <Content Include="Views\RenewalModule\LetterStoreBasicInfo.cshtml" />
+    <Content Include="Views\Renewal\ClearanceReport.cshtml" />
+    <Content Include="Views\Renewal\ClearanceReportView.cshtml" />
+    <Content Include="Views\Renewal\ConfirmLetter.cshtml" />
+    <Content Include="Views\Renewal\ConfirmLetterView.cshtml" />
+    <Content Include="Views\Reimage\SiteInfo.cshtml" />
+    <Content Include="Views\Renewal\ToolResubmit.cshtml" />
+    <Content Include="Views\Renewal\ToolApproval.cshtml" />
+    <Content Include="Views\Rebuild\TempClosureMemo.cshtml" />
+    <Content Include="Views\Rebuild\ReopenMemo.cshtml" />
+    <Content Include="Views\Rebuild\GBMemo.cshtml" />
+    <Content Include="Views\Reimage\ReimagePackage.cshtml" />
+    <Content Include="Views\RenewalModule\ApprovalDialog\Tool.cshtml" />
+    <Content Include="Views\Module\ReopenMemo.cshtml" />
+    <Content Include="Views\Reimage\ReimageSummary.cshtml" />
+    <Content Include="Views\Reimage\ConsInvtChecking.cshtml" />
+    <Content Include="Views\Renewal\Analysis.cshtml" />
+    <Content Include="Views\Renewal\AnalysisView.cshtml" />
+    <Content Include="Views\Module\EstimatedVsActualConstruction.cshtml" />
+    <Content Include="Views\Renewal\LegalApprovalView.cshtml" />
+    <Content Include="Views\Renewal\LegalApprovalResubmit.cshtml" />
+    <Content Include="Views\Renewal\LegalApprovalApproval.cshtml" />
+    <Content Include="Views\Renewal\LegalApproval.cshtml" />
+    <Content Include="Views\RenewalModule\SpecialApplication.cshtml" />
+    <Content Include="Views\RenewalModule\TransactionInvolve.cshtml" />
+    <Content Include="Views\RenewalModule\AnyLegalConcern.cshtml" />
+    <Content Include="Views\RenewalModule\LegalDepartmentReview.cshtml" />
+    <Content Include="Views\RenewalModule\SoxAudit.cshtml" />
+    <Content Include="Views\Renewal\Package.cshtml" />
+    <Content Include="Views\Renewal\PackageApproval.cshtml" />
+    <Content Include="Views\Renewal\PackageResubmit.cshtml" />
+    <Content Include="Views\Renewal\PackageView.cshtml" />
+    <Content Include="Views\RenewalModule\EndorsementByGeneralCounsel.cshtml" />
+    <Content Include="Views\RenewalModule\ApprovalDialog\LegalApproval.cshtml" />
+    <Content Include="Views\Reimage\ReopenMemo.cshtml" />
+    <Content Include="Views\Module\GBMemo.cshtml" />
+    <Content Include="Views\Reimage\GBMemo.cshtml" />
+    <Content Include="Views\RenewalModule\KeyMeasures.cshtml" />
+    <Content Include="Views\RenewalModule\ApprovalDialog\Package.cshtml" />
+    <Content Include="Views\Module\TempClosureMemo.cshtml" />
+    <Content Include="Views\Renewal\ContractInfoView.cshtml" />
+    <Content Include="Views\Renewal\ContractInfo.cshtml" />
+    <Content Include="Views\Renewal\SiteInfoView.cshtml" />
+    <Content Include="Views\Renewal\SiteInfo.cshtml" />
+    <Content Include="Views\Notification\Main.cshtml" />
+    <Content Include="Views\Notification\List.cshtml" />
+    <Content Include="Views\Module\NotificationMessage.cshtml" />
+    <Content Include="Views\Home\CommentsList.cshtml" />
+    <Content Include="Views\Renewal\ProjectDetail.cshtml" />
+    <Content Include="Views\Renewal\PackageUpload.cshtml" />
+    <Content Include="Views\RenewalModule\ApprovalDialog\Letter.cshtml" />
+    <Content Include="Views\TempClosureModule\SelectNotify.cshtml" />
+    <Content Include="Views\ClosureModule\ExecutiveSummary.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\RenewalModule\AnalysisForm.cshtml" />
+    <Content Include="Views\Module\ErrorMsg.cshtml" />
+    <Content Include="Views\TempClosureModule\ClosureMemoSelNotice.cshtml" />
+    <Content Include="Views\ReimageModule\StoreBasicInfo.cshtml" />
+    <Content Include="Views\Closure\Process\ClosurePackageProcessUpload.cshtml" />
+    <Content Include="Views\MajorLease\ClosureMemo.cshtml" />
+    <Content Include="Views\MajorLease\GBMemo.cshtml" />
+    <Content Include="Views\MajorLease\ReopenMemo.cshtml" />
+    <Content Include="Views\Module\AttachmentsMemo.cshtml" />
+    <Content Include="Views\Reimage\ClosureMemo.cshtml" />
+    <Content Include="Views\Renewal\ClosureMemo.cshtml" />
+    <Content Include="Views\Renewal\GBMemo.cshtml" />
+    <Content Include="Views\Renewal\ReopenMemo.cshtml" />
+    <Content Include="Views\TempClosureModule\ReliefRent.cshtml" />
+    <Content Include="Views\Module\SummaryReinvestmentCost.cshtml" />
+    <Content Include="Views\Reimage\SelectPackage.cshtml" />
+    <Content Include="Views\Module\LeaseChangeTemp.cshtml" />
+    <Content Include="Views\Reimage\ProjectDetail.cshtml" />
+    <Content Include="Views\Shared\_KnockoutLayout.cshtml" />
+    <Content Include="Views\Report\Form.cshtml" />
+    <Content Include="Views\Reimage\TempClosureMemo.cshtml" />
+    <Content Include="Views\RenewalModule\ApprovalDialog\GBMemo.cshtml" />
+    <Content Include="Views\Renewal\LLNegotiationResubmit.cshtml" />
+    <Content Include="Views\Renewal\ClearanceReportResubmit.cshtml" />
+    <Content Include="Views\Renewal\ConfirmLetterResubmit.cshtml" />
+    <Content Include="Views\Renewal\AnalysisResubmit.cshtml" />
+    <Content Include="Views\ClosureModule\StoreBasicInfo.cshtml" />
+    <Content Include="Views\Module\AMMutiSelect.cshtml" />
+    <Content Include="Views\StoreList\SummaryByClosure.cshtml" />
+    <Content Include="Views\StoreList\SummaryByMajorLease.cshtml" />
+    <Content Include="Views\StoreList\AddSummary.cshtml" />
+    <Content Include="Views\Module\ApprovedPackage.cshtml" />
+    <Content Include="Views\StoreList\SummaryByReimage.cshtml" />
+    <Content Include="Views\Report\ReportData.cshtml" />
+    <Content Include="Views\StoreList\SummaryByRenewal.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Components\" />
+    <Folder Include="Views\Base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mcdonalds.AM.ApiProxy\Mcdonalds.AM.ApiCaller.csproj">
+      <Project>{8e6acc7b-79b6-4fb0-99c2-e4b9c31a8d5c}</Project>
+      <Name>Mcdonalds.AM.ApiCaller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mcdonalds.AM.DataAccess\Mcdonalds.AM.DataAccess.csproj">
+      <Project>{fa8b1a33-73f0-46df-a880-77aa86f4b4e8}</Project>
+      <Name>Mcdonalds.AM.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Controllers\Notices\mcd.am.notices.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Dictionary.ts" />
+    <TypeScriptCompile Include="Scripts\Modules\MajorLease.ts" />
+    <TypeScriptCompile Include="Scripts\Modules\Rebuild.ts" />
+    <TypeScriptCompile Include="Scripts\Modules\Reimage.ts" />
+    <TypeScriptCompile Include="Scripts\Modules\Renewal.ts" />
+    <TypeScriptCompile Include="Scripts\Services\Core.ts" />
+    <TypeScriptCompile Include="Scripts\Services\Notices\mcd.am.notices.service.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>27073</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:10082/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>"$(TargetDir)i18n.PostBuild.exe" "$(ProjectDir)\web.config"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <!--<Target Name="BeforeBuild">
+    <Exec Command="&quot;$(PROGRAMFILES)\Microsoft SDKs\TypeScript\1.0\tsc&quot;
+      @(TypeScriptCompile->'&quot;%(fullpath)&quot;',' ')" />
+  </Target>-->
+</Project>

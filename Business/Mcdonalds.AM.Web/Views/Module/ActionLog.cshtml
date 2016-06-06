@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="panel panel-yellow">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[Submittal and Approval Records]]]
+        </span>
+    </div>
+    <div class="panel-body">
+        <div class="panel panel-grey mg_t_10" ng-repeat="log in logs">
+            <div class="panel-heading clearfix">
+                <div class="col-xs-3 pd_t_7">[[[User:]]]{{log.OperatorENUS}}</div>
+                <div class="col-xs-3 pd_t_7">[[[Date:]]]{{log.CreateTime  | date:"yyyy-MM-dd"}}</div>
+                <div class="col-xs-3 pd_t_7">[[[Title:]]]{{log.OperatorTitle}}</div>
+                <div class="col-xs-3 pd_t_7">[[[Action:]]]{{log.Action}}</div>
+            </div>
+            <div class="panel-body">
+                {{log.Remark}}
+            </div>
+        </div>
+    </div>
+</div>

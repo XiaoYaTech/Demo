@@ -1,0 +1,63 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal-header">
+    <h3 class="modal-title">[[[通知相关人]]]</h3>
+</div>
+<div class="modal-body">
+    <p>[[[该流程的开启通知及对应任务，会发送给下列人员：]]]</p>
+    <form class="form-horizontal" name="frmEditUser" novalidate>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[资产代表]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{entity.AssetRepNameENUS}}
+            </div>
+            <label class="control-label col-xs-2">[[[资产发起人]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{entity.AssetActorNameENUS}}
+            </div>
+            <label class="control-label col-xs-2">[[[资产经理]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{entity.AssetManagerNameENUS}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Finance]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{entity.FinanceNameENUS}}
+            </div>
+            <label class="control-label col-xs-2">[[[Legal]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{entity.LegalNameENUS}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[PM]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{entity.PMNameENUS}}
+            </div>
+            <label class="control-label col-xs-2">[[[Construction Manager]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                {{entity.CMNameENUS}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-5">[[[如果需要发送通知给其他人员，请从下面列表中选择]]]</label>
+            <div class="col-xs-7">
+                <div class="input-group">
+                    <input class="form-control" readonly="readonly" ng-model="noticeUsersName" />
+                    <button type="button" class="input-group-addon" ng-click="selectEmployee(noticeUsersName,'NoticeUsers')">[[[选择]]]</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-primary" ng-click="ok()"
+        ng-disabled="frmEditUser.$invalid||isUnchanged(editUser)">
+        [[[提交]]]</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+</div>
+
+

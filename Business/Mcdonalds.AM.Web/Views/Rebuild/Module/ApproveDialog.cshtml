@@ -1,0 +1,345 @@
+﻿@{
+    Layout = null;
+}
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title" ng-switch on="subFlowCode">
+            <span ng-switch-when="Rebuild_LegalReview">
+                [[[选择任务接收人]]]
+            </span>
+            <span ng-switch-default>
+                {{subFlowName}}[[[呈递]]]
+            </span>
+        </h3>
+    </div>
+    <div class="modal-body">
+        <p>[[[审批人]]]:</p>
+        <form class="form-horizontal" name="frmEditUser" novalidate ng-switch on="subFlowCode">
+            <div ng-switch-when="Rebuild_Package">
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">[[[Market Manager *]]]</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.MarketMgr" ng-options="m.NameENUS for m in MarketMgrs">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.MarketMgr.Code}}</div>*@
+                    </div>
+                    <label class="col-xs-3 control-label">[[[Regional Manager]]]</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.RegionalMgr" ng-options="m.NameENUS for m in RegionalMgrs">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.RegionalMgr.Code}}</div>*@
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">[[[MDD *]]] </label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.MDD" ng-options="m.NameENUS for m in MDDs">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.MDD.Code}}</div>*@
+                    </div>
+                    <label class="col-xs-3 control-label">[[[GM *]]] </label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.GM" ng-options="m.NameENUS for m in GMs">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.GM.Code}}</div>*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">[[[FC *]]] </label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.FC" ng-options="m.NameENUS for m in FCs">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.FC.Code}}</div>*@
+                    </div>
+                    <label class="col-xs-3 control-label">[[[RDD]]]</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.RDD" ng-options="m.NameENUS for m in RDDs">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.RDD.Code}}</div>*@
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">VP[[[GM *]]] </label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.VPGM" ng-options="m.NameENUS for m in VPGMs">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.VPGM.Code}}</div>*@
+                    </div>
+                    <label class="col-xs-3 control-label"></label>
+                    <div class="col-xs-3"></div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">[[[MCCL Asset Director *]]]</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.MCCLAssetDtr" ng-options="m.NameENUS for m in MCCLAssetDtrs">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.MCCLAssetDtr.Code}}</div>*@
+                    </div>
+                    <label class="col-xs-3 control-label"></label>
+                    <div class="col-xs-3"></div>
+                </div>
+                <hr />
+                <div class="form-group" ng-show="isShowCDOFOMD">
+                    <label class="col-xs-3 control-label">[[[Head of Development*]]] </label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.CDO" ng-options="m.NameENUS for m in CDOs">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.CDO.Code}}</div>*@
+                    </div>
+                    <label class="col-xs-3 control-label"></label>
+                    <div class="col-xs-3"></div>
+                </div>
+                <hr ng-show="isShowCDOFOMD">
+                <div class="form-group" ng-show="isShowCDOFOMD">
+                    <label class="col-xs-3 control-label">[[[CFO * ]]]</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.CFO" ng-options="m.NameENUS for m in CFOs">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.CFO.Code}}</div>*@
+                    </div>
+                    <label class="control-label col-xs-3"></label>
+                    <div class="col-xs-3"></div>
+                </div>
+                <hr ng-show="isShowCDOFOMD">
+                <div class="form-group" ng-show="isShowCDOFOMD">
+                    <label class="control-label col-xs-3">[[[Managing Director *]]]</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.ManagingDirector" ng-options="m.NameENUS for m in ManagingDirectors">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.ManagingDirector.Code}}</div>*@
+                    </div>
+                    <label class="control-label col-xs-3"></label>
+                    <div class="col-xs-3"></div>
+                </div>
+                <hr ng-show="isShowCDOFOMD" />
+            </div>
+            <div ng-switch-when="Rebuild_ConsInfo">
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">[[[Construction Manager]]]</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.ConstructionManager" ng-options="m.NameENUS for m in ConstructionManagers">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.ConstructionManager.Code}}</div>*@
+                    </div>
+                    <label class="col-xs-3 control-label">[[[MCCL Cons Manager]]]</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.MCCLConsManager" ng-options="m.NameENUS for m in MCCLConsManagers">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.MCCLConsManager.Code}}</div>*@
+                    </div>
+                </div>
+
+            </div>
+            <div ng-switch-when="Rebuild_FinanceAnalysis">
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">FM</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.FM" ng-options="m.NameENUS for m in FMs">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.FM.Code}}</div>*@
+                    </div>
+                    <label class="col-xs-3 control-label"></label>
+                    <div class="col-xs-3"></div>
+                </div>
+            </div>
+            <div ng-switch-when="Rebuild_ConsInvtChecking">
+                <div ng-switch on="ApprovalType">
+                    <div ng-switch-when="LeqFivePercent">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">[[[Construction Manager]]]</label>
+                            <div class="col-xs-3">
+                                <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.ConstructionManager" ng-options="m.NameENUS for m in ConstructionManagers">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                                @*<div>{{notifyUsersInfo.ConstructionManager.Code}}</div>*@
+                            </div>
+                            <label class="col-xs-3 control-label">[[[Finance Manager]]]</label>
+                            <div class="col-xs-3">
+                                <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.FM" ng-options="m.NameENUS for m in FMs">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                                @*<div>{{notifyUsersInfo.FM.Code}}</div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-switch-when="BetweenFiveAndTenPercent">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">[[[Construction Manager]]]</label>
+                            <div class="col-xs-3">
+                                <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.ConstructionManager" ng-options="m.NameENUS for m in ConstructionManagers">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                                @*<div>{{notifyUsersInfo.ConstructionManager.Code}}</div>*@
+                            </div>
+                            <label class="col-xs-3 control-label">[[[Finance Manager]]]</label>
+                            <div class="col-xs-3">
+                                <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.FM" ng-options="m.NameENUS for m in FMs">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                                @*<div>{{notifyUsersInfo.FM.Code}}</div>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">[[[Finance Controller]]]</label>
+                            <div class="col-xs-3">
+                                <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.FinanceController" ng-options="m.NameENUS for m in FinanceControllers">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                                @*<div>{{notifyUsersInfo.FinanceController.Code}}</div>*@
+                            </div>
+                            <label class="col-xs-3 control-label"></label>
+                            <div class="col-xs-3"></div>
+                        </div>
+                    </div>
+                    <div ng-switch-when="MoreThanPercent">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">[[[Construction Manager]]]</label>
+                            <div class="col-xs-3">
+                                <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.ConstructionManager" ng-options="m.NameENUS for m in ConstructionManagers">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                                @*<div>{{notifyUsersInfo.ConstructionManager.Code}}</div>*@
+                            </div>
+                            <label class="col-xs-3 control-label">[[[Finance Manager]]]</label>
+                            <div class="col-xs-3">
+                                <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.FM" ng-options="m.NameENUS for m in FMs">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                                @*<div>{{notifyUsersInfo.FM.Code}}</div>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">[[[Finance Controller]]]</label>
+                            <div class="col-xs-3">
+                                <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.FinanceController" ng-options="m.NameENUS for m in FinanceControllers">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                                @*<div>{{notifyUsersInfo.FinanceController.Code}}</div>*@
+                            </div>
+                            <label class="col-xs-3 control-label">[[[VPGM]]]</label>
+                            <div class="col-xs-3">
+                                <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.VPGM" ng-options="m.NameENUS for m in VPGMs">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                                @*<div>{{notifyUsersInfo.VPGM.Code}}</div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="Rebuild_LegalReview">
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">[[[Legal]]]</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.Legal" ng-options="m.NameENUS for m in Legals">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.Legal.Code}}</div>*@
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="Rebuild_GBMemo">
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">[[[Construction Manager]]]</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.ConstructionManager" ng-options="m.NameENUS for m in ConstructionManagers">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        @*<div>{{notifyUsersInfo.ConstructionManager.Code}}</div>*@
+                    </div>
+                </div>
+            </div>
+            <div ng-show="isShowCC">
+                <h5>[[[抄送人：]]]</h5>
+                <hr>
+                <div class="form-horizontal">
+                    @*<div class="form-group">
+                        <label class="col-xs-3 control-label">MCCL Asset Manager</label>
+                        <div class="col-xs-3">
+                            <select class="form-control" ng-show="!isLoading" ng-model="notifyUsersInfo.MCCLAssetMgr" ng-options="m.NameENUS for m in MCCLAssetMgrs">
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                            <div>{{notifyUsersInfo.MCCLAssetMgr.Code}}</div>
+                        </div>
+                        <label class="col-xs-3 control-label"></label>
+                        <div class="col-xs-3">
+                        </div>
+                    </div>
+                    *@
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">[[[添加必要抄送人]]]</label>
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                                <button type="button" class="input-group-addon" ng-click="selectNecessary()" ng-disabled="isNecessaryLoading">[[[选择]]]</button>
+                                <input class="form-control" readonly="readonly" value="{{necessaryNoticeUsersName}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">[[[添加更多抄送对象]]]</label>
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                                <button type="button" class="input-group-addon" ng-click="selectEmployee()">[[[选择]]]</button>
+                                <input class="form-control" readonly="readonly" value="{{noticeUsersName}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" ng-click="ok()"
+            ng-disabled="frmEditUser.$invalid">
+           [[[提交]]] 
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+    </div>
+</div>
+

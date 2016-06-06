@@ -1,0 +1,220 @@
+﻿
+@{
+    Layout = null;
+}
+<form name="frmWR">
+    <div class="row mg_t_10">
+        <div class="col-xs-8 panel panel-black">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    [[[Write Off Amount]]]
+                </span>
+            </div>
+            <div class="panel-body pd_0">
+                <table class="table table-form table-noborder" ng-if="editable">
+                    <colgroup>
+                        <col width="16%" />
+                        <col width="28%" />
+                        <col width="28%" />
+                        <col width="28%" />
+                    </colgroup>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>[[[Initial Investments]]]</th>
+                        <th>[[[NBV(Closure Date)]]]</th>
+                        <th>[[[Write Off]]]</th>
+                    </tr>
+                    <tr>
+                        <td>[[[RE]]]</td>
+                        <td>
+                            <input type="text" class="form-control" name="REII" number-show="money" valnumber required ng-model="writeOffAndReinCost.REII" ng-disabled="!editable" />
+                            <div ng-show="$parent.$parent.$submited||frmWR.REII.$dirty">
+                                <span class="ng-error" ng-show="frmWR.REII.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmWR.REII.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="RENBV" number-show="money" valnumber required ng-model="writeOffAndReinCost.RENBV" ng-disabled="!editable" />
+                            <div ng-show="$parent.$parent.$submited||!frmWR.RENBV.$pristine">
+                                <span class="ng-error" ng-show="frmWR.RENBV.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmWR.RENBV.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="REWriteOff" number-show="money" ng-model="writeOffAndReinCost.REWriteOff" disabled="disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>LHI</td>
+                        <td>
+                            <input type="text" class="form-control" name="LHIII" number-show="money" valnumber required ng-model="writeOffAndReinCost.LHIII" ng-disabled="!editable" />
+                            <div ng-show="$parent.$parent.$submited||!frmWR.LHIII.$pristine">
+                                <span class="ng-error" ng-show="frmWR.LHIII.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmWR.LHIII.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="LHINBV" number-show="money" valnumber required ng-model="writeOffAndReinCost.LHINBV" ng-disabled="!editable" />
+                            <div ng-show="$parent.$parent.$submited||!frmWR.LHINBV.$pristine">
+                                <span class="ng-error" ng-show="frmWR.LHINBV.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmWR.LHINBV.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" number-show="money" ng-model="writeOffAndReinCost.LHIWriteOff" disabled="disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[[ESSD]]]</td>
+                        <td>
+                            <input type="text" class="form-control" name="ESSDII" number-show="money" valnumber required ng-model="writeOffAndReinCost.ESSDII" ng-disabled="!editable" />
+                            <div ng-show="$parent.$parent.$submited||!frmWR.ESSDII.$pristine">
+                                <span class="ng-error" ng-show="frmWR.ESSDII.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmWR.ESSDII.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="ESSDNBV" number-show="money" valnumber required ng-model="writeOffAndReinCost.ESSDNBV" ng-disabled="!editable" />
+                            <div ng-show="$parent.$parent.$submited||!frmWR.ESSDNBV.$pristine">
+                                <span class="ng-error" ng-show="frmWR.ESSDNBV.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmWR.ESSDNBV.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="ESSDWriteOff" number-show="money" ng-model="writeOffAndReinCost.ESSDWriteOff" disabled="disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[[Total Write Off]]]</td>
+                        <td><input type="text" class="form-control" ng-value="sum(writeOffAndReinCost.REII,writeOffAndReinCost.LHIII,writeOffAndReinCost.ESSDII)|money" disabled="disabled" /></td>
+                        <td><input type="text" class="form-control" ng-value="sum(writeOffAndReinCost.RENBV,writeOffAndReinCost.LHINBV,writeOffAndReinCost.ESSDNBV)|money" disabled="disabled" /></td>
+                        <td><input type="text" class="form-control" ng-value="sum(writeOffAndReinCost.REWriteOff,writeOffAndReinCost.LHIWriteOff,writeOffAndReinCost.ESSDWriteOff)|money" disabled="disabled" /></td>
+                    </tr>
+                </table>
+                <table class="table table-form table-noborder" ng-if="!editable">
+                    <colgroup>
+                        <col width="16%" />
+                        <col width="28%" />
+                        <col width="28%" />
+                        <col width="28%" />
+                    </colgroup>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>[[[Initial Investments]]]</th>
+                        <th>[[[NBV(Closure Date)]]]</th>
+                        <th>[[[Write Off]]]</th>
+                    </tr>
+                    <tr>
+                        <td>[[[RE]]]</td>
+                        <td>
+                            {{writeOffAndReinCost.REII|money}}
+                        </td>
+                        <td>
+                            {{writeOffAndReinCost.RENBV|money}}
+                        </td>
+                        <td>
+                            {{writeOffAndReinCost.REWriteOff|money}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[[LHI]]]</td>
+                        <td>
+                            {{writeOffAndReinCost.LHIII|money}}
+                        </td>
+                        <td>
+                            {{writeOffAndReinCost.LHINBV|money}}
+                        </td>
+                        <td>
+                            {{writeOffAndReinCost.LHIWriteOff|money}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[[ESSD]]]</td>
+                        <td>
+                            {{writeOffAndReinCost.ESSDII|money}}
+                        </td>
+                        <td>
+                            {{writeOffAndReinCost.ESSDNBV|money}}
+                        </td>
+                        <td>
+                            {{writeOffAndReinCost.ESSDWriteOff|money}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[[Total Write Off]]]</td>
+                        <td>{{sum(writeOffAndReinCost.REII,writeOffAndReinCost.LHIII,writeOffAndReinCost.ESSDII)|money}}</td>
+                        <td>{{sum(writeOffAndReinCost.RENBV,writeOffAndReinCost.LHINBV,writeOffAndReinCost.ESSDNBV)|money}}</td>
+                        <td>{{sum(writeOffAndReinCost.REWriteOff,writeOffAndReinCost.LHIWriteOff,writeOffAndReinCost.ESSDWriteOff)|money}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-4 panel panel-black">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    [[[Reinvestment Cost]]]
+                </span>
+            </div>
+            <div class="panel-body pd_0">
+                <table class="table table-form table-noborder" ng-if="editable">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>[[[RE Cost(RMB)]]]</td>
+                        <td>
+                            <input type="text" class="form-control" name="RECost" number-show="money" ng-model="writeOffAndReinCost.RECost" disabled="disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[[LHI(RMB)]]]</td>
+                        <td>
+                            <input type="text" class="form-control" name="LHICost" number-show="money" ng-model="writeOffAndReinCost.LHICost" disabled="disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[[ESSD(RMB)]]]</td>
+                        <td>
+                            <input type="text" class="form-control" name="ESSDCost" number-show="money" ng-model="writeOffAndReinCost.ESSDCost" disabled="disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[[Total Reinvestment(RMB)]]]</td>
+                        <td><input type="text" class="form-control" ng-value="sum(writeOffAndReinCost.RECost,writeOffAndReinCost.LHICost,writeOffAndReinCost.ESSDCost)|money" disabled="disabled" /></td>
+                    </tr>
+                </table>
+                <table class="table table-form table-noborder" ng-if="!editable">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>[[[RE Cost(RMB)]]]</td>
+                        <td>
+                            {{writeOffAndReinCost.RECost|money}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[[LHI(RMB)]]]</td>
+                        <td>
+                            {{writeOffAndReinCost.LHICost|money}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[[ESSD(RMB)]]]</td>
+                        <td>
+                            {{writeOffAndReinCost.ESSDCost|money}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[[Total Reinvestment(RMB)]]]</td>
+                        <td>{{sum(writeOffAndReinCost.RECost,writeOffAndReinCost.LHICost,writeOffAndReinCost.ESSDCost)|money}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>

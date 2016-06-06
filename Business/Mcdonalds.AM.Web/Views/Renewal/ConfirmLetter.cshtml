@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_ConfirmLetter" place-holder="11" ng-show="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="Renewal_ConfirmLetter" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+<store-basic-info code="info.USCode" workflow-type="Renewal_Letter" project="info" store="store"></store-basic-info>
+<attachments ref-table-name="RenewalConfirmLetter"
+    list="attachments"
+    project-id="{{projectId}}"
+    flow-code="Renewal_ConfirmLetter"
+    ref-table-id="{{confirmLetter.Id}}"
+    upload-set="['4c3cdbbb-45ac-4f28-937f-2dd6b3aeefcd']"
+    show-contract="false"
+    editable="true"></attachments>
+<attachments-memo project-id="projectId"
+    flow-code="Renewal">
+</attachments-memo>
+@*<project-history project-id="projectId" table-name="RenewalConfirmLetter" title="Renewal ConfirmLetter History"
+    page-url="/Renewal/Main#/ConfirmLetter/Process/View?projectId={{projectId}}"
+    title-name="Renewal ConfirmLetter History" ng-show="!isHistory" has-template="false"></project-history>*@
+<notification-message project-id="projectId"
+    flow-code="Renewal"
+    sub-flow-code="Renewal_ConfirmLetter"
+    node-id="confirmLetter.Id"
+    uscode="info.USCode"></notification-message>
+<div class="form-actions ta_c">
+    <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-click="save()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+    <button type="button" class="btn btn-lg btn-red" ng-disabled="acting" ng-click="submit()"><span class="fa fa-check"></span>[[[呈递]]]</button>
+</div>

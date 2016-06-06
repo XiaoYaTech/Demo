@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10" ng-form name="frmEdors">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[Endorsement by General Counsel]]]
+        </span>
+    </div>
+    <div class="panel-body form-horizontal">
+        <div class="form-group">
+            <div class="col-xs-1">[[[Endorsement]]]</div>
+            <div class="col-xs-11">
+                <input type="radio" value="Endorsed" name="GCEndorsestate" required ng-model="entity.GCEndorsestate" ng-disabled="!editable" />
+                &nbsp;&nbsp;
+                [[[Endorsed]]]
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" value="LegalComments" name="GCEndorsestate" required ng-model="entity.GCEndorsestate" ng-disabled="!editable" />
+                &nbsp;&nbsp;
+                [[[Legal Comments]]]
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" value="NotEndorsed" name="GCEndorsestate" required ng-model="entity.GCEndorsestate" ng-disabled="!editable" />
+                &nbsp;&nbsp;
+                [[[Not Endorsed]]]
+                <err-msgs field="frmEdors.GCEndorsestate" submited="$root.$submited"></err-msgs>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-1">[[[Comments]]]</div>
+            <div class="col-xs-11">
+                <textarea rows="3" ng-model="entity.GCComment" class="form-control" ng-show="editable"></textarea>
+                <pre ng-show="!editable">{{entity.GCComment}}</pre>
+            </div>
+        </div>
+    </div>
+</div>
+

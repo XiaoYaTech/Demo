@@ -1,0 +1,275 @@
+﻿@{
+    Layout = null;
+}
+<form class="form-horizontal" name="frmDecision" novalidate id="frmDecision">
+    <div class="panel panel-black mg_t_10" id="divDecisionLogic">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Decision Logic]]]
+            </span>
+        </div>
+        <div class="panel-body clearfix">
+            <div class="col-xs-5">
+                <table class="table table-bordered">
+                    <tbody ng-form name="frmRL" ng-if="editable && entity.IsOptionOffered">
+                        <tr>
+                            <td>[[[Relocation Option offered?]]]</td>
+                            <td>
+                                <input type="radio" name="my-radion" ng-value="true" ng-model="entity.IsOptionOffered" />[[[是]]]
+                                <input type="radio" name="my-radion" ng-value="false" ng-model="entity.IsOptionOffered" />[[[否]]]
+                            @*<input type="checkbox" ng-model="entity.IsOptionOffered" name="my-checkbox" data-on-label="Yes" data-off-label="No" checked="checked" />*@
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Lease Term*]]]</td>
+                            <td class="text-right">
+                                <input type="text" valnumber ng-required="true" ng-model="entity.LeaseTerm" class="form-control text-right" name="leaseTerm" />
+                                <err-msgs field="frmRL.leaseTerm" submited="$parent.$parent.$submited"></err-msgs>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Investment*]]]</td>
+                            <td class="text-right">
+                                <input ng-model="entity.Investment" required class="form-control text-right" type="text" valnumber name="investment" />
+                                <err-msgs field="frmRL.investment" submited="$parent.$parent.$submited"></err-msgs>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[NPV Restaurant Cashflows until end lease*]]]</td>
+                            <td class="text-right">
+                                <input required type="text" valnumber name="npVRestaurantCashflows" ng-model="entity.NPVRestaurantCashflows" class="form-control text-right" />
+                                <err-msgs field="frmRL.npVRestaurantCashflows" submited="$parent.$parent.$submited"></err-msgs>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Yr1 SOI(%)*]]]</td>
+                            <td class="text-right">
+                                <input type="text" valnumber required ng-model="entity.Yr1SOI" class="form-control text-right" name="yr1SOI" input-percent />
+                                <err-msgs field="frmRL.yr1SOI" submited="$parent.$parent.$submited"></err-msgs>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>[[[IRR(%)(With lease Option)*]]]</td>
+                            <td class="text-right">
+                                <input type="text" valnumber required ng-model="entity.IRR" class="form-control text-right" name="irr" input-percent />
+                                <err-msgs field="frmRL.irr" submited="$parent.$parent.$submited"></err-msgs>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-if="editable && !entity.IsOptionOffered">
+                        <tr>
+                            <td>[[[Relocation Option offered?]]]</td>
+                            <td>
+                                <input type="radio" name="my-radion" ng-value="true" ng-model="entity.IsOptionOffered" />[[[是]]]
+                                <input type="radio" name="my-radion" ng-value="false" ng-model="entity.IsOptionOffered" />[[[否]]]
+                            @*<input type="checkbox" ng-model="entity.IsOptionOffered" name="my-checkbox" data-on-label="Yes" data-off-label="No" checked="checked" />*@
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Lease Term*]]]</td>
+                            <td class="text-right">
+                                <input type="text" ng-model="entity.LeaseTerm" class="form-control text-right" name="leaseTerm" disabled="disabled" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Investment*]]]</td>
+                            <td class="text-right">
+                                <input ng-model="entity.Investment" class="form-control text-right" type="text" name="investment" disabled="disabled" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[NPV Restaurant Cashflows until end lease*]]]</td>
+                            <td class="text-right">
+                                <input type="text" name="npVRestaurantCashflows" ng-model="entity.NPVRestaurantCashflows" class="form-control text-right" disabled="disabled" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Yr1 SOI(%)*]]]</td>
+                            <td class="text-right">
+                                <input type="text" ng-model="entity.Yr1SOI" class="form-control text-right" name="yr1SOI" disabled="disabled" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[IRR(%)(With lease Option)*]]]</td>
+                            <td class="text-right">
+                                <input type="text" ng-model="entity.IRR" class="form-control text-right" name="irr" disabled="disabled" />
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-if="!editable">
+                        <tr>
+                            <td>[[[Relocation Option offered?]]]</td>
+                            <td>{{entity.IsOptionOffered?"Yes":"No"}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Lease Term*]]]</td>
+                            <td class="text-right">{{entity.LeaseTerm | money}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Investment*]]]</td>
+                            <td class="text-right">{{entity.Investment | money}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[NPV Restaurant Cashflows until end lease*]]]</td>
+                            <td class="text-right">{{entity.NPVRestaurantCashflows | money}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Yr1 SOI(%)*]]]</td>
+                            <td class="text-right">{{entity.Yr1SOI | numberDisplay:'percent'}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>[[[IRR(%)(With lease Option)*]]]</td>
+                            <td class="text-right">{{entity.IRR | numberDisplay:'percent'}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-7" ng-form name="frmRR" ng-if="editable && entity.IsOptionOffered">
+                <div class="col-xs-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="50%">[[[Relocation Pipeline ID*]]]</td>
+                            <td>
+                                <input type="text" valnumber ng-required="true" ng-model="entity.RelocationPipelineID" class="form-control" name="relocationPipelineID" typeahead-loading="loadingPipelineId" typeahead="n.PipelineCode for n in searchPipelineId($viewValue)" />
+                                <i ng-show="loadingPipelineId" class="glyphicon glyphicon-refresh"></i>
+                                <err-msgs field="frmRR.relocationPipelineID" submited="$parent.$parent.$submited"></err-msgs>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Pipeline Name*]]]</td>
+                            <td>
+                                <input type="text" ng-required="true" ng-model="entity.PipelineName" class="form-control" name="pipelineName" typeahead-loading="loadingPipelineName" typeahead="n.PipelineNameZHCN+'-'+n.PipelineNameENUS for n in searchPipelineName($viewValue)" />
+                                <i ng-show="loadingPipelineName" class="glyphicon glyphicon-refresh"></i>
+                                <err-msgs field="frmRR.pipelineName" submited="$parent.$parent.$submited"></err-msgs>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-12">
+                    <label>
+                        [[[Future Cashflow impact]]]
+                    </label>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="30%">[[[Comp assumption(%) following years*]]]</td>
+                            <td width="20%">
+                                <input type="text" valnumber required class="form-control text-right" ng-model="entity.CompAssumption" name="compAssumption" input-percent />
+                                <err-msgs field="frmRR.compAssumption" submited="$parent.$parent.$submited"></err-msgs>
+                            </td>
+                            <td width="30%">[[[Cashflow growth(%) following years*]]]</td>
+                            <td width="20%">
+                                <input type="text" valnumber required class="form-control text-right" ng-model="entity.CashflowGrowth" name="cashflowGrowth" input-percent />
+                                <err-msgs field="frmRR.cashflowGrowth" submited="$parent.$parent.$submited"></err-msgs>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="50%">[[[Compensation (Payment)receipt(RMB)]]]</td>
+                            <td>
+                                <input type="text" valnumber required class="form-control text-right" ng-model="entity.Compensation" name="Compensation" />
+                                <err-msgs field="frmRR.Compensation" submited="$parent.$parent.$submited"></err-msgs>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xs-7" ng-form name="frmRR2" ng-if="editable && !entity.IsOptionOffered">
+                <div class="col-xs-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="50%">[[[Relocation Pipeline ID*]]]</td>
+                            <td>
+                                <input type="text" ng-model="entity.RelocationPipelineID" class="form-control" disabled="disabled" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Pipeline Name*]]]</td>
+                            <td>
+                                <input type="text" ng-model="entity.PipelineName" class="form-control" disabled="disabled" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-12">
+                    <label>
+                        [[[Future Cashflow impact]]]
+                    </label>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="30%">[[[Comp assumption(%) following years*]]]</td>
+                            <td width="20%">
+                                <input type="text" class="form-control text-right" ng-model="entity.CompAssumption" disabled="disabled" />
+                            </td>
+                            <td width="30%">[[[Cashflow growth(%) following years*]]]</td>
+                            <td width="20%">
+                                <input type="text" class="form-control text-right" ng-model="entity.CashflowGrowth" disabled="disabled" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="50%">[[[Compensation (Payment)receipt(RMB)]]]</td>
+                            <td>
+                                <input type="text" valnumber required class="form-control text-right" ng-model="entity.Compensation" name="Compensation" />
+                                <err-msgs field="frmRR2.Compensation" submited="$parent.$parent.$submited"></err-msgs>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xs-7" ng-if="!editable">
+                <div class="col-xs-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="50%">[[[Relocation Pipeline ID*]]]</td>
+                            <td>{{entity.RelocationPipelineID}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[[Pipeline Name*]]]</td>
+                            <td>{{entity.PipelineName}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-12">
+                    <label>
+                        [[[Future Cashflow impact]]]
+                    </label>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="30%">[[[Comp assumption(%) following years*]]]</td>
+                            <td width="20%">{{entity.CompAssumption| numberDisplay:'percent'}}
+                            </td>
+                            <td width="30%">[[[Cashflow growth(%) following years*]]]</td>
+                            <td width="20%">{{entity.CashflowGrowth| numberDisplay:'percent'}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="50%">[[[Compensation (Payment)receipt(RMB)]]]</td>
+                            <td>{{entity.Compensation|money}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

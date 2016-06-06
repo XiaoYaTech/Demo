@@ -1,0 +1,139 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            Key Measures
+        </span>
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="pd_0_15">
+            <table class="table table-bordered">
+                <tr>
+                    <td width="16%">GB Date</td>
+                    <td width="16%" class="text-center">{{source.ReinvestmentBasicInfo.GBDate|date:"yyyy-MM-dd"}}</td>
+                    <td>Completion Date</td>
+                    <td width="16%" class="text-center">{{source.ReinvestmentBasicInfo.ConsCompletionDate|date:"yyyy-MM-dd"}}</td>
+                    <td width="16%">Reopen Date</td>
+                    <td width="16%" class="text-center">{{source.ReinvestmentBasicInfo.ReopenDate|date:"yyyy-MM-dd"}}</td>
+                </tr>
+                <tr>
+                    <td>Existing Seat Number</td>
+                    <td class="text-center">{{storeBasicInfo.StoreSTLocation.TotalSeatsNo}}</td>
+                    <td>Estimated Seat Number</td>
+                    <td class="text-center">{{source.ReinvestmentBasicInfo.EstimatedSeatNo}}</td>
+                    <td>Right Sizing Seat Number</td>
+                    <td class="text-center">{{source.ReinvestmentBasicInfo.RightSizingSeatNo}}</td>
+                </tr>
+                <tr>
+                    <td>Existing Operation Size</td>
+                    <td class="text-center">{{storeBasicInfo.StoreSTLocation.TotalArea}}</td>
+                    <td>Existing Kitchen Size</td>
+                    <td class="text-center">{{storeBasicInfo.StoreSTLocation.KitchenArea}}</td>
+                    <td>Existing Attached Kiosk</td>
+                    <td class="text-center">{{storeBasicInfo.AttachedBeCount}}</td>
+                </tr>
+                <tr>
+                    <td>Existing Remoted Kiosk</td>
+                    <td class="text-center">{{storeBasicInfo.RemoteBeCount}}</td>
+                    <td>Existing McCafe</td>
+                    <td class="text-center">{{storeBasicInfo.MCCafeCount}}</td>
+                    <td>Existing MDS</td>
+                    <td class="text-center">{{storeBasicInfo.MDSBeCount}}</td>
+                </tr>
+                <tr>
+                    <td>Current Design Type</td>
+                    <td class="text-center">{{storeBasicInfo.StoreSTLocation.DesignStyleDisplay}}</td>
+                    <td>New Design Type</td>
+                    <td class="text-center">{{source.ReinvestmentBasicInfo.NewDesignTypeDisplay}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <table class="table table-bordered">
+                <tr>
+                    <td width="16%">TTM Sales(RMB)</td>
+                    <td width="16%" class="text-center">{{source.FinancialPreanalysis.TTMSales|money}}</td>
+                    <td colspan="2">SOI%</td>
+                    <td width="16%" class="text-center">{{store.TTMSOIPercent}}</td>
+                    <td width="16%"></td>
+                    <td width="16%"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2">Inc.Sales</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>New McCafe</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.IsMcCafe|boolFilter}}</td>
+                    <td class="table-tree-leaf" width="3%">&nbsp;</td>
+                    <td class="table-tree-leaf-node" width="17%">-McCafe%</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.McCafe|numberDisplay:'percent'}}</td>
+                    <td>Sales Building Investment</td>
+                    <td class="text-center">{{summary.Rein.TotalSalBldingInvstBudget|money}}</td>
+                </tr>
+                <tr>
+                    <td>New Kiosk</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.IsKiosk|boolFilter}}</td>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">-Kiosk%</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.Kiosk|numberDisplay:'percent'}}</td>
+                    <td>None-Sales Building Investment</td>
+                    <td class="text-center">{{summary.Rein.TotalNonSalBldingInvstBudget|money}}</td>
+                </tr>
+                <tr>
+                    <td>New MDS</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.IsMDS|boolFilter}}</td>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">-MDS%</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.MDS|numberDisplay:'percent'}}</td>
+                    <td>Total Investment</td>
+                    <td class="text-center">{{summary.Rein.TotalReinvestmentBudget|money}}</td>
+                </tr>
+                <tr>
+                    <td>New 24H</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.IsTwientyFourHour|boolFilter}}</td>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">-24H%</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.TwientyFourHour|numberDisplay:'percent'}}</td>
+                    <td>Total Write Off</td>
+                    <td class="text-center">{{summary.Writeoff.TotalWriteOff|money}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="table-tree-leaf">&nbsp;</td>
+                    <td class="table-tree-leaf-node">-Reimage+Price Tier%</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.ReimagePrice|numberDisplay:'percent'}}</td>
+                    <td>ROI%</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.ROI|numberDisplay:'percent'}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2">Total Inc.sales%</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.TotalSalesInc|numberDisplay:'percent'}}</td>
+                    <td>PayBack Year</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.PaybackYears|numberCustom:1}}</td>
+                </tr>
+                <tr>
+                    <td>Current Price Tier</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.CurrentPriceTier}}</td>
+                    <td colspan="2">Price Tier after Reimage</td>
+                    <td class="text-center">{{source.FinancialPreanalysis.PriceTierafterReimage}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+

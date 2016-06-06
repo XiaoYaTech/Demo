@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Reimage" sub-code="Reimage_Package" place-holder="12" ng-show="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+<store-basic-info code="packageInfo.USCode" editable="true" store="storeBasicInfo" project="reimageInfo"></store-basic-info>
+@*<is-cdoapprove-info need-approval="needCDOApproval"></is-cdoapprove-info>*@
+<key-measures-info source="packageInfo" code="packageInfo.USCode" store="packageInfo.FinancialPreanalysis" project-id="projectId"></key-measures-info>
+
+
+<attachments list="attachments"
+             ref-table-name="ReimagePackage"
+             project-id="{{projectId}}"
+             flow-code="{{subFlowCode}}" 
+             ref-table-id="{{entityId}}"
+             editable="false"
+             show-pack-download="true"
+             upload-set="uploadSet"
+             before-pack-download="beforePackDownload(callback)"
+             is-history="isHistory"></attachments>
+<approval-records workflow-type="Reimage" ref-table-id="packageInfo.Id" ref-table-name="ReimagePackage"></approval-records>
+<div ng-show="pageType!='View'" id="divComments">
+    <comment comments="packageInfo.Comments" title="[[[意见]]]" editable="true"></comment>
+</div>
+<project-history project-id="projectId" table-name="ReimagePackage" title="[[[Reimage Package History]]]"
+                 page-url="/Reimage/Main#/Package/Process/View?projectId={{projectId}}"
+                 title-name="Package" ng-show="!isHistory"></project-history>
+<notification-message project-id="projectId"
+                      flow-code="Reimage"
+                      sub-flow-code="{{subFlowCode}}"
+                      node-id="packageInfo.Id"
+                      uscode="reimageInfo.USCode"
+                      is-history="isHistory"></notification-message>
+@*ng-switch-when="Resubmit"*@
+<div class="form-actions ta_c" ng-switch on="pageType">
+    <div class="form-actions ta_c" ng-switch-when="Approval">
+        <button type="button" class="btn btn-lg btn-red" ng-click="approve()" ng-disabled="IsClickApprove">[[[审批]]]</button>
+        <button type="button" class="btn btn-lg btn-warning" ng-click="reject()" ng-disabled="IsClickReject" ng-show="packageInfo.IsShowReject">[[[拒绝]]]</button>
+        <button type="button" class="btn btn-lg btn-orange" ng-click="returnToOriginator()" ng-disabled="IsClickReturn"><span class="fa fa-reply"></span>[[[退回]]]</button>
+    </div>
+    <div class="ta_c mg_t_10" ng-switch-default>
+        @*<button type="button" class="btn btn-lg btn-yellow" ng-click="edit()"><span class="fa fa-edit"></span>[[[编辑]]]</button>*@
+        <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSubmit"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-click="submit()" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+    <div class="ta_c mg_t_10" ng-switch-when="View" ng-hide="isUserAction">
+        <button type="button" class="btn btn-lg btn-warning" ng-click="save()" ng-show="packageInfo.IsShowSave"><span class="fa fa-check"></span>[[[保存]]]</button>
+        @*<button type="button" class="btn btn-lg btn-warning" ng-click="save()"><span class="fa fa-check"></span>[[[保存]]]</button>*@
+        <button type="button" class="btn btn-lg btn-orange" ng-click="recall()" ng-show="packageInfo.IsShowRecall && !isHistory">[[[撤销]]]</button>
+        <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="packageInfo.IsShowEdit && !isHistory"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+    </div>
+    <div class="form-actions ta_c" ng-switch-when="Resubmit">
+        <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSubmit"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-click="submit()" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+﻿@{
+    Layout = null;
+}
+<script type="text/javascript">
+    function showWoInfo() {
+        $("#divWOInfo")[0].style.display = "";
+    }
+</script>
+<top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_ExecutiveSummary"  place-holder="8"></top-nav>
+<cheking-point project-id="projectId" flow-code="Closure_ExecutiveSummary" refresh="checkPointRefresh"></cheking-point>
+<notification-message project-id="projectId"
+                      flow-code="Closure"
+                      sub-flow-code="Closure_ExecutiveSummary"
+                      node-id="entity.Id"
+                      uscode="ClosureInfo.USCode"></notification-message>
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            Upload ExecutiveSummary
+        </span> 
+        <div class="panel-tools">
+            <a id="downLoadTemplate">
+                <span class="fa fa-cloud-download"></span>
+                请先下载Write-off模板
+            </a>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button"
+                        class="btn btn-sm btn-default"
+                        plupload-simple
+                        upload-url="api/ClosureExecutiveSummary/UploadTemplate/{{projectId}}/{{userAccount}}/{{escape(userNameZHCN）}}/{{escape(userNameENUS)}}"
+                        upload-finished="uploadTplFinish"
+                        errormsg="请上传正确的模板">
+                    <span class='fa fa-cloud-upload'></span>
+                    结果上传
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<store-basic-info project="ClosureInfo" code="ClosureInfo.USCode"></store-basic-info>
+<table class="table table-bordered">
+    <tr>
+        <th>Item</th>
+        <th>Uploaded By</th>
+        <th>Uploaded Date</th>
+        <th>Status</th>
+    </tr>
+    <tr ng-repeat="att in templateList">
+        <td>
+            {{att.Name}}
+        </td>
+        <td>
+            {{att.CreatorName}}
+        </td>
+        <td>{{att.CreateTime}}</td>
+        <td>{{att.IsAvailable}}</td>
+    </tr>
+</table>
+<div id="divWOInfo" style="display: none;">
+    <table class="table table-bordered">
+        <tr>
+            <th>Item</th>
+
+            <th>Uploaded By</th>
+            <th>Uploaded Date</th>
+            <th>Status</th>
+        </tr>
+        <tr ng-repeat="att in templateList">
+            <td><a ng-href="{{att.FileURL}}">{{att.Name}}</a></td>
+
+            <td>{{att.CreatorName}}</td>
+            <td>{{att.CreateTime  | date:"yyyy-MM-dd"}}</td>
+            <td>{{att.IsAvailable}}</td>
+        </tr>
+    </table>
+
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                Attachment
+            </span>
+            <div class="panel-tools">
+                <a 
+                    plupload-simple
+                    upload-url="api/ClosureExecutiveSummary/UploadAttachement/{{projectId}}"
+                    upload-finished="uploadAttachFinish"
+                    error-msg ="上传失败"
+                >
+                    <span class='fa fa-upload'></span>
+                    上传
+                </a>
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>No.</th>
+                <th>Item</th>
+                <th>Uploaded By</th>
+                <th>Uploaded Date</th>
+                <th>Operation</th>
+            </tr>
+            <tr ng-repeat="att in attachementList">
+                <td>{{$index}}</td>
+                <td><a ng-href="{{att.FileURL}}">{{att.Name}}</a></td>
+                <td>{{att.CreatorName}}</td>
+                <td>{{att.CreateTime}}</td>
+                <td class="table-operations">
+                    <input type="button" class="btn btn-default" ng-click="deleteAttachment(att.ID)" value="删除" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-actions ta_c">
+        <button type="button" class="btn btn-lg btn-red" ng-click="ApproverSubmit('ReSubmit')"><span class="fa fa-check"></span>ReSubmit</button>
+    </div>
+</div>

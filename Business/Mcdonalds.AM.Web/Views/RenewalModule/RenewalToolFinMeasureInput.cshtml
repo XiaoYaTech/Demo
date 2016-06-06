@@ -1,0 +1,337 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[Financial Measures(RMB)]]]
+        </span>
+    </div>
+    <div class="panel-body pd_0">
+        <form name="frmFinMeasureInput">
+            <div class="form-horizontal mg_t_10 pd_0_10">
+                <div class="form-group">
+                    <div class="pd_t_7 col-xs-2">[[[TTM Financial Data]]]</div>
+                    <div class="col-xs-2">
+                        <select chosen="{disable_search:true}" ng-if="editable" style="width:70%" class="form-control" ng-model="finMeasureInput.FinanceDataYearMonth" ng-change="onYearMonthChange()" ng-options="ym for ym in yearMonths">
+                            <option class="hide" value=""></option>
+                        </select>
+                        <span ng-if="!editable" class="pd_t_7">{{finMeasureInput.FinanceDataYearMonth}}</span>
+                    </div>
+                    <div class="pd_t_7 col-xs-2" ng-if="showSalesEditpart"> [[[Rental Structure]]]</div>
+                    <div class="col-xs-2" ng-if="showSalesEditpart">
+                        <dict-selector parent-code="RentalStructure"
+                                       required="true"
+                                       style="width:70%"
+                                       selected-code="finMeasureInput.RentalStructure" selected-dict="rentalStructureDict" editable="salesEditable"></dict-selector>
+                    </div>
+                    <div class="pd_t_7 col-xs-2" ng-if="showSalesEditpart">[[[Contribution Margin(%)]]]</div>
+                    <div class="col-xs-2" ng-if="showSalesEditpart">
+                        <input type="text" valnumber required class="form-control" name="ContributionMargin" input-percent ng-model="finMeasureInput.ContributionMargin" disabled="disabled" />
+                        <err-msgs field="frmFinMeasureInput.ContributionMargin" submited="$root.$submited"></err-msgs>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-form table-noborder">
+                <colgroup>
+                    <col width="20.5%" />
+                    <col width="9.5%" />
+                    <col width="16.5%" />
+                    <col width="16.5%" />
+                    <col width="6%" />
+                    <col width="12.5%" />
+                    <col width="6%" />
+                    <col width="12.5%" />
+                </colgroup>
+                <tr>
+                    <th>[[[Data Month:]]]{{finMeasureInput.FinanceDataYearMonth}}</th>
+                    <th>[[[Original Data]]]</th>
+                    <th>[[[Fin.Adjustment]]]</th>
+                    <th>[[[Difference]]]</th>
+                    <th ng-if="showSalesEditpart">[[[Year]]]</th>
+                    <th ng-if="showSalesEditpart">[[[Sales Comp(%)]]]</th>
+                    <th ng-if="showSalesEditpart">[[[Year]]]</th>
+                    <th ng-if="showSalesEditpart">[[[Sales Comp(%)]]]</th>
+                </tr>
+                <tr>
+                    <td>[[[PRODUCT SALES(RMB)]]]</td>
+                    <td>{{finMeasureInput.ProductSalesOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="ProductSalesAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.ProductSalesAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.ProductSalesAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" class="form-control" disabled="disabled" ng-value="finMeasureInput.ProductSalesAdjustment-finMeasureInput.ProductSalesOriginal|numberCustom:2" /></td>
+                    <td ng-if="showSales(1)">[[[Yr1]]]</td>
+                    <td ng-if="showSales(1)">
+                        <input type="text" valnumber required name="SalesCompYr1" ng-model="finMeasureInput.SalesCompYr1" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr1" ng-model="finMeasureInput.SalesCompYr1" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr1" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td ng-if="showSales(11)">[[[Yr11]]]</td>
+                    <td ng-if="showSales(11)">
+                        <input type="text" valnumber required name="SalesCompYr11" ng-model="finMeasureInput.SalesCompYr11" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr11" ng-model="finMeasureInput.SalesCompYr11" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr11" submited="$root.$submited"></err-msgs>
+                    </td>
+                </tr>
+                <tr>
+                    <td>[[[PAC(RMB)]]]</td>
+                    @*<td>{{finMeasureInput.PacOriginal|numberDisplay:'percent'}}</td>*@
+                    <td>{{finMeasureInput.PacOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="PacAdjustment" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.PacAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.PacAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.PacAdjustment-finMeasureInput.PacOriginal" /></td>
+                    <td ng-if="showSales(2)">[[[Yr2]]]</td>
+                    <td ng-if="showSales(2)">
+                        <input type="text" valnumber required name="SalesCompYr2" ng-model="finMeasureInput.SalesCompYr2" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr2" ng-model="finMeasureInput.SalesCompYr2" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr2" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td ng-if="showSales(12)">[[[Yr12]]]</td>
+                    <td ng-if="showSales(12)">
+                        <input type="text" valnumber required name="SalesCompYr12" ng-model="finMeasureInput.SalesCompYr12" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr12" ng-model="finMeasureInput.SalesCompYr12" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr12" submited="$root.$submited"></err-msgs>
+                    </td>
+                </tr>
+                <tr>
+                    <td>[[[RENT(RMB)]]]</td>
+                    <td>{{finMeasureInput.RentOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="RentAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.RentAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.RentAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.RentAdjustment-finMeasureInput.RentOriginal|numberCustom:2" /></td>
+                    <td ng-if="showSales(3)">[[[Yr3]]]</td>
+                    <td ng-if="showSales(3)">
+                        <input type="text" valnumber required name="SalesCompYr3" ng-model="finMeasureInput.SalesCompYr3" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr3" ng-model="finMeasureInput.SalesCompYr3" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr3" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td ng-if="showSales(13)">[[[Yr13]]]</td>
+                    <td ng-if="showSales(13)">
+                        <input type="text" valnumber required name="SalesCompYr13" ng-model="finMeasureInput.SalesCompYr13" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr13" ng-model="finMeasureInput.SalesCompYr13" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr13" submited="$root.$submited"></err-msgs>
+                    </td>
+                </tr>
+                <tr>
+                    <td>[[[DEPRECIATION LHI(RMB)]]]</td>
+                    <td>{{finMeasureInput.DepreciationLhiOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="DepreciationLhiAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.DepreciationLhiAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.DepreciationLhiAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.DepreciationLhiAdjustment-finMeasureInput.DepreciationLhiOriginal|numberCustom:2" /></td>
+                    <td ng-if="showSales(4)">[[[Yr4]]]</td>
+                    <td ng-if="showSales(4)">
+                        <input type="text" valnumber required name="SalesCompYr4" ng-model="finMeasureInput.SalesCompYr4" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr4" ng-model="finMeasureInput.SalesCompYr4" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr4" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td ng-if="showSales(14)">[[[Yr14]]]</td>
+                    <td ng-if="showSales(14)">
+                        <input type="text" valnumber required name="SalesCompYr14" ng-model="finMeasureInput.SalesCompYr14" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr14" ng-model="finMeasureInput.SalesCompYr14" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr14" submited="$root.$submited"></err-msgs>
+                    </td>
+                </tr>
+                <tr>
+                    <td>[[[INTEREST LHI(RMB)]]]</td>
+                    <td>{{finMeasureInput.InterestLhiOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="InterestLhiAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.InterestLhiAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.InterestLhiAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.InterestLhiAdjustment-finMeasureInput.InterestLhiOriginal|money" /></td>
+                    <td ng-if="showSales(5)">[[[Yr5]]]</td>
+                    <td ng-if="showSales(5)">
+                        <input type="text" valnumber required name="SalesCompYr5" ng-model="finMeasureInput.SalesCompYr5" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr5" ng-model="finMeasureInput.SalesCompYr5" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr5" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td ng-if="showSales(15)">[[[Yr15]]]</td>
+                    <td ng-if="showSales(15)">
+                        <input type="text" valnumber required name="SalesCompYr15" ng-model="finMeasureInput.SalesCompYr15" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr15" ng-model="finMeasureInput.SalesCompYr15" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr15" submited="$root.$submited"></err-msgs>
+                    </td>
+                </tr>
+                <tr>
+                    <td>[[[SERVICE FEE(RMB)]]]</td>
+                    <td>{{finMeasureInput.ServiceFeeOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="ServiceFeeAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.ServiceFeeAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.ServiceFeeAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.ServiceFeeAdjustment-finMeasureInput.ServiceFeeOriginal|numberCustom:2" /></td>
+                    <td ng-if="showSales(6)">[[[Yr6]]]</td>
+                    <td ng-if="showSales(6)">
+                        <input type="text" valnumber required name="SalesCompYr6" ng-model="finMeasureInput.SalesCompYr6" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr6" ng-model="finMeasureInput.SalesCompYr6" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr6" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td ng-if="showSales(16)">[[[Yr16]]]</td>
+                    <td ng-if="showSales(16)">
+                        <input type="text" valnumber required name="SalesCompYr16" ng-model="finMeasureInput.SalesCompYr16" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr16" ng-model="finMeasureInput.SalesCompYr16" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr16" submited="$root.$submited"></err-msgs>
+                    </td>
+                </tr>
+                <tr>
+                    <td>[[[ACCOUNTING(RMB)]]]</td>
+                    <td>{{finMeasureInput.AccountingOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="AccountingAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.AccountingAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.AccountingAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.AccountingAdjustment-finMeasureInput.AccountingOriginal|numberCustom:2" /></td>
+                    <td ng-if="showSales(7)">[[[Yr7]]]</td>
+                    <td ng-if="showSales(7)">
+                        <input type="text" valnumber required name="SalesCompYr7" ng-model="finMeasureInput.SalesCompYr7" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr7" ng-model="finMeasureInput.SalesCompYr7" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr7" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td ng-if="showSales(17)">[[[Yr17]]]</td>
+                    <td ng-if="showSales(17)">
+                        <input type="text" valnumber required name="SalesCompYr17" ng-model="finMeasureInput.SalesCompYr17" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr17" ng-model="finMeasureInput.SalesCompYr17" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr17" submited="$root.$submited"></err-msgs>
+                    </td>
+                </tr>
+                <tr>
+                    <td>[[[INSURANCE(RMB)]]]</td>
+                    <td>{{finMeasureInput.InsuranceOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="InsuranceAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.InsuranceAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.InsuranceAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.InsuranceAdjustment-finMeasureInput.InsuranceOriginal|numberCustom:2" /></td>
+                    <td ng-if="showSales(8)">[[[Yr8]]]</td>
+                    <td ng-if="showSales(8)">
+                        <input type="text" valnumber required name="SalesCompYr8" ng-model="finMeasureInput.SalesCompYr8" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr8" ng-model="finMeasureInput.SalesCompYr8" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr8" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td ng-if="showSales(18)">[[[Yr18]]]</td>
+                    <td ng-if="showSales(18)">
+                        <input type="text" valnumber required name="SalesCompYr18" ng-model="finMeasureInput.SalesCompYr18" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr18" ng-model="finMeasureInput.SalesCompYr18" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr18" submited="$root.$submited"></err-msgs>
+                    </td>
+                </tr>
+                <tr>
+                    <td>[[[TAXES & LICENSES(RMB)]]]</td>
+                    <td>{{finMeasureInput.TaxesAndLicensesOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="TaxesAndLicensesAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.TaxesAndLicensesAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.TaxesAndLicensesAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.TaxesAndLicensesAdjustment-finMeasureInput.TaxesAndLicensesOriginal|numberCustom:2" /></td>
+                    <td ng-if="showSales(9)">[[[Yr9]]]</td>
+                    <td ng-if="showSales(9)">
+                        <input type="text" valnumber required name="SalesCompYr9" ng-model="finMeasureInput.SalesCompYr9" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr9" ng-model="finMeasureInput.SalesCompYr9" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr9" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td ng-if="showSales(19)">[[[Yr19]]]</td>
+                    <td ng-if="showSales(19)">
+                        <input type="text" valnumber required name="SalesCompYr19" ng-model="finMeasureInput.SalesCompYr19" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr19" ng-model="finMeasureInput.SalesCompYr19" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr19" submited="$root.$submited"></err-msgs>
+                    </td>
+                </tr>
+                <tr>
+                    <td>[[[DEPRECIATION ESSD(RMB)]]]</td>
+                    <td>{{finMeasureInput.DepreciationEssdOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="DepreciationEssdAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.DepreciationEssdAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.DepreciationEssdAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.DepreciationEssdAdjustment-finMeasureInput.DepreciationEssdOriginal|numberCustom:2" /></td>
+                    <td ng-if="showSales(10)">[[[Yr10]]]</td>
+                    <td ng-if="showSales(10)">
+                        <input type="text" valnumber required name="SalesCompYr10" ng-model="finMeasureInput.SalesCompYr10" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr10" ng-model="finMeasureInput.SalesCompYr10" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr10" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td ng-if="showSales(20)">[[[Yr20]]]</td>
+                    <td ng-if="showSales(20)">
+                        <input type="text" valnumber required name="SalesCompYr20" ng-model="finMeasureInput.SalesCompYr20" input-percent class="form-control" ng-if="salesEditable" />
+                        <input type="text" name="SalesCompYr20" ng-model="finMeasureInput.SalesCompYr20" input-percent class="form-control" disabled="disabled" ng-if="!salesEditable" />
+                        <err-msgs field="frmFinMeasureInput.SalesCompYr20" submited="$root.$submited"></err-msgs>
+                    </td>
+                </tr>
+                <tr>
+                    <td>[[[INTEREST ESSD(RMB)]]]</td>
+                    <td>{{finMeasureInput.InterestEssdOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="InterestEssdAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.InterestEssdAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.InterestEssdAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.InterestEssdAdjustment-finMeasureInput.InterestEssdOriginal|numberCustom:2" /></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                </tr>
+                <tr>
+                    <td>[[[OTHER (INC)/EXP(RMB)]]]</td>
+                    <td>{{finMeasureInput.OtherIncExpOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="OtherIncExpAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.OtherIncExpAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.OtherIncExpAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.OtherIncExpAdjustment-finMeasureInput.OtherIncExpOriginal|numberCustom:2" /></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                </tr>
+                <tr>
+                    <td>[[[NON-PRODUCT SALES(RMB)]]]</td>
+                    <td>{{finMeasureInput.NonProductSalesOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="NonProductSalesAdjustment" number-show="money" class="form-control" ng-disabled="!editable" ng-model="finMeasureInput.NonProductSalesAdjustment" />
+                        <err-msgs field="frmFinMeasureInput.NonProductSalesAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.NonProductSalesAdjustment-finMeasureInput.NonProductSalesOriginal|numberCustom:2" /></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                </tr>
+                <tr>
+                    <td>[[[NON-PRODUCT COSTS(RMB)]]]</td>
+                    <td>{{finMeasureInput.NonProductCostsOriginal|money}}</td>
+                    <td>
+                        <input type="text" valnumber required name="NonProductCostsAdjustment" number-show="money" class="form-control" ng-model="finMeasureInput.NonProductCostsAdjustment" ng-disabled="!editable" />
+                        <err-msgs field="frmFinMeasureInput.NonProductCostsAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.NonProductCostsAdjustment-finMeasureInput.NonProductCostsOriginal|money" /></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                </tr>
+                <tr>
+                    <td>[[[Comp Sales（%）]]]</td>
+                    <td>{{finMeasureInput.CompSalesOriginal|numberDisplay:'percent'}}</td>
+                    <td>
+                        <input type="text" valnumber required name="CompSalesAdjustment" number-show="percent" class="form-control" ng-model="finMeasureInput.CompSalesAdjustment" ng-disabled="!editable" />
+                        <err-msgs field="frmFinMeasureInput.CompSalesAdjustment" submited="$root.$submited"></err-msgs>
+                    </td>
+                    <td><input type="text" required class="form-control" disabled="disabled" ng-value="finMeasureInput.CompSalesAdjustment-finMeasureInput.CompSalesOriginal|money" /></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                    <td ng-if="showSalesEditpart"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

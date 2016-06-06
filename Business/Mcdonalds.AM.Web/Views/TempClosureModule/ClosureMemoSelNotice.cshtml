@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal-header">
+    <h3 class="modal-title">[[[通知]]]</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="frmSelectApprovers" novalidate>
+        <div class="form-group">
+            <label class="control-label col-xs-3">Coordinator</label>
+            <div class="col-xs-9">
+                {{entity.Coordinator}}
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-xs-3">Actor</label>
+            <div class="col-xs-3">
+                {{entity.Actor}}
+            </div>
+            <label class="control-label col-xs-3">Market Manager</label>
+            <div class="col-xs-3">
+                {{entity.Market_Asset_Mgr}}
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-xs-3">Regional Asset Manager</label>
+            <div class="col-xs-3">
+                {{entity.Regional_Asset_Mgr}}
+            </div>
+            <label class="control-label col-xs-3">Mccl Asset Manger</label>
+            <div class="col-xs-3">
+                {{entity.MCCL_Asset_Mgr}}
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label class="col-xs-3 control-label">[[[添加更多抄送对象]]]</label>
+            <div class="col-xs-9">
+                <div class="input-group">
+                    <button type="button" class="input-group-addon" ng-click="selectEmployee()">[[[选择]]]</button>
+                    <input class="form-control" readonly="readonly" value="{{NoticeUsersNameENUS}}" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-primary" ng-click="ok()">[[[提交]]]</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+</div>

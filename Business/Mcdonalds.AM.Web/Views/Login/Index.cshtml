@@ -1,0 +1,85 @@
+﻿@using System.Web.Optimization;
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_AngularLayout.cshtml";
+}
+@section head{
+    @Styles.Render("~/Content/default.css")
+    <style>
+        .main {
+            margin-top:0;
+            width:100%;
+        }
+    </style>
+}
+@section scripts{
+    @Scripts.Render("~/Scripts/portal.js")
+    @Scripts.Render("~/Scripts/Apps/LoginApp.js")
+    <script src="~/Scripts/Libs/JQuery/jquery.mixitup.min.js"></script>
+}
+<!-- Preloader -->
+<div id="preloader">
+	<div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<ul class="sliderbg">
+	<li class="active" style="background-image:url(@Url.Content("~/Content/images/bg/bg1.jpg"));"></li>
+	<li style="background-image:url(@Url.Content("~/Content/images/bg/bg2.jpg"));"></li>
+	<li style="background-image:url(@Url.Content("~/Content/images/bg/bg3.jpg"));"></li>
+	<li style="background-image:url(@Url.Content("~/Content/images/bg/bg4.jpg"));"></li>
+	<li style="background-image:url(@Url.Content("~/Content/images/bg/bg5.jpg"));"></li>
+	<li style="background-image:url(@Url.Content("~/Content/images/bg/bg6.jpg"));"></li>
+	<li style="background-image:url(@Url.Content("~/Content/images/bg/bg7.jpg"));"></li>
+	<li style="background-image:url(@Url.Content("~/Content/images/bg/bg8.jpg"));"></li>
+	<li style="background-image:url(@Url.Content("~/Content/images/bg/bg9.jpg"));"></li>
+</ul>
+<section class="pb60 clearfix">
+	<div class="loginpanel" ng-controller="loginController">
+        <img src="~/Content/Images/logo.png" class="login-logo" />
+		<div class="row loginbox">
+			<div class="col-xs-6">
+				<h3>Restaurant Crew Login</h3>
+				<div class="mb40"></div>
+				<p class="mb20">Click the button below to sign on using your existing registered account information.</p>
+				<ul class="society-btn">
+					<li><a class="btn btn-warning" href=""><i class="fa fa-windows"></i><span>Windows Live</span></a></li>
+					<li><a class="btn btn-primary" href=""><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
+					<li><a class="btn btn-info" href=""><i class="fa fa-google-plus"></i><span>Google+</span></a></li>
+				</ul>
+			</div>
+			<div class="col-xs-6">
+				<form name="frmLogin" novalidate>
+					<h3>McDonald's ID</h3>
+					<p class="mb20 text-grey">Restaurant Management,O/O & Staff,Corporate</p>
+					<p>If you hava a McDonald's ID,sign on below</p>
+					<div class="form-group">
+						<label><a href="#">Forgot your username?</a>User Name</label>
+						<input class="form-control" type="text" ng-model="UserCode" id="employeeEID" name="UserCode" required>
+                        <span class="ng-error" ng-show="frmLogin.UserCode.$error.required&&!frmLogin.UserCode.$pristine">
+                            请输入用户编号
+                        </span>
+					</div>
+					<div class="form-group">
+						<label><a href="#">Forgot password?</a>Password</label>
+						<input class="form-control" type="password" name="password">
+					</div>
+					<button class="btn btn-login" onclick="login();">Login</button>
+				</form>
+			</div>
+		</div>
+		<div class="row bottom-text">
+		 	<div class="col-md-12">
+				<i class="fa fa-lock"></i>
+				<span>
+					SECURITY Notice:   Only individuals with an authorized user name and password may utilize McDonald's secure web sites and applications. Unauthorized use is strictly prohibited.
+				</span>
+			</div>
+		</div>
+	</div>
+</section>
+<footer class="footer">© 2014 All Rights Reserved. McDonald‘s ® is a registered trademark.</footer>
+<script type="text/javascript">
+    function login() {
+        var userid = document.getElementById("employeeEID").value;
+        window.location = "http://10.195.20.182:4000/default.aspx?user-id=" + userid;
+    }
+</script>

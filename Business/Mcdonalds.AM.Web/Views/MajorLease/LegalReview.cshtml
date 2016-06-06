@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "LegalReview";
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="MajorLease" sub-code="MajorLease_LegalReview" place-holder="11" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    <store-basic-info code="MajorLeaseInfo.USCode" workflow-type="MajorLease" project="MajorLeaseInfo" store="store"></store-basic-info>
+    <contact-info uscode="MajorLeaseInfo.USCode" project-id="projectId"></contact-info>
+    @*<major-lease-change project-id="{{projectId}}" rental="MajorLeaseInfo.ChangeRentalType" redline="MajorLeaseInfo.ChangeRedLineType" leaseterm="MajorLeaseInfo.ChangeLeaseTermType" is-edit="false"></major-lease-change>*@
+    <lease-change source="MajorLeaseInfo" is-edit="false" title="Major Lease Change"></lease-change>
+
+    <div class="panel panel-orange mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[法律意见]]]</span>
+        </div>
+        <div class="panel-body">
+            <textarea ng-disabled="!isEditLegalReviewComments"
+                      class="form-control {{(!legalView.LegalComments||legalView.LegalComments=='')?'input-required':'input-notrequired'}}" rows=" 4" ng-model="legalView.LegalComments"></textarea>
+        </div>
+    </div>
+
+    <notification-message project-id="projectId"
+                          flow-code="MajorLease"
+                          sub-flow-code="{{subFlowCode}}"
+                          node-id="legalView.Id"
+                          uscode="MajorLeaseInfo.USCode">
+    </notification-message>
+    <attachments-memo project-id="projectId"
+                          flow-code="MajorLease">
+        </attachments-memo>
+
+    <mater-tracking workflow-id="projectId" workflow-type="MajorLease" node-id="legalView.Id" node-type="{{subFlowCode}}"></mater-tracking>
+    <attachments ref-table-name="MajorLeaseLegalReview"
+                 project-id="{{projectId}}"
+                 flow-code="{{subFlowCode}}" 
+                 ref-table-id="{{entityId}}"
+                 is-history="isHistory"
+                 editable="{{isPageEditable}}"
+                 list="attachments"
+                 show-contract="true"
+                 upload-set="uploadSet"></attachments>
+    @*<div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">Attachment
+                </span>
+                <div class="panel-tools">
+                    <a plupload-simple
+                        upload-url="api/MajorLease/LegalReview/UploadContract/{{projectId}}"
+                        upload-finished="uploadAttachFinished"
+                        error-msg="请上传正确的文件"
+                        ng-show="pageType!='View'">
+                        <span class='fa fa-upload'></span>
+                        上传
+                    </a>
+                </div>
+                <span class="clear"></span>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>No.</th>
+                    <th>Item</th>
+                    <th>Uploaded By</th>
+                    <th>Uploaded Date</th>
+                    <th>Operation</th>
+                </tr>
+                <tr class="required">
+                    <td>1</td>
+                    <td><i>*</i><a ng-href="{{LegalClearanceReport.FileURL}}">Legal clearance report</a></td>
+                    <td>
+                        <span ng-show="LegalClearanceReport.ID">{{LegalClearanceReport.CreatorNameZHCN}}({{LegalClearanceReport.CreatorNameENUS}})
+                        </span>
+                    </td>
+                    <td>{{LegalClearanceReport.CreateTime | date:"yyyy-MM-dd"}}</td>
+                    <td class="table-operations">
+                        <div ng-show="!AssetActor">
+                            <a plupload-simple
+                                upload-url="api/MajorLease/LegalClearanceReport/UploadContract/{{projectId}}"
+                                upload-finished="uploadFinished"
+                                errormsg="请上传正确的文件"
+                                class="fa fa-upload"
+                                ng-show="pageType!='View'">&nbsp;
+                            </a>
+                            <a class="fa fa-trash-o" ng-show="LegalClearanceReport.ID && pageType!='View'" ng-click="deleteAttachment(LegalClearanceReport.ID,'LegalClearanceReport')">&nbsp;</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="required">
+                    <td>2</td>
+                    <td><i>*</i><a ng-href="{{Agreement.FileURL}}">Lease Agreement</a></td>
+                    <td>
+                        <span ng-show="Agreement.ID">{{Agreement.CreatorNameZHCN}}({{Agreement.CreatorNameENUS}})
+                        </span>
+                    </td>
+                    <td>{{Agreement.CreateTime | date:"yyyy-MM-dd"}}</td>
+                    <td class="table-operations">
+                        <div ng-show="!AssetActor">
+                            <a plupload-simple
+                                upload-url="api/MajorLease/Agreement/UploadContract/{{projectId}}"
+                                upload-finished="uploadFinished"
+                                errormsg="请上传正确的文件"
+                                class="fa fa-upload"
+                                ng-show="pageType!='View'">&nbsp;
+                            </a>
+                            <a class="fa fa-trash-o" ng-show="Agreement.ID && pageType!='View'" ng-click="deleteAttachment(Agreement.ID,'Agreement')">&nbsp;</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="required">
+                    <td><span>3</span></td>
+                    <td><i ng-show="!AssetActor">*</i><a ng-href="{{Others.FileURL}}">Others（如往来函件，业主证明)</a></td>
+                    <td>
+                        <span ng-show="Others.ID">{{Others.CreatorNameZHCN}}({{Others.CreatorNameENUS}})
+                        </span>
+                    </td>
+                    <td>{{Others.CreateTime | date:"yyyy-MM-dd"}}</td>
+                    <td class="table-operations">
+                        <a plupload-simple
+                            upload-url="api/MajorLease/Others/UploadContract/{{projectId}}"
+                            upload-finished="uploadFinished"
+                            errormsg="请上传正确的文件"
+                            class="fa fa-upload"
+                            ng-show="pageType!='View'">&nbsp;
+                        </a>
+                        <a class="fa fa-trash-o" ng-show="Others.ID && pageType!='View'" ng-click="deleteAttachment(Others.ID,'Others')">&nbsp;</a>
+                    </td>
+                </tr>
+                <tr ng-repeat="att in Contract">
+                    <td>{{$index+4}}</td>
+                    <td><a ng-href="{{att.FileURL}}">{{att.Name}}</a></td>
+                    <td>{{att.CreatorNameZHCN}}({{att.CreatorNameENUS}})</td>
+                    <td>{{att.CreateTime | date:"yyyy-MM-dd"}}</td>
+                    <td class="table-operations">
+                        <a ng-href="{{att.FileURL}}" class="fa fa-download">&nbsp;</a>
+                        <a class="fa fa-trash-o" ng-show="att.ID && pageType!='View'" ng-click="deleteAttachment(att.ID,'contract')">&nbsp;</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    *@
+
+    <approval-records ref-table-id="legalView.Id" ref-table-name="MajorLeaseLegalReview" workflow-type="MajorLease"></approval-records>
+    <div ng-show="pageType!='View'">
+        <comment comments="legalView.Comments" title="[[[意见]]]" editable="true"></comment>
+    </div>
+    <project-history project-id="projectId" table-name="MajorLeaseLegalReview" title="MajorLease Legal Review History" has-template="false"
+                     page-url="/MajorLease/Main#/LegalReview/Process/View?projectId={{projectId}}"
+                     title-name="Legal Review" ng-show="!isHistory"></project-history>
+
+    @*<div ng-switch on="pageType" ng-show="!legalView.IsProjectFreezed">
+    *@
+    <div ng-switch on="pageType">
+        <div class="ta_c mg_t_10" ng-switch-default>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" ng-click="submit(frmMain)" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Approval">
+            <button type="button" class="btn btn-lg btn-red" ng-click="approve()" ng-disabled="IsClickApprove">[[[完成]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="returnToOriginator()" ng-disabled="IsClickReturn"><span class="fa fa-reply"></span>[[[退回]]]</button>
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="View" ng-hide="isUserAction">
+            <button type="button" class="btn btn-lg btn-warning" ng-click="save()" ng-show="legalView.IsShowSave"><span class="fa fa-check"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="recall()" ng-show="legalView.IsShowRecall && !isHistory">[[[撤销]]]</button>
+            <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="legalView.IsShowEdit && !isHistory"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Resubmit">
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" ng-click="submit(frmMain)" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+    </div>
+</form>
+

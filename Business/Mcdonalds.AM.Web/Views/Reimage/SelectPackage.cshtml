@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal-header">
+    <h3 class="modal-title">[[[选择Package]]]</h3>
+</div>
+<div class="modal-body clearfix">
+    <div class="col-sm-8">
+        <form name="frmSelectUser" class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="USCODE" ng-model="searchCondition.StoreCode" />
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="餐厅名称" ng-model="searchCondition.StoreNameZHCN" />
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="search()">[[[查询]]]</button>
+        </form>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th width="10%">&nbsp;</th>
+                <th width="30%">[[[Title]]]</th>
+                @*<th width="30%">姓名</th>*@
+            </tr>
+            <tbody>
+                <tr ng-show="!isLoading">
+                    <td colspan="2" class="text-center"><img src="~/Content/Images/loading.gif" /></td>
+                </tr>
+                <tr ng-repeat="package in packageList" ng-show="isLoading">
+                    <td>
+                        <input type="checkbox" ng-model="package.Checked" ng-change="selectChange(package)" />
+                    </td>
+                    <td>
+                        <a ng-href="{{package.ProjectDetailUrl}}">{{package.Title}}</a>
+                    </td>
+                    @*<td>{{package.NameENUS}}</td>*@
+                </tr>
+            </tbody>
+        </table>
+        <div class="table-paginate">
+            <span>[[[当前第]]]{{pageIndex}}[[[页/共]]]{{totalItems}}[[[页]]]</span>
+            @*<pagination total-items="totalItems" max-size="5" items-per-page="pageSize" num-pages="numPages" ng-model="pageIndex" on-page-change="onPageChange" class="pagination-sm" previous-text="上一页" next-text="下一页" first-text="首页" last-text="末页"></pagination>*@
+            <pagination total-items="totalItems" max-size="5" items-per-page="pageSize" ng-model="pageIndex" class="pagination-sm" previous-text="Previous" next-text="Next" first-text="First" last-text="Last"></pagination>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">[[[当前选择]]]</div>
+            <div class="panel-body">
+                <ul class="list-group" ng-repeat="package in selectedItems">
+                    <li class="list-group-item">
+                        <span class="fa fa-trash-o pull-right fs_14 cur_p" ng-click="removeItem(package)"></span>
+                        {{package.StoreCode}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">[[[确定]]]</button>
+    @*<button class="btn btn-warning" ng-click="cancel()">[[[取消]]]</button>*@
+</div>
+
+

@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Rebuild" sub-code="{{subFlowCode}}" place-holder="10"></top-nav>
+<cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+
+<gb-memo project-id="{{projectId}}" editable="isPageEditable" source="entity"></gb-memo>
+
+<approval-records ref-table-id="entity.Id" ref-table-name="GBMemo" workflow-type="Rebuild"></approval-records>
+
+<div ng-show="pageType!='View' && pageType!='Notify'">
+    <comment comments="entity.Comments" title="[[[意见]]]" editable="true"></comment>
+</div>
+<project-history project-id="projectId" table-name="GBMemo" title="[[[GBMemo History]]]" has-template="false"
+                 page-url="/Rebuild/Main#/GBMemo/Process/View?projectId={{projectId}}"
+                 title-name="[[[GBMemo]]]" ng-show="!isHistory"></project-history>
+
+<notification-message project-id="projectId"
+                      flow-code="Rebuild"
+                      sub-flow-code="{{subFlowCode}}"
+                      node-id="entity.Id"
+                      uscode="entity.UsCode"
+                      is-history="isHistory"></notification-message>
+
+<div ng-switch on="pageType" ng-show="!entity.IsProjectFreezed">
+    <div class="ta_c mg_t_10" ng-switch-default>
+        <button type="button" class="btn btn-lg btn-orange" ng-click="save()" ng-disabled="IsClickSave"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-click="submit()" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+    <div class="form-actions ta_c" ng-switch-when="Approval">
+        <button type="button" class="btn btn-lg btn-red" ng-click="approve()" ng-disabled="IsClickApprove">[[[审批]]]</button>
+        @*<button type="button" class="btn btn-lg btn-red" ng-show="unNotify" ng-click="notify()" ng-disabled="acting"><span class="fa fa-check"></span>Notify</button>*@
+        <button type="button" class="btn btn-lg btn-orange" ng-click="returnToOriginator()" ng-disabled="IsClickReturn"><span class="fa fa-reply"></span>[[[退回]]]</button>
+    </div>
+    <div class="form-actions ta_c" ng-switch-when="Notify">
+        <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="entity.IsShowEdit"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-show="unNotify" ng-click="notify()" ng-disabled="acting"><span class="fa fa-check"></span>[[[通知]]]</button>
+    </div>
+    <div class="ta_c mg_t_10" ng-switch-when="View" ng-hide="isUserAction">
+        <button type="button" class="btn btn-lg btn-warning" ng-click="save()" ng-show="entity.IsShowSave"><span class="fa fa-check"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-orange" ng-click="recall()" ng-show="entity.IsShowRecall && !isHistory && !(entity.IsShowSave)">[[[撤销]]]</button>
+        <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="entity.IsShowEdit"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+    </div>
+    <div class="form-actions ta_c" ng-switch-when="Resubmit">
+        <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSave"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-click="submit()" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</div>
+

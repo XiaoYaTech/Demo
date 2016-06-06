@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain" novalidate>
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_ConsInfo" place-holder="11" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="Renewal_ConsInfo" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    <store-basic-info code="info.USCode" workflow-type="Renewal" project="info" store="store"></store-basic-info>
+    <attachments-memo project-id="projectId"
+        flow-code="Renewal">
+    </attachments-memo>
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[再投资类型]]]
+            </span>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-2">
+                    <label>
+                        <input type="radio" ng-value="false" ng-model="consInfo.HasReinvenstment" />&nbsp;&nbsp;&nbsp;[[[不需要再投资]]]</label>
+                </div>
+                <div class="col-xs-4 col-xs-offset-2">
+                    <label>
+                        <input type="radio" ng-value="true" ng-model="consInfo.HasReinvenstment" />&nbsp;&nbsp;&nbsp;[[[需要再投资]]]</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <reinvestment-basic-info editable="true" ng-show="consInfo.HasReinvenstment" source="reinBasicInfo" code="info.USCode" store-type-name="{{store.StoreBasicInfo.StoreTypeName}}" flow-code="Renewal_ConsInfo"></reinvestment-basic-info>
+    <reinvstcost-and-writeoff editable="true" ng-show="consInfo.HasReinvenstment" write-off-source="writeOffAmount" invent-cost-source="reinCost" reinvenstment-type="2"></reinvstcost-and-writeoff>
+    <attachments ref-table-name="RenewalConsInfo"
+        list="attachments"
+        upload-set="uploadSet"
+        project-id="{{projectId}}"
+        flow-code="Renewal_ConsInfo"
+        ref-table-id="{{consInfo.Id}}"
+        show-contract="false"
+        editable="true"></attachments>
+    <approval-records workflow-type="Renewal" ref-table-id="consInfo.Id" ref-table-name="RenewalConsInfo"></approval-records>
+    <comment comments="projectComment" editable="true" title="[[[意见]]]"></comment>
+    <project-history project-id="projectId" table-name="RenewalConsInfo" title="[[[Renewal ConsInfo History]]]"
+        page-url="/Renewal/Main#/ConsInfo/Process/View?projectId={{projectId}}"
+        title-name="[[[Renewal ConsInfo History]]]" ng-show="!isHistory" has-template="false"></project-history>
+    <notification-message project-id="projectId"
+        flow-code="Renewal"
+        sub-flow-code="Renewal_ConsInfo"
+        node-id="consInfo.Id"
+        uscode="info.USCode"></notification-message>
+    <div class="form-actions ta_c">
+        <button type="button" class="btn btn-lg btn-warning" ng-disabled="acting" ng-click="save()"><span class="fa fa-check"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-disabled="acting" form-submit ng-click="resubmit(frmMain)"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</form>

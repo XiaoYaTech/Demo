@@ -1,0 +1,176 @@
+﻿@{
+    Layout = "";
+}
+<form class="form-horizontal" name="frmMain">
+    <task-reminder></task-reminder>
+    <step1 code="storeCode" store-valid="step1Finished" flow-code="Closure"></step1>
+    <div ng-style="{visibility:!step1Finished?'hidden':''}">
+        <store-basic-info code="storeCode" editable="true" store="storeBasicInfo"></store-basic-info>
+        <div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">[[[关店信息]]]
+                </span>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[项目类型]]]</label>
+                    <div class="col-xs-2 pd_t_7">[[[关店]]]</div>
+                    <label class="control-label col-xs-2">[[[美国编号]]]</label>
+                    <div class="col-xs-2 pd_t_7">{{entity.USCode}}</div>
+                    <label class="control-label col-xs-2">[[[项目创建时间]]]</label>
+                    <div class="col-xs-2 pd_t_7">{{CreateDate | date:"yyyy-MM-dd"}}</div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[关店日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input name="actualCloseDate" type="text" id="closeDate" class="form-control" ng-model="entity.ActualCloseDate" datepicker-popup="yyyy-MM-dd" is-open="opened" min-date="now" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" onfocus="this.blur()" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event,'')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <err-msgs field="frmMain.actualCloseDate" submited="$submited"></err-msgs>
+                    </div>
+                    <label class="control-label col-xs-2">[[[关店类型]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-show="closureTypeDics">
+                            <select name="selClosureType" chosen="{disable_search:true}" class="form-control" ng-model="selClosureType" ng-options="m.NameDisp for m in closureTypeDics" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <err-msgs field="frmMain.selClosureType" submited="$submited"></err-msgs>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!closureTypeDics" />
+                    </div>
+
+                    <label class="control-label col-xs-2">[[[迁址]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-show="relocations">
+                            <select name="selRelocation" chosen="{disable_search:true}" class="form-control" ng-model="selRelocation" ng-options="m.NameDisp for m in relocations" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <err-msgs field="frmMain.selRelocation" submited="$submited"></err-msgs>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!relocations" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[风险等级]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-show="riskStatus">
+                            <select name="selRiskStatus" chosen="{disable_search:true}" class="form-control" ng-model="selRiskStatus" ng-options="m.NameDisp for m in riskStatus" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <err-msgs field="frmMain.selRiskStatus" submited="$submited"></err-msgs>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!riskStatus" />
+                    </div>
+                    <label class="control-label col-xs-2">[[[关店原因]]]</label>
+                    <div class="col-xs-4">
+                        <div ng-show="closureReasons">
+                            <select class="form-control" chosen="{disable_search:true}" name="closureReasons" ng-model="selClosureReason" ng-options="m.NameDisp for m in closureReasons" ng-change="closureReasonsChange()" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <err-msgs field="frmMain.closureReasons" submited="$submited"></err-msgs>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!closureReasons" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <textarea id="closureReasonRemark" rows="4" ng-model="entity.ClosureReasonRemark" class="form-control input-required" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-orange mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">[[[项目成员]]]</span>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[资产代表]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-show="dataLoaded">
+                            <select name="selRep" chosen="" class="form-control" ng-model="selRep" ng-options="m.NameENUS for m in RepList" required>
+                                <option value="" ng-hide="isRep">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <err-msgs field="frmMain.selRep" submited="$submited"></err-msgs>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+                    <label class="control-label col-xs-2">[[[资产发起人]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-show="dataLoaded">
+                            <select name="selActor" chosen="" class="form-control" id="selActor" ng-model="selActor" ng-options="m.NameENUS for m in ActorList" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <err-msgs field="frmMain.selActor" submited="$submited"></err-msgs>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+
+                    <label class="control-label col-xs-2">[[[资产经理]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-show="dataLoaded">
+                            <select name="selAssetMgr" chosen="" class="form-control" ng-model="selAssetMgr" ng-options="m.NameENUS for m in AssetMgrList" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <err-msgs field="frmMain.selAssetMgr" submited="$submited"></err-msgs>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[Finance]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-show="dataLoaded">
+                            <select name="selFinance" chosen="" class="form-control" ng-model="selFinance" ng-options="m.NameENUS for m in FinanceList" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <err-msgs field="frmMain.selFinance" submited="$submited"></err-msgs>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+
+                    <label class="control-label col-xs-2">[[[Legal]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-show="dataLoaded">
+                            <select name="selLegal" chosen="" class="form-control" ng-model="selLegal" ng-options="m.NameENUS for m in LegalList" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <err-msgs field="frmMain.selLegal" submited="$submited"></err-msgs>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[PM]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-show="dataLoaded">
+                            <select name="selPM" class="form-control" chosen="" ng-model="selPM" ng-options="m.NameENUS for m in PMList" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <err-msgs field="frmMain.selPM" submited="$submited"></err-msgs>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+                    <label class="control-label col-xs-2">[[[Construction Manager]]]</label>
+                    <div class="col-xs-2">
+                        <div ng-show="dataLoaded">
+                            <select name="selCM" class="form-control" chosen="" ng-model="selCM" ng-options="m.NameENUS for m in CMList" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <err-msgs field="frmMain.selCM" submited="$submited"></err-msgs>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+                </div>
+                <div class="form-actions ta_c pd_b_100">
+                    <button type="button" form-submit ng-click="beginNoticeUsers(frmMain,entity)" class="btn btn-lg btn-red"><span class="fa fa-check"></span>[[[下一步]]]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

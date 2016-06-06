@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_Analysis" place-holder="11" ng-show="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="Renewal_Analysis" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+<store-basic-info code="info.USCode" workflow-type="Renewal_Letter" project="info" store="store"></store-basic-info>
+<analysis-form entity="analysis" store-info="storeInfo" editable="savable"></analysis-form>
+<attachments ref-table-name="RenewalAnalysis"
+    list="attachments"
+    project-id="{{projectId}}"
+    flow-code="Renewal_Analysis"
+    ref-table-id="{{analysis.Id}}"
+    show-contract="false"
+    editable="false"></attachments>
+<attachments-memo project-id="projectId"
+    flow-code="Renewal">
+</attachments-memo>
+<project-history project-id="projectId" table-name="RenewalAnalysis" title="[[[Renewal Analysis History]]]"
+    page-url="/Renewal/Main#/Analysis/Process/View?projectId={{projectId}}"
+    title-name="Renewal Analysis History" ng-show="!isHistory" has-template="false"></project-history>
+<notification-message project-id="projectId"
+    flow-code="Renewal"
+    sub-flow-code="Renewal_Analysis"
+    node-id="analysis.Id"
+    uscode="info.USCode"></notification-message>
+<div class="form-actions ta_c" ng-if="from != 'useraction'">
+    <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-if="savable" ng-click="save()"><span class="fa fa-edit"></span>[[[保存]]]</button>
+    <button type="button" class="btn btn-lg btn-yellow" ng-disabled="acting" ng-if="editable" ng-click="edit()"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+    <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-if="recallable" ng-click="recall()">[[[撤回]]]</button>
+</div>

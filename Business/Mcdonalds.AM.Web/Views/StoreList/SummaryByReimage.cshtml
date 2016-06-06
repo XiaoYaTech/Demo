@@ -1,0 +1,111 @@
+﻿@{
+    Layout = null;
+}
+<form class="form-horizontal" name="frmReimage">
+    <approved-package entity-id="entity.Id" flow-code="Reimage" us-code="usCode" before-upload="beforeUpload()"></approved-package>
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">Reimage</span>
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-xs-2 control-label">US Code</label>
+            <div class="col-xs-2 pd_t_7">{{usCode}}</div>
+            <label class="col-xs-2 control-label">Original Seat NO.</label>
+            <div class="col-xs-2 pd_t_7">
+                <input name="OriginalSeatNO" ng-model="entity.OriginalSeatNO" type="text" class="form-control" required valnumber ng-disabled="!editable" />
+                <err-msgs field="frmReimage.OriginalSeatNO" submited="$root.$submited"></err-msgs>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Reimage Right Sizing Seat NO.</label>
+            <div class="col-xs-2 pd_t_7">
+                <input name="RightSizingSeatNO" ng-model="entity.RightSizingSeatNO" type="text" class="form-control" required valnumber ng-disabled="!editable" />
+                <err-msgs field="frmReimage.RightSizingSeatNO" submited="$root.$submited"></err-msgs>
+            </div>
+            <label class="col-xs-2 control-label">After Reimage Seat NO.</label>
+            <div class="col-xs-2 pd_t_7">
+                <input name="AfterReimageSeatNO" ng-model="entity.AfterReimageSeatNO" type="text" class="form-control" required valnumber ng-disabled="!editable" />
+                <err-msgs field="frmReimage.AfterReimageSeatNO" submited="$root.$submited"></err-msgs>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Original Design Type</label>
+            <div class="col-xs-2 pd_t_7">
+                <dict-selector name="OriginalDesignType" parent-code="InnerDesign" editable="editable" selected-code="entity.OriginalDesignType" required="true"></dict-selector>
+            </div>
+            <label class="col-xs-2 control-label">After Reimage Design Type</label>
+            <div class="col-xs-2 pd_t_7">
+                <dict-selector name="AfterReimageDesignType" parent-code="InnerDesign" editable="editable" selected-code="entity.AfterReimageDesignType" required="true"></dict-selector>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Original Operation Area</label>
+            <div class="col-xs-2 pd_t_7">
+                <input name="OriginalOperationArea" ng-model="entity.OriginalOperationArea" type="text" class="form-control" required valnumber ng-disabled="!editable" />
+                <err-msgs field="frmReimage.OriginalOperationArea" submited="$root.$submited"></err-msgs>
+            </div>
+            <label class="col-xs-2 control-label">After Reimage Operation Area</label>
+            <div class="col-xs-2 pd_t_7">
+                <input name="AfterReimageOperationArea" ng-model="entity.AfterReimageOperationArea" type="text" class="form-control" required valnumber ng-disabled="!editable" />
+                <err-msgs field="frmReimage.AfterReimageOperationArea" submited="$root.$submited"></err-msgs>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Reimage_Total WO_Proj.</label>
+            <div class="col-xs-2 pd_t_7">
+                <input name="Reimage_Total_WO_Proj" ng-model="entity.Reimage_Total_WO_Proj" type="text" class="form-control" required valnumber ng-disabled="!editable" />
+                <err-msgs field="frmReimage.Reimage_Total_WO_Proj" submited="$root.$submited"></err-msgs>
+            </div>
+            <label class="col-xs-2 control-label">Reimage_Total WO_Act.</label>
+            <div class="col-xs-2 pd_t_7">
+                <input name="Reimage_Total_WO_Act" ng-model="entity.Reimage_Total_WO_Act" type="text" class="form-control" required valnumber ng-disabled="!editable" />
+                <err-msgs field="frmReimage.Reimage_Total_WO_Act" submited="$root.$submited"></err-msgs>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Reimage_Total Reinvestment_Proj.</label>
+            <div class="col-xs-2 pd_t_7">
+                <input name="Reimage_Total_Reinvestment_Proj" ng-model="entity.Reimage_Total_Reinvestment_Proj" type="text" class="form-control" required valnumber ng-disabled="!editable" />
+                <err-msgs field="frmReimage.Reimage_Total_Reinvestment_Proj" submited="$root.$submited"></err-msgs>
+            </div>
+            <label class="col-xs-2 control-label">Reimage_Total Reinvestment_Act.</label>
+            <div class="col-xs-2 pd_t_7">
+                <input name="Reimage_Total_Reinvestment_Act" ng-model="entity.Reimage_Total_Reinvestment_Act" type="text" class="form-control" required valnumber ng-disabled="!editable" />
+                <err-msgs field="frmReimage.Reimage_Total_Reinvestment_Act" submited="$root.$submited"></err-msgs>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Reimage GB Date</label>
+            <div class="col-xs-2 pd_t_7">
+                <p class="input-group">
+                    <input type="text" name="GBDate" class="form-control" ng-model="entity.GBDate" datepicker-popup="{{format}}" is-open="$parent.showGBDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled="!editable" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showGBDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+                <err-msgs field="frmReimage.GBDate" submited="$root.$submited"></err-msgs>
+            </div>
+            <label class="col-xs-2 control-label">Reimage Finish Date</label>
+            <div class="col-xs-2 pd_t_7">
+                <p class="input-group">
+                    <input type="text" name="ReopenDate" class="form-control" ng-model="entity.ReopenDate" datepicker-popup="{{format}}" is-open="$parent.showReopenDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled="!editable" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showReopenDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+                <err-msgs field="frmReimage.ReopenDate" submited="$root.$submited"></err-msgs>
+            </div>
+        </div>
+        @*<div class="form-group">
+            <label class="col-xs-2 control-label">Closure Days</label>
+            <div class="col-xs-2 pd_t_7">
+            </div>
+        </div>
+        *@
+    </div>
+    <div class="form-actions ta_c" ng-show="editable">
+        <button type="button" ng-disabled="submiting" class="btn btn-lg btn-orange" ng-click="save(frmReimage,false)" form-submit><span class="fa fa-paste" form-submit></span>暂存</button>
+        <button type="button" class="btn btn-lg btn-red" form-submit ng-click="save(frmReimage,true)" form-submit><span class="fa fa-check"></span>推送</button>
+    </div>
+</form>

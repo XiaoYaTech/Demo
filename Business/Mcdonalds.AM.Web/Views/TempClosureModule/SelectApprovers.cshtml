@@ -1,0 +1,159 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal-header">
+    <h3 class="modal-title">Package[[[呈递]]]</h3>
+</div>
+<div class="modal-body">
+    <p>审批人:</p>
+    <form class="form-horizontal" name="frmSelectApprovers" novalidate>
+        <div class="approve-dialog">
+            <div class="approve-group">
+                <span class="badge">1</span>
+                <div class="form-group">
+                    <label class="control-label col-xs-3"><i class="required-field">*</i>Market Manager</label>
+                    <div class="col-xs-3">
+                        <div ng-show="!isLoading">
+                            <select name="marketMgrs" chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.MarketMgr" ng-options="m.NameENUS for m in data.MarketMgrs" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <div ng-show="$submited||frmSelectApprovers.marketMgrs.$dirty">
+                                <span class="ng-error" ng-show="frmSelectApprovers.marketMgrs.$error.required">必须选择</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                    </div>
+                    <label class="control-label col-xs-3">[[[Regional Manager]]]</label>
+                    <div class="col-xs-3">
+                        <div ng-show="!isLoading">
+                            <select id="selRegionalMgr" chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.RegionalMgr" ng-options="m.NameENUS for m in data.RegionalMgrs">
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div class="approve-group">
+                <span class="badge">2</span>
+                <div class="form-group">
+                    <label class="control-label col-xs-3"><i class="required-field">*</i>MDD</label>
+                    <div class="col-xs-3">
+                        <div ng-show="!isLoading">
+                            <select name="mDDs" chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.MDD" ng-options="m.NameENUS for m in data.MDDs" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <div ng-show="$submited||frmSelectApprovers.mDDs.$dirty">
+                                <span class="ng-error" ng-show="frmSelectApprovers.mDDs.$error.required">必须选择</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                    </div>
+                    <label class="control-label col-xs-3"><i class="required-field">*</i>GM</label>
+                    <div class="col-xs-3">
+                        <div ng-show="!isLoading">
+                            <select name="selRegionalMgr" id="selRegionalMgr" chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.GM" ng-options="m.NameENUS for m in data.GMs" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <div ng-show="$submited||frmSelectApprovers.selRegionalMgr.$dirty">
+                                <span class="ng-error" ng-show="frmSelectApprovers.selRegionalMgr.$error.required">必须选择</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3"><i class="required-field">*</i>FC</label>
+                    <div class="col-xs-3">
+                        <div ng-show="!isLoading">
+                            <select name="fCs" chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.FC" ng-options="m.NameENUS for m in data.FCs" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <div ng-show="$submited||frmSelectApprovers.fCs.$dirty">
+                                <span class="ng-error" ng-show="frmSelectApprovers.fCs.$error.required">必须选择</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div class="approve-group">
+                <span class="badge">3</span>
+                <div class="form-group">
+                    <label class="control-label col-xs-3"><i class="required-field">*</i>[[[VPGM]]]</label>
+                    <div class="col-xs-3">
+                        <div ng-show="!isLoading">
+                            <select name="vPGMs" chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.VPGM" required ng-options="m.NameENUS for m in data.VPGMs" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <div ng-show="$submited||frmSelectApprovers.vPGMs.$dirty">
+                                <span class="ng-error" ng-show="frmSelectApprovers.vPGMs.$error.required">必须选择</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div class="approve-group">
+                <h5>[[[抄送人：]]]</h5>
+                @*<div class="form-group">
+                    <label class="col-xs-3 control-label"><i class="required-field">*</i>MCCL Asset Manager</label>
+                    <div class="col-xs-3">
+                        <div ng-show="!isLoading">
+                            <select name="mCCLAssetMgrs" chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.MCCLAssetMgr" ng-options="m.NameENUS for m in data.MCCLAssetMgrs" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <div ng-show="$submited||frmSelectApprovers.mCCLAssetMgrs.$dirty">
+                                <span class="ng-error" ng-show="frmSelectApprovers.mCCLAssetMgrs.$error.required">必须选择</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                        <div>{{notifyUsersInfo.MCCLAssetMgr.Code}}</div>
+                    </div>
+                    <label class="col-xs-3 control-label"><i class="required-field">*</i>MCCL Asset Director</label>
+                    <div class="col-xs-3">
+                        <div ng-show="!isLoading">
+                            <select name="mCCLAssetDtr" chosen="{disable_search:true}" class="form-control" ng-model="data.ProjectDto.ApproveUsers.MCCLAssetDtr" ng-options="m.NameENUS for m in data.MCCLAssetDirs" required>
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <div>{{notifyUsersInfo.MCCLAssetDtr.Code}}</div>
+                            <div ng-show="$submited||frmSelectApprovers.mCCLAssetDtr.$dirty">
+                                <span class="ng-error" ng-show="frmSelectApprovers.mCCLAssetDtr.$error.required">必须选择</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="isLoading" />
+                    </div>
+                </div>
+                *@
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">[[[添加必要抄送人]]]</label>
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                                <button type="button" class="input-group-addon" ng-click="selectNecessary()" ng-disabled="isNecessaryLoading">[[[选择]]]</button>
+                                <input class="form-control" required onfocus="this.blur()" value="{{data.ProjectDto.ApproveUsers.NecessaryNoticeUsers|NoticeUsersNameENUS}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">[[[添加更多抄送对象]]]</label>
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                                <button type="button" class="input-group-addon" ng-click="selectEmployee()">[[[选择]]]</button>
+                                <input class="form-control" readonly="readonly" value="{{data.ProjectDto.ApproveUsers.NoticeUsers|NoticeUsersNameENUS}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-primary" form-submit ng-click="ok(frmSelectApprovers)">提交</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+</div>

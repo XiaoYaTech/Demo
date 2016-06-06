@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Reimage" sub-code="Reimage_ConsInfo" place-holder="11" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    <store-basic-info code="ReimageInfo.USCode" editable="true" store="storeBasicInfo" project="ReimageInfo"></store-basic-info>
+    <reinvestment-basic-info source="consInfo.ReinBasicInfo" editable="isPageEditable" code="ReimageInfo.USCode" store-type-name="{{storeBasicInfo.StoreBasicInfo.StoreTypeName}}" flow-code="Reimage_ConsInfo"></reinvestment-basic-info>
+    <reinvestment-cost ng-show="isShowReinvenstmentCost"
+                       editable="isPageEditable"
+                       template-url="api/ExcelTemplate/DownLoadTemplate/ReinvestmentCost/{{projectId}}/Reimage_ConsInfo"
+                       upload-api="api/ExcelTemplate/UploadReinvestmentCostTpl/ReimageConsInfo/{{projectId}}"
+                       source="consInfo.ReinCost"
+                       before-download="saveReinvestmentBasicInfo(redirectUrl)"
+                       upload-finish="uploadFAFinish"
+                       norm-type-filter="['Reimage-IS (>= 8 year)','Reimage-IS (< 8 year)','Reimage - China Design - IS','Reimage-DT (>= 8 year)','Reimage-DT (< 8 year)','Reimage - China Design - DT']"
+                       is-check-page="false">
+    </reinvestment-cost>
+    <write-off-amount editable="isPageEditable"
+                      template-url="api/ExcelTemplate/DownLoadTemplate/WriteOffAmount/{{projectId}}/Reimage_ConsInfo"
+                      upload-api="api/ExcelTemplate/UploadWriteOffTpl/ReimageConsInfo/{{projectId}}"
+                      source="consInfo.WriteOff"
+                      upload-finish="uploadWOFinish"
+                      is-check-page="false"></write-off-amount>
+
+    <attachments ref-table-name="ReimageConsInfo"
+                 project-id="{{projectId}}"
+                 flow-code="{{subFlowCode}}" 
+                 ref-table-id="{{entityId}}"
+                 editable="{{isPageEditable}}"
+                 list="attachments"
+                 upload-set="uploadSet"
+                 is-history="isHistory"></attachments>
+
+    <approval-records workflow-type="Reimage" ref-table-id="consInfo.Id" ref-table-name="ReimageConsInfo"></approval-records>
+    <div ng-show="pageType!='View'">
+        <comment comments="consInfo.Comments" title="[[[意见]]]" editable="true"></comment>
+    </div>
+    <project-history project-id="projectId" table-name="ReimageConsInfo" title="[[[Reimage ConsInfo History]]]"
+                     page-url="/Reimage/Main#/ConsInfo/Process/View?projectId={{projectId}}"
+                     title-name="ConsInfo" ng-show="!isHistory"></project-history>
+    <notification-message project-id="projectId"
+                          flow-code="Reimage"
+                          sub-flow-code="{{subFlowCode}}"
+                          node-id="consInfo.Id"
+                          uscode="ReimageInfo.USCode"
+                          is-history="isHistory"></notification-message>
+    @*ng-switch-when="Resubmit"*@
+    <div class="form-actions ta_c" ng-switch on="pageType">
+        <div class="form-actions ta_c" ng-switch-when="Approval">
+            <button type="button" class="btn btn-lg btn-red" ng-click="approve()" ng-disabled="IsClickApprove">[[[审批]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="returnToOriginator()" ng-disabled="IsClickReturn"><span class="fa fa-reply"></span>[[[退回]]]</button>
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-default>
+            @*<button type="button" class="btn btn-lg btn-yellow" ng-click="edit()"><span class="fa fa-edit"></span>[[[编辑]]]</button>*@
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSubmit"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" form-submit ng-click="submit(frmMain)" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="View" ng-hide="isUserAction">
+            <button type="button" class="btn btn-lg btn-warning" ng-click="save()" ng-show="consInfo.IsShowSave"><span class="fa fa-check"></span>[[[保存]]]</button>
+            @*<button type="button" class="btn btn-lg btn-warning" ng-click="save()"><span class="fa fa-check"></span>[[[保存]]]</button>*@
+            <button type="button" class="btn btn-lg btn-orange" ng-click="recall()" ng-show="consInfo.IsShowRecall && !isHistory">[[[撤销]]]</button>
+            <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="consInfo.IsShowEdit"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Resubmit">
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSubmit"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" form-submit ng-click="submit(frmMain)" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+    </div>
+</form>

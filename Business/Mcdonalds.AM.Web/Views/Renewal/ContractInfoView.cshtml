@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_ContractInfo" place-holder="8"></top-nav>
+    <cheking-point project-id="projectId" flow-code="Renewal_ContractInfo" refresh="checkPointRefresh"></cheking-point>
+    <contract-info project-id="{{projectId}}" editable="savable" contract="contract" revisions="revisions" flow-code="Renewal_ContractInfo"></contract-info>
+    <notification-message project-id="projectId"
+                          flow-code="Renewal"
+                          sub-flow-code="Renewal_ContractInfo"
+                          node-id="contract.Id"
+                          uscode="info.USCode"></notification-message>
+    <div class="form-actions ta_c" ng-if="from!='useraction'">
+        <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-if="savable" ng-click="save()"><span class="fa fa-edit"></span>[[[保存]]]</button>
+    </div>
+</form>

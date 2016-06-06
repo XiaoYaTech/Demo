@@ -1,0 +1,306 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10">
+    <style>
+        table[id="TableWriteOff"] tr td:first-child {
+            text-align: left;
+        }
+        table[id="TableWriteOff"] tr th {
+            text-align: center;
+        }
+    </style>
+
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title" ng-show="!isCheckPage"> Write Off Amount</span>
+        <span class="panel-title" ng-show="isCheckPage"> Write Off Actual Checking</span>
+        <div class="panel-tools" ng-show="editable">
+            <a class="btn btn-sm btn-default" id="downLoadTemplate" href="{{downLoadTemplateUrl}}">
+                <span class="fa fa-cloud-download"></span>
+                请先下载模板
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+            <button plupload-simple
+                    type="button"
+                    class="btn btn-sm btn-default"
+                    upload-url="{{uploadApi}}"
+                    upload-finished="uploadWOFinish"
+                    error-msg="请上传正确的模板">
+                <span class='fa fa-cloud-upload'></span>
+                结果上传
+            </button>
+        </div>
+        <span class="clear"></span>
+    </div>
+    <div class="panel-body form-horizontal" ng-show="!isCheckPage">
+        <table width="100%">
+            <tr>
+                <td class="text-center" valign="top">
+                    <label class="control-label">Item:</label>
+                </td>
+                <td class="text-center" valign="top">
+                    <div class="">
+                        Construction Write Off Tool
+                    </div>
+                </td>
+                <td class="text-center" valign="top">
+                    <label class="control-label">Uploaded By:</label>
+                </td>
+                <td class="text-center" valign="top">
+                    <div class="">
+                        {{source.WriteOffUser}}
+                    </div>
+                </td>
+                <td class="text-center" valign="top">
+                    <label class="control-label">Upload Date:</label>
+                </td>
+                <td class="text-center" valign="top">
+                    <div class="">
+                        {{source.WriteOffTime | date:"yyyy-MM-dd"}}
+                    </div>
+                </td>
+                <td class="text-center" valign="top">
+                    <label class="col-xs-1 control-label">Status</label>
+                </td>
+                <td class="text-center" valign="top">
+                    <div class="">
+                        生效
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <div class="pd_0_15">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center" colspan="2">Item</th>
+                        <th class="text-center">Initial Investments</th>
+                        <th class="text-center">NBV(Closure date)</th>
+                        <th class="text-center">Write Off</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">RE</td>
+                        <td class="text-center">{{source.REII | money}}</td>
+                        <td class="text-center">{{source.RENBV | money}}</td>
+                        <td class="text-center">{{source.REWriteOff | money}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">LHI</td>
+                        <td class="text-center">{{source.LHIII | money}}</td>
+                        <td class="text-center">{{source.LHINBV | money}}</td>
+                        <td class="text-center">{{source.LHIWriteOff | money}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-tree-branch" colspan="2">ESSD</td>
+                        <td class="text-center">{{source.ESSDII | money}}</td>
+                        <td class="text-center">{{source.ESSDNBV | money}}</td>
+                        <td class="text-center">{{source.ESSDWriteOff | money}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-tree-leaf" width="5%">&nbsp;</td>
+                        <td class="table-tree-leaf-node">Equipment</td>
+                        <td class="text-center">{{source.EquipmentII | money}}</td>
+                        <td class="text-center">{{source.EquipmentNBV | money}}</td>
+                        <td class="text-center">{{source.EquipmentWriteOff | money}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-tree-leaf">&nbsp;</td>
+                        <td class="table-tree-leaf-node">Signage</td>
+                        <td class="text-center">{{source.SignageII | money}}</td>
+                        <td class="text-center">{{source.SignageNBV | money}}</td>
+                        <td class="text-center">{{source.SignageWriteOff | money}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-tree-leaf">&nbsp;</td>
+                        <td class="table-tree-leaf-node">Seating</td>
+                        <td class="text-center">{{source.SeatingII | money}}</td>
+                        <td class="text-center">{{source.SeatingNBV | money}}</td>
+                        <td class="text-center">{{source.SeatingWriteOff | money}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-tree-leaf-last">&nbsp;</td>
+                        <td class="table-tree-leaf-node-last">Decoration</td>
+                        <td class="text-center">{{source.DecorationII | money}}</td>
+                        <td class="text-center">{{source.DecorationNBV | money}}</td>
+                        <td class="text-center">{{source.DecorationWriteOff | money}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Closing Cost</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">{{source.ClosingCostBudegt | money}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Total</td>
+                        <td class="text-center">{{source.TotalII | money}}</td>
+                        <td class="text-center">{{source.TotalNBV | money}}</td>
+                        <td class="text-center">{{source.TotalWriteOff | money}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel-body clearfix" ng-show="isCheckPage">
+        TTM Financial Data
+        <br />
+        <br />
+        <table id="TableWriteOff" class="table table-bordered">
+            <tr>
+                <th width="20%" colspan="2"></th>
+                <th width="20%">Budget</th>
+                <th width="20%">Finance Actual</th>
+                <th width="20%">Actual VS Budget</th>
+                <th width="20">Variance %</th>
+            </tr>
+            <tr>
+                <td colspan="2">RE Cost（地产费用）</td>
+                <td>{{source.REWriteOff | money}}</td>
+                <td>{{source.REActual | money}}</td>
+                <td>
+                    <span ng-show="!!recostVar">
+                        {{recostVar = ActualVSBudget(source.REActual,source.REWriteOff) | money}}
+                    </span>
+                </td>
+                <td>
+                    <span ng-show="!!recostVar">
+                        {{Variance(recostVar,source.REWriteOff) | numberCustom:1}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">LHI（工程装修）</td>
+                <td>{{source.LHIWriteOff| money}}</td>
+                <td>{{source.LHIActual| money}}</td>
+                <td>
+                    <span ng-show="!!recostVar2">
+                        {{recostVar2 = ActualVSBudget(source.LHIActual,source.LHIWriteOff) | money}}
+                    </span>
+                </td>
+                <td>
+                    <span ng-show="!!recostVar2">
+                        {{Variance(recostVar2 , source.LHIWriteOff) | numberCustom:1}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-tree-branch" colspan="2">ESSD</td>
+                <td>{{tESSD = Total(source.EquipmentWriteOff,Total(source.SignageWriteOff,Total(source.SeatingWriteOff,Total(source.DecorationWriteOff,null)))) | money}}</td>
+                <td>{{tESSDAc = Total(source.EquipmentActual,Total(source.SignageActual,Total(source.SeatingActual,Total(source.DecorationActual,null)))) | money}}</td>
+                <td>
+                    <span ng-show="!!recostVar5">
+                        {{recostVar5 = ActualVSBudget(tESSDAc,tESSD) | money}}
+                    </span>
+                </td>
+                <td>
+                    <span ng-show="!!recostVar5">
+                        {{Variance(recostVar5 , tESSD) | numberCustom:1}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-tree-leaf" width="5%"></td>
+                <td width="15%" class="table-tree-leaf-node">Equipment（设备）</td>
+                <td>{{source.EquipmentWriteOff | money}}</td>
+                <td>{{source.EquipmentActual | money}}</td>
+                <td>
+                    @*<span ng-show="!!recostVar3">
+                        {{recostVar3 = ActualVSBudget(source.EquipmentActual,source.EquipmentII) | money}}
+                    </span>*@
+                    -
+                </td>
+                <td>
+                    @*<span ng-show="!!recostVar3">
+                        {{Variance(recostVar3 , source.EquipmentII) | numberCustom:1}}
+                    </span>*@
+                    -
+                </td>
+            </tr>
+            <tr>
+                <td class="table-tree-leaf"></td>
+                <td class="table-tree-leaf-node">Signage（招牌）</td>
+                <td>{{source.SignageWriteOff | money}}</td>
+                <td>{{source.SignageActual | money}}</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td class="table-tree-leaf"></td>
+                <td class="table-tree-leaf-node">Seating（桌椅）</td>
+                <td>{{source.SeatingWriteOff | money}}</td>
+                <td>{{source.SeatingActual | money}}</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td class="table-tree-leaf-last"></td>
+                <td class="table-tree-leaf-node-last">Decoration（装饰）</td>
+                <td>{{source.DecorationWriteOff | money}}</td>
+                <td>{{source.DecorationActual | money}}</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td colspan="2">Closing Cost（拆店费用）</td>
+                <td>{{source.ClosingCostBudegt | money}}</td>
+                <td>{{source.ClosingCostActual | money}}</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td colspan="2">Total</td>
+                <td>{{source.TotalWriteOff | money}}</td>
+                <td>{{source.TotalActual | money}}</td>
+                <td>
+                    <span>
+                        {{recostVar4 = ActualVSBudget(source.TotalActual,source.TotalWriteOff) | money}}
+                    </span>
+                </td>
+                <td>
+                    <span>
+                        {{Variance(recostVar4 , source.TotalWriteOff) | numberCustom:1}}
+                    </span>
+                </td>
+            </tr>
+        </table>
+
+        <div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    Write Off Variance Explanation
+                </span>            
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-xs-4">FA Actual vs Budget (RE Cost)> +-5%</label>
+                    <div class="col-xs-8 pd_t_7">
+                        {{source.ExpFAActVsReCost}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-4">FA Actual vs Budget (LHI)> +-5%</label>
+                    <div class="col-xs-8 pd_t_7">
+                        {{source.ExpFAActVsLHI}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-4">FA Actual vs Budget (ESSD)> +-5%</label>
+                    <div class="col-xs-8 pd_t_7">
+                        {{source.ExpFAActVsESSD}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-4">FA Actual vs Budget (Total)> +-5%</label>
+                    <div class="col-xs-8 pd_t_7">
+                        {{source.ExpFAActVsTotal}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

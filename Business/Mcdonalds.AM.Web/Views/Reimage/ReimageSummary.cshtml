@@ -1,0 +1,99 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Reimage" sub-code="Reimage_Summary" place-holder="4" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="Reimage_Summary" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    @*<div class="panel panel-black mg_t_10" ng-show="isActor">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[Genarate]]]
+            </span>
+        </div>
+        <div class="panel-body">
+            <button type="button" id="btnGen" class="btn btn-sm btn-default" ng-click="generateReimageSummary()">
+                <span class="fa fa-bar-chart"></span> [[[Reimage Summary]]]
+            </button>
+        </div>
+    </div>*@
+    
+    <store-basic-info code="reimageInfo.USCode" editable="true" store="storeBasicInfo" project="reimageInfo"></store-basic-info>
+    <reinvestment-info source="entity.ReinvestmentBasicInfo"
+                       editable=" isPageEditable"
+                       code="reimageInfo.USCode"
+                       project-id="projectId"></reinvestment-info>
+    <store-profitability-and-lease-info source="entity.StoreProfitabilityAndLeaseInfo"
+                                        leaseenddate="{{storeBasicInfo.StoreContractInfo.EndDate}}"
+                                        gbdate="{{entity.ReinvestmentBasicInfo.GBDate}}"
+                                        editable="isPageEditable"
+                                        code="reimageInfo.USCode"
+                                        project-id="projectId"
+                                        ttm-sales="entity.FinancialPreanalysis.TTMSales"></store-profitability-and-lease-info>
+    <summary-reinvestment-cost source="entity.ReimageConsInfo" editable="isPageEditable" code="reimageInfo.USCode" project-id="projectId" page-type="pageType"></summary-reinvestment-cost>
+    <financial-pre-analysis source="entity.FinancialPreanalysis"
+                            spali="entity.StoreProfitabilityAndLeaseInfo"
+                            editable="isPageEditable"
+                            project-id="projectId"
+                            code="reimageInfo.USCode"></financial-pre-analysis>
+    <comment comments="entity.OperationRequirements" editable="isPageEditable" title="Operation Requirements"></comment>
+    @*<attachments ref-table-name="ReimageSummary"
+        list="packageAttachments"
+        project-id="{{projectId}}"
+        upload-finish="uploadAttachmentFinish(up,files)"
+        before-pack-download="beforePackDownload()"
+        upload-set="['5647bdbb-5b5f-47cd-9ad2-3e35a16dd303']"
+        editable="true"></attachments>*@
+    <div class="panel panel-black mg_t_10" ng-show="isActor">
+        @*<div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">Genarate
+                </span>
+            </div>
+        *@
+        <div class="panel-body" style="border-top: solid 1px #ececec; text-align: center">
+            <span class="glyphicon glyphicon-info-sign"></span>&nbsp;[[[如果您已完成填写，请点击]]]
+            <button type="button" class="btn btn-sm btn-default" ng-click="generateReimageSummary()">
+                <span class="fa fa-bar-chart-o"></span>
+                [[[生成]]]Reimage Summary
+            </button>
+        </div>
+    </div>
+    <attachments ref-table-name="ReimageSummary"
+                 project-id="{{projectId}}"
+                 flow-code="Reimage_Summary" 
+                 ref-table-id="{{entityId}}"
+                 editable="{{isPageEditable}}"
+                 list="packageAttachments"
+                 upload-set="uploadSet"
+                 is-history="isHistory"></attachments>
+    <project-history project-id="projectId" table-name="ReimageSummary" title="[[[ReimageSummary History]]]" has-template="false"
+                     page-url="/Reimage/Main#/Summary/Process/View?projectId={{projectId}}"
+                     title-name="Reimage Summary" ng-show="!isHistory"></project-history>
+    <notification-message project-id="projectId"
+                          flow-code="Reimage"
+                          sub-flow-code="Reimage_Summary"
+                          node-id="entity.Id"
+                          uscode="reimageInfo.USCode"
+                          is-history="isHistory"></notification-message>
+    <div ng-switch on="pageType">
+        <div class="ta_c mg_t_10" ng-switch-default>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSave"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" ng-click="submit(frmMain)" form-submit ng-disabled="acting"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Approval">
+            <button type="button" class="btn btn-lg btn-red" ng-click="approve()" ng-disabled="acting">[[[审批]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="returnToOriginator()" ng-disabled="acting"><span class="fa fa-reply"></span>[[[退回]]]</button>
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="View" ng-hide="isUserAction">
+            @*<button type="button" class="btn btn-lg btn-warning" ng-click="save()"><span class="fa fa-check"></span>[[[保存]]]</button>*@
+            <button type="button" class="btn btn-lg btn-orange" ng-click="recall()" ng-show="entity.IsShowRecall && !isHistory">[[[撤销]]]</button>
+            <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="entity.IsShowEdit && !isHistory"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Resubmit">
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSave"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" ng-click="submit(frmMain)" form-submit ng-disabled="acting"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+    </div>
+</form>

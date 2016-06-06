@@ -1,0 +1,340 @@
+﻿
+@{
+    Layout = null;
+}
+   <nav class="navbar navbar-default" role="navigation">
+       WorkFlow > closure > <b>Approval</b>
+        <div>
+            <ul class="ul-Modules" >
+                <li style="float: left;">
+                    <a href="#/closure/WOCheckList">
+                        WOCheckList 
+                    </a>
+                </li>
+                <li style="float: left;">
+                    <a href="#/closure/ClosureTool">
+                        Finacial Inputs
+                    </a>
+                </li>
+                <li style="float: left;">
+                    <a href="#/closure/LegalReview">
+                        Legal Review
+                            
+                    </a>
+                </li>
+                <li style="float: left;">
+                    <a href="#/closure/ExecutiveSummary">
+
+                    Executive Summary
+                              
+                    </a>
+                </li>
+                <li style="float: left;">
+                    <a href="#/closure/ClosurePackage">
+
+                           Closure Package
+                             
+                    </a>
+                </li>
+                <li style="float: left;">
+                    <a href="#/closure/Approval">
+                       <b>  Approval</b> 
+                               
+                    </a>
+                </li>
+                <li style="float: left;">
+                    <a href="#/closure/ContractInfo">
+                        Contract Info 
+                               
+                    </a>
+                </li>
+                <li style="float: left;">
+                    <a href="#/closure/SiteInfo">
+                        Site Info
+                                
+                    </a>
+                </li>
+                           
+                <li style="float: left;">
+                    <a href="#/closure/ClosureMemo">
+                        Closure Memo
+                                
+                    </a>
+                </li>
+                <li style="float: left;">
+                    <a href="#/closure/ConsInvtChecking">
+                        Cons Invt Checking
+                               
+                    </a>
+                </li>
+            </ul>
+            <div style="clear: both;"></div>
+        </div>
+
+       </nav>
+<div id="divInfo" class="container-fluid ">
+@*餐厅基础信息*@
+    <div>
+        <div class="popover-title">Basic Info</div>   
+        <table class="table table-bordered table-striped"  id="tbBasicInfo">
+        
+            <tr>
+                <td width="15%">US Code
+                </td>
+                <td width="20%"><label >{{storeBasicInfo.Code}}</label></td>
+                <td width="15%">Store Name_CN
+                </td>
+                <td width="20%">{{storeBasicInfo.NameZHCN}}</td>
+                <td  width="15%">Store Name_EN</td>
+                <td width="20%">{{storeBasicInfo.NameENUS}}</td>
+            </tr>
+            <tr>
+                <td>Region
+                </td>
+                <td>{{storeBasicInfo.Region}}</td>
+                <td>Market
+                </td>
+                <td>{{storeBasicInfo.Market}}</td>
+                <td>City</td>
+                <td>{{storeBasicInfo.City}}</td>
+            </tr>
+            <tr>
+                <td>Address(CN)
+                </td>
+                <td>{{storeBasicInfo.AddressZHCN}}</td>
+                <td>Open Date
+                </td>
+                <td>{{storeBasicInfo.OpenDate}}</td>
+                <td>Close Date</td>
+                <td>{{storeBasicInfo.CloseDate}}</td>
+            </tr>
+            <tr>
+                <td>Store Type
+                </td>
+                <td>{{storeBasicInfo.AddressZHCN}}</td>
+                <td>Portfolio Type
+                </td>
+                <td>{{storeBasicInfo.OpenDate}}</td>
+                <td></td>
+                <td></td>        
+            </tr>
+            <tr>
+                <td>Floor
+                </td>
+                <td>{{storeBasicInfo.Floor}}</td>
+                <td>Rent Area(sqm)
+                </td>
+                <td>{{storeBasicInfo.OpenDate}}</td>
+                <td>Ops Area(sqm)</td>
+                <td></td>        
+            </tr>
+            <tr>
+                <td>Total Seats
+                </td>
+                <td>{{storeBasicInfo.AddressZHCN}}</td>
+                <td>Brand Extention
+                </td>
+                <td>{{storeBasicInfo.OpenDate}}</td>
+                <td></td>
+                <td></td>        
+            </tr>
+
+            <tr>
+                <td>Assets Manager(CN)
+                </td>
+                <td>{{storeBasicInfo.GM}}</td>
+                <td>AssetsRep
+                </td>
+                <td>{{storeBasicInfo.AssetsRep}}</td>
+                <td>Assets Actor</td>
+                <td>{{storeBasicInfo.Actor}}</td>
+            </tr>
+            <tr>
+                <td>VPGM
+                </td>
+                <td>{{storeBasicInfo.Floor}}</td>
+                <td>GM
+                </td>
+                <td>{{storeBasicInfo.OpenDate}}</td>
+                <td>Maket DD</td>
+                <td></td>        
+            </tr>
+        </table>
+    </div>
+        <div>
+            <div class="popover-title">ExecutiveSummary</div>   
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td>Closure Type</td>
+                    <td></td>
+                    <td>Closure Date</td>
+                    <td></td>
+                    <td>Original CF NPV</td>
+                    <td><input class="form-control"/></td>
+                </tr>
+                <tr>
+                    <td>Lease Expire Date</td>
+                    <td></td>
+                    <td>LandloadName </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th colspan="6">On Impact On Current Year</th>
+                </tr>
+                <tr>
+                    <td>Total one-off Costs</td>
+                    <td></td>
+                    <td>Compensation </td>
+                    <td></td>
+                    <td>Net Operating Income</td>
+                    <td><input class="form-control"/></td>
+                </tr>
+               <tr>
+                <th colspan="6">Current Future Impact</th>
+                </tr>
+                <tr>
+                    <td>Relocation?</td>
+                    <td><input type="radio"/>Yes    <input type="radio"/>No</td>
+                    <td>Relocation Pipeline ID </td>
+                    <td><input class="form-control"/></td>
+                    <td>Pipeline Name</td>
+                    <td><input class="form-control"/></td>
+                </tr>
+                 <tr>
+                    <td> New Site Net CF NPV</td>
+                     <td><input  class="form-control"/></td>
+                    <td>Other CF NPV </td>
+                    <td><input  class="form-control"/></td>
+                    <td>Net Gain</td>
+                    <td><input class="form-control"/></td>
+                </tr>
+            </table>
+
+        </div>
+    <div>
+        <div class="popover-title"> Reason Description For Negative Net Gain</div>  
+        <div><input class="form-control"/></div>
+    </div>
+    <p></p>
+     <div>
+        <div class="popover-title">附件列表</div>
+        <div>
+            <input type="button" class="btn btn-default" value="打包下载"/>
+        </div>
+
+
+         <table class="table table-bordered table-striped" id="tbBasicInfo">
+
+             <tr>
+                 <td>Item</td>
+                 <td >
+                     Action
+                 </td>
+             </tr>
+             <tr>
+                 <td>Cover</td>
+                 <td>
+                     DownLoad
+                 </td>
+             </tr>
+            
+
+
+
+
+
+             <tr>
+                 <td>FA Write-off Tool</td>
+                 <td>
+                     DownLoad
+                 </td>
+             </tr> <tr>
+                       <td>Closure Tool</td>
+                       <td>
+                           DownLoad
+                       </td>
+                   </tr> <tr>
+                             <td>Executive Summary</td>
+                             <td>
+                                 DownLoad
+                             </td>
+                         </tr> <tr>
+                                   <td>Termination Agreement</td>
+                                   <td>
+                                       DownLoad
+                                   </td>
+                               </tr>
+             <tr>
+                 <td>Signed Termination Agreement</td>
+                 <td>
+                     DownLoad
+                 </td>
+             </tr>
+             <tr>
+                 <td>Signed Package</td>
+                 <td>
+                     DownLoad
+                 </td>
+             </tr>
+         </table>
+              @*审批意见*@
+    <div>
+        <div class="popover-title">Submission And Approve List</div>
+        <table class="table table-bordered table-striped" id="tbBasicInfo">
+
+            <tr>
+                <td width="15%">
+                    User:Linda
+                </td>
+                <td width="20%">Date:2014-04-20</td>
+                <td width="15%">
+                    Title:Asset Rep
+                </td>
+                <td width="20%">Action:Submit</td>
+               
+            </tr>
+            <tr>
+                <td colspan="4">
+                    Content...
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered table-striped" id="tbBasicInfo">
+
+            <tr>
+                <td width="15%">
+                    User:Linda
+                </td>
+                <td width="20%">Date:2014-04-20</td>
+                <td width="15%">
+                    Title:Asset Rep
+                </td>
+                <td width="20%">Action:Submit</td>
+               
+            </tr>
+            <tr>
+                <td colspan="4">
+                    Content...
+                </td>
+            </tr>
+        </table>
+    </div>
+                <div>
+    <div class="popover-title">Comments</div>  
+    <div><input class="form-control"/></div>
+</div>
+         <table align="right">
+            <tr>
+                <td>
+                    <div>
+                        <input type="button" class="btn btn-default" value="Approve" />
+                        <input type="button" class="btn btn-default" value="Return" />
+                        <input type="button" class="btn btn-default" value="Reject" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmReinCostAndWF">
+    <div class="mg_t_10 row">
+        <div class="col-md-6 panel panel-black panel-body form-horizontal">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    Reinvestment Cost
+                </span>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">RE Cost(RMB)</label>
+                    <div class="col-xs-8">
+                        <input type="text" class="form-control" name="RECostNorm" number-show="money" ng-model="inventCostSource.RECostNorm" valnumber required ng-disabled="!editable" />
+                        <div ng-show="$parent.$submited||frmReinCostAndWF.RECostNorm.$dirty">
+                            <span class="ng-error" ng-show="frmReinCostAndWF.RECostNorm.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmReinCostAndWF.RECostNorm.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">LHI (RMB)</label>
+                    <div class="col-xs-8">
+                        <input type="text" class="form-control" name="LHINorm" number-show="money" ng-model="inventCostSource.LHINorm" valnumber required ng-disabled="!editable" />
+                        <div ng-show="$parent.$submited||frmReinCostAndWF.LHINorm.$dirty">
+                            <span class="ng-error" ng-show="frmReinCostAndWF.LHINorm.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmReinCostAndWF.LHINorm.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">ESSD (RMB)</label>
+                    <div class="col-xs-8 ">
+                        <input type="text" class="form-control" name="ESSDNorm" number-show="money" ng-model="inventCostSource.ESSDNorm" valnumber required ng-disabled="!editable" />
+                        <div ng-show="$parent.$submited||frmReinCostAndWF.ESSDNorm.$dirty">
+                            <span class="ng-error" ng-show="frmReinCostAndWF.ESSDNorm.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmReinCostAndWF.ESSDNorm.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">Total Reinvestment(RMB)*</label>
+                    <div class="col-xs-8 ">
+                        <input type="text" class="form-control" name="TotalReinvestmentNorm" number-show="money" ng-model="inventCostSource.TotalReinvestmentNorm" valnumber required disabled="disabled" />
+                        <div ng-show="$parent.$submited||frmReinCostAndWF.TotalReinvestmentNorm.$dirty">
+                            <span class="ng-error" ng-show="frmReinCostAndWF.TotalReinvestmentNorm.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmReinCostAndWF.TotalReinvestmentNorm.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-6 panel panel-black panel-body form-horizontal" style="padding-right:0;">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    Write Off Amount
+                </span>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">RE Cost(RMB)</label>
+                    <div class="col-xs-8 ">
+                        <input type="text" class="form-control" name="REWriteOff" number-show="money" ng-model="writeOffSource.REWriteOff" valnumber required ng-disabled="!editable" />
+                        <div ng-show="$parent.$submited||frmReinCostAndWF.REWriteOff.$dirty">
+                            <span class="ng-error" ng-show="frmReinCostAndWF.REWriteOff.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmReinCostAndWF.REWriteOff.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">LHI (RMB)</label>
+                    <div class="col-xs-8 ">
+                        <input type="text" class="form-control" name="LHIWriteOff" number-show="money" ng-model="writeOffSource.LHIWriteOff" valnumber required ng-disabled="!editable" />
+                        <div ng-show="$parent.$submited||frmReinCostAndWF.LHIWriteOff.$dirty">
+                            <span class="ng-error" ng-show="frmReinCostAndWF.LHIWriteOff.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmReinCostAndWF.LHIWriteOff.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">ESSD (RMB)</label>
+                    <div class="col-xs-8 ">
+                        <input type="text" class="form-control" name="ESSDWriteOff" number-show="money" ng-model="writeOffSource.ESSDWriteOff" valnumber required ng-disabled="!editable" />
+                        <div ng-show="$parent.$submited||frmReinCostAndWF.ESSDWriteOff.$dirty">
+                            <span class="ng-error" ng-show="frmReinCostAndWF.ESSDWriteOff.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmReinCostAndWF.ESSDWriteOff.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">Total Write Off(RMB)*</label>
+                    <div class="col-xs-8 ">
+                        <input type="text" class="form-control" name="TotalWriteOff" number-show="money" ng-model="writeOffSource.TotalWriteOff" valnumber required disabled="disabled" />
+                        <div ng-show="$parent.$submited||frmReinCostAndWF.TotalWriteOff.$dirty">
+                            <span class="ng-error" ng-show="frmReinCostAndWF.TotalWriteOff.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmReinCostAndWF.TotalWriteOff.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </div>
+        <div class="clear"></div>
+    </div>
+</form>

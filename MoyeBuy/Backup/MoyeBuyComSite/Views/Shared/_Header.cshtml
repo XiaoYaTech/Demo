@@ -1,0 +1,134 @@
+﻿@using System.Configuration;
+@using System.Text;
+@using MoyeBuy.Com.MoyeBuyUtility;
+@using MoyeBuy.Com.Model;
+@using MoyeBuy.Com.MoyeBuyComSite.Proxys;
+
+@RenderPage("~/Views/Shared/HeaderBanner.cshtml");
+@*if (ViewContext.RouteData.Values["action"].ToString().ToUpper() != "LOGON" && ViewContext.RouteData.Values["action"].ToString().ToUpper() != "REGISTER")*@
+@if (ViewContext.RouteData.Values["controller"].ToString().ToUpper() != "ACCOUNT")
+{ 
+<div class="Header">
+    <div class="HeaderSection">
+        <div class="logo">
+            <a href="http://www.moyebuy.com" target="_blank"><img src="@Url.Content("~/Content/MoyeBuyComStyle1/Imgs/logo.png")" /></a>
+        </div>
+        <div class="search">
+            <div class="SearchFild">
+                <b class="left">&nbsp;</b>
+                <b class="right">&nbsp;</b>
+                <div class="SearchTextDiv">
+                    <input id="SearchText" name="SearchText" value="" onkeydown = "javascript:if(event.keyCode==13) search('SearchText');" />
+                    <div class="searchBtn" onclick="javascript:search('SearchText');"><div style="margin-top:5px;margin-left:25px;">搜索</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="MyAcount">
+            <div class="HeaderAcount"></div>
+            <div class="AcountDisp"><a href="javascript:void(0);" onclick="javascript:GoToMyAccount();" >我的账号</a></div>
+            <b>&nbsp;</b>
+        </div>
+        <div class="MyCart">
+            <b>&nbsp;</b>
+            <div class="MyCartDisp"><a href="javascript:void(0);" onclick="javascript:GoToCart();" target="_self">去购物车结算</a></div>
+        </div>
+    </div>
+    <div class="Menu">
+        <div class="MenuCenter">
+            <div class="Categorys">
+                @{
+                    StringBuilder sbdHTML = new StringBuilder("");
+                    IList<Menu> MenuNavs = LayoutMenuProxy.GetMenu();
+                    int intCategorysItems = 0;
+                    int intCategorysSubMenus = 0;
+                    if (MenuNavs.Count != 0)
+                    {
+                        for (int i = 0; i < MenuNavs.Count; i++)
+                        {
+                            if (MenuNavs[i].MenuType == "CategoryAll")
+                            {
+                                @MvcHtmlString.Create("<div class=\"" + MenuNavs[i].MenuClassName + "\"><a href=\"" + MenuNavs[i].MenuUrl + "\" target=\"" + MenuNavs[i].Target + "\">" + MenuNavs[i].MenuName + "</a></div>");
+                                break;
+                            }
+                        }
+                        foreach (Menu menu in MenuNavs)
+                        {
+                            if (menu.MenuType == "Category")
+                            {
+                                intCategorysItems++;
+                            }
+                        }
+                    }
+                 }
+                <div class="CategorysItems" style="height:@(intCategorysItems * 35 + 5)px">
+                    <ul>
+                    <div style="height:2px;">&nbsp;</div>
+                    @{
+                        if (MenuNavs.Count != 0)
+                        {
+                            foreach (Menu menu in MenuNavs)
+                            {
+                                if (menu.MenuType == "Category")
+                                {
+                                    sbdHTML.Append("<li class=\"CategorysItemsli\" subCatDivID=\"" + menu.MenuControlID + "\" disq=\"" + menu.Disq + "\">");//
+                                    sbdHTML.Append("<div class=\"\" id=\"CategorysItemsDiv" + menu.MenuControlID + "\"><b>&nbsp;&nbsp;</b><a href=\"" + menu.MenuUrl + "\" target=\"" + menu.Target + "\" >" + menu.MenuName + "</a></div>");
+                                    sbdHTML.Append("<div class=\"CategorysItemsFlyout\" id=\"" + menu.MenuControlID + "\"> ");//Flyout
+                                    sbdHTML.Append("    <div class=\"close\" onclick=\"javascript:CloseMenu(this);\"></div>");
+                                    sbdHTML.Append("    <div class=\"CategorysSubMenu\">");
+                                    if (menu.SubMenu != null)
+                                    {
+                                        foreach (Menu subMainMenu in menu.SubMenu)
+                                        {
+                                            sbdHTML.Append("        <div class=\"CategorysSubMenuContainDiv\">");
+                                            sbdHTML.Append("        <dl>");
+                                            if (subMainMenu.MenuType == "MainSubCategory")
+                                            {
+                                                sbdHTML.Append("            <dt class=\"" + subMainMenu.MenuClassName + "\"><a id=\"" + subMainMenu.MenuControlID + "\" href=\"" + subMainMenu.MenuUrl + "\" target=\"" + subMainMenu.Target + "\">" + subMainMenu.MenuName + "</a></dt>");
+                                            }
+                                            if (subMainMenu.SubMenu != null)
+                                            {
+                                                foreach (Menu subMenu in subMainMenu.SubMenu)
+                                                {
+                                                    sbdHTML.Append("            <dt class=\"" + subMenu.MenuClassName + "\"><a id=\"" + subMenu.MenuControlID + "\" href=\"" + subMenu.MenuUrl + "\" target=\"" + subMenu.Target + "\">" + subMenu.MenuName + "</a>&nbsp;|&nbsp;</dt>");
+                                                }
+                                            }
+
+                                            sbdHTML.Append("        </dl>");
+                                            sbdHTML.Append("        </div>");
+                                        }
+                                    }
+                                    sbdHTML.Append("    </div>");
+                                    sbdHTML.Append("</div>");
+                                    sbdHTML.Append("</li>");
+                                }
+                            }
+                                @MvcHtmlString.Create(sbdHTML.ToString())
+                        }
+                     }
+                     </ul>
+                </div>
+            </div>
+            <div class="NavItems">
+                <ul>
+                    @{
+                        sbdHTML = new StringBuilder("");
+                        if (MenuNavs.Count != 0)
+                        {
+                            foreach (Menu menu in MenuNavs)
+                            {
+                                if (menu.MenuType == "MainMenu")
+                                {
+                                    string strClassName = menu.MenuClassName;
+                                    sbdHTML.Append("<li class=\"" + strClassName + "\"><a href=\"" + menu.MenuUrl + "\" target=\"" + menu.Target + "\">" + menu.MenuName + "</a></li>");
+                                }
+                            }
+                            @MvcHtmlString.Create(sbdHTML.ToString());
+                        }
+                     }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+}
+

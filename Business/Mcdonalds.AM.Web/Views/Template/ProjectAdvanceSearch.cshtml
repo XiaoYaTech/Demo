@@ -1,0 +1,149 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal-header">
+    <h3 class="modal-title">[[[项目高级查询]]]</h3>
+</div>
+<div class="modal-body">
+    <div class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Project Id]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.ProjectId" />
+            </div>
+            <label class="control-label col-xs-2">[[[Create Date]]]</label>
+            <div class="col-xs-4">
+                <p class="input-group">
+                    <input type="text" class="form-control" ng-model="condition.CreateDate" datepicker-popup="yyyy-MM-dd" ng-model="dt" is-open="condition._IsOpenCreateDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenCreateDate')"><span class="fa fa-calendar"></span></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Status]]]</label>
+            <div class="col-xs-10">
+                <select chosen multiple ng-model="condition.Status" class="form-control">
+                    <option value="Active">[[[Active]]]</option>
+                    <option value="Pending">[[[Pending]]]</option>
+                    <option value="Rejected">[[[Rejected]]]</option>
+                    <option value="Completed">[[[Completed]]]</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Project Type]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.ProjectType" />
+            </div>
+            <label class="control-label col-xs-2">[[[Portfolio Type]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.PortfolioType" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Store Type]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.StoreType" />
+            </div>
+            <label class="control-label col-xs-2">[[[Store Status]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.Id" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Open Date]]]</label>
+            <div class="col-xs-4">
+                <p class="input-group">
+                    <input type="text" class="form-control" ng-model="condition.OpenDate" datepicker-popup="yyyy-MM-dd" ng-model="dt" is-open="condition._IsOpenOpenDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenOpenDate')"><span class="fa fa-calendar"></span></button>
+                    </span>
+                </p>
+            </div>
+            <label class="control-label col-xs-2">[[[Actor]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.Actor" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Asset Rep]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.AssetRep" />
+            </div>
+            <label class="control-label col-xs-2">[[[Asset Manager]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.AssetManager" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Finance]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.Finance" />
+            </div>
+            <label class="control-label col-xs-2">[[[PM]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.PM" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Legal]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.Legal" />
+            </div>
+            <label class="control-label col-xs-2">[[[USCode]]]</label>
+            <div class="col-xs-4">
+                <p class="input-group">
+                    <input type="text" class="form-control" ng-model="condition.USCode" readonly="" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="selectStore()"><span class="fa fa-calendar"></span></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[ReImaging Date]]]</label>
+            <div class="col-xs-4">
+                <p class="input-group">
+                    <input type="text" class="form-control" ng-model="condition.ReImagingDate" datepicker-popup="yyyy-MM-dd" ng-model="dt" is-open="condition._IsOpenReImagingDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenReImagingDate')"><span class="fa fa-calendar"></span></button>
+                    </span>
+                </p>
+            </div>
+            <label class="control-label col-xs-2">[[[Store Name]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.StoreName" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Province]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" placeholder="Province" ng-model="condition.Province" typeahead-loading="loadingPositions" typeahead="n for n in seachOrg(3,$viewValue)" />
+                <i ng-show="loadingPositions" class="glyphicon glyphicon-refresh"></i>
+            </div>
+            <label class="control-label col-xs-2">[[[City]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" placeholder="City" ng-model="condition.City" typeahead-loading="loadingPositions" typeahead="n for n in seachOrg(4,$viewValue)" />
+                <i ng-show="loadingPositions" class="glyphicon glyphicon-refresh"></i>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[Design Type]]]</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="condition.DesignType" />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" ng-click="ok()"
+                ng-disabled="frmEditUser.$invalid||isUnchanged(editUser)">
+            [[[查询]]]
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+    </div>
+</div>
+
+

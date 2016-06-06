@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+<div class="nav-project clearfix">
+    <span class="nav-project-left fa fa-chevron-left fs_30 cur_p" ng-style="{visibility:!navLoaded?'hidden':''}" ng-class="{'c_grey':!enableLeftScroll,'c_orange':enableLeftScroll }" ng-click="scrollNav('left')"></span>
+    <div class="nav-project-con" id="navProjectTable" style="width:960px">
+        <table class="nav-project-table">
+            <tr>
+                <td ng-repeat="nav in navs">
+                    <a class="nav-project-item" ng-class="{'active':nav.IsSelected}" ng-if="$index==0" ng-href="{{nav.Url}}" ng-show="!!navLoaded">
+                        <span class="item-name">{{nav.NameENUS}}</span>
+                    </a>
+                    <a class="nav-project-item"
+                       ng-mouseenter="$parent.loadOperators(nav,projectId)"
+                       tooltip-html-unsafe="{{nav.operatorHTML}}"
+                       tooltip-placement="bottom"
+                       ng-href="{{nav.Url}}"
+                       ng-class="{'active':nav.IsSelected}"
+                       ng-if="$index>0"
+                       ng-show="!!navLoaded">
+                        <span class="percentage" ng-show="flowCode=='Renewal'">{{nav.Percentage}}</span>
+                        <span class="item-name">
+                            <span ng-class="{true: 'fa fa-check finished', false: 'fa fa-times'}[nav.IsFinished]"></span>
+                            {{nav.NameENUS}}
+                        </span>
+
+                    </a>
+                    <a class="nav-project-item" ng-class="{'active':nav.IsSelected}" ng-show="!navLoaded">
+                        <img src="~/Content/Images/loading.gif" />
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <a class="clear"></a>
+    </div>
+    <div class="nav-project-right fa fa-chevron-right fs_30 cur_p" ng-style="{visibility:!navLoaded?'hidden':''}" ng-class="{'c_grey':!enableRightScroll,'c_orange':enableRightScroll }" ng-click="scrollNav('right')"></div>
+</div>

@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_ExecutiveSummary" place-holder="8"></top-nav>
+<cheking-point project-id="projectId" flow-code="Closure_ExecutiveSummary" refresh="checkPointRefresh"></cheking-point>
+
+
+<notification-message project-id="projectId"
+    flow-code="Closure"
+    sub-flow-code="Closure_ExecutiveSummary"
+    node-id="entity.Id"
+    uscode="ClosureInfo.USCode"></notification-message>
+
+<store-basic-info project="ClosureInfo" code="ClosureInfo.USCode"></store-basic-info>
+<executive-summary project-id="projectId" entity="entity" editable="editable"></executive-summary>
+
+<div class="panel panel-black mg_t_10">
+    @*<div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">Genarate
+        </span>
+    </div>
+    *@
+    <div class="panel-body" style="border-top: solid 1px #ececec; text-align: center">
+        <span class="glyphicon glyphicon-info-sign"></span>&nbsp;[[[如果您已完成填写，请点击]]]
+        <button type="button" class="btn btn-sm btn-default" ng-click="genExecutiveSummary()">
+            <span class="fa fa-bar-chart-o"></span>
+            [[[生成Executive Summary]]]
+        </button>
+    </div>
+</div>
+<attachments ref-table-name="ClosureExecutiveSummary"
+    project-id="{{projectId}}"
+    flow-code="Closure_ExecutiveSummary"
+    list="ExecutiveSummaryAttachment"
+    reload="reloadAtt"
+    editable="true"></attachments>
+
+<project-history page-url="/closure/Main#/ExecutiveSummary/Process/View?projectId={{projectId}}" project-id="projectId" table-name="ClosureExecutiveSummary" title=" Closure Executive Summary History" has-template="false" title-name="ClosureExecutiveSummary"></project-history>
+<div class="form-actions ta_c">
+    <button type="button" class="btn btn-lg btn-warning" ng-click="saveExecutiveSummary()"><span class="fa fa-check"></span>[[[保存]]]</button>
+    <button type="button" class="btn btn-lg btn-red" ng-click="ActorSubmit()"><span class="fa fa-check"></span>[[[呈递]]]</button>
+</div>

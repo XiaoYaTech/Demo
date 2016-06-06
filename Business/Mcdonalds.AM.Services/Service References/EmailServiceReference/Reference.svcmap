@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a2e734ff-1c33-4299-9bc2-0ec053a39c3e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="EmailService4.xsd" MetadataType="Schema" ID="48c0023a-f92b-49ec-9fd2-16e5f2e816ee" SourceId="1" SourceUrl="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?xsd=xsd0" />
+    <MetadataFile FileName="EmailService1.disco" MetadataType="Disco" ID="e68c5865-7a6a-40d8-a2db-79678f357727" SourceId="1" SourceUrl="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?disco" />
+    <MetadataFile FileName="EmailService41.xsd" MetadataType="Schema" ID="3795292b-9fe7-4b55-9163-bb7a3b23e7f2" SourceId="1" SourceUrl="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?xsd=xsd2" />
+    <MetadataFile FileName="EmailService1.wsdl" MetadataType="Wsdl" ID="0cb5efaa-5306-46c4-aa4f-89bb0cc479fd" SourceId="1" SourceUrl="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?wsdl" />
+    <MetadataFile FileName="EmailService42.xsd" MetadataType="Schema" ID="167c7d55-fcae-45f2-ba14-be481ffef92f" SourceId="1" SourceUrl="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?xsd=xsd1" />
+    <MetadataFile FileName="EmailService43.xsd" MetadataType="Schema" ID="9228662d-6b1d-467b-9b1f-b768ebb82506" SourceId="1" SourceUrl="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

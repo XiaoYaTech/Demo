@@ -1,0 +1,131 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<div class="panel panel-black mg_t_10" style="display: none;">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            Search
+        </span>
+        <div class="panel-tools">
+            <a ng-click="advancedSearch()">Advanced Search</a>
+        </div>
+    </div>
+    <div class="panel-body form-horizontal">
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Project ID</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" name="projectID" id="projectID" value="" class="form-control input-medium" ng-model="ProjectID" />
+            </div>
+            <label class="col-xs-2 control-label">Project Type</label>
+            <div class="col-xs-2 pd_t_7">
+                <select name="projectType" id="projectType" class="form-control" ng-model="ProjectType">
+                    <option>Please select</option>
+                </select>
+            </div>
+            <label class="col-xs-2 control-label">Asset Actor</label>
+            <div class="col-xs-2 pd_t_7">
+                <select name="assetActor" id="assetActor" value="" class="form-control" ng-model="AssetActor">
+                    <option>Please select</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Status</label>
+            <div class="col-xs-2 pd_t_7">
+                <select name="status1" id="status1" value="" class="form-control" ng-model="Sstatus1">
+                    <option value="">Please select</option>
+                </select>
+            </div>
+            <label class="col-xs-2 control-label">Status2</label>
+            <div class="col-xs-2 pd_t_7">
+                <select name="status2" id="status2" value="" class="form-control" ng-model="Status2">
+                    <option value="">Please select</option>
+                </select>
+            </div>
+            <label class="col-xs-2 control-label">Project Date</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" name="projectDate" id="projectDate" value="" class="form-control" ng-model="ProjectDate" data-role="datePicker" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ta_c mg_t_10" style="display: none;">
+    <button class="btn btn-lt btn-warning" type="button" ng-click="search()">Search</button>
+</div>
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[待办列表]]](<span>{{todoCount}}</span>)
+            <span class="fa fa-tags panel-title-fa"></span>
+        </span>
+    </div>
+    <div class="panel-body pd_0">
+        <ul class="panel-todo">
+            <li ng-repeat="task in todoList" ng-show="loadTodoFinished">
+                <div class="pull-right handle">
+                    <a class="btn" href="{{task.Url}}">[[[处理]]]</a>
+                </div>
+                <div class="todo-content">
+                    <small class="time">{{task.CreateTime | date:"yyyy-MM-dd HH:mm:ss"}}</small>
+                    <h4 class="title">
+                        <span class="{{task.TagClass}}">
+                            <span class="fa {{task.Icon}}"></span>
+                            {{task.TaskType|taskTypeFilter}}
+                        </span>
+                        &nbsp;{{task.RefID}}
+                    </h4>
+                    <p class="msg">{{task.SourceNameENUS}} {{task.TypeNameENUS}} {{task.OperateMsg}}</p>
+                    <p class="desc">{{task.StoreCode}}  {{task.Title}}</p>
+                </div>
+            </li>
+            <li ng-show="loadTodoFinished&&todoList.length==0" class="ta_c">
+                [[[暂无数据]]]
+            </li>
+            <li ng-show="!loadTodoFinished" class="ta_c">
+                <img src="~/Content/Images/loading.gif" />
+            </li>
+        </ul>
+        <div class="panel-more"><a href="#/taskworkMore/0" class="btn btn-sm btn-default">[[[更多]]] ></a></div>
+    </div>
+</div>
+<div class="panel panel-orange">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[已办列表]]](<span>{{doneCount}}</span>)
+            <span class="fa fa-tags panel-title-fa"></span>
+        </span>
+    </div>
+    <div class="panel-body pd_0">
+        <ul class="panel-todo">
+            <li ng-repeat="task in doneList" ng-show="loadDoneFinished">
+                <div class="pull-right handle">
+                    <a class="btn" href="{{task.Url}}">[[[查看]]]</a>
+                </div>
+                <div class="todo-content">
+                    <small class="time">{{task.CreateTime | date:"yyyy-MM-dd HH:mm:ss"}}</small>
+                    <h4 class="title">
+                        <span class="{{task.TagClass}}">
+                            <span class="fa {{task.Icon}}"></span>
+                            {{task.TaskType|taskTypeFilter}}
+                        </span>
+                        &nbsp;{{task.RefID}}
+                    </h4>
+                    <p class="msg">{{task.SourceNameENUS}} {{task.TypeNameENUS}}</p>
+                    <p class="desc">{{task.StoreCode}}  {{task.Title}}</p>
+                </div>
+            </li>
+            <li ng-show="loadDoneFinished&&doneList.length==0" class="ta_c">
+                [[[暂无数据]]]
+            </li>
+            <li ng-show="!loadDoneFinished" class="ta_c">
+                <img src="~/Content/Images/loading.gif" />
+            </li>
+        </ul>
+        <div class="panel-more"><a href="#/taskworkMore/2" class="btn btn-sm btn-default">[[[更多]]] ></a></div>
+    </div>
+</div>
+

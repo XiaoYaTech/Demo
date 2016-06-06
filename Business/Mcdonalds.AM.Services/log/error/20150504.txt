@@ -1,0 +1,24 @@
+﻿2015-05-04 15:20:32,496 ERROR Mcdonalds.AM.Services.ExceptionLogFilterAttribute - -----------------------------------------Error------------------------------------------------
+Could not load file or assembly 'SourceCode.Workflow.Client, Version=4.0.0.0, Culture=neutral, PublicKeyToken=16a2c5aaaa1b130d' or one of its dependencies. The system cannot find the file specified.
+
+   at NTTMNC.BPM.Fx.K2.Services.K2FxContext.ApprovalProcess(String SerialNumber, String EmployeeCode, String EmployeeName, String RedirectToEmployeeCode, String ActionName, String Comment, IList`1 DataFields)
+   at NTTMNC.BPM.Fx.K2.Services.K2FxContext.ApprovalProcess(String SerialNumber, String EmployeeCode, String ActionName, String Comment, IList`1 DataFields)
+   at Mcdonalds.AM.DataAccess.RenewalLegalApproval.Approve(String comment, String SerialNumber, Boolean isGeneralCouncel) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalLegalApproval.cs:line 235
+   at Mcdonalds.AM.Services.Controllers.Renewal.RenewalLegalApprovalController.Approve(RenewalLegalApprovalDTO postData) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.Services\Controllers\Renewal\RenewalLegalApprovalController.cs:line 46
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingActionResultAsync>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+

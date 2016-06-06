@@ -1,0 +1,235 @@
+﻿@{
+    Layout = null;
+}
+<form name="tmpClosureMemo">
+    <table class="table table-bordered" style="margin-top:10px;">
+        <tr>
+            <td colspan="2">
+                <label>Region/区域</label>
+            </td>
+            <td colspan="2">
+                {{entity.RegionNameENUS}}/{{entity.RegionNameZHCN}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label>Market/市场</label>
+            </td>
+            <td colspan="2">
+                {{entity.MarketNameENUS}}/{{entity.MarketNameZHCN}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label>Province/省份</label>
+            </td>
+            <td colspan="2">
+                {{entity.ProvinceNameZHCN}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label>City/城市</label>
+            </td>
+            <td colspan="2">
+                {{entity.CityNameENUS}}/{{entity.CityNameZHCN}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label>Store Name/店铺名称</label>
+            </td>
+            <td colspan="2">
+                {{entity.StoreNameENUS}}/{{entity.StoreNameZHCN}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label>Store Address/店铺地址</label>
+            </td>
+            <td colspan="2">
+                {{entity.StoreAddressENUS}}
+                /
+                {{entity.StoreAddressZHCN}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label>US Code</label>
+            </td>
+            <td colspan="2">
+                {{entity.USCode}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label>Open Date</label>
+            </td>
+            <td colspan="2">
+                {{entity.OpenDate|date:"yyyy-MM-dd"}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label>Closure Date</label>
+            </td>
+            <td colspan="2" ng-show="flowCode!='Reimage' && flowCode!='Rebuild' && flowCode!='MajorLease' && flowCode!='Renewal'">
+                {{entity.ClosureDate|date:"yyyy-MM-dd"}}
+            </td>
+            <td colspan="2" ng-show="flowCode=='Reimage' || flowCode=='Rebuild' || flowCode!='MajorLease' || flowCode!='Renewal'">
+                <p class="input-group" style="width:200px;">
+                    <input type="text" class="form-control"
+                           name="ClosureDate"
+                           ng-model="source.ClosureDate"
+                           datepicker-popup="{{format}}"
+                           is-open="openedClosureDate"
+                           datepicker-options="dateOptions"
+                           date-disabled="disabled(date, mode)"
+                           ng-required="true"
+                           close-text="Close"
+                           ng-disabled="!editable" />
+                    <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-disabled="!editable"
+                                ng-click="open($event,'openedClosureDate')">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </p>
+                <div ng-show="$parent.$submited||tmpClosureMemo.ClosureDate.$dirty">
+                    <span class="ng-error" ng-show="tmpClosureMemo.ClosureDate.$error.required">选择日期</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label>Closure Nature/关店形式</label>
+            </td>
+            <td colspan="2">
+                <label>- Temporary</label>
+            </td>
+            @*<td >
+                <div ng-show="false">
+                    <label><input type="radio" name="ClosureNature" ng-model="entity.ClosureNature" ng-value="true" ng-disabled="!editable" /> Yes</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="ClosureNature" ng-model="entity.ClosureNature" ng-value="false" ng-disabled="!editable" /> No</label>
+                </div>
+            </td>*@
+        </tr>
+        <tr>
+            <td colspan="2" rowspan="7" valign="middle" width="20%">
+                <label>Reason for Closure/关店原因</label>
+            </td>
+            <td width="40%">
+                -  <label for="cbBecauseOfReimaging">Reimaging 餐厅形象翻新</label>
+            </td>
+            <td width="40%">
+                <input type="checkbox" value="1" id="cbBecauseOfReimaging" ng-model="entity.BecauseOfReimaging" ng-disabled="!editable" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                -  <label for="cbBecauseOfRemodel">Landlord Remodel 业主改造</label>
+            </td>
+            <td>
+                <input type="checkbox" value="1" id="cbBecauseOfRemodel" ng-model="entity.BecauseOfRemodel" ng-disabled="!editable" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                -  <label for="cbBecauseOfDespute">Landlord Dispute 业主纠纷</label>
+            </td>
+            <td>
+                <input type="checkbox" value="1" id="cbBecauseOfDespute" ng-model="entity.BecauseOfDespute" ng-disabled="!editable" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                -  <label for="cbBecauseOfRedevelopment">Government Redevelopment 政府改造</label>
+            </td>
+            <td>
+                <input type="checkbox" value="1" id="cbBecauseOfRedevelopment" ng-model="entity.BecauseOfRedevelopment" ng-disabled="!editable" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                -  <label for="cbBecauseOfPlanedClosure">Planned Closure 策略性关店</label>
+            </td>
+            <td>
+                <input type="checkbox" value="1" id="cbBecauseOfPlanedClosure" ng-model="entity.BecauseOfPlanedClosure" ng-disabled="!editable" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                -  <label for="cbBecauseOfRebuild">Rebuild 重建</label>
+            </td>
+            <td>
+                <input type="checkbox" value="1" id="cbBecauseOfRebuild" ng-model="entity.BecauseOfRebuild" ng-disabled="!editable" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                -  <label>Other (please specify) 其他（请描述）: </label>
+            </td>
+            <td>
+                <textarea class="form-control" rows="4" ng-model="entity.BecauseOfOthers" ng-disabled="!editable"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" rowspan="3">
+                <label>Relocation/迁址</label>
+            </td>
+            <td>
+                -  <label>Potential to permanent close? 有机会永久关店？</label>
+            </td>
+            <td>
+                <label><input type="radio" name="PermanentCloseOpportunity" ng-model="entity.PermanentCloseOpportunity" ng-value="true" ng-disabled="!editable" /> Yes</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label><input type="radio" name="PermanentCloseOpportunity" ng-model="entity.PermanentCloseOpportunity" ng-value="false" ng-disabled="!editable" /> No</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                -  <label>Plan for relocation? 有迁店的计划？</label>
+            </td>
+            <td>
+                <label><input type="radio" name="HasRelocationPlan" ng-model="entity.HasRelocationPlan" ng-value="true" ng-disabled="!editable" /> Yes</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label><input type="radio" name="HasRelocationPlan" ng-model="entity.HasRelocationPlan" ng-value="false" ng-disabled="!editable" /> No</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                -  <label>Relocate Store/Pipeline Name  迁店后新店/Pipeline名称</label>
+            </td>
+            <td>
+                <input type="text" class="form-control" ng-model="entity.PipelineName" ng-disabled="!editable" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" rowspan="2">
+                <label class="">Compensation/赔偿</label>
+            </td>
+            <td>
+                -  <label>Compensation Awarded? 获得赔偿?</label>
+            </td>
+            <td>
+                <label><input type="radio" name="CompensationAwarded" ng-model="entity.CompensationAwarded" ng-value="true" ng-disabled="!editable" /> Yes</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label><input type="radio" name="CompensationAwarded" ng-model="entity.CompensationAwarded" ng-value="false" ng-disabled="!editable" /> No</label>
+            </td>
+        </tr>
+        <tr>
+            <td style="border-bottom:1px solid #DDD">
+                <label>Remarks,if the figure is negative,it means We pay the Compensation to the landlord.备注：如果金额为负数，则表示麦当劳需向业主支付赔偿。</label>
+            </td>
+            <td style="border-bottom:1px solid #DDD">
+                <input class="form-control" ng-show="entity.CompensationAwarded" name="CompensationAwarded" ng-required="entity.CompensationAwarded" ng-model="entity.Compensation" ng-disabled="!editable" valnumber />
+                <div ng-show="$parent.$submited||tmpClosureMemo.CompensationAwarded.$dirty">
+                    <span class="ng-error" ng-show="tmpClosureMemo.CompensationAwarded.$error.valnumber">[[[请输入数字]]]</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

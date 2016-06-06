@@ -1,0 +1,121 @@
+﻿@{
+    Layout = null;
+}
+<div>
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[重建信息]]]
+            </span>  
+            <div class="panel-tools" ng-show="canInnerEdit">
+                <button class="btn btn-sm" ng-show="!innerEditing" ng-click="edit()">
+                    <span class="fa fa-edit"></span> [[[编辑]]]
+                </button>
+                <button class="btn btn-sm" ng-show="innerEditing" ng-click="save()">
+                    <span class="fa fa-save"></span> [[[保存]]]
+                </button>
+            </div>         
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">
+                    [[[项目类型]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    [[[重建]]]
+                </div>
+                <label class="col-xs-2 control-label">
+                    [[[美国编号]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    {{detail.USCode}}
+                </div>
+                <label class="col-xs-2 control-label">
+                    @*Project ID*@
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    @*{{projectId}}*@
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[临时关店日期]]]</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               name="TempClosureDate"
+                               ng-model="detail.TempClosureDate"
+                               datepicker-popup="{{format}}"
+                               is-open="$parent.openedTempClosureDate"
+                               min-date="now"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="false" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" ng-disabled="!innerEditing" class="btn btn-default" ng-click="openDate($event,'openedTempClosureDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <err-msgs field="frmMain.TempClosureDate" submited="$submited"></err-msgs>
+                </div>
+                <label class="control-label col-xs-2">[[[重开日期]]]</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               name="ReopenDate"
+                               ng-model="detail.ReopenDate"
+                               datepicker-popup="{{format}}"
+                               is-open="$parent.openedReopenDate"
+                               min-date="detail.ConstCompletionDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="false" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" ng-disabled="!innerEditing" class="btn btn-default" ng-click="openDate($event,'openedReopenDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <err-msgs field="frmMain.ReopenDate" submited="$submited"></err-msgs>
+                </div>
+                <label class="control-label col-xs-2"></label>
+                <div class="col-xs-2 pd_t_7"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[开工日期]]]</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               name="GBDate"
+                               ng-model="detail.GBDate"
+                               datepicker-popup="{{format}}"
+                               is-open="$parent.openedGBDate"
+                               min-date="detail.TempClosureDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" ng-disabled="!innerEditing" class="btn btn-default" ng-click="openDate($event,'openedGBDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <err-msgs field="frmMain.GBDate" submited="$submited"></err-msgs>
+                </div>
+                <label class="control-label col-xs-2">[[[完工日期]]]</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               name="ConstCompletionDate"
+                               ng-model="detail.ConstCompletionDate"
+                               datepicker-popup="{{format}}"
+                               is-open="$parent.openedConstCompletionDate"
+                               min-date="detail.GBDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" ng-disabled="!innerEditing" class="btn btn-default" ng-click="openDate($event,'openedConstCompletionDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <err-msgs field="frmMain.ConstCompletionDate" submited="$submited"></err-msgs>
+                </div>
+                <label class="control-label col-xs-2"></label>
+                <div class="col-xs-2 pd_t_7"></div>
+            </div>
+        </div>
+    </div>
+</div>

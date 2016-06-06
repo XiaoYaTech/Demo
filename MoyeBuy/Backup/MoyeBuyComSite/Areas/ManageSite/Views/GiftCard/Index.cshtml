@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "礼品卡";
+    ViewBag.PageTitle = "礼品卡管理";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Areas/ManageSite/Scripts/GiftCard.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";    
+}
+
+<div class="OptionContainer">
+<table border="0">
+        <tr>
+            <td><span style=" width:100px;"><a href ="@Url.Action("GenerateCard", "giftcard")" >新生成礼品卡</a></span></td>
+        </tr>
+    </table>
+</div>
+<div class="ResultBody">
+@if (Model != null)
+{ 
+    <table border="0" width="80%" cellpadding="0" cellspacing="0" class="detailtable">
+        <tr>
+            <th>ID</th>
+            <th>礼品卡号</th>
+            <th>金额</th>
+            <th>有效开始日期</th>
+            <th>有效截止日期</th>
+            <th>是否有效</th>
+            <th>用户名</th>
+            <th>更新时间</th>
+            <th>操作</th>
+        </tr>
+        @foreach (var giftcard in (IList<MoyeBuy.Com.Model.GiftCard>)Model)
+        {
+        <tr>
+            <td>@giftcard.GiftCardNoID</td>
+            <td>@giftcard.GiftCardNo</td>
+            <td>@giftcard.GiftCardAmount 元</td>
+            <td>@giftcard.StartDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            <td>@giftcard.ExpireDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            <td>@(giftcard.IsInvalid ? "无效" : "有效")</td>
+            <td>@giftcard.UpdateByUserID</td>
+            <td>@giftcard.LastUpdatedDate.ToString("yyyy-MM-dd")</td>
+            <td><span onclick="javascript:delSupplier('@giftcard.GiftCardNo');">删除</span><span onclick="javascript:showAddWindow('@giftcard.GiftCardNo');">更新</span></td>
+        </tr>
+        }
+    </table>
+}

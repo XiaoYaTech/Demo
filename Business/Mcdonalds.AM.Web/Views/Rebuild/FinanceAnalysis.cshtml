@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Finance Analysis";
+    Layout = null;
+}
+
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Rebuild" sub-code="{{subFlowCode}}" place-holder="10" ng-show="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+<store-basic-info code="RebuildInfo.USCode" workflow-type="Rebuild" project="RebuildInfo" store="store"></store-basic-info>
+<comment ng-show="IsShowComments" comments="finance.FinanceComments" editable="isPageEditable" title="[[[财务意见]]]"></comment>
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[附件]]]
+        </span>
+        <div class="panel-tools">
+            <a plupload-simple
+               upload-url="api/Rebuild/FinancAnalysisAttach/UploadContract/{{projectId}}"
+               upload-finished="uploadAttachFinished"
+               error-msg="请上传正确的文件"
+               ng-show="isPageEditable"
+               class="btn btn-sm btn-default">
+                <span class="fa fa-paperclip"></span>
+                [[[上传其他附件]]]
+            </a>
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+            <th>[[[序号]]]</th>
+            <th>[[[内容]]]</th>
+            <th>[[[文件名]]]</th>
+            <th>[[[上传人]]]</th>
+            <th>[[[上传时间]]]</th>
+            <th>[[[操作]]]</th>
+        </tr>
+        <tr ng-class="{'required':!FinAgreement.ID}">
+            <td>1</td>
+            <td>
+                <i class="required-field">*</i>
+                <span class="{{FinAgreement.Icon}}"></span>
+                <a ng-href="{{FinAgreement.downloadLink}}" ng-show="FinAgreement.downloadLink!='' && FinAgreement.downloadLink!=null">[[[Finance Analysis]]]</a>
+                <a href="javascript:void(0)" ng-show="FinAgreement.downloadLink=='' || FinAgreement.downloadLink==null">[[[Finance Analysis]]]</a>
+            </td>
+            <td><a title="{{FinAgreement.Name}}" ng- ng-href="{{FinAgreement.downloadLink}}" style="display:inline-block;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{FinAgreement.Name}}</a></td>
+            <td>
+                <span ng-show="FinAgreement.ID">
+                    {{FinAgreement.CreatorNameENUS}}
+                </span>
+            </td>
+            <td>{{FinAgreement.CreateTime | date:"yyyy-MM-dd"}}</td>
+            <td class="table-operations">
+                <a plupload-simple
+                   upload-url="api/Rebuild/FinanceAnalysis/UploadContract/{{projectId}}"
+                   upload-finished="uploadFAFinished"
+                   errormsg="[[[请上传正确的文件]]]"
+                   ng-show="isPageEditable">
+                    [[[上传]]]
+                </a>
+                <a ng-href="{{FinAgreement.downloadLink}}" ng-show="(FinAgreement.ID)">[[[下载]]]</a>
+                <a ng-show="FinAgreement.ID && isPageEditable" ng-click="deleteAttachment(FinAgreement.ID,'FinAgreement')">[[[删除]]]</a>
+            </td>
+        </tr>
+        @*<tr>
+                <td>{{$index+2}}</td>
+                <td><a ng-click="showContractAttachments()">Contract Info({{contractAttachCount}})</a></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>*@
+        <tr ng-repeat="att in Attachment">
+            <td>{{$index+3}}</td>
+            <td>
+                <span class="{{att.Icon}}"></span>
+                <a ng-href="{{att.downloadLink}}">{{att.Name}}</a>
+            </td>
+            <td><a title="{{att.Name}}" ng- ng-href="{{att.downloadLink}}" style="display:inline-block;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{att.Name}}</a></td>
+            <td>{{att.CreatorNameENUS}}</td>
+            <td>{{att.CreateTime | date:"yyyy-MM-dd"}}</td>
+            <td class="table-operations">
+                <a ng-href="{{att.downloadLink}}">[[[下载]]]</a>
+                <a ng-show="att.ID && isPageEditable" ng-click="deleteAttachment(att.ID,'Attachment')">[[[删除]]]</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<approval-records ref-table-id="finance.Id" ref-table-name="RebuildFinancAnalysis" workflow-type="Rebuild"></approval-records>
+<div ng-show="pageType!='View'">
+    <comment comments="finance.Comments" title="[[[意见]]]" editable="true"></comment>
+</div>
+<project-history project-id="projectId" table-name="RebuildFinancAnalysis" title="[[[Rebuild Finance Analysis History]]]"
+                 page-url="/Rebuild/Main#/FinanceAnalysis/Process/View?projectId={{projectId}}"
+                 title-name="[[[Finance Analysis]]]" ng-show="!isHistory" has-template="false"></project-history>
+
+<notification-message project-id="projectId"
+                      flow-code="Rebuild"
+                      sub-flow-code="{{subFlowCode}}"
+                      node-id="finance.Id"
+                      uscode="RebuildInfo.USCode"
+                      is-history="isHistory"></notification-message>
+
+<div ng-switch on="pageType" ng-show="!finance.IsProjectFreezed">
+    <div class="ta_c mg_t_10" ng-switch-default>
+        <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSave"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-click="submit()" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+    <div class="form-actions ta_c" ng-switch-when="Approval">
+        <button type="button" class="btn btn-lg btn-red" ng-click="approve()" ng-disabled="IsClickApprove">[[[审批]]]</button>
+        <button type="button" class="btn btn-lg btn-orange" ng-click="returnToOriginator()" ng-disabled="IsClickReturn"><span class="fa fa-reply"></span>[[[退回]]]</button>
+    </div>
+    <div class="ta_c mg_t_10" ng-switch-when="View" ng-hide="isUserAction">
+        <button type="button" class="btn btn-lg btn-warning" ng-click="save()" ng-show="finance.IsShowSave"><span class="fa fa-check"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-orange" ng-click="recall()" ng-show="finance.IsShowRecall && !isHistory">[[[撤销]]]</button>
+        <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="finance.IsShowEdit"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+    </div>
+    <div class="form-actions ta_c" ng-switch-when="Resubmit">
+        <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSave"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-click="submit()" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</div>
+
+
+

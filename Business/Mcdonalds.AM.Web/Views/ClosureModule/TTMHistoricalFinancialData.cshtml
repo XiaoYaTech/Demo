@@ -1,0 +1,434 @@
+﻿@{
+    Layout = null;
+}
+
+<form class="form-horizontal" name="frmFin">
+
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[Financial Input TTM Financial Data & Historical Financial Data(RMB)]]]
+            </span>
+        </div>
+        <div class="panel-body clearfix">
+            [[[TTM Financial Data]]]
+            <select ng-show="editable" ng-model="yearmonth" ng-options="m.value for m in yearMonthList" ng-change="changeYearMonth()">
+                <option>[[[-- 请选择 --]]]</option>
+            </select>
+            <br />
+            <br />
+            <table class="table table-bordered">
+                <tr>
+                    <th width="16%">[[[Data Month:]]]<i>{{plEntity.YearMonth}}</i></th>
+                    <th width="16%">[[[Original Data]]]</th>
+                    <th width="16%">[[[Fin.Adjustment]]]</th>
+                    <th width="16%">[[[Difference]]]</th>
+                    <th width="16%">[[[TTM Yr-1]]]</th>
+                    <th width="16%">[[[TTM Yr-2]]]</th>
+                </tr>
+                <tr>
+                    <td>[[[Total Sales(RMB)]]] </td>
+                    <td class="text-right">{{plEntity.TotalSales| money}}</td>
+                    <td class="text-right">
+                        <input class="form-control text-right" name="totalSales" type="text" valnumber ng-show="editable" ng-model="entity.TotalSales_Adjustment_RMB" />
+                        <div ng-show="$parent.$submited||frmFin.totalSales.$dirty">
+                            <span class="ng-error" ng-show="frmFin.totalSales.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                        <span ng-show="!editable">{{entity.TotalSales_Adjustment_RMB | money}}</span>
+                    </td>
+                    <td class="text-right">
+                        <label id="lblTotalSales">{{entity.TotalSales_Adjustment_RMB -  plEntity.TotalSales | money}}</label>
+                    </td>
+                    <td class="text-right">{{plEntity.TotalSales_TTMY1 | money}}</td>
+                    <td class="text-right">{{plEntity.TotalSales_TTMY2 | money}}</td>
+                </tr>
+                <tr>
+                    <td>[[[Product Sales(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.Product_Sales_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.Product_Sales_RMB_Adjustment" type="text" valnumber name="ProductSales" />
+                        <err-msgs field="frmFin.ProductSales" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.Product_Sales_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblProduct_Sales_RMB">
+                            {{entity.Product_Sales_RMB_Adjustment  -  plEntity.Product_Sales_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Comp. Sales(%)]]]</td>
+                    <td class="text-right">{{plEntity.CompSales| numberDisplay:'percent'}}</td>
+                    <td class="text-right">
+                        <input name="compSales" type="text" valnumber input-percent ng-show="editable" class="form-control text-right" ng-model="entity.CompSales_Adjustment" />
+                        <err-msgs field="frmFin.compSales" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.CompSales_Adjustment | numberDisplay:'percent'}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblCompSales">{{entity.CompSales_Adjustment -  plEntity.CompSales | numberDisplay:'percent'}}</label>
+                    </td>
+                    <td class="text-right">{{plEntity.CompSales_TTMY1 | numberDisplay:'percent'}}</td>
+                    <td class="text-right">{{plEntity.CompSales_TTMY2 | numberDisplay:'percent'}}</td>
+                </tr>
+                <tr>
+                    <td>[[[Comp. Sales(%) Macket]]]</td>
+                    <td class="text-right">
+                        {{plEntity.CompSalesMacket | numberDisplay:'percent'}}
+                    <td class="text-right">
+                        <input ng-show="editable" type="text" input-percent name="compSalesMacket" class="form-control text-right" ng-model="entity.CompSalesMacket_Adjustment" />
+                        <err-msgs field="frmFin.compSalesMacket" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.CompSalesMacket_Adjustment | numberDisplay:'percent'}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblCompSalesMacket">{{entity.CompSalesMacket_Adjustment - plEntity.CompSalesMacket | numberDisplay:'percent'}}</label>
+                    </td>
+                    <td class="text-right">{{plEntity.CompSales_Market_TTMY1 | numberDisplay:'percent'}}</td>
+                    <td class="text-right">{{plEntity.CompSales_Market_TTMY2 | numberDisplay:'percent'}}</td>
+                </tr>
+                <tr>
+                    <td>[[[Comp. GC(%)]]] </td>
+                    <td class="text-right">{{plEntity.CompCG | numberDisplay:'percent'}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.CompCG_Adjustment" type="text" valnumber input-percent name="compCG" />
+                        <err-msgs field="frmFin.compCG" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.CompCG_Adjustment | numberDisplay:'percent'}}</span>
+                    </td>
+                    <td class="text-right">
+                        <label id="lblCompCG">{{entity.CompCG_Adjustment -  plEntity.CompCG | numberDisplay:'percent'}}</label>
+                    </td>
+                    <td class="text-right">{{plEntity.CompGC_TTMY1 | numberDisplay:'percent'}}</td>
+                    <td class="text-right">{{plEntity.CompGC_TTMY2 | numberDisplay:'percent'}}</td>
+                </tr>
+                <tr>
+                    <td>[[[Comp. GC(%) Macket]]]</td>
+                    <td class="text-right">{{plEntity.CompCGMacket | numberDisplay:'percent'}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.CompCGMacket_Adjustment" type="text" valnumber input-percent name="compCGMacket" />
+                        <err-msgs field="frmFin.compCGMacket" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.CompCGMacket_Adjustment | numberDisplay:'percent'}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblCompCGMacket">{{entity.CompCGMacket_Adjustment - plEntity.CompCGMacket | numberDisplay:'percent'}}</label>
+                    </td>
+                    <td class="text-right">{{plEntity.CompGCMarket_TTMY1 | numberDisplay:'percent'}}</td>
+                    <td class="text-right">{{plEntity.CompGCMarket_TTMY2 | numberDisplay:'percent'}}</td>
+                </tr>
+                <tr>
+                    <td>[[[PAC(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.PAC_RMB| money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" name="pacRMB" class="form-control text-right" ng-model="entity.PAC_RMB_Adjustment" type="text" valnumber />
+                        <err-msgs field="frmFin.pacRMB" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.PAC_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblPAC_RMB">{{entity.PAC_RMB_Adjustment -  plEntity.PAC_RMB | money}}</label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[PAC(%)]]]</td>
+                    <td class="text-right">{{plEntity.PAC| numberDisplay:'percent'}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.PAC_Adjustment" name="pac" type="text" valnumber input-percent />
+                        <err-msgs field="frmFin.pac" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.PAC_Adjustment | numberDisplay:'percent'}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblPAC">{{entity.PAC_Adjustment -  plEntity.PAC | numberDisplay:'percent'}}</label>
+                    </td>
+                    <td class="text-right">{{plEntity.PAC_TTMY1 | numberDisplay:'percent'}}</td>
+                    <td class="text-right">{{plEntity.PAC_TTMY2 | numberDisplay:'percent'}}</td>
+                </tr>
+                <tr>
+                    <td>[[[PAC Market(%)]]]</td>
+                    <td class="text-right">{{plEntity.PACMarket | numberDisplay:'percent'}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.PACMarket_Adjustment" type="text" valnumber input-percent name="pacMarket" />
+                        <err-msgs field="frmFin.pacMarket" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.PACMarket_Adjustment | numberDisplay:'percent'}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblPACMarket">{{entity.PACMarket_Adjustment -  plEntity.PACMarket | numberDisplay:'percent'}}</label>
+                    </td>
+                    <td class="text-right">{{plEntity.PACMarket_TTMY1 | numberDisplay:'percent'}}</td>
+                    <td class="text-right">{{plEntity.PACMarket_TTMY2 | numberDisplay:'percent'}}</td>
+                </tr>
+                <tr>
+                    <td>[[[Rent(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.Rent_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.Rent_RMB_Adjustment" type="text" valnumber name="rent" />
+                        <err-msgs field="frmFin.rent" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.Rent_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblRent_RMB">{{entity.Rent_RMB_Adjustment -  plEntity.Rent_RMB | money}}</label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Depreciation LHI(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.DepreciationLHI_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.DepreciationLHI_RMB_Adjustment" type="text" valnumber name="depreciationLHI" />
+                        <err-msgs field="frmFin.depreciationLHI" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.DepreciationLHI_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblDepreciationLHI_RMB">
+                            {{entity.DepreciationLHI_RMB_Adjustment -  plEntity.DepreciationLHI_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Interest LHI(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.InterestLHI_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.InterestLHI_RMB_Adjustment" type="text" valnumber name="InterestLHI" />
+                        <err-msgs field="frmFin.InterestLHI" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.InterestLHI_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblInterestLHI_RMB">
+                            {{entity.InterestLHI_RMB_Adjustment -  plEntity.InterestLHI_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Service Fee(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.ServiceFee_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.ServiceFee_RMB_Adjustment" type="text" valnumber name="serviceFee" />
+                        <err-msgs field="frmFin.serviceFee" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.ServiceFee_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblServiceFee_RMB">
+                            {{entity.ServiceFee_RMB_Adjustment -  plEntity.ServiceFee_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Accounting(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.Accounting_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.Accounting_RMB_Adjustment" type="text" valnumber name="accounting" />
+                        <err-msgs field="frmFin.accounting" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.Accounting_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblAccounting_RMB">
+                            {{entity.Accounting_RMB_Adjustment -  plEntity.Accounting_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Insurance(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.Insurance_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.Insurance_RMB_Adjustment" type="text" valnumber name="insurance" />
+                        <err-msgs field="frmFin.insurance" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.Insurance_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblInsurance_RMB">
+                            {{entity.Insurance_RMB_Adjustment -  plEntity.Insurance_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Taxes&Licenses(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.TaxesLicenses_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.TaxesLicenses_RMB_Adjustment" type="text" valnumber name="taxesLicenses" />
+                        <err-msgs field="frmFin.taxesLicenses" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.TaxesLicenses_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblTaxesLicenses_RMB">
+                            {{entity.TaxesLicenses_RMB_Adjustment  -  plEntity.TaxesLicenses_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Depreciation ESSD(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.Depreciation_ESSD_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.Depreciation_ESSD_RMB_Adjustment" name="epreciationEssd" type="text" valnumber />
+                        <err-msgs field="frmFin.epreciationEssd" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.Depreciation_ESSD_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblTaxesLicenses_RMB">
+                            {{entity.Depreciation_ESSD_RMB_Adjustment  -  plEntity.Depreciation_ESSD_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Interest ESSD(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.Interest_ESSD_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.Interest_ESSD_RMB_Adjustment" type="text" valnumber name="interestESSD" />
+                        <err-msgs field="frmFin.interestESSD" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.Interest_ESSD_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblInterest_ESSD_RMB">
+                            {{entity.Interest_ESSD_RMB_Adjustment  -  plEntity.Interest_ESSD_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Other(Inc)/Exp(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.OtherIncExp_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.OtherIncExp_RMB_Adjustment" name="otherIncExp" type="text" valnumber />
+                        <err-msgs field="frmFin.otherIncExp" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.OtherIncExp_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblOtherIncExp_RMB">
+                            {{entity.OtherIncExp_RMB_Adjustment  -  plEntity.OtherIncExp_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Non-Product Sales(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.NonProduct_Sales_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.NonProduct_Sales_RMB_Adjustment" type="text" valnumber name="nonProductSales" />
+                        <err-msgs field="frmFin.nonProductSales" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.NonProduct_Sales_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblNonProduct_Sales_RMB">
+                            {{entity.NonProduct_Sales_RMB_Adjustment  -  plEntity.NonProduct_Sales_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[Non-Product Costs(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.NonProduct_Costs_RMB | money}}</td>
+                    <td class="text-right">
+                        <input name="nonProductCost" ng-show="editable" class="form-control text-right" ng-model="entity.NonProduct_Costs_RMB_Adjustment" type="text" valnumber />
+                        <err-msgs field="frmFin.nonProductCost" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.NonProduct_Costs_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblNonProduct_Costs_RMB">
+                            {{entity.NonProduct_Costs_RMB_Adjustment  -  plEntity.NonProduct_Costs_RMB | money}}
+                        </label>
+                    </td>
+                    <td class="text-right">/</td>
+                    <td class="text-right">/</td>
+                </tr>
+                <tr>
+                    <td>[[[SOI(%)]]]</td>
+                    <td class="text-right">{{plEntity.SOI | numberDisplay:'percent'}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.SOI_Adjustment" name="soi" type="text" valnumber input-percent />
+                        <err-msgs field="frmFin.soi" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.SOI_Adjustment | numberDisplay:'percent'}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblSOI">
+                            {{entity.SOI_Adjustment  -  plEntity.SOI | numberDisplay:'percent'}}
+                        </label>
+                    </td>
+                    <td class="text-right">{{plEntity.SOI_TTMY1 | numberDisplay:'percent'}}</td>
+                    <td class="text-right">{{plEntity.SOI_TTMY2 | numberDisplay:'percent'}}</td>
+                </tr>
+                <tr>
+                    <td>[[[SOI(%) Market]]] </td>
+                    <td class="text-right">{{plEntity.SOIMarket | numberDisplay:'percent'}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.SOIMarket_Adjustment" type="text" valnumber input-percent name="soiMarket" />
+                        <err-msgs field="frmFin.soiMarket" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.SOIMarket_Adjustment | numberDisplay:'percent'}}</span>
+
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblSOIMarket">
+                            {{entity.SOIMarket_Adjustment  -  plEntity.SOIMarket | numberDisplay:'percent'}}
+                        </label>
+                    </td>
+                    <td class="text-right">{{plEntity.SOIMarket_TTMY1 | numberDisplay:'percent'}}</td>
+                    <td class="text-right">{{plEntity.SOIMarket_TTMY2 | numberDisplay:'percent'}}</td>
+                </tr>
+                <tr>
+
+                    <td>[[[Cash Flow(RMB)]]]</td>
+                    <td class="text-right">{{plEntity.CashFlow_RMB | money}}</td>
+                    <td class="text-right">
+                        <input ng-show="editable" class="form-control text-right" ng-model="entity.CashFlow_RMB_Adjustment" type="text" valnumber name="cashFlow" />
+                        <err-msgs field="frmFin.cashFlow" submited="$parent.$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.CashFlow_RMB_Adjustment | money}}</span>
+
+                    </td>
+                    <td class="text-right">
+                        <label id="lblCashFlow">
+                            {{entity.CashFlow_RMB_Adjustment  -  plEntity.CashFlow_RMB | money}}
+                            <label id="lblSOIMarket"></label>
+                        </label>
+                    </td>
+                    <td class="text-right">{{plEntity.CashFlow_TTMY1 | money}}</td>
+                    <td class="text-right">{{plEntity.CashFlow_TTMY2 | money}}</td>
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+
+
+</form>
+
+
+

@@ -1,0 +1,1 @@
+01  ReinvenstmentAmountType  -- 49上没有办法调出Reinvestment Amount Type 的3个选项，但是43上是正常的，不过依然无法submit。

@@ -1,0 +1,199 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div id="divInfo" class="container-fluid ">
+    <nav class="navbar navbar-default" role="navigation">
+        WorkFlow > closure > ConsInvtChecking
+          <closure-Nav projectId="{{projectId}}" code="ConsInvtChecking"></closure-Nav>
+        <div>
+            <div>
+                Closure Memo：<input type="radio" />Permannent|<input type="radio" />Temporary
+            </div>
+        </div>
+    </nav>
+    <div>
+        <div class="popover-title">Attachment </div> 
+        <table class="table table-bordered table-striped" >
+            <tr>
+                <td></td>
+                <td>Estimated</td>
+                <td>Booked</td>
+                <td>Difference</td>
+                <td>Booked Date</td>
+                <td>Description(if eifference>+-5%)</td>
+            </tr>
+            <tr>
+                <td>
+                    RE Cost_Write-off
+                </td>
+                <td></td>
+                <td>c20</td>
+                <td>-1(-5%)</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    LHI_Write-off
+                </td>
+                <td></td>
+                <td>c21</td>
+                <td><a href="#">Booked-Estimated</a></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    ESSD_Write-off
+                </td>
+                <td></td>
+                <td>c22=SUM(C23:C26)</td>
+                <td>1</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Equipment_Write-off
+                </td>
+                <td></td>
+                <td>C23</td>
+                <td>1</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Signage_Write-off
+                </td>
+                <td></td>
+                <td>C24</td>
+                <td>1</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Seating_Write-off
+                </td>
+                <td></td>
+                <td>C25</td>
+                <td>1</td>
+                <td></td>
+                <td></td>
+            </tr>
+               <tr>
+                <td>
+                    Decoration_Write-off
+                </td>
+                <td></td>
+                <td>C26</td>
+                 <td>1</td>
+                <td></td>
+                <td></td>
+               </tr>  <tr>
+                          <td>
+                              Total Cost_Write-off
+                          </td>
+                          <td></td>
+                          <td>=C20+C21+C22</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+            <tr>
+                <td>
+                    Estimated Copensation
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Estimated Closing Cost
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Reinvestment_Re Cost
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Reinvestment_LHI
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Reinvestment_ESSD
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Total Reinvestment
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    -Reinvestment_McCafe
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    -Reinvestment_Kiosk
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                <td>
+                   -Reinvestment_MDS
+                </td>
+                <td></td>
+                <td></td>
+                 <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+       </div>

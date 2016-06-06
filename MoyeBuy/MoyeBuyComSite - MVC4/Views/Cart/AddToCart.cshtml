@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "商品已经成功加入购物车";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Scripts/Cart.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";    
+}
+<div class="addSucc">
+    <div class="Succ">
+        <b>&nbsp;</b>
+        <div style=" float:right; margin-right:20px;">
+        <a href="javascript:history.back()" id="gocontinue" target="_self"></a>
+        <a href="/cart/index" id="gotoCart" target="_self"></a>
+    </div>
+    </div>
+</div>

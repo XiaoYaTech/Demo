@@ -1,0 +1,233 @@
+﻿@{
+    Layout = null;
+}
+<form name="finan">
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                Financial Pre-analysis
+            </span>
+        </div>
+        <div class="panel-body form-horizontal">
+            <div class="pd_0_15">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>TTM Sales</td>
+                        <td class="text-center">
+                            @*<input type="text" class="form-control" ng-model="source.TTMSales" ng-disabled="!editable" />*@
+                            {{source.TTMSales|money}}
+                        </td>
+                        <td>
+                            @*Sales Building investment*@
+                        </td>
+                        <td>
+                            @*<input name="SalesBuildingInvestment" type="text" valnumber class="form-control" ng-model="source.SalesBuildingInvestment" ng-disabled="!editable" />
+                                <div ng-show="$parent.$submited||finan.SalesBuildingInvestment.$dirty">
+                                    <span class="ng-error" ng-show="finan.SalesBuildingInvestment.$error.valnumber">[[[请输入数字]]]</span>
+                                </div>
+                            *@
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>New Add_BE</td>
+                        <td class="text-center">
+                            <input type="text" class="form-control" ng-model="source.NewAddBE" ng-disabled="true" />
+                        </td>
+                        <td class="text-center" colspan="2">Inc.Sales</td>
+                        <td class="text-center" colspan="2">Inc.Sales(RMB)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td class="text-center">Reimage+Price Tier%</td>
+                        <td class="text-center">
+                            <input type="text" valnumber ng-required="true" name="ReimagePrice" class="form-control" ng-model="source.ReimagePrice" ng-disabled="!editable" input-percent />
+                            <err-msgs field="finan.ReimagePrice" submited="$root.$submited"></err-msgs>
+                        </td>
+                        <td class="text-center">
+                            {{source.ReimagePriceSales|money}}
+                        </td>
+                        <td></td>
+
+                    </tr>
+                    <tr>
+                        <td>New McCafe</td>
+                        <td class="text-center">
+                            <label>
+                                <input type="radio" name="IsMcCafe" ng-disabled="true" ng-value="true" ng-model="source.IsMcCafe" />
+                                Yes
+                            </label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label>
+                                <input type="radio" name="IsMcCafe" ng-disabled="true" ng-value="false" ng-model="source.IsMcCafe" />
+                                No
+                            </label>
+                        </td>
+                        <td class="text-center">McCafe%</td>
+                        <td class="text-center" ng-switch="source.IsMcCafe">
+                            <div ng-switch-when="true">
+                                <input type="text" ng-required="true" name="McCafe" class="form-control" ng-model="source.McCafe" ng-disabled="!editable" input-percent />
+                                <err-msgs field="finan.McCafe" submited="$root.$submited"></err-msgs>
+                            </div>
+                            <div ng-switch-default>
+                                <input type="text" name="McCafe" class="form-control" ng-model="source.McCafe" ng-disabled="true" />
+                            </div>
+                        </td>
+                        <td class="text-center">{{source.McCafeSales|money}} </td>
+                        <td></td>
+
+                    </tr>
+                    <tr>
+                        <td>New Kiosk</td>
+                        <td class="text-center">
+                            <label>
+                                <input type="radio" name="IsKiosk" ng-disabled="true" ng-value="true" ng-model="source.IsKiosk" />
+                                Yes
+                            </label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label>
+                                <input type="radio" name="IsKiosk" ng-disabled="true" ng-value="false" ng-model="source.IsKiosk" />
+                                No
+                            </label>
+                        </td>
+                        <td class="text-center">Kiosk%</td>
+                        <td class="text-center" ng-switch="source.IsKiosk">
+                            <div ng-switch-when="true">
+                                <input type="text" valnumber ng-required="true" input-percent name="Kiosk" class="form-control" ng-model="source.Kiosk" ng-disabled="!editable" />
+                                <err-msgs field="finan.Kiosk" submited="$root.$submited"></err-msgs>
+                            </div>
+                            <div ng-switch-default>
+                                <input type="text" name="Kiosk" class="form-control" ng-model="source.Kiosk" ng-disabled="true" />
+                            </div>
+                        </td>
+                        <td class="text-center">{{source.KioskSales|money}}</td>
+                        <td></td>
+
+
+                    </tr>
+                    <tr>
+                        <td>New MDS</td>
+                        <td class="text-center">
+                            <label>
+                                <input type="radio" name="IsMDS" ng-disabled="true" ng-value="true" ng-model="source.IsMDS" />
+                                Yes
+                            </label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label>
+                                <input type="radio" name="IsMDS" ng-disabled="true" ng-value="false" ng-model="source.IsMDS" />
+                                No
+                            </label>
+                        </td>
+                        <td class="text-center">MDS%</td>
+                        <td class="text-center" ng-switch="source.IsMDS">
+                            <div ng-switch-when="true">
+                                <input type="text" valnumber ng-required="true" input-percent name="MDS" class="form-control" ng-model="source.MDS" ng-disabled="!editable" />
+                                <err-msgs field="finan.MDS" submited="$root.$submited"></err-msgs>
+                            </div>
+                            <div ng-switch-default>
+                                <input type="text" name="MDS" class="form-control" ng-model="source.MDS" ng-disabled="true" />
+                            </div>
+
+                        </td>
+                        <td class="text-center">{{source.MDSSales|money}}</td>
+                        <td></td>
+
+
+                    </tr>
+                    <tr>
+                        <td>New 24H</td>
+                        <td class="text-center">
+                            <label>
+                                <input type="radio" name="IsTwientyFourHour" ng-disabled="true" ng-value="true" ng-model="source.IsTwientyFourHour" />
+                                Yes
+                            </label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label>
+                                <input type="radio" name="IsTwientyFourHour" ng-disabled="true" ng-value="false" ng-model="source.IsTwientyFourHour" />
+                                No
+                            </label>
+                        </td>
+                        <td class="text-center">24H%</td>
+                        <td class="text-center" ng-switch="source.IsTwientyFourHour">
+                            <div ng-switch-when="true">
+                                <input type="text" valnumber ng-required="true" input-percent name="TwientyFourHour" class="form-control" ng-model="source.TwientyFourHour" ng-disabled="!editable" />
+                                <err-msgs field="finan.TwientyFourHour" submited="$root.$submited"></err-msgs>
+                            </div>
+                            <div ng-switch-default>
+                                <input type="text" name="TwientyFourHour" class="form-control" ng-model="source.TwientyFourHour" ng-disabled="true" />
+                            </div>
+
+                        </td>
+                        <td class="text-center">{{source.TwientyFourHourSales|money}}</td>
+                        <td></td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center">Total Sales Inc%</td>
+                        <td class="text-center">
+                            @*<input type="text" input-percent class="form-control" ng-model="source.TotalSalesInc" ng-disabled="!editable" />*@
+                            {{source.TotalSalesInc|numberDisplay:'percent'}}
+                        </td>
+                        <td class="text-center">{{source.IncSales|money}} </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Store CM%</td>
+                        <td class="text-center">
+                            {{source.StoreCM|numberDisplay:'percent'}}
+                            @*<input type="text" valnumber name="StoreCM" class="form-control" ng-model="source.StoreCM" ng-disabled="!editable" />
+                                <div ng-show="$parent.$submited||finan.StoreCM.$dirty">
+                                    <span class="ng-error" ng-show="finan.StoreCM.$error.valnumber">[[[请输入数字]]]</span>
+                                </div>
+                            *@
+                        </td>
+                        <td>ROI%</td>
+                        <td class="text-center">
+                            {{source.ROI|numberDisplay:'percent'}}
+                            @*<input type="text" class="form-control" ng-model="source.ROI" ng-disabled="!editable" />*@
+                        </td>
+                        <td>Impacted Sales during WIP</td>
+                        <td>
+                            <input type="text" name="SPTAR" ng-required="true" class="form-control" ng-model="source.SPTAR" ng-disabled="!editable" />
+                            <err-msgs field="finan.SPTAR" submited="$root.$submited"></err-msgs>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Margin$ Inc</td>
+                        <td class="text-center">
+                            @*<input type="text" class="form-control" ng-model="source.MarginInc" ng-disabled="!editable" />*@
+                            {{source.MarginInc|money}}
+                        </td>
+                        <td>PayBack Year</td>
+                        <td class="text-center">
+                            {{source.PaybackYears|numberCustom:2}}
+                            @*<input type="text" class="form-control" ng-model="source.PaybackYears" ng-disabled="!editable" />*@
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Current Price Tier</td>
+                        <td class="text-center">
+                            @*<input type="text" class="form-control" ng-model="source.MarginInc" ng-disabled="!editable" />*@
+                            {{source.CurrentPriceTier}}
+                        </td>
+                        <td>Price Tier after Reimage</td>
+                        <td>
+                            <dict-selector parent-code="PriceTier" required="true" selected-code="source.PriceTierafterReimage" selected-dict="PriceTierDict" editable="editable"></dict-selector>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>

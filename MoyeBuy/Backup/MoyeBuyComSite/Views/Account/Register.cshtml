@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "注册";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Scripts/Account.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script><link href=\"" + @Url.Content("~/Content/logon.css?version=") + @DateTime.Now.Ticks + "\" rel=\"stylesheet\" type=\"text/css\" />";    
+}
+
+<div style=" border:1px solid #333333; width:990px; margin:auto; height:400px;">
+    <div class="logonTitle">
+        <span>注册新用户</span>
+    </div>
+    <div style=" margin-left:50px; margin-top:50px;">
+        <div style=" width:540px; height:55px;">
+            <div class="item">
+                <b style=" color:Red; float:left;">*</b>
+                <span class="lable">邮箱:</span>
+                <div class="fl">
+                    <input type="text" name="username" id="username" value="" maxlength="30" style="width:200px; height:20px;" />
+                </div>
+                @if (ViewBag.Error != "")
+                { 
+                    <span class="lable" style=" color:Red;">@ViewBag.Error</span>
+                }
+            </div>
+
+            <div class="item">
+            <b style=" color:Red; float:left;">*</b>
+                <span class="lable">请输入密码:</span>
+                <div class="fl">
+                    <input type="password" name="pwd" id="pwd" value="" maxlength="30" style="width:200px;height:20px;" />
+                </div>
+            </div>
+
+            <div class="item">
+            <b style=" color:Red; float:left;">*</b>
+                <span class="lable">请确认密码:</span>
+                <div class="fl">
+                    <input type="password" name="pwdcfm" id="pwdcfm" value="" maxlength="30" style="width:200px;height:20px;" />
+                </div>
+            </div>
+
+            <div class="item">
+            <b style=" color:Red; float:left;">*</b>
+                <span class="lable">验证码:</span>
+                <div class="fl">
+                    <input type="text" name="authcode" id="authcode" value="" maxlength="30" style="width:100px;height:20px; float:left; margin-right:10px;" />
+                    <span class="lable"><img id="ImgValidateCode" src="@Url.Action("ValidateCode", "Account")" onclick ="javascript:RefreshValidateCode();" /></span>
+                </div>
+            </div>
+
+            <div class="item">
+                <span class="lable"></span>
+                <div class="fl">
+                    <a href="javascript:void(0);" name="submitbtn" id="submitbtn" onclick="javascript:regist();" /><div class="registBtn">同意以下协议，提交</div></a><span>&nbsp;</span>
+                </div>
+            </div>
+
+            <div class="item">
+                <div style="overflow-y:scroll;">
+                    111
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

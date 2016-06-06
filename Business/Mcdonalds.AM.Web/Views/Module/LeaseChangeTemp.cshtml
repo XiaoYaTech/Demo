@@ -1,0 +1,233 @@
+﻿@{
+    Layout = null;
+}
+
+<div ng-form name="frmLease">
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                {{title}}
+            </span>
+        </div>
+        <div class="form-group">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="5">Changes Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td valign="top">
+                            <input type="checkbox" id="rental" ng-model="source.ChangeRentalType" ng-disabled="!isEdit" />
+                            <label class="control-label">
+                                The Change of the Rental
+                            </label>
+                        </td>
+                        <td colspan="2">
+                            <label class="control-label" ng-show="source.ChangeRentalType">
+                                Old Rental Structure
+                            </label>
+                            <textarea ng-show="source.ChangeRentalType"
+                                      ng-disabled="true"
+                                      class="form-control"
+                                      rows="5" ng-model="source.OldRentalStructure"></textarea>
+                        </td>
+                        <td colspan="2">
+                            <label class="control-label" ng-show="source.ChangeRentalType">
+                                New Rental Structure
+                            </label>
+                            <textarea ng-show="source.ChangeRentalType"
+                                      name="NewRentalStructure"
+                                      ng-required="source.ChangeRentalType"
+                                      ng-disabled="!isEdit"
+                                      class="form-control"
+                                      rows="5" ng-model="source.NewRentalStructure"></textarea>
+                            <div ng-show="($parent.$submited||frmLease.NewRentalStructure.$dirty) && source.ChangeRentalType">
+                                <span class="ng-error" ng-show="frmLease.NewRentalStructure.$error.required">[[[必须填写]]]</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <input type="checkbox" id="redline" ng-model="source.ChangeRedLineType" ng-disabled="!isEdit" />
+                            <label class="control-label">
+                                The Change of Red Line
+                            </label>
+                        </td>
+                        <td width="20%">
+                            <label class="control-label" ng-show="source.ChangeRedLineType">
+                                Old Redline Area (sqm)
+                            </label>
+                        </td>
+                        <td width="20%">
+                            <input type="text" class="form-control"
+                                   name="OldChangeRedLineRedLineArea"
+                                   ng-model="source.OldChangeRedLineRedLineArea"
+                                   ng-show="source.ChangeRedLineType"
+                                   ng-disabled="true" />
+                        </td>
+                        <td width="20%">
+                            <label class="control-label" ng-show="source.ChangeRedLineType">
+                                New Redline Area (sqm)
+                            </label>
+                        </td>
+                        <td width="20%">
+                            <input type="text" class="form-control" valnumber
+                                   name="NewChangeRedLineRedLineArea"
+                                   id="NewChangeRedLineRedLineArea"
+                                   ng-model="source.NewChangeRedLineRedLineArea"
+                                   ng-disabled="!isEdit"
+                                   ng-required="source.ChangeRedLineType"
+                                   ng-show="source.ChangeRedLineType" />
+                            <div ng-show="$parent.$submited||frmLease.NewChangeRedLineRedLineArea.$dirty">
+                                <span class="ng-error" ng-show="frmLease.NewChangeRedLineRedLineArea.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmLease.NewChangeRedLineRedLineArea.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="leaseterm" ng-model="source.ChangeLeaseTermType" ng-disabled="!isEdit" />
+                            <label class="control-label">
+                                The Change of Lease Term
+                            </label>
+                        </td>
+                        <td>
+                            <label class="control-label" ng-show="source.ChangeLeaseTermType">
+                                Old Lease Change Expiry (Date)
+                            </label>
+                        </td>
+                        <td>
+                            <p class="input-group">
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="source.OldChangeLeaseTermExpiraryDate"
+                                       datepicker-popup="{{format}}"
+                                       ng-required="false"
+                                       ng-disabled="true"
+                                       ng-if="source.ChangeLeaseTermType" />
+                                <span class="input-group-btn" ng-show="source.ChangeLeaseTermType">
+                                    <button type="button" class="btn btn-default" ng-disabled="true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </td>
+                        <td>
+                            <label class="control-label" ng-show="source.ChangeLeaseTermType">
+                                New Lease Change Expiry (Date)
+                            </label>
+                        </td>
+                        <td>
+                            <p class="input-group">
+                                <input type="text"
+                                       class="form-control"
+                                       name="NewChangeLeaseTermExpiraryDate"
+                                       ng-model="source.NewChangeLeaseTermExpiraryDate"
+                                       datepicker-popup="{{format}}"
+                                       is-open="openedNewChangeLeaseTermExpiraryDate"
+                                       min-date="minDate"
+                                       datepicker-options="dateOptions"
+                                       date-disabled="disabled(date, mode)"
+                                       ng-required="source.ChangeLeaseTermType"
+                                       close-text="Close"
+                                       ng-disabled="!isEdit"
+                                       ng-show="source.ChangeLeaseTermType" />
+                                <span class="input-group-btn" ng-show="source.ChangeLeaseTermType">
+                                    <button type="button" class="btn btn-default" ng-disabled="!isEdit" ng-click="open($event,'openedNewChangeLeaseTermExpiraryDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                            <div ng-show="$parent.$submited||frmLease.NewChangeLeaseTermExpiraryDate.$dirty">
+                                <span class="ng-error" ng-show="frmLease.NewChangeLeaseTermExpiraryDate.$error.required">必须填写日期</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="landlord" ng-model="source.ChangeLandlordType" ng-disabled="!isEdit" />
+                            <label class="control-label">
+                                The Change of Landlord
+                            </label>
+                        </td>
+                        <td>
+                            <label class="control-label" ng-show="source.ChangeLandlordType">
+                                Old Landlord
+                            </label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control"
+                                   name="OldLandlord"
+                                   id="OldLandlord"
+                                   ng-model="source.OldLandlord"
+                                   ng-disabled="true"
+                                   ng-show="source.ChangeLandlordType" />
+                        </td>
+                        <td>
+                            <label class="control-label" ng-show="source.ChangeLandlordType">
+                                New Landlord
+                            </label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control"
+                                   name="NewLandlord"
+                                   id="NewLandlord"
+                                   ng-model="source.NewLandlord"
+                                   ng-disabled="!isEdit"
+                                   ng-required="source.ChangeLandlordType"
+                                   ng-show="source.ChangeLandlordType" />
+                            <div ng-show="$parent.$submited||frmLease.NewLandlord.$dirty">
+                                <span class="ng-error" ng-show="frmLease.NewLandlord.$error.required">[[[必须填写]]]</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="other" ng-model="source.ChangeOtherType" ng-disabled="!isEdit" />
+                            <label class="control-label">
+                                Others
+                            </label>
+                        </td>
+                        <td colspan="4">
+                            <input type="text" class="form-control"
+                                   name="Others"
+                                   id="Others"
+                                   ng-model="source.Others"
+                                   ng-disabled="!isEdit"
+                                   ng-required="source.ChangeOtherType"
+                                   ng-show="source.ChangeOtherType" />
+                            <div ng-show="$parent.$submited||frmLease.Others.$dirty">
+                                <span class="ng-error" ng-show="frmLease.Others.$error.required">[[[必须填写]]]</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" ng-show="(source.ChangeRentalType
+                                      || source.ChangeRedLineType
+                                      || source.ChangeLeaseTermType
+                                      || source.ChangeLeaseTermType
+                                      || source.ChangeLandlordType
+                                      || source.ChangeOtherType)">
+                            <label class="control-label">
+                                Description
+                            </label>
+                            <textarea class="form-control"
+                                      rows="5"
+                                      name="LeaseChangeDescription"
+                                      ng-model="source.LeaseChangeDescription"
+                                      ng-disabled="!isEdit"
+                                      ng-required="(source.ChangeRentalType
+                                      || source.ChangeRedLineType
+                                      || source.ChangeLeaseTermType
+                                      || source.ChangeLeaseTermType
+                                      || source.ChangeLandlordType
+                                      || source.ChangeOtherType)"></textarea>
+                            <div ng-show="$parent.$submited||frmLease.LeaseChangeDescription.$dirty">
+                                <span class="ng-error" ng-show="frmLease.LeaseChangeDescription.$error.required">[[[必须填写]]]</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

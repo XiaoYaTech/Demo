@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="modal-header">
+    <h3 class="modal-title">[[[选择审批人]]]</h3>
+</div>
+<div class="modal-body">
+    
+    <form class="form-horizontal" name="$parent.frmSelApprover" novalidate>
+       
+        <div class="form-group">
+            <label class="control-label col-xs-2" ng-show="showPM">[[[Construction Manager]]]</label>
+            <div class="col-xs-4 pd_t_7" ng-show="showPM">
+          
+                <select chosen="{disable_search:true}" id="selPM" class="form-control" ng-change="formValid()" ng-model="entity.selPM" required ng-options="m.NameENUS for m in PMList">
+                    <option value="">[[[-- 请选择 --]]]</option>
+                </select>
+            </div>
+            <label class="control-label col-xs-2" ng-show="showFinaceManger">[[[Finace Manger]]]</label>
+            <div class="col-xs-4 pd_t_7" ng-show="showFinaceManger">
+                <select chosen="{disable_search:true}" id="selFinManager" class="form-control" ng-change="formValid()" ng-model="entity.selFinManager" required  ng-options="m.NameENUS for m in FinManagerList">
+                    <option value="">[[[-- 请选择 --]]]</option>
+                </select>
+                
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="control-label col-xs-2" ng-show="showFinController">Finace Controller</label>
+            <div class="col-xs-4 pd_t_7" ng-show="showFinController">
+          
+                <select chosen="{disable_search:true}" id="selFinController" name="selFinController" ng-change="formValid()" class="form-control" ng-model="entity.selFinController" required ng-options="m.NameENUS for m in FinControllerList">
+                    <option value="">[[[-- 请选择 --]]]</option>
+                </select>
+            </div>
+             <label class="control-label col-xs-2" ng-show="showVPGM">[[[VPGM]]]</label>
+            <div class="col-xs-4 pd_t_7" ng-show="showVPGM">
+                <select chosen="{disable_search:true}" id="selVPGM" name="selVPGM" class="form-control" ng-change="formValid()" ng-model="entity.selVPGM" required  ng-options="m.NameENUS for m in VPGMList">
+                    <option value="">[[[-- 请选择 --]]]</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    </div>
+<div class="modal-footer">
+ 
+    
+    <button class="btn btn-sm btn-primary" ng-click="ok(scope)" 
+            ng-disabled="frmInvalid">[[[提交]]]</button>
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+</div>

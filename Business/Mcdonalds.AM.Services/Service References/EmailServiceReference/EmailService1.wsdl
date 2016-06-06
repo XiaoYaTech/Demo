@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EmailService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" />
+      <xsd:import schemaLocation="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IEmailService_SendNotificationEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendNotificationEmail" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendNotificationEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendNotificationEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendGBMemoNotificationEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendGBMemoNotificationEmail" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendGBMemoNotificationEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendGBMemoNotificationEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendRecallEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendRecallEmail" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendRecallEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendRecallEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendCommentsEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendCommentsEmail" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendCommentsEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendCommentsEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendApprovalEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendApprovalEmail" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendApprovalEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendApprovalEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendApprovalWithRejectEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendApprovalWithRejectEmail" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendApprovalWithRejectEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendApprovalWithRejectEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmail" />
+  </wsdl:message>
+  <wsdl:message name="IEmailService_SendEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IEmailService">
+    <wsdl:operation name="SendNotificationEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEmailService/SendNotificationEmail" message="tns:IEmailService_SendNotificationEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEmailService/SendNotificationEmailResponse" message="tns:IEmailService_SendNotificationEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendGBMemoNotificationEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEmailService/SendGBMemoNotificationEmail" message="tns:IEmailService_SendGBMemoNotificationEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEmailService/SendGBMemoNotificationEmailResponse" message="tns:IEmailService_SendGBMemoNotificationEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendRecallEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEmailService/SendRecallEmail" message="tns:IEmailService_SendRecallEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEmailService/SendRecallEmailResponse" message="tns:IEmailService_SendRecallEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendCommentsEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEmailService/SendCommentsEmail" message="tns:IEmailService_SendCommentsEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEmailService/SendCommentsEmailResponse" message="tns:IEmailService_SendCommentsEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendApprovalEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEmailService/SendApprovalEmail" message="tns:IEmailService_SendApprovalEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEmailService/SendApprovalEmailResponse" message="tns:IEmailService_SendApprovalEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendApprovalWithRejectEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEmailService/SendApprovalWithRejectEmail" message="tns:IEmailService_SendApprovalWithRejectEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEmailService/SendApprovalWithRejectEmailResponse" message="tns:IEmailService_SendApprovalWithRejectEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEmailService/SendEmail" message="tns:IEmailService_SendEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEmailService/SendEmailResponse" message="tns:IEmailService_SendEmail_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IEmailService" type="tns:IEmailService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendNotificationEmail">
+      <soap:operation soapAction="http://tempuri.org/IEmailService/SendNotificationEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendGBMemoNotificationEmail">
+      <soap:operation soapAction="http://tempuri.org/IEmailService/SendGBMemoNotificationEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendRecallEmail">
+      <soap:operation soapAction="http://tempuri.org/IEmailService/SendRecallEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCommentsEmail">
+      <soap:operation soapAction="http://tempuri.org/IEmailService/SendCommentsEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendApprovalEmail">
+      <soap:operation soapAction="http://tempuri.org/IEmailService/SendApprovalEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendApprovalWithRejectEmail">
+      <soap:operation soapAction="http://tempuri.org/IEmailService/SendApprovalWithRejectEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmail">
+      <soap:operation soapAction="http://tempuri.org/IEmailService/SendEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EmailService">
+    <wsdl:port name="BasicHttpBinding_IEmailService" binding="tns:BasicHttpBinding_IEmailService">
+      <soap:address location="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

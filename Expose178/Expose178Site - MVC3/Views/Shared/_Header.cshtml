@@ -1,0 +1,49 @@
+﻿<div class="HeaderBannerStyle">
+    <div class="HeaderInner">
+        <div class="HeaderPositionCtr">
+            <div class="HeaderLeft">
+                <b>&nbsp;&nbsp;</b><a href="javascript:addToFavorite();">收藏&nbsp;@ViewBag.SiteLayout.SiteName</a>
+            </div>
+            <div class="HeaderRight">
+                <div class="" style="float:left;">您好，欢迎来到&nbsp;@ViewBag.SiteLayout.SiteName！ &nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                <div class="" style="float:left;"><a href="javascript:login();">[登录]</a>&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                <div style="float:left;"><a href="javascript:regist();">[免费注册]</a>&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="Header">
+    <div class="HeaderSection">
+        <div class="logo">
+            <a href="http://www.moyebuy.com" target="_blank"><img src="@Url.Content("~/Content/Style1/Images/logo.png")" /></a>
+        </div>
+        <div class="search">
+            <div class="SearchFild">
+                <b class="left">&nbsp;</b>
+                <b class="right">&nbsp;</b>
+                <div class="SearchTextDiv">
+                    <input id="SearchText" name="SearchText" value="" onkeydown = "javascript:if(event.keyCode==13) search('SearchText');" />
+                    <div class="searchBtn" onclick="javascript:search('SearchText');"><div style="margin-top:5px;margin-left:25px;">搜索</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="MyAcount">
+            <div class="HeaderAcount"></div>
+            <div class="AcountDisp"><a href="javascript:void(0);" >我的账号</a></div>
+            <b>&nbsp;</b>
+        </div>
+@*        <div class="MyCart">
+            <b>&nbsp;</b>
+            <div class="MyCartDisp"><a href="javascript:void(0);" target="_self">去购物车结算</a></div>
+        </div>*@
+    </div>
+    <div class="Menu">
+        <div class="MenuCenter">
+            <div class="NavItems">
+                <ul>
+                    <li><a href="#">首页</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,215 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10 any_legal_concern">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[Any Legal Concerns]]]
+        </span>
+    </div>
+    <div class="panel-body">
+        <table>
+            <colgroup>
+                <col width="20" />
+                <col />
+            </colgroup>
+            <tr>
+                <td colspan="2">
+                    <input type="radio" ng-value="false" ng-model="entity.AnyLegalConcern" ng-disabled="!editable" />
+                    &nbsp;&nbsp;
+                    [[[No *]]]
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="radio" ng-value="true" ng-model="entity.AnyLegalConcern" ng-disabled="!editable" />
+                    &nbsp;&nbsp;
+                    [[[Yes.The legal issure(s) below,if not resolved,the project should not proceed;other wise,it may cause serious damage to company's asset *]]]
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="30">
+                                <input type="checkbox" ng-model="entity.IllegalStructure" ng-disabled="!entity.AnyLegalConcern||!editable" />
+                            </td>
+                            <td width="20">1.</td>
+                            <td>
+                                [[[Illegal structure]]]
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="30">
+                                <input type="checkbox" ng-model="entity.Occupying" ng-disabled="!entity.AnyLegalConcern||!editable" />
+                            </td>
+                            <td width="20">2.</td>
+                            <td>
+                                [[[Occupying fire exit or other cllectively owned area]]]<br />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="30">
+                                <input type="checkbox" ng-model="entity.NoAuthorityToRelease" ng-disabled="!entity.AnyLegalConcern||!editable" />
+                            </td>
+                            <td width="20">3.</td>
+                            <td>
+                                [[[No authority to release]]]<br />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="30">
+                                <input type="checkbox" ng-model="entity.EntrustLease" ng-disabled="!entity.AnyLegalConcern||!editable" />
+                            </td>
+                            <td width="20">4.</td>
+                            <td>
+                                [[[Renewal lease term longer than the letter or authorization in case of entrust lease]]]<br />
+                                @*委托出租,授权委托期限短于拟续租期限*@
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="30">
+                                <input type="checkbox" ng-model="entity.SubLease" ng-disabled="!entity.AnyLegalConcern||!editable" />
+                            </td>
+                            <td width="20">5.</td>
+                            <td>
+                                [[[Renewal lease term longer than the original lease contract in case of sub-lease]]]<br />
+                                @*转租，出租人与大业主之间租赁合同期限短于拟续租期限*@
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="30">
+                                <input type="checkbox" ng-model="entity.BeingSealedUp" ng-disabled="!entity.AnyLegalConcern||!editable" />
+                            </td>
+                            <td width="20">6.</td>
+                            <td>
+                                [[[Mortgage or sealed up by the court (please specify in case of being sealed up by the court)]]]<br />
+                                @*出租物业又被抵押或被法院查封（如查封，请注明）*@
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <textarea rows="3" class="form-control" ng-model="entity.BeingSealedUpDesc" ng-disabled="!entity.AnyLegalConcern" ng-show="entity.BeingSealedUp&&editable"></textarea>
+                                <pre ng-show="!editable">{{entity.BeingSealedUpDesc}}</pre>
+                            </td>
+                        </tr>
+                    </table> 
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="30">
+                                <input type="checkbox" ng-model="entity.LicenseCantBeObtained" ng-disabled="!entity.AnyLegalConcern||!editable" />
+                            </td>
+                            <td width="20">7.</td>
+                            <td>
+                                [[[Government license or permits cannot be obtained with regard to the lease site (e.g. environment, fire prevention, signage etc.)]]]<br />
+                                @*与租赁物业相关政府的许可/批准无法取得（如环保、消防、餐厅招牌等）*@
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="30">
+                                <input type="checkbox" ng-model="entity.PendingOrDispute" ng-disabled="!entity.AnyLegalConcern||!editable" />
+                            </td>
+                            <td width="20">8.</td>
+                            <td>
+                                [[[Pending or threatened dispute with regard to the lease site. (pealse specify, if any)]]]<br />
+                                @*租赁物业目前有未结或潜在的重大纠纷（如有，请注明）*@
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <textarea rows="3" class="form-control" ng-model="entity.PendingOrDisputeDesc" ng-show="entity.PendingOrDispute&&editable"></textarea>
+                                <pre ng-show="!editable">{{entity.PendingOrDisputeDesc}}</pre>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="30">
+                                <input type="checkbox" ng-model="entity.OtherIssure" ng-disabled="!entity.AnyLegalConcern||!editable" />
+                            </td>
+                            <td width="20">9.</td>
+                            <td>
+                                [[[Other Issure]]]<br />
+                                @*其他*@
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="30"></td>
+                            <td width="20"></td>
+                            <td>
+                                <textarea rows="3" class="form-control" ng-model="entity.OtherIssureDesc" ng-show="entity.OtherIssure&&editable"></textarea>
+                                <pre ng-show="!editable">{{entity.OtherIssureDesc}}</pre>
+                            </td>
+                        </tr>
+                    </table>               
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+

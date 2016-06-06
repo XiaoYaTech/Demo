@@ -1,0 +1,181 @@
+/*!
+* Datepicker for Bootstrap
+*
+* Original Idea: http://www.eyecon.ro/bootstrap-datepicker (Copyright 2012 Stefan Petre)
+* Updated by AymKdn (http://kodono.info - https://github.com/Aymkdn/Datepicker-for-Bootstrap)
+* Licensed under the Apache License v2.0
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+*/
+
+.datepicker {
+    top: 0;
+    left: 0;
+    padding: 4px;
+    margin-top: 1px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    /*.dow {
+border-top: 1px solid #ddd !important;
+}*/
+}
+/*.datepicker:before {
+    content: '';
+    display: inline-block;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: -7px;
+    left: 6px;
+}*/
+
+.datepicker:after {
+    content: '';
+    display: inline-block;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid #dedede;
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    z-index:10000;
+}
+.datepicker > div {
+    display: none;
+}
+.datepicker table {
+    width: 100%;
+    margin: 0;
+}
+.datepicker tbody {
+    background: #f1f1f1;
+}
+.datepicker th {
+    text-align: center;
+    width: 35px;
+    height: 35px;
+    font-weight: normal;
+}
+.datepicker td {
+    text-align: center;
+    width: 40px;
+    height: 40px;
+}
+.datepicker tbody td {
+    border: 1px solid #e7e7e7;
+    background: #fff;
+}
+.datepicker td.old,
+.datepicker td.off {
+    background: #f7f7f7;
+}
+.datepicker td.day:hover {
+    background: #f6b139;
+    color: #fff;
+    cursor: pointer;
+}
+.datepicker td.old, .datepicker td.new {
+    color: #999999;
+}
+.datepicker td.active, .datepicker td.active:hover {
+    background-color: #ea6060;
+    color: #fff;
+}
+.datepicker td span {
+    display: block;
+    width: 47px;
+    height: 54px;
+    line-height: 54px;
+    float: left;
+    margin: 2px;
+    cursor: pointer;
+}
+.datepicker td span:hover {
+    background: #eeeeee;
+}
+.datepicker td span.active {
+    background-color: #ea6060;
+    color: #fff;
+}
+.datepicker td span.old {
+    color: #999999;
+}
+.datepicker th.switch {
+    width: 145px;
+}
+.datepicker thead tr:first-child th {
+    background: #fff;
+    cursor: pointer;
+}
+.datepicker thead tr:first-child th:hover {
+    background: #eeeeee;
+}
+.input-append.date .add-on i, .input-prepend.date .add-on i {
+    display: block;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+.dropdown-menu.datepicker {
+    padding: 12px;
+    background: #dedede;
+    border: none;
+    box-shadow: none;
+}
+/*daterangepicker*/
+
+.daterangepicker.opensleft:after{
+	left: auto;
+	right: 10px;
+}
+.daterangepicker.opensleft .ranges, .daterangepicker.opensleft .calendar {
+  	float: left;
+  	margin: 4px;
+}
+.daterangepicker .ranges ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.daterangepicker .ranges li {
+    width: 150px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 13px;
+    background: #fff;
+    padding: 0 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+.daterangepicker .ranges li.active, .daterangepicker .ranges li:hover {
+    color: #fff;
+    background: #f6b139;
+}
+.datepicker td.active.start-date,
+.datepicker td.active.end-date{
+    background: #f6b139;
+}
+.datepicker td.in-range{
+	background: #ebf4f8;
+}
+.rangeBtns .btn:last-child{
+	float: right;
+}
+.rangeBtns .btn{
+	padding-top: 0;
+	padding-bottom: 0;
+	border-radius: 0;
+	border: none;
+	height: 35px;
+	line-height: 35px;
+}
+.rangeBtns .applyBtn{
+	background: #ff654d;
+	color: #fff;
+}
+.rangeBtns .applyBtn:hover{
+	background: #ee5e53;
+}

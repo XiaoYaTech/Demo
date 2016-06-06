@@ -1,0 +1,270 @@
+﻿@{
+    Layout = null;
+}
+<form class="form-horizontal" name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="TempClosure" sub-code="TempClosure_ClosureMemo" place-holder="4"></top-nav>
+    <cheking-point project-id="projectId" flow-code="TempClosure_ClosureMemo" refresh="checkPointRefresh"></cheking-point>
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">Closure Memo
+            </span>
+        </div>
+        <table class="table table-bordered">
+            <colgroup>
+                <col width="25%" />
+                <col width="25%" />
+                <col width="25%" />
+                <col width="25%" />
+            </colgroup>
+            <tr>
+                <td colspan="2">
+                    <label>Closure Nature/关店形式</label>
+                </td>
+                <td colspan="2">
+                    <label>
+                        Temporary</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label>Region/区域</label>
+                </td>
+                <td colspan="2">{{entity.RegionNameENUS}}/{{entity.RegionNameZHCN}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label>Market/市场</label>
+                </td>
+                <td colspan="2">{{entity.MarketNameENUS}}/{{entity.MarketNameZHCN}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label>Province/省份</label>
+                </td>
+                <td colspan="2">{{entity.ProvinceNameENUS}}/{{entity.ProvinceNameZHCN}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label>City/城市</label>
+                </td>
+                <td colspan="2">{{entity.MarketNameENUS}}/{{entity.MarketNameZHCN}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label>Store Name/店铺名称</label>
+                </td>
+                <td colspan="2">{{entity.StoreNameENUS}}/{{entity.StoreNameZHCN}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label>Store Address/店铺地址</label>
+                </td>
+                <td colspan="2" ng-show="editable">
+                    <input type="text" class="form-control" ng-model="entity.StoreAddressENUS" />
+                    /<br />
+                    <input type="text" class="form-control" ng-model="entity.StoreAddressZHCN" />
+                </td>
+                <td colspan="2" ng-show="!editable">{{entity.StoreAddressENUS}}/{{entity.StoreAddressZHCN}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label>US Code</label>
+                </td>
+                <td colspan="2">{{entity.USCode}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Open Date</label>
+                </td>
+                <td>{{entity.OpenDate|date:'yyyy-MM-dd'}}
+                </td>
+                <td>
+                    <label>Temp Closure Date</label>
+                </td>
+                <td ng-show="editable">
+                    <p class="input-group">
+                        <input id="closureDate" name="closureDate" type="text" class="form-control" ng-model="entity.ClosureDate" datepicker-popup="yyyy-MM-dd" is-open="showClosureDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" onfocus="this.blur()" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDate($event,'showClosureDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        <div ng-show="$submited||frmMain.closureDate.$dirty">
+                            <span class="ng-error" ng-show="frmMain.closureDate.$error.required">[[[必须填写]]]</span>
+                        </div>
+                    </p>
+                </td>
+                <td ng-show="!editable">{{entity.ClosureDate|date:'yyyy-MM-dd'}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="7" valign="middle">
+                    <label>Reason for Closure/关店原因</label>
+                </td>
+                <td>- 
+                <label for="cbBecauseOfReimaging">Reimaging 餐厅形象翻新</label>
+                </td>
+                <td ng-show="!editable">{{entity.BecauseOfReimaging|boolFilter}}
+                </td>
+                <td ng-show="editable">
+                    <input type="checkbox" value="1" id="cbBecauseOfReimaging" ng-model="entity.BecauseOfReimaging" />
+                </td>
+            </tr>
+            <tr>
+                <td>- 
+                <label for="cbBecauseOfRemodel">Landlord Remodel 业主改造</label>
+                </td>
+                <td ng-show="editable">
+                    <input type="checkbox" value="1" id="cbBecauseOfRemodel" ng-model="entity.BecauseOfRemodel" />
+                </td>
+                <td ng-show="!editable">{{entity.BecauseOfRemodel|boolFilter}}
+                </td>
+            </tr>
+            <tr>
+                <td>- 
+                <label for="cbBecauseOfDespute">Landlord Dispute 业主纠纷</label>
+                </td>
+                <td ng-show="editable">
+                    <input type="checkbox" value="1" id="cbBecauseOfDespute" ng-model="entity.BecauseOfDespute" />
+                </td>
+                <td ng-show="!editable">{{entity.BecauseOfDespute|boolFilter}}
+                </td>
+            </tr>
+            <tr>
+                <td>- 
+                <label for="cbBecauseOfRedevelopment">Government Redevelopment 政府改造</label>
+                </td>
+                <td ng-show="editable">
+                    <input type="checkbox" value="1" id="cbBecauseOfRedevelopment" ng-model="entity.BecauseOfRedevelopment" />
+                </td>
+                <td ng-show="!editable">{{entity.BecauseOfRedevelopment|boolFilter}}
+                </td>
+            </tr>
+            <tr>
+                <td>- 
+                <label for="cbBecauseOfPlanedClosure">Planned Closure 策略性关店</label>
+                </td>
+                <td ng-show="editable">
+                    <input type="checkbox" value="1" id="cbBecauseOfPlanedClosure" ng-model="entity.BecauseOfPlanedClosure" />
+                </td>
+                <td ng-show="!editable">{{entity.BecauseOfPlanedClosure|boolFilter}}
+                </td>
+            </tr>
+            <tr>
+                <td>- 
+                <label for="cbBecauseOfRebuild">Rebuild 重建</label>
+                </td>
+                <td ng-show="editable">
+                    <input type="checkbox" value="1" id="cbBecauseOfRebuild" ng-model="entity.BecauseOfRebuild" />
+                </td>
+                <td ng-show="!editable">{{entity.BecauseOfRebuild|boolFilter}}
+                </td>
+            </tr>
+            <tr>
+                <td>- 
+                <label for="cbBecauseOfRebuild">Other (please specify) 其他（请描述）: </label>
+                </td>
+                <td ng-show="!editable">{{entity.BecauseOfOthers}}
+                </td>
+                <td ng-show="editable">
+                    <textarea class="form-control" rows="2" ng-model="entity.BecauseOfOthers"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="3">
+                    <label>Relocation/迁址</label>
+                </td>
+                <td>- 
+                <label>Potential to permanent close? 有机会永久关店？</label>
+                </td>
+                <td ng-show="!editable">{{entity.PermanentCloseOpportunity|boolFilter}}
+                </td>
+                <td ng-show="editable">
+                    <label>
+                        <input type="radio" name="PermanentCloseOpportunity" ng-model="entity.PermanentCloseOpportunity" ng-value="true" />
+                        Yes</label>
+                    &nbsp;&nbsp;
+                <label>
+                    <input type="radio" name="PermanentCloseOpportunity" ng-model="entity.PermanentCloseOpportunity" ng-value="false" />
+                    No</label>
+                </td>
+            </tr>
+            <tr>
+                <td>- 
+                <label>Plan for relocation? 有迁店的计划？</label>
+                </td>
+                <td ng-show="!editable">{{entity.HasRelocationPlan|boolFilter}}
+                </td>
+                <td ng-show="editable">
+                    <label>
+                        <input type="radio" name="HasRelocationPlan" ng-model="entity.HasRelocationPlan" ng-value="true" />
+                        Yes</label>
+                    &nbsp;&nbsp;
+                <label>
+                    <input type="radio" name="HasRelocationPlan" ng-model="entity.HasRelocationPlan" ng-value="false" />
+                    No</label>
+                </td>
+            </tr>
+            <tr>
+                <td>- 
+                <label>Relocate Store/Pipeline Name  迁店后新店/Pipeline名称</label>
+                </td>
+                <td ng-show="!editable">{{entity.PipelineName}}
+                </td>
+                <td ng-show="editable">
+                    <input type="text" class="form-control" ng-model="entity.PipelineName" ng-show="entity.HasRelocationPlan" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="2">
+                    <label class="">Compensation/赔偿</label>
+                </td>
+                <td>- 
+                <label>Compensation Awarded? 获得赔偿?</label>
+                </td>
+                <td ng-show="!editable">{{entity.CompensationAwarded?"Yes":"No"}}
+                {{!compensation?'':(compensation<0?"yes":"no")}}
+                </td>
+                <td ng-show="editable">
+                    <label>
+                        <input type="radio" name="CompensationAwarded" ng-model="entity.CompensationAwarded" ng-value="true" />
+                        Yes</label>
+                    &nbsp;&nbsp;
+                <label>
+                    <input type="radio" name="CompensationAwarded" ng-model="entity.CompensationAwarded" ng-value="false" />
+                    No</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom: 1px solid #DDD">
+                    <label>Remarks,if the figure is negative,it means We pay the Compensation to the landlord.备注：如果金额为负数，则表示麦当劳需向业主支付赔偿。</label>
+                </td>
+                <td ng-show="!editable" style="border-bottom: 1px solid #DDD">
+                    <span ng-show="entity.CompensationAwarded">{{entity.Compensation}}</span>
+                </td>
+                <td ng-show="editable" style="border-bottom: 1px solid #DDD">
+                    <input type="text" name="compensation" valnumber class="form-control" ng-show="entity.CompensationAwarded" ng-model="entity.Compensation" />
+                    <div ng-show="$submited||frmMain.compensation.$dirty">
+                        <span class="ng-error" ng-show="frmMain.compensation.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <notification-message project-id="projectId"
+        flow-code="TempClosure"
+        sub-flow-code="{{subFlowCode}}"
+        node-id="entity.Id"
+        uscode="entity.USCode"></notification-message>
+    <div class="form-actions ta_c">
+        <button type="button" class="btn btn-lg btn-orange" ng-show="editable" ng-click="save()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" form-submit ng-show="unNotify" ng-click="notify(frmMain)"><span class="fa fa-check"></span>[[[通知]]]</button>
+    </div>
+</form>

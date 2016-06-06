@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html xmlns:ng="http://angularjs.org"  ng-app="remindRegisterApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>提醒注册</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <style>
+        li {
+            list-style: none;
+        }
+
+        .dic-Search {
+            height: 130px;
+        }
+
+        .dic-Search h1 {
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        .dic-Search li {
+            float: left;
+            width: 260px;
+        }
+
+        .li-clear {
+            clear: both;
+        }
+
+        .dic-add li {
+            float: left;
+        }
+
+        .dic-grid {
+            width: 1000px;
+        }
+
+        .dic-header {
+            height: 30px;
+        }
+
+        .dic-grid td {
+            width: 200px;
+            text-align: center;
+        }
+    </style>
+   <script src="~/Scripts/Libs/JQuery/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Libs/Angular/angular.js"></script>
+    <script src="~/Scripts/Libs/Angular/angular-route.js"></script>
+    <script src="~/Scripts/Libs/Angular/angular-animate.js"></script>
+    <script src="~/Scripts/Libs/Angular/angular-resource.js"></script>
+@*    <script src="~/Scripts/Libs/AjaxQueue.js"></script>*@
+    
+    <script src="~/Scripts/Apps/Dictionary/RemindRegisterApps.js"></script>
+   <script src="~/Scripts/Controllers/RemindRegisterController.js"></script>
+    <script src="~/Scripts/Services/RemindRegisterServices.js"></script>
+
+</head>
+
+    <body>
+        <div ng-view></div>
+</body>
+</html>

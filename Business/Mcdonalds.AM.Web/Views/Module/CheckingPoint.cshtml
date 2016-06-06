@@ -1,0 +1,26 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="step-project">
+    <div class="project-status-con">
+        <div class="arrow">
+            <span class="fa fa-angle-double-right"></span>
+        </div>
+        <div class="project-status">
+            [[[当前项目]]]：{{project.NameDisp}} {{progress?"（"+progress+"）":""}}<br />
+            [[[项目状态]]]：{{project.Status|projectStatusFilter}}<br />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="step-project-item"
+         ng-class="{'passed':item.Status == 2,'first':$index === 0,'last':$index === $parent.checkPointList.length-1}"
+         ng-repeat="item in checkPointList">
+        <div class="title">{{item.NameDisp}}</div>
+        <div class="sequance">
+            <span class="box-sep-left"></span><span class="box-sep-right"></span>
+            <span class="box">{{item.Sequence}}</span>
+            <span class="clear"></span>
+        </div>
+    </div>
+</div>

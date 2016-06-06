@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = "系统错误";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Scripts/Error.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";    
+}
+<div style=" width:400px; height:100px; margin:auto;">
+    <h2>@ViewBag.Msg</h2>
+</div>
+

@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Site Info";
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Reimage" sub-code="{{subFlowCode}}" place-holder="4" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    <estimated-vs-actual-construction source="estimatedVsActualConstruction"
+                                      editable="isPageEditable"
+                                      flow-code="Reimage"></estimated-vs-actual-construction>
+    <site-info source="siteInfo"
+               editable="isPageEditable"
+               us-code="reimageInfo.USCode"
+               store="store"
+               identifier="reimageInfo.SiteInfoId"
+               flow-code="Reimage_SiteInfo"
+               is-inner-design-disable="true"></site-info>
+
+    @*<div ng-switch="pageType" ng-show="!consInfo.IsProjectFreezed">*@
+    <div ng-switch on="pageType">
+        <div class="ta_c mg_t_10" ng-switch-default ng-hide="isUserAction">
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" ng-disabled="acting" ng-show="isPageEditable"><span class="fa fa-paste"></span>[[[保存]]]</button>
+            @*<button type="button" class="btn btn-lg btn-red" ng-click="submit()" ng-disabled="acting"><span class="fa fa-check"></span>[[[呈递]]]</button>*@
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="Approval">
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" ng-disabled="acting"><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" ng-disabled="acting" form-submit ng-click="confirm(frmMain)"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+    </div>
+</form>

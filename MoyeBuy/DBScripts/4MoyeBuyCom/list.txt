@@ -1,0 +1,13 @@
+list.txt
+usp_AddUpdateProductByProductID.sql
+usp_AddUpdateProductCategory.sql
+usp_AddUpdateProductComment.sql
+usp_AddUpdateSupplier.sql
+usp_GetProductByProductIDKeyWords.sql
+usp_GetProductCategory.sql
+usp_GetProductCommentByProductID.sql
+usp_GetProductCommentCatgory.sql
+usp_GetProductStore.sql
+usp_GetProductStoreByProductIDSupplierID.sql
+usp_GetSupplierBySupplierIDName.sql
+usp_UpdateProductStore.sql

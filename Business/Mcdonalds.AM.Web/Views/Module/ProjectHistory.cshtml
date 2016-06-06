@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = null;
+}
+<div>
+    <span class="btn-project-versions">&nbsp;</span>
+    <div class="project-versions">
+        <div class="title">
+            [[[历史版本]]]
+        </div>
+        <div class="content">
+            <table class="table">
+                <colgroup>
+                    <col width="10%" />
+                    <col width="35%" />
+                    <col width="20%" />
+                    <col width="20%" />
+                    <col width="15%" />
+                </colgroup>
+                <tr>
+                    <th>[[[序号]]]</th>
+                    <th>[[[内容]]]</th>
+                    <th>[[[提交人]]]</th>
+                    <th>[[[提交日期]]]</th>
+                    <th>[[[状态]]]</th>
+                </tr>
+                <tr ng-repeat="history in historyList">
+                    <td><a ng-href="{{history.Url}}" target="_blank">{{$index+1}}</a></td>
+                    <td><a ng-href="{{history.Url}}" target="_blank">{{titleName}} {{history.CreateTime | date:"yyyyMMdd"}}</a></td>
+                    <td>{{history.ApproverNameENUS}}</td>
+                    <td>{{history.FinishTime | date:"yyyy-MM-dd"}}</td>
+                    <td>
+                        [[[失效]]]
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</div>

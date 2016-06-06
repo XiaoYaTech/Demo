@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<engines>
+	<engine id="1" name="google.com" url="http://www.google.com" key="q" encode="utf8">谷歌</engine>
+	<engine id="2" name="google.cn" url="http://www.google.cn" key="q" encode="utf8">谷歌中国</engine>
+	<engine id="3" name="g.cn" url="http://www.g.cn" key="q" encode="utf-8">谷歌中国</engine>
+	<engine id="4" name="baidu" url="http://www.baidu.com" key="wd" encode="gb2312">百度</engine>
+	<engine id="5" name="cn.bing" url="http://cn.bing.com" key="q" encode="utf8">必应中国</engine>
+	<engine id="6" name="bing.com" url="http://www.bing.com" key="q" encode="utf8">必应</engine>
+	<engine id="7" name="yahoo.cn" url="http://www.yahoo.cn" key="p" encode="utf8">雅虎中图</engine>
+	<engine id="8" name="yahoo.com" url="http://www.yahoo.com" key="p" encode="utf8">雅虎</engine>
+	<engine id="9" name="soso.com" url="http://www.soso.com" key="w" encode="gb2312">SoSo搜搜</engine>
+	<engine id="10" name="yisou.com" url="http://www.yisou.com" key="search" encode="utf8">一搜</engine>
+	<engine id="11" name="tom.com" url="http://i.tom.com" key="word" encode="gb2312">Tom搜索</engine>
+	<engine id="12" name="youdao.com" url="http://www.youdao.com" key="q" encode="gb2312">有道</engine>
+	<engine id="13" name="iask" url="http://iask.sina.com.cn" key="k" encode="gb2312">爱问</engine>
+	<engine id="14" name="sogou.com" url="http://www.sogou.com" key="query" encode="gb2312">搜狗</engine>
+	<engine id="15" name="zhongsou.com" url="http://www.zhongsou.com" key="w" encode="gb2312">中搜</engine>
+</engines>

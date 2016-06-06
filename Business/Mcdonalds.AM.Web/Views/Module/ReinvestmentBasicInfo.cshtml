@@ -1,0 +1,317 @@
+﻿@{
+    Layout = null;
+}
+<div ng-form name="frmReinBasic">
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                Reinvestment Basic Information
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">GB Date</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               name="GBDate"
+                               ng-model="source.GBDate"
+                               datepicker-popup="{{format}}"
+                               is-open="openedGBDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="true"
+                               close-text="Close"
+                               ng-disabled="!editable" />
+                        <span class="input-group-btn">
+                            <button type="button"
+                                    class="btn btn-default"
+                                    ng-disabled="!editable"
+                                    ng-click="open($event,'openedGBDate')">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                    <err-msgs field="frmReinBasic.GBDate" submited="$submited"></err-msgs>
+                </div>
+                <label class="col-xs-2 control-label">Construction Completion Date</label>
+                <div class="col-xs-2 pd_t_7">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               name="ConsCompletionDate"
+                               ng-required="true"
+                               ng-model="source.ConsCompletionDate"
+                               min-date="source.GBDate"
+                               datepicker-popup="{{format}}"
+                               is-open="openedConstructionCompletionDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               close-text="Close" ng-disabled="!editable" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-disabled="!editable" ng-click="open($event,'openedConstructionCompletionDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <div ng-show="$parent.$submited||frmReinBasic.ConsCompletionDate.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.ConsCompletionDate.$error.required">[[[必须填写]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">Reopen Date</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               name="ReopenDate"
+                               ng-model="source.ReopenDate"
+                               datepicker-popup="{{format}}"
+                               is-open="openedReopenDate"
+                               min-date="source.ConsCompletionDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="false"
+                               close-text="Close"
+                               ng-disabled="!editable" />
+                        <span class="input-group-btn">
+                            <button type="button"
+                                    class="btn btn-default"
+                                    ng-click="open($event,'openedReopenDate')"
+                                    ng-disabled="!editable">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                    <err-msgs field="frmReinBasic.ReopenDate" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Initial Design Type<br>(原设计风格)</label>
+                <div class="col-xs-2 pd_t_7" ng-form name="frmSTLDS">
+                    <p class="input-group">
+                        <dict-selector ng-show="editDesignStyle" parent-code="DesignType" title="点击右侧按钮保存" name="DesignStyle" required="true" selected-code="storeLocation.DesignStyle" selected-dict="InitDesignStyleDict" editable="true"></dict-selector>
+                        <input type="text" class="form-control" ng-show="!editDesignStyle" disabled="disabled" value="{{InitDesignStyleDict.NameENUS}}" />
+                        <span class="input-group-btn">
+                            <button type="button" ng-style="{width:editDesignStyle?'85%':''}" class="btn btn-default" ng-disabled="!editable" ng-if="!editDesignStyle" ng-click="editField('DesignStyle')"><i class="fa fa-edit"></i></button>
+                            <button type="button" ng-style="{width:editDesignStyle?'85%':''}" class="btn btn-default" ng-disabled="!editable" ng-if="editDesignStyle" ng-click="saveField('DesignStyle',frmSTLDS)"><i class="fa fa-save"></i></button>
+                        </span>
+                    </p>
+                    <err-msgs field="frmSTLDS.DesignStyle" submited="frmSTLPA.$submited"></err-msgs>
+                </div>
+                <label class="col-xs-2 control-label">New Design Type<br />(新设计风格)</label>
+                <div class="col-xs-2 pd_t_7">
+                    @*<dict-selector parent-code="DesignType" name="NewDesignType" required="true" selected-code="source.NewDesignType" selected-dict="NewDesignStyleDict" editable="editable"></dict-selector>*@
+                    <select required class="form-control" name="NewDesignType" ng-model="source.NewDesignType" ng-options="m.Code as m.NameENUS for m in NewDesignTypes" ng-disabled="!editable">
+                        <option value="">请选择</option>
+                    </select>
+                    <div ng-show="$parent.$submited||frmReinBasic.NewDesignType.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.NewDesignType.$error.required">[[[必须填写]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Initial Seat No.<br />(原座位数)</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" class="form-control" ng-model="storeLocation.TotalSeatsNo" disabled="disabled" />
+                </div>
+                <label class="col-xs-2 control-label">Estimated Seat No.<br />(新座位数)</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" valnumber class="form-control" name="EstimatedSeatNo" ng-required="true" ng-model="source.EstimatedSeatNo" ng-disabled="!editable" />
+                    <div ng-show="$parent.$submited||frmReinBasic.EstimatedSeatNo.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.EstimatedSeatNo.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmReinBasic.EstimatedSeatNo.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">Right Sizing Seat No.<br />(合理座位数)</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" valnumber class="form-control" name="RightSizingSeatNo" ng-required="true" ng-model="source.RightSizingSeatNo" ng-disabled="!editable" />
+                    <div ng-show="$parent.$submited||frmReinBasic.RightSizingSeatNo.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.RightSizingSeatNo.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmReinBasic.RightSizingSeatNo.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Initial DT Site Area (m2)<br />(原DT场地面积)</label>
+                <div class="col-xs-2 pd_t_7" ng-form name="frmSTLSA" ng-switch="storeTypeName">
+                    <div ng-switch-when="DT">
+                        <p class="input-group">
+                            <input type="text" class="form-control" ng-model="storeLocation.DTSize" ng-if="!editDTSize" disabled="disabled" />
+                            <input type="text" class="form-control" ng-model="storeLocation.DTSize" name="DTSize" required valnumber ng-if="editDTSize" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-disabled="!editable" ng-if="!editDTSize" ng-click="editField('DTSize')"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-default" ng-disabled="!editable" ng-if="editDTSize" ng-click="saveField('DTSize',frmSTLSA)"><i class="fa fa-save"></i></button>
+                            </span>
+                        </p>
+                        <err-msgs field="frmSTLSA.SeatArea" submited="frmSTLPA.$submited"></err-msgs>
+                    </div>
+                    <div ng-switch-when="IS">
+                        <p class="input-group">
+                            <input class="form-control" disabled="disabled" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-disabled="true"><i class="fa fa-edit"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">New DT Site Area （m2) <br />(新DT场地面积)</label>
+                <div class="col-xs-2 pd_t_7" ng-switch="storeTypeName">
+                    <div ng-switch-when="DT">
+                        <input type="text" valnumber class="form-control" name="NewDTSiteArea" required ng-model="source.NewDTSiteArea" ng-disabled="!editable" />
+                        <div ng-show="$parent.$parent.$submited||frmReinBasic.NewDTSiteArea.$dirty">
+                            <span class="ng-error" ng-show="frmReinBasic.NewDTSiteArea.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmReinBasic.NewDTSiteArea.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    </div>
+                    <div ng-switch-when="IS">
+                        <input class="form-control" disabled="disabled" />
+                    </div>
+                    <div ng-switch-default>
+                        <input type="text" valnumber class="form-control" name="NewDTSiteArea" ng-model="source.NewDTSiteArea" ng-disabled="!editable" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Initial Operation Size (m2)<br />(原营运面积)</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" class="form-control" ng-model="storeLocation.TotalArea" disabled="disabled" />
+                </div>
+                <label class="col-xs-2 control-label">New Operation Size （m2)<br />(新营运面积)</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" valnumber class="form-control" name="NewOperationSize" ng-required="true" ng-model="source.NewOperationSize" ng-disabled="!editable" />
+                    <div ng-show="$parent.$submited||frmReinBasic.NewOperationSize.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.NewOperationSize.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmReinBasic.NewOperationSize.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Initial Kitchen Size (m2)<br />(原厨房面积)</label>
+                <div class="col-xs-2 pd_t_7" ng-form name="frmSTLKA">
+                    <p class="input-group">
+                        <input type="text" class="form-control" ng-model="storeLocation.KitchenArea" ng-if="!editKitchenArea" disabled="disabled" />
+                        <input type="text" class="form-control" ng-model="storeLocation.KitchenArea" name="KitchenArea" required valnumber ng-if="editKitchenArea" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-disabled="!editable" ng-if="!editKitchenArea" ng-click="editField('KitchenArea')"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-default" form-submit ng-disabled="!editable" ng-if="editKitchenArea" ng-click="saveField('KitchenArea',frmSTLKA)"><i class="fa fa-save"></i></button>
+                        </span>
+                    </p>
+                    <err-msgs field="frmSTLKA.KitchenArea" submited="frmSTLKA.$submited"></err-msgs>
+                </div>
+                <label class="col-xs-2 control-label">New Kitchen Size （m2)<br />(新厨房面积)</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" valnumber class="form-control" name="NewKitchenSize" ng-required="true" ng-model="source.NewKitchenSize" ng-disabled="!editable" />
+                    <div ng-show="$parent.$submited||frmReinBasic.NewKitchenSize.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.NewKitchenSize.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmReinBasic.NewKitchenSize.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Initial Dining Area (m2)<br />(原就餐区面积)</label>
+                <div class="col-xs-2 pd_t_7" ng-form name="frmSTLDA">
+                    <p class="input-group">
+                        <input type="text" class="form-control" ng-model="storeLocation.DiningArea" disabled="disabled" ng-if="!editDiningArea" />
+                        <input type="text" class="form-control" ng-model="storeLocation.DiningArea" name="DiningArea" required valnumber ng-if="editDiningArea" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-disabled="!editable" ng-if="!editDiningArea" ng-click="editField('DiningArea')"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-default" form-submit ng-disabled="!editable" ng-if="editDiningArea" ng-click="saveField('DiningArea',frmSTLDA)"><i class="fa fa-save"></i></button>
+                        </span>
+                    </p>
+                    <err-msgs field="frmSTLDA.DiningArea" submited="frmSTLDA.$submited"></err-msgs>
+                </div>
+                <label class="col-xs-2 control-label">New Dining Area （m2)<br />(新就餐区面积)</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" valnumber class="form-control" name="NewDiningArea" ng-required="true" ng-model="source.NewDiningArea" ng-disabled="!editable" />
+                    <div ng-show="$parent.$submited||frmReinBasic.NewDiningArea.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.NewDiningArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmReinBasic.NewDiningArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Wall panel area (m2)<br />(墙面面积)</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" valnumber class="form-control" name="WallPanelArea" ng-required="true" ng-model="source.WallPanelArea" ng-disabled="!editable" />
+                    <div ng-show="$parent.$submited||frmReinBasic.WallPanelArea.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.WallPanelArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmReinBasic.WallPanelArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">Wall graphic area (m2)<br />(墙画面积)</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" valnumber class="form-control" name="WallGraphicArea" ng-required="true" ng-model="source.WallGraphicArea" ng-disabled="!editable" />
+                    <div ng-show="$parent.$submited||frmReinBasic.WallGraphicArea.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.WallGraphicArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmReinBasic.WallGraphicArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">Facade ACM area (m2)<br />(外立面铝塑板面积)</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" valnumber class="form-control" name="FacadeACMArea" ng-required="true" ng-model="source.FacadeACMArea" ng-disabled="!editable" />
+                    <div ng-show="$parent.$submited||frmReinBasic.FacadeACMArea.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.FacadeACMArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmReinBasic.FacadeACMArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div ng-if="flowCode!='MajorLease_ConsInfo'&& flowCode!='Renewal_ConsInfo' && flowCode!='Reimage_ConsInfo' && flowCode!='Rebuild_ConsInfo'">
+                    <label class="col-xs-2 control-label">New Kiosk</label>
+                    <div class="col-xs-2 pd_t_7">
+                        <select class="form-control" name="NewKiosk" ng-required="true" ng-model="source.NewKiosk" ng-options="o.value as o.text for o in alternativeOptions" ng-disabled="!editable">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <div ng-show="$parent.$submited||frmReinBasic.NewKiosk.$dirty">
+                            <span class="ng-error" ng-show="frmReinBasic.NewKiosk.$error.required">[[[必须填写]]]</span>
+                        </div>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">New Attached Kiosk</label>
+                <div class="col-xs-2 pd_t_7">
+                    <select class="form-control" name="NewAttachedKiosk" ng-required="true" ng-model="source.NewAttachedKiosk" ng-options="o.value as o.text for o in alternativeOptions" ng-disabled="!editable">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||frmReinBasic.NewAttachedKiosk.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.NewAttachedKiosk.$error.required">[[[必须填写]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">New Remote Kiosk</label>
+                <div class="col-xs-2 pd_t_7">
+                    <select class="form-control" name="NewRemoteKiosk" ng-required="true" ng-model="source.NewRemoteKiosk" ng-options="o.value as o.text for o in alternativeOptions" ng-disabled="!editable">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||frmReinBasic.NewRemoteKiosk.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.NewRemoteKiosk.$error.required">[[[必须填写]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">New McCafe</label>
+                <div class="col-xs-2 pd_t_7">
+                    <select class="form-control" name="NewMcCafe" ng-required="true" ng-model="source.NewMcCafe" ng-options="o.value as o.text for o in alternativeOptions" ng-disabled="!editable">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||frmReinBasic.NewMcCafe.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.NewMcCafe.$error.required">[[[必须填写]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">New MDS</label>
+                <div class="col-xs-2 pd_t_7">
+                    <select class="form-control" name="NewMDS" ng-required="true" ng-model="source.NewMDS" ng-options="o.value as o.text for o in alternativeOptions" ng-disabled="!editable">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||frmReinBasic.NewMDS.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.NewMDS.$error.required">[[[必须填写]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">New 24H</label>
+                <div class="col-xs-2 pd_t_7">
+                    <select class="form-control" name="NewTwientyFourHour" ng-required="true" ng-model="source.NewTwientyFourHour" ng-options="o.value as o.text for o in alternativeOptions" ng-disabled="!editable">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||frmReinBasic.NewTwientyFourHour.$dirty">
+                        <span class="ng-error" ng-show="frmReinBasic.NewTwientyFourHour.$error.required">[[[必须填写]]]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

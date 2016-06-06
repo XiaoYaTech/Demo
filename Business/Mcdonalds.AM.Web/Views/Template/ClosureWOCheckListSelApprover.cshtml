@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+}
+
+    <div class="modal-header">
+        <h3 class="modal-title">[[[选择审批人]]]</h3>
+    </div>
+<div class="modal-body">
+    <p>[[[审批人:]]]</p>
+    <form class="form-horizontal" name="frmEditUser" novalidate>
+        <div class="approve-dialog">
+            <div class="approve-group">
+                <span class="badge">1</span>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[Construction Manager]]]</label>
+                    <div class="col-xs-4 pd_t_7">
+                        <div ng-show="dataLoaded">
+                            <select chosen="{disable_search:true}" id="selPMSupervisor" name="selPMSupervisor" class="form-control" ng-model="entity.selConstructionMgr" required ng-options="m.NameENUS for m in ConstructionMgrList">
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <div ng-show="$submited||frmEditUser.selPMSupervisor.$dirty">
+                                <span class="ng-error" ng-show="frmEditUser.selPMSupervisor.$error.required">[[[必须选择]]]</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div class="approve-group">
+                <span class="badge">2</span>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[MCCL Cons Manager]]]</label>
+                    <div class="col-xs-4 pd_t_7">
+                        <div ng-show="dataLoaded">
+                            <select chosen="{disable_search:true}" id="selMCCLConsManager" name="selMCCLConsManager" class="form-control" ng-model="entity.selMCCLConsManager" required ng-options="m.NameENUS for m in MCCLConsManagerList">
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <div ng-show="$submited||frmEditUser.selMCCLConsManager.$dirty">
+                                <span class="ng-error" ng-show="frmEditUser.selMCCLConsManager.$error.required">[[[必须选择]]]</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+                    <label class="control-label col-xs-2">[[[MCCL IT]]]</label>
+                    <div class="col-xs-4 pd_t_7">
+                        <div ng-show="dataLoaded">
+                            <select chosen="{disable_search:true}" id="selMCCLIT" name="selMCCLIT" class="form-control" ng-model="entity.selMCCLIT" required ng-options="m.NameENUS for m in MCCLITList">
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <div ng-show="$submited||frmEditUser.selMCCLIT.$dirty">
+                                <span class="ng-error" ng-show="frmEditUser.selMCCLIT.$error.required">必须选择</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[MCCL Equipment]]]</label>
+                    <div class="col-xs-4 pd_t_7">
+                        <div ng-show="dataLoaded">
+                            <select chosen="{disable_search:true}" name="selMCCLEquipment" id="selMCCLEquipment" class="form-control" ng-model="entity.selMCCLEquipment" required ng-options="m.NameENUS for m in MCCLEquipmentList">
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <div ng-show="$submited||frmEditUser.selMCCLEquipment.$dirty">
+                                <span class="ng-error" ng-show="frmEditUser.selMCCLEquipment.$error.required">必须选择</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+
+
+    <button class="btn btn-sm btn-primary" form-submit ng-click="ok(frmEditUser,scope)">
+        [[[提交]]]</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+</div>
+

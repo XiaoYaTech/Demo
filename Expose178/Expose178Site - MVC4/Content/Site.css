@@ -1,0 +1,96 @@
+/* CSS Document */
+body
+{
+	margin:0px;
+	padding:0px;
+	/*background-color:#FFF3E7;*/
+	color:#333333;
+	font:12px/150% Arial,Verdana,"ËÎÌו";
+	/*background-image:url("/Content/MoyeBuyComStyle1/Imgs/body_bg.jpg");*/
+	background-position:center;
+	background-repeat:no-repeat;
+}
+ul, p, h1, h2, h3, h4, h5, h6, dl, dd, ol
+{
+    font-family:"ËÎÌו";
+    line-height:1.6;
+    font-size:100%;
+    margin:0px;
+	padding:0px;
+	color:#333333;
+}
+a
+{
+	text-decoration:none;
+	color:#333333;
+	z-index:1000;
+}
+a:hover
+{
+	color:#D80000;
+	text-decoration:underline;
+}
+li
+{
+    list-style:none;
+}
+.MainBody
+{
+    position:relative;
+	margin:auto;
+	width:auto;
+	height:auto;
+	min-height:700px;
+	min-width:1210px;
+	width:1210px;
+	height:100%;
+	/*background-color:#FFF3E7;*/
+	z-index:0;
+}
+
+.Container
+{
+	float:left;
+	height:auto;
+	width:auto;
+	background-color:#FFF;
+}
+.ContainerInner
+{
+	margin:10px;
+}
+.dataTable
+{
+	border-width:1px;
+	border-style:solid;
+	line-height:25px;
+	text-align:center;
+}
+.changeTable
+{
+	border-width:1px;
+	border-style:solid;
+}
+th
+{
+	color:#8C5963;
+	min-width:30px;
+	padding-left:5px;
+	padding-right:5px;
+	border-color:#999;
+}
+td
+{
+	padding-left:5px;
+	padding-right:5px;
+	border-color:#999;
+}
+.trmouseover
+{
+	background-color:#ECDFDE;
+	cursor:default;
+}
+textarea
+{
+    display:block;   
+}

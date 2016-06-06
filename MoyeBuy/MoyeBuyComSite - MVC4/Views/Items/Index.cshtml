@@ -1,0 +1,97 @@
+﻿@{
+    MoyeBuy.Com.Model.ProductInfo prod = Model;
+    ViewBag.Title = prod.ProductName;
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Scripts/Items.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";
+}
+<div class="ProdCategoryTitle">
+    <strong>
+    <a href="@Url.Content("/Categorys/"+prod.Category.CategoryId+".html")" target="_self">@prod.Category.CategoryName</a></strong> >>
+    <a href="@Url.Content("/Items/"+prod.ProductId+".html")" target="_self">@prod.ProductName.Substring(0, prod.ProductName.Length > 15 ? 15 : prod.ProductName.Length)</a>
+</div>
+
+<div class="ProdIntrod">
+    <div class="PreviewProd">
+        <div class="PreviewProdImg">
+        @{
+            string strImg = "";
+            strImg = prod.ProductImgs;
+            if (string.IsNullOrEmpty(strImg))
+            {
+                strImg = "1.jpg";
+            }
+         }
+            <img src ="@Url.Content("~/Graphics/Prod/" + strImg + "")" width="350px" height="350px;" alt="" />
+        </div>
+    </div>
+    <div class="PreviewName">
+        <h1>@prod.ProductName</h1>
+    </div>
+    <div class="SummaryContainerDiv">
+        <ul id="Summary">
+            <li class="SummaryMarkey">
+                <div class="dt">参 考 价:</div>
+                <div class="dd"><del>￥@prod.MarketPrice</del></div>
+            </li>
+            <li class="SummaryPrice">
+                <div class="dt">本 站 价:</div>
+                <div class="dd"><strong>￥<span id="myprice">@prod.MoyeBuyPrice</span></strong></div>
+            </li>
+            <li class="SummaryPrice">
+                <div class="dt">促销信息:</div>
+                <div class="dd"><span>已优惠￥@((Convert.ToDouble(prod.MarketPrice) - Convert.ToDouble(prod.MoyeBuyPrice)).ToString("0.00"))</span></div>
+            </li>
+            <li class="SummaryPrice">
+                <div class="dt">包装规格:</div>
+                <div class="dd">@prod.ProductSpec</div>
+            </li>
+        </ul>
+        <div class="BuyContainerDiv">
+            <div class="BuyProdNumDiv">
+            <input type="hidden" name="sumprice" id="sumprice" value="@prod.MoyeBuyPrice" />
+                购买<input type="text" onchange="javascript:countProd();" name="BuyProdNum" id="BuyProdNum" value="1" size="5" style="width:30px; text-align:center; color:Red;" />件,需支付总金额为<span style="color:Red;" id="countRslt">@prod.MoyeBuyPrice</span>元
+            </div>
+            <div class="Buy" onclick="javascript:Buy('@prod.ProductId');"></div>
+            <div class="BuyToCart" onclick="javascript:addToCart('@prod.ProductId');"></div>
+        </div>
+    </div>
+    <div class="ProdRight">
+        <div class="TuiJian">&nbsp;&nbsp;热门推荐</div>
+        @if (ViewBag.ListHotProd != null)
+        {
+            int count=0;
+            foreach (var hotProd in (IList<MoyeBuy.Com.Model.ProductInfo>)ViewBag.ListHotProd)
+            {
+                strImg = hotProd.ProductImgs;
+                if (string.IsNullOrEmpty(strImg))
+                {
+                    strImg = "1.jpg";
+                }
+            
+                <div style=" margin-top:15px;margin-left:10px; border-bottom:1px dotted #ddd; float:left;">
+                    <img src="@Url.Content("~/Graphics/Prod/" + strImg + "")" width="70px" height="60px" alt="" style="float:left;" />
+                    <ul>
+                        <li>原价:<del>￥@hotProd.MarketPrice</del></li>
+                        <li>折扣价:<strong style="color:Red;">￥@hotProd.MoyeBuyPrice</strong></li>
+                        <li><a href="@Url.Content("/Items/"+@hotProd.ProductId+".html")" ><img src="@Url.Content("/Content/MoyeBuyComStyle1/Imgs/index_233.gif")" /></a></li>
+                    </ul>
+                </div>
+                count++;
+                if (count > 5)
+                {
+                    break;
+                }
+            }
+        }
+        
+    </div>
+</div>
+<div class="ProdDetail">
+    <div class="DtBorder">
+        <div class="DetailTitle">商品详细</div>
+    </div>
+    <div class="DetailContainer">
+        <div class="DetailBody">
+            @MvcHtmlString.Create(@prod.ProductDesc);
+        </div>
+    </div>
+</div>

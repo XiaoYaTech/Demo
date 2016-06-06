@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+
+<form class="form-horizontal" name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_ClosureTool" place-holder="8"></top-nav>
+    <cheking-point project-id="projectId" flow-code="Closure_ClosureTool" refresh="checkPointRefresh"></cheking-point>
+
+    <notification-message project-id="projectId"
+        flow-code="Closure"
+        sub-flow-code="Closure_ClosureTool"
+        node-id="entity.Id"
+        uscode="ClosureInfo.USCode"></notification-message>
+
+    <closure-tool-store-basic-info project="ClosureInfo" code="ClosureInfo.USCode"></closure-tool-store-basic-info>
+    <div class="panel panel-black mg_t_10" ng-hide="true">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">FinSupervisor
+            </span>
+        </div>
+        <div class="panel-body clearfix">
+            <input class="form-control" ng-model="entity.FinReportToAccount" />
+        </div>
+    </div>
+
+    <ttm-historical-financial-data editable="true" entity="entity" project-id="projectId" yearmonth="yearmonth"></ttm-historical-financial-data>
+    <impact-on-other-stores editable="impactStoreEditable" impact-store1="impactStore1" impact-store2="impactStore2" entity="entity"></impact-on-other-stores>
+    <decision-logic editable="decisionEditable" entity="entity" is-load-finished="isLoadFinished" is-loaded="isLoaded" us-code="ClosureInfo.USCode" />
+
+
+    <closure-write-off-data datas="woCheckList"></closure-write-off-data>
+
+
+    <div ng-show="isActor">
+        @*<assets-inputs editable="true" is-show="isActor" inputs="entity.Compensation"></assets-inputs>*@
+        <comment comments="entity.ConclusionComment" title="Comments and Conclusion" editable="true"></comment>
+    </div>
+
+   <div class="panel panel-black mg_t_10" ng-show="isActor">
+        @*<div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">Genarate
+            </span>
+        </div>
+        *@
+        <div class="panel-body" style="border-top: solid 1px #ececec; text-align: center">
+            <span class="glyphicon glyphicon-info-sign"></span>&nbsp;[[[如果您已完成填写，请点击]]]
+            <button type="button" class="btn btn-sm btn-default" ng-click="genClosureTool()">
+                <span class="fa fa-bar-chart-o"></span>
+                [[[生成]]]ClosureTool
+            </button>
+        </div>
+    </div>
+
+    <attachments ref-table-name="ClosureTool"
+        project-id="{{projectId}}"
+        flow-code="Closure_ClosureTool"
+        editable="true"></attachments>
+
+    <approval-records ref-table-id="entity.Id" ref-table-name="ClosureTool" workflow-type="Closure"></approval-records>
+
+    <comment comments="entity.Comments" title="[[[意见]]]" editable="true"></comment>
+    <project-history page-url="/closure/Main#/ClosureTool/Process/View?projectId={{projectId}}" project-id="projectId" table-name="ClosureTool" title=" ClosureTool History" has-template="false" title-name="ClosureTool"></project-history>
+    <div class="form-actions ta_c">
+        <button type="button" ng-disabled="submiting" class="btn btn-lg btn-orange" ng-click="SaveClosureTool()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" ng-disabled="submiting" ng-hide="isActor" form-submit class="btn btn-lg btn-red" ng-click="beginSelApprover(frmMain,ClosureInfo)"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</form>

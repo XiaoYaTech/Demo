@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+<form class="form-horizontal" name="frmFin" novalidate>
+    <div class="panel panel-orange mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Assets Inputs(RMB)]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2">[[[Compensation (Payment)receipt]]]</label>
+                <div class="col-xs-10" ng-if="editable">
+                    <input type="text" valnumber name="receipt" class="form-control" ng-model="$parent.inputs" required></input>
+                    <err-msgs field="frmFin.receipt" submited="$parent.$submited"></err-msgs>
+                </div>
+                <div class="col-xs-10" ng-if="!editable">
+                    {{inputs|money}}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

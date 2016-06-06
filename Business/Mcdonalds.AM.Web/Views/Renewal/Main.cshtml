@@ -1,0 +1,13 @@
+﻿@using System.Web.Optimization;
+@{
+    Layout = "~/Views/Shared/_AngularLayout.cshtml";
+}
+
+@section scripts{
+
+    @Scripts.Render("~/Scripts/Renewal")
+@Scripts.Render("~/Scripts/Controllers/Renewal/ClosureMemoController.js")
+@Scripts.Render("~/Scripts/Controllers/Renewal/ReopenMemoController.js")
+@Scripts.Render("~/Scripts/Controllers/Renewal/GBMemoController.js")
+}
+<div ng-view></div>

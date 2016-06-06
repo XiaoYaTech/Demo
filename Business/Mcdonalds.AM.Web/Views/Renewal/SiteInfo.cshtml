@@ -1,0 +1,20 @@
+﻿
+@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_SiteInfo" place-holder="4" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="Renewal_SiteInfo" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    <estimated-vs-actual-construction source="estimatedVsActualConstruction" editable="true" flow-code="Renewal"></estimated-vs-actual-construction>
+    <site-info source="siteInfo" editable="true" us-code="info.USCode" identifier="estimatedVsActualConstruction.RefId"></site-info>
+    <notification-message project-id="projectId"
+                          flow-code="Renewal"
+                          sub-flow-code="Renewal_SiteInfo"
+                          node-id="siteInfo.Id"
+                          uscode="info.USCode"></notification-message>
+    <div class="form-actions ta_c">
+        <button type="button" class="btn btn-lg btn-orange" ng-click="save()" ng-disabled="acting"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" form-submit ng-disabled="acting" ng-click="submit(frmMain)"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</form>

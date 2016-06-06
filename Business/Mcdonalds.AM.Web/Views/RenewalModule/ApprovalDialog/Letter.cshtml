@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">Letter[[[呈递]]]</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="frmApprovalDialog" novalidate>
+            <div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">[[[Asset Manager]]]</label>
+                    <div class="col-xs-3">
+                        <div ng-show="dataLoaded">
+                            <select chosen="" class="form-control" name="AssetManager" ng-model="Approvers.AssetManager" ng-options="m.NameENUS for m in AssetManagers" ng-required="true"></select>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                        @*<div>{{Approvers.AssetManager.Code}}</div>*@
+                        <div ng-show="$submited||frmApprovalDialog.AssetManager.$dirty">
+                            <span class="ng-error" ng-show="frmApprovalDialog.AssetManager.$error.required">[[[必须选择]]]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" form-submit ng-click="ok(frmApprovalDialog)">[[[确定]]]</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+    </div>
+</div>

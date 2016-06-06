@@ -1,0 +1,497 @@
+﻿@using System.Web.Optimization;
+@using System.Configuration;
+@using Mcdonalds.AM.Web.Core;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+    var userQueryString = McdAMContext.CurrentUser != null ? Cryptography.Encrypt(McdAMContext.CurrentUser.Code, DateTime.Now.ToString("yyyyMMdd"), "oms") : "";
+}
+@section head{
+    @Styles.Render("~/Content/animate.css")
+    @Styles.Render("~/Content/default.css")
+    <style>
+        body {
+            background-color: #FFF;
+            background-image: none;
+        }
+
+        .main {
+            margin-top: 0;
+            width: 100%;
+        }
+    </style>
+}
+@section scripts{
+    @Scripts.Render("~/Scripts/portal.js")
+    <script type="text/javascript">
+        setInterval(setFrameHeight, 1000);
+        function setFrameHeight() {
+            try {
+                var iframeBody = document.getElementById("mainFrame").contentDocument.body;
+                if (!!iframeBody) {
+                    var height = iframeBody.scrollHeight;
+                    var minHeight = 800;
+                    if (height < minHeight) {
+                        height = minHeight;
+                    }
+                    $("#mainFrame").height(height);
+                }
+            }
+            catch (e) {
+
+            }
+        }
+        $(window).resize(setFrameHeight);
+
+        window.onscroll = function () {
+            var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            var frmWin = document.getElementById("mainFrame").contentWindow;
+            frmWin.resetVertionPos && frmWin.resetVertionPos(scrollTop);
+            frmWin.resetMessagePos && frmWin.resetMessagePos(scrollTop);
+            frmWin.resetAttachmentsMemoPos && frmWin.resetAttachmentsMemoPos(scrollTop);
+        };
+
+        $(function () {
+            var timeout = setTimeout(function () {
+                if (window.currentUser) {
+                    $("#userName").html(window.currentUser.NameENUS);
+                    $.ajax({
+                        url: Utils.ServiceURI.Address() + "api/system/reminders",
+                        cache: false,
+                    }).success(function (data) {
+                        $("#taskCount").html(data.TaskCount);
+                        var html = [];
+                        var tplTask = $("#tplTask").html();
+                        var tplRemind = $("#tplRemind").html();
+                        $.each(data.Tasks, function (i, t) {
+                            var task = tplTask
+                                .replace("{{ProjectId}}", t.RefID)
+                                .replace("{{SourceNameZHCN}}", t.SourceNameZHCN)
+                                .replace("{{TypeNameZHCN}}", t.TypeNameZHCN)
+                                .replace("{{CreateTime}}", moment(t.CreateTime).format("YYYY-MM-DD"))
+                                .replace("{{Title}}", t.Title)
+                                .replace("{{Url}}", t.Url);
+                            html.push(task);
+                        });
+                        $("#todoList").html(html.join(""));
+                        html = [];
+                        $("#remindCount").html(data.RemindCount);
+                        $.each(data.Reminds, function (i, r) {
+                            var remind = tplRemind.replace("{{Title}}", r.Title);
+                            html.push(remind);
+                        });
+                        $("#remindList").html(html.join(""));
+                    });
+                };
+                clearTimeout(timeout);
+            }, 1000);
+
+        });
+        function gotoUrl(url) {
+            window.open(Utils.ServiceURI.AppUri + url + "?user-id=" + escape("@userQueryString"), "mainFrame");
+        }
+        function gotoFx(url) {
+            window.open("@ConfigurationManager.AppSettings["Fx.WebHostUri"]" + url + "?user-id=" + escape("@userQueryString"), "mainFrame");
+        }
+    </script>
+}
+
+<!-- Preloader -->
+<div id="preloader" style="display: none;">
+    <div id="status" style="display: none;"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<header class="headerpanel">
+    <div class="logopanel">
+        <img src="~/Content/images/logo.png">
+    </div>
+    <ul class="nav nav-pills nav-header">
+        <li>
+            <a href="#">报表中心</a>
+        </li>
+        <li>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                发展中心
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-grid animated fadeInLeft">
+                <li>
+                    <a href="~/Home/Index">
+                        <i class="fa fa-bar-chart-o"></i>
+                        <span class="text">AM</span>
+                    </a>
+                </li>
+                @*<li>
+                        <a href="#">
+                            <i class="fa fa-cubes"></i>
+                            <span class="text">PMT</span>
+                        </a>
+                    </li>*@
+            </ul>
+        </li>
+        <li>
+            <a href="#">财务中心</a>
+        </li>
+        <li>
+            <a href="#">营运中心</a>
+        </li>
+    </ul>
+    <div class="header-right">
+        <ul class="headermenu" id="step2">
+            @*<li>
+                    <div class="findmenu">
+                        <a class="dropdown-toggle" href="" data-toggle="dropdown">I need to go...</a>
+                        <ul class="dropdown-menu dropdown-find animated fadeInLeft">
+                            <li><a href="#">HR Site</a></li>
+                            <li><a href="#">HW Sites</a></li>
+                            <li><a href="#">Document Center</a></li>
+                            <li><a href="#">Ask for leave</a></li>
+                            <li><a href="#">Request for laptop</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#addNewLink"><i class="fa fa-plus-square"></i> Add new link</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="search">
+                        <i class="fa fa-search"></i>
+                        <input class="form-control" type="search">
+                    </div>
+                </li>*@
+            <li>
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle tp-icon" id="todoBtn" data-toggle="dropdown">
+                        <i class="fa fa-list"></i>
+                        <span class="badge bg-orange" id="taskCount">0</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-head pull-right animated fadeInLeft">
+                        <div class="tab-filter">
+                            @*<span class="filter active" data-filter="all">All</span>*@
+                            <span class="filter" data-filter=".am">AM</span>
+                            @*<span class="filter" data-filter=".pmt">PMT</span>*@
+                        </div>
+                        <ul class="dropdown-list task" id="todoList"></ul>
+                        <div class="more"><a href="~/Home/Main/#taskwork" target="mainFrame">More</a></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle tp-icon" data-toggle="dropdown">
+                        <i class="fa fa-bell"></i>
+                        <span class="badge bg-red" id="remindCount">0</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-head pull-right animated fadeInLeft">
+                        <h5 class="title">Notifications</h5>
+                        <ul class="dropdown-list noti" id="remindList"></ul>
+                        @*						<div class="more"><a href="#">More</a></div>*@
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle tp-icon" data-toggle="dropdown">
+                        <i class="fa fa-envelope"></i>
+                        <span class="badge bg-yellow" id="noticeCount">0</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-head pull-right animated fadeInLeft">
+                        <h5 class="title">You have <span id="titleNoticeCount"></span> Reminds</h5>
+                        <ul class="dropdown-list inbox"></ul>
+                        <div class="more"><a href="#">More</a></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle tp-icon" data-toggle="dropdown">
+                        <span id="userName"></span>
+                        <i class="fa fa-cog"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-head pull-right animated fadeInLeft">
+                        <ul class="dropdown-list user">
+                            <li>
+                                <a href="~/Error/LoginError.html">
+                                    <i class="fa fa-sign-out"></i>
+                                    Log Out
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</header>
+
+<section>
+    <div class="leftpanel">
+        <div class="leftpanelinner">
+            <a class="menutoggle">
+                <i class="fa fa-bars fa-5"></i>
+            </a>
+            <ul class="nav nav-pills nav-stacked nav-mcd">
+                <li class="nav-parent">
+                    <a id="step1" href="#">
+                        <i class="fa fa-file"></i>
+                        <span>Create Workflow</span>
+                    </a>
+                    <ul class="children">
+                        <li><a class="cur_p" onclick="gotoUrl('Closure/Main#/Create')">Closure</a></li>
+                        <li><a class="cur_p" onclick="gotoUrl('MajorLease/Main#/Create')">MajorLease</a></li>
+                        <li><a class="cur_p" onclick="gotoUrl('Reimage/Main#/Create')">Reimage</a></li>
+                        <li><a class="cur_p" onclick="gotoUrl('Rebuild/Main#/Create')">Rebuild</a></li>
+                        <li><a class="cur_p" onclick="gotoUrl('Renewal/Main#/Create')">Renewal</a></li>
+                        <li><a class="cur_p" onclick="gotoUrl('TempClosure/Main#/Create')">TempClosure</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="cur_p" onclick="gotoUrl('StoreList')">
+                        <i class="fa fa-bank"></i>
+                        <span>Store list</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="cur_p" onclick="gotoUrl('Home/Main#projectList')">
+                        <i class="fa fa-file-text-o"></i>
+                        <span>Project list</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="cur_p" onclick="gotoUrl('report/form')">
+                        <i class="fa fa-file-text-o"></i>
+                        <span>Report</span>
+                    </a>
+                </li>
+                <li class="nav-parent">
+                    <a href="#">
+                        <i class="fa fa-cog"></i>
+                        <span>Setting</span>
+                    </a>
+                    <ul class="children">
+                        <li><a class="cur_p" onclick="gotoUrl('Home/Main#dictionary')">Dictionary</a></li>
+                        <li><a onclick="gotoFx('#/user')" class="cur_p">User Management</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="mainpanel">
+        <div class="contentpanel">
+            <iframe width="100%" height="0" allowtransparency="true" name="mainFrame" id="mainFrame" src="~/Home/Main/#taskwork" scrolling="no" frameborder="0"></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- Modal add new link-->
+<div tabindex="-1" class="modal modal-mcd fade" id="addNewLink" role="dialog" aria-hidden="true" aria-labelledby="addNewLink">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Quick link</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <ul class="modal-navbar">
+                            <li class="active"><a href="#amTab" data-toggle="tab"><i class="fa fa-thumb-tack"></i> AM</a></li>
+                            <li><a href="#gapTab" data-toggle="tab"><i class="fa fa-thumb-tack"></i> GAP</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-9 tab-content">
+                        <div class="tab-pane fade active in" id="amTab">
+                            <ul class="modal-checkgroup">
+                                <li class="ckbox-solid">
+                                    <input name="store" id="store" type="checkbox">
+                                    <label for="store">
+                                        <span class="ckbox-addon"></span>
+                                        Store List
+                                    </label>
+                                </li>
+                                <li class="ckbox-solid">
+                                    <input name="project" id="project" type="checkbox">
+                                    <label for="project">
+                                        <span class="ckbox-addon"></span>
+                                        Project List
+                                    </label>
+                                </li>
+                                <li class="ckbox-solid">
+                                    <input name="document" id="document" type="checkbox">
+                                    <label for="document">
+                                        <span class="ckbox-addon"></span>
+                                        Document List
+                                    </label>
+                                </li>
+                            </ul>
+                            <div class="modal-checkmodule">
+                                <h3 class="modal-checktitle">Work flow</h3>
+                                <ul class="modal-checkgroup">
+                                    <li class="ckbox-solid">
+                                        <input name="Closure" id="Closure" type="checkbox">
+                                        <label for="Closure">
+                                            <span class="ckbox-addon"></span>
+                                            Closure
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="Rebuild" id="Rebuild" type="checkbox">
+                                        <label for="Rebuild">
+                                            <span class="ckbox-addon"></span>
+                                            Rebuild
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="Reimage" id="Reimage" type="checkbox">
+                                        <label for="Reimage">
+                                            <span class="ckbox-addon"></span>
+                                            Reimage
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="Renewal" id="Renewal" type="checkbox">
+                                        <label for="Renewal">
+                                            <span class="ckbox-addon"></span>
+                                            Renewal
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="modal-checkmodule">
+                                <h3 class="modal-checktitle">Dashboard</h3>
+                                <ul class="modal-checkgroup">
+                                    <li class="ckbox-solid">
+                                        <input name="dashboard1" id="dashboard1" type="checkbox">
+                                        <label for="dashboard1">
+                                            <span class="ckbox-addon"></span>
+                                            Dashboard 1
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="dashboard2" id="dashboard2" type="checkbox">
+                                        <label for="dashboard2">
+                                            <span class="ckbox-addon"></span>
+                                            Dashboard 2
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="gapTab">
+                            <div class="modal-checkmodule">
+                                <h3 class="modal-checktitle">Process</h3>
+                                <ul class="modal-checkgroup">
+                                    <li class="ckbox-solid">
+                                        <input name="cashExpense" id="cashExpense" type="checkbox">
+                                        <label for="cashExpense">
+                                            <span class="ckbox-addon"></span>
+                                            Cash Expense Claim
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="processTravel" id="processTravel" type="checkbox">
+                                        <label for="processTravel">
+                                            <span class="ckbox-addon"></span>
+                                            Travel Application
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="cashAdvance" id="cashAdvance" type="checkbox">
+                                        <label for="cashAdvance">
+                                            <span class="ckbox-addon"></span>
+                                            Cash Advance Application
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="processGift" id="processGift" type="checkbox">
+                                        <label for="processGift">
+                                            <span class="ckbox-addon"></span>
+                                            Gift Application
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="unionFe" id="unionFe" type="checkbox">
+                                        <label for="unionFe">
+                                            <span class="ckbox-addon"></span>
+                                            Union Fe Claim
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="delegation" id="delegation" type="checkbox">
+                                        <label for="delegation">
+                                            <span class="ckbox-addon"></span>
+                                            Delegation Application
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="modal-checkmodule">
+                                <h3 class="modal-checktitle">Report By Category</h3>
+                                <ul class="modal-checkgroup">
+                                    <li class="ckbox-solid">
+                                        <input name="travelApplication" id="travelApplication" type="checkbox">
+                                        <label for="travelApplication">
+                                            <span class="ckbox-addon"></span>
+                                            Travel Application Report
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="giftApplication" id="giftApplication" type="checkbox">
+                                        <label for="giftApplication">
+                                            <span class="ckbox-addon"></span>
+                                            Gift Application
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="policyDeviation" id="policyDeviation" type="checkbox">
+                                        <label for="policyDeviation">
+                                            <span class="ckbox-addon"></span>
+                                            Report of Policy Deviation
+                                        </label>
+                                    </li>
+                                    <li class="ckbox-solid">
+                                        <input name="timeStatus" id="timeStatus" type="checkbox">
+                                        <label for="timeStatus">
+                                            <span class="ckbox-addon"></span>
+                                            Time Status Report
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-mcd btn-sm bg-orange" type="button">[[[保存]]]</button>
+                <button class="btn btn-mcd btn-sm bg-yellow" type="button" data-dismiss="modal">[[[取消]]]</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tplTask">
+    <li class="mix am" data-cat="am">
+        <span class="photo"><img src="@Url.Content("~/Content/images/avatar-mini.jpg")"></span>
+        <div class="desc">
+            <h5>{{SourceNameZHCN}} {{TypeNameZHCN}}</h5>
+            <span class="date">{{CreateTime}}</span>
+            <p>{{ProjectId}}</p>
+        </div>
+        <div class="collspan-info">
+            <p class="summary">{{Title}}</p>
+            <div class="check-group">
+                <div class="check-group">
+                    <a class="btn btn-mcd btn-sm proceed-flag" href="{{Url}}" target="mainFrame">Proceed</a>
+                </div>
+            </div>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="tplRemind">
+    <li>
+        <a>
+            <span class="alert-icon bg-orange"><i class="fa fa-bolt"></i></span>
+            <span class="noti-info">{{Title}}</span>
+        </a>
+    </li>
+</script>
+

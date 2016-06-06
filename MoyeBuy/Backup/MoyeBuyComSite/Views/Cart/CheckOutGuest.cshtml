@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "支付";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Scripts/Cart.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";
+}
+<div class="CartDiv" style="border:2px solid #aacded; height:600px;">
+    <div class="MyCartTitle">
+        <img src="@Url.Content("/Content/MoyeBuyComStyle1/Imgs/cart_001.gif")" width="190px" height="50px" alt="我的购物车" />
+        <ul style="background-image:url(@Url.Content("/Content/MoyeBuyComStyle1/Imgs/warebuy2.jpg"));">
+            <li class="step1">1.我的购物车</li>
+            <li class="step2">2.填写核对订单信息</li>
+            <li class="step3">3.成功提交订单</li>
+        </ul>
+    </div>
+    <div class="CartDetail">
+        <h2><span style=" margin-left:10px;">填写核对订单信息</span></h2>
+    </div>
+    <div class="DivAddress">
+        <h2><span style="color:#666;">收货人信息</span></h2>
+        <ul>
+            <li><span>*</span>收货人姓名:</li>
+            <li><input type="text" name="" id="" value="" maxlength="10" size="10" /></li>
+        </ul>
+        <ul>
+            <li><span>*</span>省　　份:</li>
+            <li>
+                <select id="province" name="province" onchange="javascript:changeProvince(this);">
+                <option value="">---请选择---</option>
+                    @if(ViewBag.ListProvince!=null)
+                    {
+                        foreach (var item in (IList<MoyeBuy.Com.Model.Province>)ViewBag.ListProvince)
+                        {
+                            if (item.ProvinceID == "9")
+                            { 
+                                <option value="@item.ProvinceID" selected>@item.ProvinceName</option>
+                            }
+                            else
+                            { 
+                                <option value="@item.ProvinceID">@item.ProvinceName</option>
+                            }
+
+                        }
+                    }
+                    
+                </select>
+            </li>
+            <li>
+                <div id="divCity" name="divCity">
+                    <select id="city" name="city" onchange="javascript:chagneCity(this);">
+                        <option>---请选择---</option>
+                    </select>
+                </div>
+                
+            </li>
+            <li>
+                <div id="divDistrict" name="district">
+                    <select id="district" name="district">
+                        <option>---请选择---</option>
+                    </select>
+                </div>
+            </li>
+        </ul>
+        <ul>
+            <li><span>*</span>地　　制:</li>
+            <li><input type="text" id="address" name="address" maxlength="100" size="50" /></li>
+        </ul>
+        <ul>
+            <li><span>*</span>手 机 号:</li>
+            <li><input type="text" id="phoneNo" name="phoneNo" maxlength="20" size="20" /></li>
+            <li>或者固定电话:</li>
+            <li><input type="text" id="TelphoneNo" name="TelphoneNo" maxlength="20" size="20" /></li>
+            <li>用于接收发货通知短信及送货前确认</li>
+        </ul>
+        <ul>
+            <li>电子邮件：</li>
+            <li><input type="text" id="email" name="email" maxlength="20" size="20" /></li>
+            <li>用来接收订单提醒邮件，便于您及时了解订单状态</li>
+        </ul>
+        <ul>
+            <li>邮政编码：</li>
+            <li><input type="text" id="zipcode" name="zipcode" maxlength="10" size="10" /></li>
+            <li>有助于快速确定送货地址</li>
+        </ul>
+    </div>
+
+    <div class="PeisongDiv">
+        <h2><span style="color:#666;">支付及配送方式</span></h2>
+        <ul>
+            <li><strong>支付总金额:</strong></li>
+            <li><span style="color:Red;"><strong>￥100.00</strong></span></li>
+        </ul>
+        <ul>
+            <li>运送方式:</li>
+            <li>
+                <select id="GetProdMothed">
+                    <option value="">---请选择---</option>
+                    <option value="1">送货到家</option>
+                    <option value="2">来店自提</option>
+                </select>
+            </li>
+            <li><span style="color:red;">请选择提货的方式</span></li>
+        </ul>
+    </div>
+    
+    <div class="PeisongDiv">
+        <table border="0" cellpadding="0" cellspacing="5">
+            <tr>
+                <td>购物卡卡号:</td>
+                <td><input type="text" value="" id="GiftCardNo" name="GiftCardNo" maxlength="30" size="30" /></td>
+            </tr>
+            <tr>
+                <td>购物卡密码:</td>
+                <td><input type="text" value="" id="GiftCardPwd" name="GiftCardPwd" maxlength="30" size="30" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <a href="/Cart/Index"><img src="@Url.Content("/Content/MoyeBuyComStyle1/Imgs/back.gif")" alt="上一步" /></a>
+                    <a href="javascript:CheckGiftCard();"><img src="@Url.Content("/Content/MoyeBuyComStyle1/Imgs/next.gif")" alt="下一步" /></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="checkoutresult" id="CheckoutResult"></div>
+

@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_Tool" place-holder="11" ng-if="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="Renewal_Tool" refresh="checkPointRefresh" ng-if="!isHistory"></cheking-point>
+<store-basic-info code="info.USCode" workflow-type="Renewal" project="info" store="store"></store-basic-info>
+<form name="frmTool">
+    <renewaltool-fin-measure-input editable="savable"
+        info="info"
+        sales-editable="uploadable"
+        show-sales-editpart="true"
+        fin-measure-input="finMeasureInput"
+        year-months="yearMonths"
+        project-id="{{projectId}}"></renewaltool-fin-measure-input>
+    <renewaltool-writeoff-and-reincost editable="savable" write-off-and-rein-cost="writeOffAndReinCost" has-reinvestment="info.NeedProjectCostEst"></renewaltool-writeoff-and-reincost>
+    <renewaltool-fin-measure-output></renewaltool-fin-measure-output>
+    <table width="100%">
+        <tr>
+            <th>
+                <label>[[[Comments & Conclusion]]]</label></th>
+        </tr>
+        <tr>
+            <td>
+                <textarea rows="4" class="form-control" name="ComSalesDesc" ng-model="tool.ComSalesDesc" ng-disabled="!uploadable"></textarea>
+                <err-msgs field="frmTool.ComSalesDesc" submited="$root.$submited"></err-msgs>
+            </td>
+        </tr>
+    </table>
+    <div class="panel panel-black mg_t_10" ng-if="uploadable">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Renewal Tool]]]
+            </span>
+            <div class="panel-tools" ng-if="!isFinished">
+                <a class="btn btn-sm btn-default" form-submit ng-click="downloadTpl(frmTool)">
+                    <span class="fa fa-cloud-download"></span>
+                    [[[请先下载Renewal Tool模板]]]
+                </a>
+                <iframe class="hide" id="frmDownload"></iframe>
+                <span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="uploadWoCheckList"
+                            type="button"
+                            class="btn btn-sm btn-default"
+                            plupload-simple
+                            upload-url="api/RenewalTool/UploadTool/{{projectId}}"
+                            mm-types="[{name:'Excel Files',extensions:'xlsx'}]"
+                            upload-finished="uploadToolFinish"
+                            error-msg="[[[上传失败]]]">
+                        <span class='fa fa-cloud-upload'></span>
+                        [[[结果上传]]]
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <attachments ref-table-name="RenewalTool"
+        list="attachments"
+        flow-code="Renewal_Tool"
+        is-history="isHistory"
+        upload-set="viewUploadSet"
+        project-id="{{projectId}}"
+        ref-table-id="{{tool.Id}}"
+        editable="{{savable}}"></attachments>
+    <approval-records workflow-type="Renewal" ref-table-id="tool.Id" ref-table-name="RenewalTool"></approval-records>
+    <project-history project-id="projectId" table-name="RenewalTool" title="[[[Renewal Tool History]]]"
+        page-url="/Renewal/Main#/Tool/Process/View?projectId={{projectId}}"
+        title-name="[[[Renewal Tool History]]]" ng-show="!isHistory" has-template="false"></project-history>
+    <notification-message project-id="projectId"
+        flow-code="Renewal"
+        sub-flow-code="Renewal_Tool"
+        node-id="tool.Id"
+        uscode="info.USCode"></notification-message>
+    <attachments-memo project-id="projectId"
+        flow-code="Renewal">
+    </attachments-memo>
+    <div class="form-actions ta_c" ng-if="!isHistory&&from!='useraction'">
+        <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-if="(savable||uploadable)&&!isFinished" ng-click="confirm()"><span class="fa fa-edit"></span>[[[提交]]]</button>
+        <button type="button" class="btn btn-lg btn-yellow" ng-disabled="acting" ng-if="editable" ng-click="edit()"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-if="recallable" ng-click="recall()">[[[撤回]]]</button>
+    </div>
+</form>

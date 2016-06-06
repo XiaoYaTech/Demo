@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "ConsInvtChecking";
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="MajorLease" sub-code="MajorLease_ConsInvtChecking" place-holder="11" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+
+    <notification-message project-id="projectId"
+                          flow-code="MajorLease"
+                          sub-flow-code="{{subFlowCode}}"
+                          node-id="ConsInvtChecking.Id"
+                          uscode="ConsInvtChecking.USCode"></notification-message>
+    <attachments-memo project-id="projectId"
+                      flow-code="MajorLease">
+    </attachments-memo>
+    <write-off-amount ng-show="true"
+                      editable="isPageEditable"
+                      template-url="api/ExcelTemplate/DownLoadTemplate/WriteOffAmount/{{projectId}}/MajorLease_ConsInvtChecking"
+                      upload-api="api/ExcelTemplate/UploadWriteOffTpl/MajorLeaseConsInvtChecking/{{projectId}}"
+                      source="WriteOff"
+                      upload-finish="uploadWOFinish"
+                      is-check-page="true"
+                      cons-info-id="ConsInfo.Id">
+    </write-off-amount>
+
+    <reinvestment-cost ng-show="true"
+                       editable="isPageEditable"
+                       template-url="api/ExcelTemplate/DownLoadTemplate/ReinvestmentCost/{{projectId}}/MajorLease_ConsInvtChecking"
+                       upload-api="api/ExcelTemplate/UploadReinvestmentCostTpl/MajorLeaseConsInvtChecking/{{projectId}}"
+                       source="ReinCost"
+                       before-download="saveReinvestmentBasicInfo(redirectUrl)"
+                       upload-finish="uploadFAFinish"
+                       is-check-page="true"
+                       cons-info-id="ConsInfo.Id"
+                       hide-norm-type="true">
+    </reinvestment-cost>
+    <approval-records ref-table-id="ConsInvtChecking.Id" ref-table-name="MajorLeaseConsInvtChecking" workflow-type="MajorLease"></approval-records>
+    <div ng-show="pageType!='View'">
+        <comment comments="ConsInvtChecking.Comments" title="意见" editable="true"></comment>
+    </div>
+    <project-history project-id="projectId" table-name="MajorLeaseConsInvtChecking" title="MajorLease ConsInvtChecking History"
+                     page-url="/MajorLease/Main#/ConsInvtChecking/Process/View?projectId={{projectId}}"
+                     title-name="ConsInvtChecking" ng-show="!isHistory"></project-history>
+
+    @*<div ng-switch on="pageType" ng-show="!ConsInvtChecking.IsProjectFreezed">*@
+    <div ng-switch on="pageType">
+        <div class="ta_c mg_t_10" ng-switch-default>
+            <button type="button" class="btn btn-lg btn-red" ng-click="submit(frmMain)" ng-show="IsShowSubmit" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Approval">
+            <button type="button" class="btn btn-lg btn-red" ng-click="approve()" ng-disabled="IsClickApprove">[[[审批]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="returnToOriginator()" ng-disabled="IsClickReturn"><span class="fa fa-reply"></span>[[[退回]]]</button>
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="View" ng-hide="isUserAction">
+            <button type="button" class="btn btn-lg btn-warning" ng-click="save()" ng-show="ConsInvtChecking.IsShowSave"><span class="fa fa-check"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="recall()" ng-show="ConsInvtChecking.IsShowRecall && !isHistory">[[[撤销]]]</button>
+            <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="ConsInvtChecking.IsShowEdit && !isHistory"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Resubmit">
+            <button type="button" class="btn btn-lg btn-red" ng-click="submit(frmMain)" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+    </div>
+
+</form>

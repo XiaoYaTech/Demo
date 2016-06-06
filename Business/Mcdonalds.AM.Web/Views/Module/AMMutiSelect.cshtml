@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "AMMutiSelect";
+    Layout = null;
+}
+<div class="am-multi-select">
+    <input class="form-control" readonly="readonly" value="{{text}}" ng-disabled="!editable" />
+    <ul class="am-multi-select-con" tabindex="1">
+        <li ng-repeat="op in options">
+            <input class="am-multi-select-check" value="{{valueField?op[valueField]:op}}" type="checkbox" ng-change="selectChange" />
+            <span class="am-multi-select-text">{{displayField?op[displayField]:op}}</span>
+        </li>
+    </ul>
+</div>
+

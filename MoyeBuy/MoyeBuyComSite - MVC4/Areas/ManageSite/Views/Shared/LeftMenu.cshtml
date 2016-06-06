@@ -1,0 +1,53 @@
+﻿<ul>
+        @{
+            @*System.Text.StringBuilder sbHTML = new System.Text.StringBuilder("");
+            IList<MoyeBuy.Com.Model.Menu> MenuNavs = MoyeBuy.Com.MoyeBuyComSite.Proxys.LayoutMenuProxy.GetAdminMenu();
+            if(MenuNavs!=null)
+            {
+                foreach(MoyeBuy.Com.Model.Menu menu in MenuNavs)
+                {
+                    if (menu.MenuType == "MainSubCategory")
+                    {
+                        sbHTML.Append("<li><b></b><a  href=\"javascript:void(0);\" onclick=\"javascript:toggleMenu(this);\">"+menu.MenuName+"</a></li>");
+                        sbHTML.Append("<li>");
+                        sbHTML.Append("<ul>");
+                        if (menu.SubMenu!=null)
+                        {
+                            foreach(MoyeBuy.Com.Model.Menu subMenu in menu.SubMenu)
+                            {
+                                sbHTML.Append("<li><b></b><a href=\""+subMenu.MenuUrl+"\" target=\""+subMenu.Target+"\" >"+subMenu.MenuName+"</a></li>");
+                            }
+                        }
+                        sbHTML.Append("</ul>");
+                        sbHTML.Append("</li>");
+                    }
+                }
+                @MvcHtmlString.Create(sbHTML.ToString());
+            }*@
+            
+        }
+@{
+    IList<MoyeBuy.Com.Model.Menu> MenuNavs = ViewBag.LeftMenu;
+    if(MenuNavs!=null)
+    {
+        foreach(MoyeBuy.Com.Model.Menu menu in MenuNavs)
+        {
+            if (menu.MenuType == "MainSubCategory")
+            {
+                <li><b></b><a  href="javascript:void(0);" onclick="javascript:toggleMenu(this);">@menu.MenuName</a></li>
+                <li>
+                    <ul>
+                        @if (menu.SubMenu!=null)
+                        {
+                            foreach(MoyeBuy.Com.Model.Menu subMenu in menu.SubMenu)
+                            {
+                                <li><b></b><a href="@subMenu.MenuUrl" target="@subMenu.Target" >@subMenu.MenuName</a></li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+        }
+    }
+}
+</ul>

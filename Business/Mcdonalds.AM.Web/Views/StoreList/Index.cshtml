@@ -1,0 +1,2298 @@
+﻿@using System.Web.Optimization;
+@{
+    Layout = "~/Views/Shared/_AngularLayout.cshtml";
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/Apps/StoreApp.js")
+    @Scripts.Render("~/Scripts/Services/SiteInfoService.js")
+    @Scripts.Render("~/Scripts/Services/StoreService.js")
+    @Scripts.Render("~/Scripts/Services/Closure/CreateServices.js")
+    <script src="~/Scripts/Libs/bootstrap-typeahead.js"></script>
+<script src="~/Scripts/Controllers/StoreList/Index.js"></script>
+@*
+<script src="~/Scripts/Controllers/StoreList/StoreContractInfo.js"></script>
+*@
+    <script src="~/Scripts/Controllers/StoreList/StoreOwnerContactInfo.js"></script>
+<script src="~/Scripts/Controllers/StoreList/StoreLicenses.js"></script>
+<script src="~/Scripts/Controllers/StoreList/StoreFinanceInfo.js"></script>
+<script src="~/Scripts/Controllers/StoreList/StoreBE.js"></script>
+@*<script src="~/Scripts/Controllers/StoreList/StoreConstruction.js"></script>*@
+    <script src="~/Scripts/Controllers/StoreList/StoreManagement.js"></script>
+<script src="~/Scripts/Controllers/StoreList/StoreRealEstate.js"></script>
+<script src="~/Scripts/Controllers/StoreList/StoreTA.js"></script>
+}
+
+
+<div class="task-reminder hide">
+    <div class="task-reminder-item"><a href="/home/Personal/#/taskworkMore/0"><span class="fa fa-circle"></span>Tasks (<span id="taskBarTasks">0</span>)</a></div>
+    <div class="task-reminder-item"><span class="fa fa-exclamation-triangle"></span>Reminding (<span id="taskBarReminding">0</span>)</div>
+    <div class="task-reminder-item"><span class="fa fa-volume-off"></span>Notices (<span id="taskBarNotices">0</span>)</div>
+</div>
+
+<div class="pd15"></div>
+<div id="divStore" class="panel panel-black" style="scrollbar-3dlight-color: #666;">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">[[[搜索]]] <i class="fa fa-search panel-title-fa"></i>
+        </span>
+    </div>
+    <div class="panel-body pd_0">
+        <div class="form-horizontal" role="form" style="padding: 15px;">
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[餐厅编号]]]:</label>
+                <div class="col-xs-3">
+                    <input id="txtUSCode" type="text" class="form-control" data-provide="typeahead" />
+                </div>
+                <label class="control-label col-xs-2">[[[餐厅名称]]]:</label>
+                <div class="col-xs-3">
+                    <input id="txtNameZHCN" type="text" class="form-control" data-provide="typeahead" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[省份]]]:</label>
+                <div class="col-xs-3">
+                    <input id="txtProvince" type="text" class="form-control" data-provide="typeahead" />
+                </div>
+                <label class="control-label col-xs-2">[[[城市]]]: </label>
+                <div class="col-xs-3">
+                    <input id="txtCityName" type="text" class="form-control" data-provide="typeahead" />
+                </div>
+                <div class="col-xs-2">
+                    <button type="button" class="btn btn-sm btn-warning" onclick="selectPage(1);">[[[搜索]]]</button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[餐厅列表]]]
+            </span>
+        </div>
+        <div class="ta_c">
+            <img id="imgStoreList" style="display: none" src="../../Content/Images/loading.gif" />
+        </div>
+
+        <div style="overflow: auto" class="panel panel-black mg_t_10">
+            <table id="tabStoreList" style="table-layout: fixed; width: 99%;" class="table"></table>
+        </div>
+        <div class="table-paginate">
+            <span id="paginationDesc"></span>
+            <ul class="pagination-sm pagination ng-isolate-scope ng-pristine ng-valid" id="paginationInnerHtml" style="margin-top: 5px; margin-bottom: 0px">
+                <li class='disabled'><a href='' ng-click='selectPage(page - 1)'>[[[上一页]]]</a></li>
+                <li class='active'><a href='' ng-click='selectPage(page.number)'>1</a></li>
+                <li><a href='' ng-click='selectPage(page.number)'>2</a></li>
+                <li><a href='' ng-click='selectPage(page.number)'>3</a></li>
+                <li><a href='' ng-click='selectPage(page.number)'>4</a></li>
+                <li><a href='' ng-click='selectPage(page.number)'>5</a></li>
+                <li><a href='' ng-click='selectPage(page + 1)'>[[[下一页]]]</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="divStoreDetail" style="display: none; padding-bottom: 20px;" class="main">
+
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span style="font-weight: bold" class="panel-title">[[[餐厅列表]]]> [[[餐厅编号]]] </span>
+            <span id="spStoreListUSCode" style="font-weight: bold"></span>
+            <div class="panel-tools">
+                <a href="javascript:switchMain();" class="btn btn-sm btn-default">
+                    <span class="fa fa-reply"></span>
+                    [[[返回]]]
+                </a>
+            </div>
+            <span class="clear"></span>
+        </div>
+    </div>
+
+    <div class="nav-project" style="display: none">
+        <a class="nav-project-item first" id="aClosure" onclick="switchStoreFlowType('Closure')">
+            <span class="fa fa-check"></span>
+            Closure
+            <span id="spanClosureRowsCount">0</span>
+        </a>
+        <a class="nav-project-item" id="aRenewal" onclick="switchStoreFlowType('Renewal')">
+            <span class="fa fa-check"></span>
+            Renewal
+            <span id="spanRenewalRowsCount">0</span>
+        </a>
+        <a class="nav-project-item" id="aRebuild" onclick="switchStoreFlowType('Rebuild')">
+            <span class="fa fa-check"></span>
+            Rebuild
+            <span id="spanRebuildRowsCount">0</span>
+        </a>
+        <a class="nav-project-item" id="aMajorLease" onclick="switchStoreFlowType('MajorLease')">
+            <span class="fa fa-check"></span>
+            MajorLease
+            <span id="spanMajorLeaseRowsCount">0</span>
+        </a>
+        <a class="nav-project-item" id="aReimage" onclick="switchStoreFlowType('Reimage')">
+            <span class="fa fa-check"></span>
+            Reimage
+            <span id="spanReimageRowsCount">0</span>
+        </a>
+        <a class="nav-project-item" id="aTempClosure" onclick="switchStoreFlowType('TempClosure')">
+            <span class="fa fa-check"></span>
+            TempClosure
+            <span id="spanTempClosureRowsCount">0</span>
+        </a>
+        <a class="clear"></a>
+    </div>
+
+    <div class="headline">
+        <ul class="clearfix">
+            <li id="liClosure"><a id="tClosure" onclick="switchStoreFlowType('Closure')"><i class="icon-closure"></i>Closure            <span class="badge badge-ffa200" id="lispanClosureRowsCount">0</span></a></li>
+            <li id="liRenewal"><a id="tRenewal" onclick="switchStoreFlowType('Renewal')"><i class="icon-renewal"></i>Renewal            <span class="badge badge-ffc000" id="lispanRenewalRowsCount">0</span></a></li>
+            <li id="liRebuild"><a id="tRebuild" onclick="switchStoreFlowType('Rebuild')"><i class="icon-rebuild"></i>Rebuild            <span class="badge badge-ffa200" id="lispanRebuildRowsCount">0</span></a></li>
+            <li id="liMajorLease"><a id="tMajorLease" onclick="switchStoreFlowType('MajorLease')"><i class="icon-majorlease"></i>MajorLease   <span class="badge badge-ffa200" id="lispanMajorLeaseRowsCount">0</span></a></li>
+            <li id="liReimage"><a id="tReimage" onclick="switchStoreFlowType('Reimage')"><i class="icon-reimage"></i>Reimage            <span class="badge badge-ffc000" id="lispanReimageRowsCount">0</span></a></li>
+            <li id="liTempClosure"><a id="tTempClosure" onclick="switchStoreFlowType('TempClosure')"><i class="icon-tempclosure"></i>TempClosure<span class="badge badge-ff7200" id="lispanTempClosureRowsCount">0</span></a></li>
+        </ul>
+    </div>
+
+    <div id="divStoreFlowType" class="panel panel-orange mg_t_10" style="display: none">
+        <div class="panel-heading clearfix" id="divStoreFlowTypeMore">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[项目列表]]]</span>
+            <div class="panel-tools">
+                <a href="javascript:void(0);" class="btn btn-sm btn-default" style="display: none" onclick="divStoreFlowTypeMore_onclick()">更多 ></a>
+                <input id="inputFlowTypeName" value="" style="display: none" />
+            </div>
+        </div>
+        <table id="tabStoreListProjectInfo" class="table"></table>
+    </div>
+    <div id="divStoreFlowTypeMarginBottom" style="height: 10px; display: none">
+    </div>
+
+    <div class="nav-project" style="display: none">
+        <a class="nav-project-item first active" id="aStoreManagement" onclick="switchStoreCategory('StoreManagement')">
+            <span class="fa fa-check"></span>
+            [[[Store Management]]]
+        </a>
+        <a class="nav-project-item" id="aRealEstate" onclick="switchStoreCategory('RealEstate')">
+            <span class="fa fa-check"></span>
+            [[[Real Estate]]]
+        </a>
+        <a class="nav-project-item" id="aTA" onclick="switchStoreCategory('TA')">
+            <span class="fa fa-check"></span>
+            [[[TA]]]
+        </a>
+        <a class="nav-project-item" id="aConstruction" onclick="switchStoreCategory('Construction')">
+            <span class="fa fa-check"></span>
+            [[[Construction]]]
+        </a>
+        <a class="nav-project-item" id="aAssetManagement" onclick="switchStoreCategory('AssetManagement')">
+            <span class="fa fa-check"></span>
+            [[[Asset Management]]]
+        </a>
+
+        <a class="nav-project-item" id="aFinanceInfo" onclick="switchStoreCategory('FinanceInfo')">
+            <span class="fa fa-check"></span>
+            [[[财务信息]]]
+        </a>
+        <a class="nav-project-item" id="aContractInfo" onclick="switchStoreCategory('ContractInfo')">
+            <span class="fa fa-check"></span>
+            [[[合同信息]]]
+        </a>
+        <a class="nav-project-item" id="aOwnerContactInfo" onclick="switchStoreCategory('OwnerContactInfo')">
+            <span class="fa fa-check"></span>
+            [[[业主联系记录]]]
+        </a>
+        <a class="nav-project-item" id="aBE" onclick="switchStoreCategory('BE')">
+            <span class="fa fa-check"></span>
+            [[[业务拓展]]]
+        </a>
+
+        <a class="clear"></a>
+    </div>
+
+    <div class="nav-item">
+        <ul class="nav nav-tabs" role="tablist">
+            <li id="liStoreManagement" class="active"><a id="tStoreManagement" onclick="switchStoreCategory('StoreManagement')">[[[餐厅管理]]]</a></li>
+            <li id="liRealEstate"><a id="tRealEstate" onclick="switchStoreCategory('RealEstate')">[[[资产交接]]]</a></li>
+            <li id="liTA"><a id="tTA" onclick="switchStoreCategory('TA')">[[[商圈信息]]]</a></li>
+            <li id="liConstruction"><a id="tConstruction" onclick="switchStoreCategory('Construction')">[[[工程]]]</a></li>
+            <li id="liCOBA" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">[[[资产管理]]] <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li id="liContractInfo" class="active"><a id="tContractInfo" onclick="switchStoreCategory('ContractInfo')">[[[合同信息]]]</a></li>
+                    <li id="liOwnerContactInfo"><a id="tOwnerContactInfo" onclick="switchStoreCategory('OwnerContactInfo')">[[[业主联系记录]]]</a></li>
+                    <li id="liBE"><a id="tBE" onclick="switchStoreCategory('BE')">[[[业务拓展]]]</a></li>
+                    <li id="liAssetManagement"><a id="tAssetManagement" onclick="switchStoreCategory('AssetManagement')">[[[Licenses]]]</a></li>
+                </ul>
+            </li>
+            <li id="liFinanceInfo"><a id="tFinanceInfo" onclick="switchStoreCategory('FinanceInfo')">[[[财务信息]]]</a></li>
+            <li id="liSummary"><a id="tSummary" onclick="switchStoreCategory('SummaryList')">[[[Summary]]]</a></li>
+        </ul>
+    </div>
+
+    <div class="ta_c">
+        <img id="imgStoreListDetial" style="display: none" src="../../Content/Images/loading.gif" />
+    </div>
+
+    <div id="divStoreManagement" class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[基本信息]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅编号]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biUSCode"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[英文名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biStoreNameEN"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[中文名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biStoreNameCN"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[区域]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biRegion"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[市场]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biMarket"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[城市]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biCityName"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[区县]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biDistrict"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[MM名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biMMName"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[商圈名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biTA"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅类别]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biStoreType"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[投资组合]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biPortfolioType"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[DT型号]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biDTType"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[是否由联盟团队推荐]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biIsAlliance"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[联盟名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biAllianceName"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[TV Market]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biTVMarket"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[是否属于联盟企业]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biIsBigLL"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[联盟名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biBigLLName"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Status]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biStatus"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[开业日期]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biOpenDate"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Reimage Date]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biReimageDate"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Close Date]]]</label>
+                <div class="col-xs-2 pd_t_7" id="biCloseDate"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[地址_中文]]]</label>
+                <div class="col-xs-10 pd_t_7" id="biAddressZHCN"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[地址_英文]]]</label>
+                <div class="col-xs-10 pd_t_7" id="biAddressENUS"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[人员信息]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="panel panel-orange">
+                <div class="panel-heading">
+                    <span class="panel-icon"></span>
+                    <span class="panel-title">[[[开发]]]</span>
+                </div>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[资产专员（当前）]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biAssetRep"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[资产经理（当前）]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biAssetMgr"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[Planner（开业时）]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biPlanner"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[项目经理（开业时）]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biProjectmanager"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[工程经理（开业时）]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biPlannerMgr"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[规划经理（开业时）]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biConsMgr"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[地产代表（开业时）]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biREPep"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[地产经理（开业时）]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biREMgr"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                    <div class="col-xs-2 pd_t_7"></div>
+                </div>
+            </div>
+
+            <div class="panel panel-orange">
+                <div class="panel-heading">
+                    <span class="panel-icon"></span>
+                    <span class="panel-title">[[[营运]]]</span>
+                </div>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[VPGM]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biVPGM"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[GM]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biGM"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[DO]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biDO"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[OM]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biOM"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[OC]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biOC"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅经理]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biStoreManager"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅电话]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biStorePhone"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅Email]]]</label>
+                    <div class="col-xs-2 pd_t_7" id="biStoreEmail"></div>
+                    <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                    <div class="col-xs-2 pd_t_7"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divRealEstate" style="display: none" class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[业主]]]1
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[联系人]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1Contact1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[职位]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1Title1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[座机]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1Tel1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[手机]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1Mobile1"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[联系人]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1Contact2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[职位]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1Title2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[座机]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1Tel2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[手机]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1Mobile2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[邮编]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1ZipCode"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[地址]]]</label>
+                <div class="col-xs-8 pd_t_7" id="divLL1Address"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[业主]]]2</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[联系人]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2Contact1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[职位]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2Title1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[座机]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2Tel1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[手机]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2Mobile1"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[联系人]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2Contact2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[职位]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2Title2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[座机]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2Tel2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[手机]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2Mobile2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[邮编]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2ZipCode"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[地址]]]</label>
+                <div class="col-xs-8 pd_t_7" id="divLL2Address"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[产权人]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[联系人]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divOwnerContact1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[职位]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divOwnerTitle1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[座机]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divOwnerTel1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[手机]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divOwnerMobile1"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[联系人]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divOwnerContact2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[职位]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divOwnerTitle2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[座机]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divOwnerTel2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">手机2</label>
+                <div class="col-xs-2 pd_t_7" id="divOwnerMobile2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[邮编]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divOwnerZipCode"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[地址]]]</label>
+                <div class="col-xs-8 pd_t_7" id="divOwnerAddress"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[物业管理公司]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[联系人]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divPropertyContact1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[职位]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divPropertyTitle1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[座机]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divPropertyTel1"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[手机]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divPropertyMobile1"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[联系人]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divPropertyContact2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[职位]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divPropertyTitle2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[座机]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divPropertyTel2"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[手机]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divPropertyMobile2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[邮编]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divPropertyZipCode"></div>
+                <label for="inputEmail3" class="col-xs-1 control-label">[[[地址]]]</label>
+                <div class="col-xs-8 pd_t_7" id="divPropertyAddress"></div>
+            </div>
+        </div>
+
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-3 control-label">[[[业主负责人及具体联系人是否已引见]]]</label>
+                <div class="col-xs-1 pd_t_7" id="divProperty1YesNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[若未引荐，计划引荐时间]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divProperty1PlanTime"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[最终引荐时间]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divProperty1FinalTime"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-3 control-label">[[[招牌已按合同中效果图安装到位]]]</label>
+                <div class="col-xs-1 pd_t_7" id="divProperty2YesNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[说明]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divProperty2Remark"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-3 control-label">[[[共用隔油池/化粪池清理频率及费用约定]]]</label>
+                <div class="col-xs-1 pd_t_7" id="divProperty3YesNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[说明]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divProperty3Remark"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-3 control-label">[[[业主同意承担的工程增加费用是否已支付]]]</label>
+                <div class="col-xs-1 pd_t_7" id="divProperty4YesNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[说明]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divProperty4Remark"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-3 control-label">[[[水电、单价确认并按合同执行]]]</label>
+                <div class="col-xs-1 pd_t_7" id="divProperty5YesNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[说明]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divProperty5Remark"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-3 control-label">[[[MDC支付给DT餐厅业主的配套费发票是否已收到]]]</label>
+                <div class="col-xs-1 pd_t_7" id="divProperty6YesNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[说明]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divProperty6Remark"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-3 control-label">[[[是否有第三方共用的场地、费用如何分配]]]</label>
+                <div class="col-xs-1 pd_t_7" id="divProperty7YesNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[说明]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divProperty7Remark"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-3 control-label">[[[消防逃生门是否符合规范（逃生通道是否与其他租户共用）]]]</label>
+                <div class="col-xs-1 pd_t_7" id="divProperty8YesNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[说明]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divProperty8Remark"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-3 control-label">[[[其他未尽事项]]]</label>
+                <div class="col-xs-1 pd_t_7" id="divProperty9YesNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[说明]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divProperty9Remark"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[文件交接]]]</span>
+        </div>
+        <table id="tabRealEstateFileHandover" style="table-layout: fixed;" class="table"></table>
+    </div>
+
+    <div id="divTA" style="display: none" class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">MM
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[MM名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divMMName"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[MM优先级]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divPriority"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[人口]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divPopulation"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[商圈]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[商圈]]]ID</label>
+                <div class="col-xs-2 pd_t_7" id="divTACode"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[商圈名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divTAName"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[商圈类型]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divTAType"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[成熟度]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divMaturity"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[理想性]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divDesirability"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[优先级]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divTAAPriority"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[商圈大小]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divTASize"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[收入水平]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divIncomeLevel"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[特征]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅类型]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divStoreTypeName"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[投资组合]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divPortfolioTypeName"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[地产评分]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLocationRatingPP"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[优先级]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBackDistance"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[整体可见度]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divOverallVisibility"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label hide">[[[整体可接近度]]]</label>
+                <div class="col-xs-2 pd_t_7 hide" id="divOverallAccessibility"></div>
+            </div>
+            <div class="form-group hide">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[关键字]]]1</label>
+                <div class="col-xs-2 pd_t_7" id="divKeyword1"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[关键字]]]2</label>
+                <div class="col-xs-2 pd_t_7" id="divKeyword2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[关键字]]]3</label>
+                <div class="col-xs-2 pd_t_7" id="divKeyword3"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[是否街铺]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divIsNearStreet"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[投资类型]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divStrategicInvestmentType"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[国家级发展区域]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divNatZone"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[是否联盟团队推荐]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divIsAlliance"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[联盟名称]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divAllianceName"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[是否属于联盟企业]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divIsBigLL"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[联盟名称]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divBigLLName"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[最近现有餐厅]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[最近现有餐厅]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divNearestStorePP"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[距离]]](m)</label>
+                <div class="col-xs-2 pd_t_7" id="divNearestDistancePP"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[最近现有餐厅开业日期]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divNearestMcDOpenDate"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[最近现有餐厅营业额]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divNearestMcDAUV"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Est Impact]]](RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divEstimatedImpactOnPp"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[第二近现有餐厅]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSecondNearestStorePP"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[距离]]](m)</label>
+                <div class="col-xs-2 pd_t_7" id="divSecondNearestDistancePP"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[第二近现有餐厅开业日期]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divNearest2ndMcDOpenDate"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[对该Pipeline估计影响]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divNearest2ndMcDAUV"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[2nd Est.Impact]]](RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divEstimatedImpactOnPp2"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[最近KFC]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[最近KFC]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divNearestKFC"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[距离]]](m)</label>
+                <div class="col-xs-2 pd_t_7" id="divNearestKFCDist"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[KFC开业日期]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divKFCOpenDate"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Annual Sales]]](RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divNearestKFCY1Sales"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Generators]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Home]]](500m)</label>
+                <div class="col-xs-2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Shop]]](300m)</label>
+                <div class="col-xs-2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Transportation Hub]]]</label>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[商圈内居住人口]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divHomePop"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[The Shop in Trade Area]]]</label>
+                <div class="col-xs-2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[交通枢纽类型]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divTHType"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Shopping等级]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divShoppingLevel"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅位置在主建筑的]]]...</label>
+                <div class="col-xs-2 pd_t_7" id="divTHStoreLocation"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[家庭收入水平]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divHomeIncomeLevel"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[购物中心数量]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divShopMallsNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅所在楼层]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divStoreLocatedon"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Home销售占比]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divHomeSalesPct"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[总商业面积（平方米）]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divShopTotalCommercialSize"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[年均吞吐量]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divTHTurnoverCount"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">Work(500m)</label>
+                <div class="col-xs-2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[商业街长度（米）]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divShopSteetLength"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[竞争对手所在]]]...</label>
+                <div class="col-xs-2 pd_t_7" id="divTHMainCmpLocatedon"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[商圈内工作人口]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divWorkersNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[The Building Located]]]</label>
+                <div class="col-xs-2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[交通枢纽销售占比]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divTHSalesPct"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅所在物业性质]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBuildingNature"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">Leisure</label>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[上班族情况]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divWorkersProfile"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[物业开业日期]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBuildingOpenDate"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[娱乐/消遣的性质列举]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLeisureNature"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Work销售占比]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divWorkSalesPct"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[物业的商业面积]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBuildingCommercialSize"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Leisure销售占比]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLeisureSalesPct"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[School]]](1Km)</label>
+                <div class="col-xs-2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[零售活动强度]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBuildingRetailActStrength"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Others]]]</label>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[总学生人数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSchoolStudentNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[物业里主要商户1的名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBuildingAnchor1Name"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[列举TA的其他影响因素]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divOtherFactorsName"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[学生情况]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSchoolStudentProfile"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[物业里主要商户1的面积]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBuildingAnchor1Size"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Others销售占比]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divOtherSalesPct"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[School销售占比]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSchoolSalesPct"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[物业里主要商户2的名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBuildingAnchor2Name"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[物业里主要商户2的面积]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBuildingAnchor2Size"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Shop销售占比]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divShopSalesPct"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-6 control-label">[[[Home Remark]]]</label>
+                <label for="inputEmail3" class="col-xs-6 control-label">[[[Work Remark]]]</label>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6 pd_t_7">
+                    <pre class="pre" id="divHomeRemark"></pre>
+                </div>
+                <div class="col-xs-6 pd_t_7">
+                    <pre class="pre" id="divWorkRemark"></pre>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-6 control-label">[[[Shop Remark]]]</label>
+                <label for="inputEmail3" class="col-xs-6 control-label">[[[School Remark]]]</label>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6 pd_t_7">
+                    <pre class="pre" id="divShopRemark"></pre>
+                </div>
+                <div class="col-xs-6 pd_t_7">
+                    <pre class="pre" id="divSchoolRemark"></pre>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-6 control-label">[[[Transport Hub Remark]]]</label>
+                <label for="inputEmail3" class="col-xs-6 control-label">[[[Leisure Remark]]]</label>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6 pd_t_7">
+                    <pre class="pre" id="divTHRemark"></pre>
+                </div>
+                <div class="col-xs-6 pd_t_7">
+                    <pre class="pre" id="divLeisureRemark"></pre>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-6 control-label">[[[Other Remark]]]</label>
+                <label for="inputEmail3" class="col-xs-6 control-label"></label>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6 pd_t_7">
+                    <pre class="pre" id="divOthersRemark"></pre>
+                </div>
+                <div class="col-xs-6"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Enablers]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="panel panel-orange">
+                <div class="panel-heading">
+                    <span class="panel-icon"></span>
+                    <span class="panel-title">[[[地铁]]]</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[地铁线总数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSubwayLines"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅里最近出口的距离（米）]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSubwayClosetExitDist"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[总地铁方向看餐厅的可视性]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSubwayVisibility"></div>
+            </div>
+
+            <div class="panel panel-orange">
+                <div class="panel-heading">
+                    <span class="panel-icon"></span>
+                    <span class="panel-title">Public Bus</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅100米内公交车站总数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBusStopNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅100米内公交线总数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBusLines"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[餐厅离最近公交站的距离（米）]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBusClosetStopDist"></div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Competitors]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[主要竞争对手的数量]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divCompetitorsNo"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[列举前三个竞争对手名字]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divCompetitorsTop3Name"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[No. of KFC]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divKFCCount"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[No. of KFC to be Opened in Y1]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divKFCY1Count"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Avg Sales of KFC/Y]]](RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divKFCAvgSales"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[Nearest KFC Sales/Year]]](RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divNearestKFCY1Sales2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divConstruction" style="display: none" class="panel panel-black mg_t_10">
+        <form id="formSiteInfo" name="siteInfo" ng-controller="storeSiteInfoController">
+            <div class="panel panel-black mg_t_10">
+                <div class="panel-heading">
+                    <span class="panel-icon"></span>
+                    <span class="panel-title">[[[招牌和停车位]]]
+                    </span>
+                </div>
+                <div class="panel-body form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">[[[是否有立杆招牌]]]</label>
+                        <div class="col-xs-2 pd_t_7">
+                            <label>
+                                <input type="radio" name="IsPoleSign" ng-disabled="!editable" value="1" ng-model="source.PoleSign" />
+                                Yes</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" name="IsPoleSign" ng-disabled="!editable" value="0" ng-model="source.PoleSign" />
+                        No</label>
+                        </div>
+                        <label class="col-xs-2 control-label">立杆招牌数量</label>
+                        <div class="col-xs-2 pd_t_7">
+                            <input type="text" valnumber name="PoleSignageCount"
+                                ng-required="source.PoleSign==1"
+                                class="form-control"
+                                ng-disabled="!editablePoleSign"
+                                ng-model="source.PoleSignageCount" />
+                            <err-msgs field="siteInfo.PoleSignageCount" submited="$submited"></err-msgs>
+                        </div>
+                        <label class="col-xs-2 control-label">招牌有效性</label>
+                        <div class="col-xs-2 pd_t_7">
+                            <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}" ng-if="dataLoaded" class="form-control" ng-model="source.DirectionalEffect" ng-options="m.NameZHCN as m.NameZHCN for m in DirectionalEffects">
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                            <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">[[[是否有指示性招牌]]]</label>
+                        <div class="col-xs-2 pd_t_7">
+                            <label>
+                                <input type="radio" name="IsSignage" ng-disabled="!editable" value="1" ng-model="source.Signage" />
+                                Yes</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" name="IsSignage" ng-disabled="!editable" value="0" ng-model="source.Signage" />
+                        No</label>
+                        </div>
+                        <label class="col-xs-2 control-label">[[[指示性招牌的数量]]]</label>
+                        <div class="col-xs-2 pd_t_7">
+                            <input type="text" valnumber
+                                name="SignageCount"
+                                ng-required="source.Signage==1"
+                                class="form-control"
+                                ng-disabled="!editableSignage"
+                                ng-model="source.SignageCount" />
+                            <err-msgs field="siteInfo.SignageCount" submited="$submited"></err-msgs>
+                        </div>
+                        <label class="col-xs-2 control-label">[[[展示面长度（米）]]]</label>
+                        <div class="col-xs-2 pd_t_7">
+                            <input type="text" valnumber name="FacadeLenth" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.FacadeLenth" />
+                            <err-msgs field="siteInfo.FacadeLenth" submited="$submited"></err-msgs>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">[[[出口数量]]]</label>
+                        <div class="col-xs-2 pd_t_7" ng-switch="store.StoreTypeName">
+                            <div ng-switch-when="DT">
+                                <input type="text" valnumber name="EgressCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.EgressCount" />
+                                <err-msgs field="siteInfo.EgressCount" submited="$submited"></err-msgs>
+                            </div>
+                            <div ng-switch-when="IS">
+                                <input class="form-control" disabled="disabled" />
+                            </div>
+                        </div>
+                        <label class="col-xs-2 control-label">[[[进口数量]]]</label>
+                        <div class="col-xs-2 pd_t_7" ng-switch="store.StoreTypeName">
+                            <div ng-switch-when="DT">
+                                <input type="text" valnumber name="IngressCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.IngressCount" />
+                                <err-msgs field="siteInfo.IngressCount" submited="$submited"></err-msgs>
+                            </div>
+                            <div ng-switch-when="IS">
+                                <input class="form-control" disabled="disabled" />
+                            </div>
+                        </div>
+                        <label class="col-xs-2 control-label">[[[开口数量]]]</label>
+                        <div class="col-xs-2 pd_t_7" ng-switch="store.StoreTypeName">
+                            <div ng-switch-when="DT">
+                                <input type="text" valnumber name="OpenCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.OpenCount" />
+                                <err-msgs field="siteInfo.OpenCount" submited="$submited"></err-msgs>
+                            </div>
+                            <div ng-switch-when="IS">
+                                <input class="form-control" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">[[[麦当劳停车位]]]</label>
+                        <div class="col-xs-2 pd_t_7" ng-switch="store.StoreTypeName">
+                            <div ng-switch-when="DT">
+                                <input type="text" valnumber name="McdCarParkCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.McdCarParkCount" />
+                                <err-msgs field="siteInfo.McdCarParkCount" submited="$submited"></err-msgs>
+                            </div>
+                            <div ng-switch-when="IS">
+                                <input class="form-control" disabled="disabled" />
+                            </div>
+                        </div>
+                        <label class="col-xs-2 control-label">[[[公用停车位]]]</label>
+                        <div class="col-xs-2 pd_t_7" ng-switch="store.StoreTypeName">
+                            <div ng-switch-when="DT">
+                                <input type="text" valnumber name="PublicCarParkCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.PublicCarParkCount" />
+                                <err-msgs field="siteInfo.PublicCarParkCount" submited="$submited"></err-msgs>
+                            </div>
+                            <div ng-switch-when="IS">
+                                <input class="form-control" disabled="disabled" />
+                            </div>
+                        </div>
+                        <label class="col-xs-2 control-label">[[[路边停车位]]]</label>
+                        <div class="col-xs-2 pd_t_7" ng-switch="store.StoreTypeName">
+                            <div ng-switch-when="DT">
+                                <input type="text" valnumber name="RoadCarParkCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.RoadCarParkCount" />
+                                <err-msgs field="siteInfo.RoadCarParkCount" submited="$submited"></err-msgs>
+                            </div>
+                            <div ng-switch-when="IS">
+                                <input class="form-control" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">[[[停车位合计]]]</label>
+                        <div class="col-xs-2 pd_t_7" ng-switch="store.StoreTypeName">
+                            <div ng-switch-when="DT">
+                                {{source.CarParkTotal}}
+                            </div>
+                            <div ng-switch-when="IS">
+                                {{source.CarParkTotal}}
+                            </div>
+                        </div>
+                        <label class="col-xs-2 control-label">[[[投资组合]]]</label>
+                        <div class="col-xs-2 pd_t_7" ng-switch="store.StoreTypeName">
+                            <div ng-switch-when="DT">
+                                <dict-selector parent-code="InvestmentPortfolio"
+                                    selected-code="source.PortfolioTypeName"
+                                    selected-dict="InvestmentPortfolioDict"
+                                    dict-filter="['FSDT_GS','FSDT_NonGS','Attached DT','Highway']"
+                                    editable="editable"></dict-selector>
+                            </div>
+                        </div>
+                        <label class="col-xs-2 control-label">[[[DT型号]]]</label>
+                        <div class="col-xs-2 pd_t_7" ng-switch="store.StoreTypeName">
+                            <div ng-switch-when="DT">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}" ng-if="dataLoaded" class="form-control" ng-model="source.DTTypeName" ng-options="m.NameZHCN as m.NameZHCN for m in DTTypeNames">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <div ng-switch-when="IS">
+                                <input class="form-control" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-heading">
+                        <span class="panel-icon"></span>
+                        <span class="panel-title">[[[楼层及座位]]]</span>
+                    </div>
+                    <div class="panel-body form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[共楼层数]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}" ng-if="dataLoaded" class="form-control" ng-model="source.Floor" ng-options="m as m for m in FloorsCount">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <label class="col-xs-2 control-label"></label>
+                            <div class="col-xs-2"></div>
+                            <label class="col-xs-2 control-label"></label>
+                            <div class="col-xs-2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[楼层]]]1</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=1">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}" name="Floor1" ng-required="source.Floor>=1" ng-disabled="!editable" ng-if="dataLoaded" class="form-control" ng-model="source.Floor1" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <err-msgs field="siteInfo.Floor1" submited="$submited"></err-msgs>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<1">
+                                <select chosen="{disable_search:true,disabled:true,width:'100%'}" ng-if="dataLoaded" class="form-control" ng-model="source.Floor1" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[面积]]]（sqm）</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=1">
+                                <input type="text" valnumber name="Size1" ng-required="source.Floor>=1" class="form-control" ng-disabled="!editable" ng-model="source.Size1" />
+                                <err-msgs field="siteInfo.Size1" submited="$submited"></err-msgs>
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<1">
+                                <input type="text" name="Size1" class="form-control" ng-disabled="true" ng-model="source.Size1" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[座位数]]]</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=1">
+                                <input type="text" valnumber name="Seats1" ng-required="source.Floor>=1" class="form-control" ng-disabled="!editable" ng-model="source.Seats1" />
+                                <err-msgs field="siteInfo.Seats1" submited="$submited"></err-msgs>
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<1">
+                                <input type="text" class="form-control" ng-disabled="true" ng-model="source.Seats1" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[楼层]]]2</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=2">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}" name="Floor2" ng-required="source.Floor>=2" ng-disabled="!editable" ng-if="dataLoaded" class="form-control" ng-model="source.Floor2" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <err-msgs field="siteInfo.Floor2" submited="$submited"></err-msgs>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<2">
+                                <select chosen="{disable_search:true,disabled:true,width:'100%'}" class="form-control" ng-model="source.Floor2" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[面积]]]（sqm）</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=2">
+                                <input type="text" valnumber name="Size2" ng-required="source.Floor>=2" class="form-control" ng-disabled="!editable" ng-model="source.Size2" />
+                                <err-msgs field="siteInfo.Size2" submited="$submited"></err-msgs>
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<2">
+                                <input type="text" class="form-control" ng-disabled="true" ng-model="source.Size2" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[座位数]]]</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=2">
+                                <input type="text" valnumber name="Seats2" ng-required="source.Floor>=2" class="form-control" ng-disabled="!editable" ng-model="source.Seats2" />
+                                <err-msgs field="siteInfo.Seats2" submited="$submited"></err-msgs>
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<2">
+                                <input type="text" class="form-control" ng-disabled="true" ng-model="source.Seats2" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[楼层]]]3</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=3">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}" ng-disabled="!editable" ng-if="dataLoaded" name="Floor3" ng-required="source.Floor>=3" class="form-control" ng-model="source.Floor3" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <err-msgs field="siteInfo.Floor3" submited="$submited"></err-msgs>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<3">
+                                <select chosen="{disable_search:true,disabled:true,width:'100%'}" ng-if="dataLoaded" class="form-control" ng-model="source.Floor3" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[面积]]]（sqm）</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=3">
+                                <input type="text" valnumber name="Size3" ng-required="source.Floor>=3" class="form-control" ng-disabled="!editable" ng-model="source.Size3" />
+                                <err-msgs field="siteInfo.Size3" submited="$submited"></err-msgs>
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<3">
+                                <input type="text" class="form-control" ng-disabled="true" ng-model="source.Size3" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[座位数]]]</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=3">
+                                <input type="text" valnumber name="Seats3" ng-required="source.Floor>=3" class="form-control" ng-disabled="!editable" ng-model="source.Seats3" />
+                                <err-msgs field="siteInfo.Seats3" submited="$submited"></err-msgs>
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<3">
+                                <input type="text" class="form-control" ng-disabled="true" ng-model="source.Seats3" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[楼层]]]4</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=4">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}" ng-disabled="!editable" name="Floor4" ng-required="source.Floor>=4" ng-if="dataLoaded" class="form-control" ng-model="source.Floor4" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <err-msgs field="siteInfo.Floor4" submited="$submited"></err-msgs>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<4">
+                                <select chosen="{disable_search:true,disabled:true,width:'100%'}" ng-if="dataLoaded" class="form-control" ng-model="source.Floor4" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[面积]]]（sqm）</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=4">
+                                <input type="text" valnumber name="Size4" ng-required="source.Floor>=4" class="form-control" ng-disabled="!editable" ng-model="source.Size4" />
+                                <err-msgs field="siteInfo.Size4" submited="$submited"></err-msgs>
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<4">
+                                <input type="text" class="form-control" ng-disabled="true" ng-model="source.Size4" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[座位数]]]</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=4">
+                                <input type="text" valnumber name="Seats4" ng-required="source.Floor>=4" class="form-control" ng-disabled="!editable" ng-model="source.Seats4" />
+                                <err-msgs field="siteInfo.Seats4" submited="$submited"></err-msgs>
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<4">
+                                <input type="text" class="form-control" ng-disabled="true" ng-model="source.Seats4" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[楼层]]]5</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=5">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}" ng-if="dataLoaded" name="Floor5" ng-required="source.Floor>=5" class="form-control" ng-model="source.Floor5" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <err-msgs field="siteInfo.Floor5" submited="$submited"></err-msgs>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<5">
+                                <select chosen="{disable_search:true,disabled:true,width:'100%'}" ng-if="dataLoaded" class="form-control" ng-model="source.Floor5" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[面积]]]（sqm）</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=5">
+                                <input type="text" valnumber name="Size5" ng-required="source.Floor>=5" class="form-control" ng-disabled="!editable" ng-model="source.Size5" />
+                                <err-msgs field="siteInfo.Size5" submited="$submited"></err-msgs>
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<5">
+                                <input type="text" class="form-control" ng-disabled="true" ng-model="source.Size5" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[座位数]]]</label>
+                            <div class="col-xs-2 pd_t_7" ng-show="source.Floor>=5">
+                                <input type="text" valnumber name="Seats5" ng-required="source.Floor>=5" class="form-control" ng-disabled="!editable" ng-model="source.Seats5" />
+                                <err-msgs field="siteInfo.Seats5" submited="$submited"></err-msgs>
+                            </div>
+                            <div class="col-xs-2 pd_t_7" ng-if="source.Floor<5">
+                                <input type="text" class="form-control" ng-disabled="true" ng-model="source.Seats5" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">Seating Ratio</label>
+                            <div class="col-xs-2 pd_t_7">
+                                {{source.SeatingRatio | numberCustom:2}}
+                            </div>
+                            <label class="col-xs-2 control-label">[[[总面积]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                {{source.TotalArea}}
+                            </div>
+                            <label class="col-xs-2 control-label">[[[总座位数]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                {{source.TotalSeatsNo}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[是否分体厨房]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <label>
+                                    <input type="radio" name="IsSplitKitchen" ng-disabled="!editable" value="1" ng-model="source.SplitKitchen" />
+                                    Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                            <input type="radio" name="IsSplitKitchen" ng-disabled="!editable" value="0" ng-model="source.SplitKitchen" />
+                            No</label>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[厨房楼层]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}" ng-if="dataLoaded" class="form-control" ng-model="source.KitchenFloor" ng-options="m.NameZHCN as m.NameZHCN for m in KitchenFloors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[柜台楼层]]]1</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}" ng-if="dataLoaded" class="form-control" ng-model="source.FrontCounterFloor1" ng-options="m.NameZHCN as m.NameZHCN for m in FrontCounterFloors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[柜台楼层座位数]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="FrontCounterSeats" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.FrontCounterSeats" />
+                                <err-msgs field="siteInfo.FrontCounterSeats" submited="$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[座位数量-室外]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="OutsideSeats" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.OutsideSeats" />
+                                <err-msgs field="siteInfo.OutsideSeats" submited="$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[柜台楼层]]]2</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}" ng-disabled="!editable" ng-if="dataLoaded" class="form-control" ng-model="source.FrontCounterFloor2" ng-options="m.NameZHCN as m.NameZHCN for m in FrontCounterFloors">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-heading">
+                        <span class="panel-icon"></span>
+                        <span class="panel-title">[[[面积]]]</span>
+                    </div>
+                    <div class="panel-body form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[DT场地面积]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7" ng-switch="store.StoreTypeName">
+                                <div ng-switch-when="DT">
+                                    <input type="text" valnumber name="DTSize" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.DTSize" />
+                                    <err-msgs field="siteInfo.DTSize" submited="$submited"></err-msgs>
+                                </div>
+                                <div ng-switch-when="IS">
+                                    {{source.DTSize}}
+                                </div>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[餐区面积]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                {{source.DiningArea}}
+                            </div>
+                            <label class="col-xs-2 control-label">[[[厨房面积]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                {{source.KitchenArea}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[店外kiosk面积]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" name="RemoteKioskArea" class="form-control" ng-disabled="!editable" ng-model="source.RemoteKioskArea" />
+
+                            </div>
+                            <label class="col-xs-2 control-label">[[[排队等侯区]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="WaitingArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.WaitingArea" />
+                                <err-msgs field="siteInfo.WaitingArea" submited="$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[服务区]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="ServiceArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.ServiceArea" />
+                                <err-msgs field="siteInfo.ServiceArea" submited="$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">Play Place</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <label>
+                                    <input type="radio" name="IsPlayPlace" ng-disabled="!editable" value="1" ng-model="source.PlayPlace" />
+                                    Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                            <input type="radio" name="IsPlayPlace" ng-disabled="!editable" value="0" ng-model="source.PlayPlace" />
+                            No</label>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[座位区]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="SeatArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.SeatArea" />
+                                <err-msgs field="siteInfo.SeatArea" submited="$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[产区]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="ProducingArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.ProducingArea" />
+                                <err-msgs field="siteInfo.ProducingArea" submited="$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">Party Room</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <label>
+                                    <input type="radio" name="IsPartyRoom" ng-disabled="!editable" value="1" ng-model="source.PartyRoom" />
+                                    Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                            <input type="radio" name="IsPartyRoom" ng-disabled="!editable" value="0" ng-model="source.PartyRoom" />
+                            No</label>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[游乐场]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="PlayPlaceArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.PlayPlaceArea" />
+                                <err-msgs field="siteInfo.PlayPlaceArea" submited="$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[后区]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="BackArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.BackArea" />
+                                <err-msgs field="siteInfo.BackArea" submited="$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label"></label>
+                            <div class="col-xs-2"></div>
+                            <label class="col-xs-2 control-label">[[[卫生间]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="ToiletArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.ToiletArea" />
+                                <err-msgs field="siteInfo.ToiletArea" submited="$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[冷库]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="ColdStorageArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.ColdStorageArea" />
+                                <err-msgs field="siteInfo.ColdStorageArea" submited="$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label"></label>
+                            <div class="col-xs-2"></div>
+                            <label class="col-xs-2 control-label">[[[楼梯]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="StairArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.StairArea" />
+                                <err-msgs field="siteInfo.StairArea" submited="$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[千仓]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="DryArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.DryArea" />
+                                <err-msgs field="siteInfo.DryArea" submited="$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label"></label>
+                            <div class="col-xs-2"></div>
+                            <label class="col-xs-2 control-label">[[[其他]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="OtherArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.OtherArea" />
+                                <err-msgs field="siteInfo.OtherArea" submited="$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[员工室]]](sqm)</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <input type="text" valnumber name="StaffroomArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.StaffroomArea" />
+                                <err-msgs field="siteInfo.StaffroomArea" submited="$submited"></err-msgs>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-heading">
+                        <span class="panel-icon"></span>
+                        <span class="panel-title">[[[设计风格]]]</span>
+                    </div>
+                    <div class="panel-body form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[内部设计]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}"
+                                    name="InnerDesign"
+                                    ng-required="true"
+                                    ng-if="dataLoaded"
+                                    class="form-control"
+                                    ng-model="source.DesignStyle"
+                                    ng-options="m.Code as m.NameENUS for m in InnerDesign">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <err-msgs field="siteInfo.InnerDesign" submited="$submited"></err-msgs>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[外观设计]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}"
+                                    name="AppearDesign"
+                                    ng-required="true"
+                                    ng-if="dataLoaded"
+                                    class="form-control"
+                                    ng-model="source.ExteriorDesign"
+                                    ng-options="m.Code as m.NameENUS for m in AppearDesign">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <err-msgs field="siteInfo.AppearDesign" submited="$submited"></err-msgs>
+                                <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions ta_c">
+                        <button type="button" ng-show="editable" class="btn btn-lg btn-orange" form-submit ng-click="save(siteInfo)"><span class="fa fa-paste"></span>[[[保存]]]</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="divAssetManagement" style="display: none" class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">Licenses
+            </span>
+        </div>
+        <table id="tabAssetManagement" style="table-layout: fixed;" class="table"></table>
+    </div>
+
+    <div id="divFinanceInfo" style="display: none" class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[财务信息]]]（TTM as of <span id="spanTTMValue"></span>）
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">Total Net Sales(RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divNetProductSales"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">Cash Flow(RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divCashFlow"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">SOI(RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divSOI"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">Rent Paid to LL(RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divRent"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">McOpCo Margin(RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divMcOpCoMargin"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">SOI%</label>
+                <div class="col-xs-2 pd_t_7" id="divSOIPct"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">TTM Adj.Rent(RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divRent_inclAdjustment"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">TTM Adj.Rent%</label>
+                <div class="col-xs-2 pd_t_7" id="divRent_inclAdjustmentPct"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">Comps Sales%</label>
+                <div class="col-xs-2 pd_t_7" id="divCompsSales"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">LHI NBV(RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divLHINBV"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">ESSD NBV(RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divESSDNBV"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">Total NBV(RMB)</label>
+                <div class="col-xs-2 pd_t_7" id="divTotalNBV"></div>
+            </div>
+        </div>
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[财务列表]]]</span>
+        </div>
+        <table id="tabFinanceInfo" style="table-layout: fixed;" class="table"></table>
+    </div>
+
+    <div id="divContractInfo" style="display: none" class="panel panel-black mg_t_10">
+        <form id="formContract" name="formContract" ng-controller="storeContractController">
+            <div>
+                <div class="panel panel-black mg_t_10">
+                    <div class="panel-heading">
+                        <span class="panel-icon"></span>
+                        <span class="panel-title">[[[联系人信息]]]
+                        </span>
+                    </div>
+                    <div class="panel-body form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[甲方全称]]]</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" name="PartyAFullName" disabled="disabled" ng-model="contract.PartyAFullName" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[合同方名称]]]</label>
+                            <div class="col-xs-6">
+                                <dict-selector name="McDLegalEntity" parent-code="175" selected-code="contract.McDLegalEntity" selected-dict="McDLegalEntityDict" editable="editable&&contract.contractEditable"></dict-selector>
+                                <err-msgs field="formContract.McDLegalEntity" submited="$parent.$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[麦当劳实体]]]</label>
+                            <div class="col-xs-2">
+                                <dict-selector name="McDOwnership" parent-code="302" selected-code="contract.McDOwnership" selected-dict="McDOwnershipDict" editable="editable&&contract.contractEditable"></dict-selector>
+                                <err-msgs field="formContract.McDOwnership" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[业主联系人]]]</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" name="ContactPerson" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.ContactPerson" required />
+                                <err-msgs field="formContract.ContactPerson" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[联系方式]]]</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" name="ContactMode" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.ContactMode" required />
+                                <err-msgs field="formContract.ContactMode" submited="$parent.$submited"></err-msgs>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-black mg_t_10">
+                    <div class="panel-heading">
+                        <span class="panel-icon"></span>
+                        <span class="panel-title">[[[合同信息]]]
+                        </span>
+                    </div>
+                    <div class="panel-body form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[租赁类型]]]</label>
+                            <div class="col-xs-2">
+                                <select chosen="{{editable&&contract.contractEditable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}"
+                                    name="RentType"
+                                    ng-if="editable&&contract.contractEditable"
+                                    ng-required="true"
+                                    class="form-control"
+                                    ng-model="contract.RentType"
+                                    ng-options="r as r for r in RentTypes">
+                                    <option value="">[[[-- 请选择 --]]]</option>
+                                </select>
+                                <input type="text" class="form-control" disabled ng-if="!editable||!contract.contractEditable" ng-model="contract.RentType" />
+                                <err-msgs field="formContract.RentType" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[租赁面积]]]</label>
+                            <div class="col-xs-2">
+                                <input type="text" valnumber name="totalLeasedArea" class="form-control" disabled="disabled" ng-model="contract.TotalLeasedArea" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[租赁/土地购置期限]]]（Years)</label>
+                            <div class="col-xs-2">
+                                <input type="text" required name="leasePurchaseTerm" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.LeasePurchaseTerm" />
+                                <err-msgs field="formContract.leasePurchaseTerm" submited="$parent.$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[合同类型]]]</label>
+                            <div class="col-xs-2">
+                                <dict-selector name="LeasePurchase" parent-code="148" selected-code="contract.LeasePurchase" selected-dict="LeasePurchaseDict" editable="editable&&contract.contractEditable"></dict-selector>
+                                <err-msgs field="formContract.LeasePurchase" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[预计合同起始日期]]]</label>
+                            <div class="col-xs-2">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" ng-disabled="!editable || !contract.contractEditable" name="StartDate" aria-readonly="true" onfocus="this.blur()" ng-model="contract.StartDate" datepicker-popup="{{format}}" is-open="showStartDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn" ng-show="editable && contract.contractEditable">
+                                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showStartDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                                <err-msgs field="formContract.StartDate" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[合同起始年]]]</label>
+                            <div class="col-xs-2">
+                                {{contract.StartYear}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[租金起付日]]]</label>
+                            <div class="col-xs-2">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" ng-disabled="!editable || !contract.contractEditable" name="RentCommencementDate" onfocus="this.blur()" ng-model="contract.RentCommencementDate" datepicker-popup="{{format}}" is-open="showRentCommencementDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn" ng-show="editable && contract.contractEditable">
+                                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showRentCommencementDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                                <err-msgs field="formContract.RentCommencementDate" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[预计合同到期日期]]]</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" disabled ng-model="contract.EndDate" datepicker-popup="{{format}}" />
+                            </div>
+                            <label class="col-xs-2 control-label">[[[合同到期年]]]</label>
+                            <div class="col-xs-2">
+                                {{contract.EndYear}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[续租通知最迟提交日]]]</label>
+                            <div class="col-xs-2">
+                                <input type="text" required name="DeadlineToNotice" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.DeadlineToNotice" />
+                                <err-msgs field="formContract.DeadlineToNotice" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[2010年起合同是否有修订]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <label>
+                                    <input type="radio" name="Changedafter2010" required ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.Changedafter2010" />
+                                    Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" name="Changedafter2010" required ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.Changedafter2010" />
+                        No</label>
+                                <err-msgs field="formContract.Changedafter2010" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[免租期]]]</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" name="FreeRentalPeriod" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.FreeRentalPeriod" required />
+                                <err-msgs field="formContract.FreeRentalPeriod" submited="$parent.$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[租金构成]]]</label>
+                            <div class="col-xs-10">
+                                <textarea rows="5" class="form-control" name="RentStructure" disabled="disabled" ng-model="contract.RentStructure"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[提前解约条款]]]</label>
+                            <div class="col-xs-2">
+                                <label>
+                                    <input type="radio" required ng-disabled="!editable || !contract.contractEditable" name="WithEarlyTerminationClause" ng-value="1" ng-model="contract.WithEarlyTerminationClause" />
+                                    Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" required ng-disabled="!editable || !contract.contractEditable" name="WithEarlyTerminationClause" ng-value="0" ng-model="contract.WithEarlyTerminationClause" />
+                        No</label>
+                                <err-msgs field="formContract.WithEarlyTerminationClause" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[排他协议]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <label>
+                                    <input type="radio" name="ExclusivityClause" required ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.ExclusivityClause" />
+                                    Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" name="ExclusivityClause" required ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.ExclusivityClause" />
+                        No</label>
+                                <err-msgs field="formContract.ExclusivityClause" submited="$parent.$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="contract.WithEarlyTerminationClause">
+                            <label class="col-xs-2 control-label">[[[提前解约描述]]]</label>
+                            <div class="col-xs-10">
+                                <textarea rows="5" required name="EarlyTerminationClauseDetail" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.EarlyTerminationClauseDetail"></textarea>
+                                <err-msgs field="formContract.EarlyTerminationClauseDetai" submited="$parent.$parent.$submited"></err-msgs>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-black mg_t_10">
+                    <div class="panel-heading">
+                        <span class="panel-icon"></span>
+                        <span class="panel-title">[[[付款信息]]]
+                        </span>
+                    </div>
+                    <div class="panel-body form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[租金支付对象]]]</label>
+                            <div class="col-xs-2">
+                                <input type="text" required name="RentalPaidto" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.RentalPaidto" />
+                                <err-msgs field="formContract.RentalPaidto" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[租金支付方式]]]</label>
+                            <div class="col-xs-2">
+                                <dict-selector name="RentPaymentArrangement" parent-code="303" selected-code="contract.RentPaymentArrangement" selected-dict="RentPaymentArrangementDict" editable="editable&&contract.contractEditable"></dict-selector>
+                                @*<input type="text" required name="RentPaymentArrangement" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.RentPaymentArrangement" />*@
+                                <err-msgs field="formContract.RentPaymentArrangement" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[保证金]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <label>
+                                    <input type="radio" required name="HasDeposit" ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.HasDeposit" />
+                                    Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" required name="HasDeposit" ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.HasDeposit" />
+                        No</label>
+                                <err-msgs field="formContract.HasDeposit" submited="$parent.$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="contract.HasDeposit">
+                            <label class="col-xs-2 control-label">[[[保证金金额]]]</label>
+                            <div class="col-xs-2">
+                                <input type="text" required name="depositAmount" number-show="money" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.DepositAmount" />
+                                <err-msgs field="formContract.depositAmount" submited="$parent.$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[保证金可退]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <label>
+                                    <input type="radio" required name="Refundable" ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.Refundable" />
+                                    Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" required name="Refundable" ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.Refundable" />
+                        No</label>
+                                <err-msgs field="formContract.Refundable" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label" ng-if="contract.Refundable">[[[保证金退还日期]]]</label>
+                            <div class="col-xs-2" ng-if="contract.Refundable">
+                                <input type="text" required name="RefundableDate" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.RefundableDate" />
+                                <err-msgs field="formContract.RefundableDate" submited="$parent.$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">[[[滞纳金条款]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <label>
+                                    <input type="radio" required name="WithPenaltyClause" ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.WithPenaltyClause" />
+                                    Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" required name="WithPenaltyClause" ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.WithPenaltyClause" />
+                        No</label>
+                                <err-msgs field="formContract.WithPenaltyClause" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[银行保函]]]</label>
+                            <div class="col-xs-2 pd_t_7">
+                                <label>
+                                    <input type="radio" required name="HasBankGuarantee" ng-disabled="!editable || !contract.contractEditable" ng-value="1" ng-model="contract.HasBankGuarantee" />
+                                    Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" required name="HasBankGuarantee" ng-disabled="!editable || !contract.contractEditable" ng-value="0" ng-model="contract.HasBankGuarantee" />
+                        No</label>
+                                <err-msgs field="formContract.HasBankGuarantee" submited="$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label" ng-if="contract.HasBankGuarantee">[[[银行保函编号]]]</label>
+                            <div class="col-xs-2" ng-if="contract.HasBankGuarantee">
+                                <input type="text" required name="BGNumber" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.BGNumber" />
+                                <err-msgs field="formContract.BGNumber" submited="$parent.$parent.$submited"></err-msgs>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="contract.HasBankGuarantee">
+                            <label class="col-xs-2 control-label">[[[银行保函额]]]</label>
+                            <div class="col-xs-2">
+                                <input type="text" required number-show="money" name="BGAmount" class="form-control" ng-disabled="!editable || !contract.contractEditable" ng-model="contract.BGAmount" />
+                                <err-msgs field="formContract.BGAmount" submited="$parent.$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[银行保函起始日]]]</label>
+                            <div class="col-xs-2">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" ng-disabled="!editable || !contract.contractEditable" name="BGCommencementDate" onfocus="this.blur()" aria-readonly="true" is-open="$parent.showBGCommencementDate" ng-model="contract.BGCommencementDate" datepicker-popup="{{format}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn" ng-show="editable && contract.contractEditable">
+                                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showBGCommencementDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                                <err-msgs field="formContract.BGCommencementDate" submited="$parent.$parent.$submited"></err-msgs>
+                            </div>
+                            <label class="col-xs-2 control-label">[[[银行保函终止日]]]</label>
+                            <div class="col-xs-2">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" ng-disabled="!editable || !contract.contractEditable" name="BGEndDate" onfocus="this.blur()" aria-readonly="true" is-open="$parent.showBGEndDate" ng-model="contract.BGEndDate" datepicker-popup="{{format}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn" ng-show="editable && contract.contractEditable">
+                                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showBGEndDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                                <err-msgs field="formContract.BGEndDate" submited="$parent.$parent.$submited"></err-msgs>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-black mg_t_10">
+                    <div class="panel-heading">
+                        <span class="panel-icon"></span>
+                        <span class="panel-title">[[[修订信息]]]
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <tr ng-if="revisions.length>0 || (editable && contract.contractEditable)">
+                                <th width="20" ng-if="editable && contract.contractEditable">
+                                    <a ng-click="addRevision()"><span class="fa fa-plus"></span></a>
+                                </th>
+                                <th width="15%">[[[修订日期]]]</th>
+                                <th>[[[变更类型]]]</th>
+                            </tr>
+                        </table>
+                        <div ng-form name="frmRevision" ng-repeat="revision in revisions" ng-if="!revision.IsHistory">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td width="20" ng-if="editable && contract.contractEditable">
+                                        <a ng-click="$parent.removeRevision(revision)"><span class="fa fa-minus"></span></a>
+                                    </td>
+                                    <td width="15%">
+                                        <p class="input-group">
+                                            <input type="text" name="ChangeDate" ng-disabled="!editable || !contract.contractEditable" class="form-control" onfocus="this.blur()" aria-readonly="true" ng-model="revision.ChangeDate" datepicker-popup="yyyy-MM-dd" is-open="$parent.$parent['showChangeDate'+$index]" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                            <span class="input-group-btn" ng-show="editable && contract.contractEditable">
+                                                <button type="button" class="btn btn-default" ng-click="openDate($event,'showChangeDate'+$index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </p>
+                                        <err-msgs field="frmRevision.ChangeDate" submited="$parent.$parent.$parent.$submited"></err-msgs>
+                                    </td>
+                                    <td class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-xs-3">
+                                                <input type="checkbox" ng-disabled="!editable || !contract.contractEditable" ng-model="revision.Rent" ng-true-value="Y" ng-false-value="N" ng-change="revisionCheckChange(revision,revision.Rent)" />
+                                                [[[租金变更]]]
+                                            </label>
+                                            <div class="col-xs-9" ng-if="revision.Rent=='Y'">
+                                                <div class="col-xs-6">
+                                                    <div>[[[原租金构成]]]</div>
+                                                    <textarea rows="5" class="form-control mg_t_10" ng-model="revision.RentStructureOld" disabled="disabled"></textarea>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div>[[[新租金构成]]]</div>
+                                                    <textarea rows="5" class="form-control mg_t_10" name="RentStructureNew" ng-model="revision.RentStructureNew" required maxlength="500" ng-disabled="!editable || !contract.contractEditable"></textarea>
+                                                    <err-msgs field="frmRevision.RentStructureNew" submited="$parent.$parent.$parent.$submited"></err-msgs>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-3">
+                                                <input type="checkbox" ng-disabled="!editable || !contract.contractEditable" ng-model="revision.Size" ng-true-value="Y" ng-false-value="N" ng-change="revisionCheckChange(revision,revision.Size)" />
+                                                [[[红线变更]]]
+                                            </label>
+                                            <div class="col-xs-9" ng-if="revision.Size=='Y'">
+                                                <label class="col-xs-3 control-label">[[[原红线面积（平方米）]]]</label>
+                                                <div class="col-xs-3">
+                                                    <input type="text" class="form-control" ng-model="revision.RedlineAreaOld" disabled="disabled" />
+                                                </div>
+                                                <label class="col-xs-3 control-label">[[[新红线面积 （平方米）]]]</label>
+                                                <div class="col-xs-3">
+                                                    <input type="text" class="form-control" name="RedlineAreaNew" required number-show valnumber ng-model="revision.RedlineAreaNew" ng-disabled="!editable || !contract.contractEditable" />
+                                                    <err-msgs field="frmRevision.RedlineAreaNew" submited="$parent.$parent.$parent.$submited"></err-msgs>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-3">
+                                                <input type="checkbox" ng-disabled="!editable || !contract.contractEditable" ng-model="revision.LeaseTerm" ng-true-value="Y" ng-false-value="N" ng-change="revisionCheckChange(revision,revision.LeaseTerm)" />
+                                                [[[租赁期限变更]]]
+                                            </label>
+                                            <div class="col-xs-9" ng-if="revision.LeaseTerm=='Y'">
+                                                <label class="col-xs-3 control-label">[[[原租约到期日期（年月日）]]]</label>
+                                                <div class="col-xs-3">
+                                                    <input type="text" class="form-control" value="{{revision.LeaseChangeExpiryOld|date:'yyyy-MM-dd'}}" disabled="disabled" />
+                                                </div>
+                                                <label class="col-xs-3 control-label">[[[新租约到期日期（年月日）]]]</label>
+                                                <div class="col-xs-3">
+                                                    <p class="input-group">
+                                                        <input type="text" class="form-control" onfocus="this.blur()" aria-readonly="true" ng-disabled="!editable || !contract.contractEditable" name="LeaseChangeExpiryNew" ng-model="revision.LeaseChangeExpiryNew" datepicker-popup="yyyy-MM-dd" is-open="$parent.$parent.$parent['showLCE'+$index]" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                                        <span class="input-group-btn" ng-show="editable && contract.contractEditable">
+                                                            <button type="button" class="btn btn-default" ng-click="openDate($event,'showLCE'+$index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                        </span>
+                                                    </p>
+                                                    <err-msgs field="frmRevision.LeaseChangeExpiryNew" submited="$parent.$parent.$parent.$submited"></err-msgs>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-3">
+                                                <input type="checkbox" ng-disabled="!editable || !contract.contractEditable" ng-model="revision.Entity" ng-true-value="Y" ng-false-value="N" ng-change="revisionCheckChange(revision,revision.Entity)" />
+                                                [[[业主方变更]]]
+                                            </label>
+                                            <div class="col-xs-9" ng-if="revision.Entity=='Y'">
+                                                <label class="col-xs-3 control-label">[[[原租约业主]]]</label>
+                                                <div class="col-xs-3">
+                                                    <input type="text" class="form-control" ng-model="revision.LandlordOld" disabled="disabled" />
+                                                </div>
+                                                <label class="col-xs-3 control-label">[[[新租约业主]]]</label>
+                                                <div class="col-xs-3">
+                                                    <input type="text" class="form-control" name="LandlordNew" ng-model="revision.LandlordNew" required ng-disabled="!editable || !contract.contractEditable" />
+                                                    <err-msgs field="frmRevision.LandlordNew" submited="$parent.$parent.$parent.$submited"></err-msgs>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-3">
+                                                <input type="checkbox" ng-disabled="!editable || !contract.contractEditable" ng-model="revision.Others" ng-true-value="Y" ng-false-value="N" ng-change="revisionCheckChange(revision,revision.Others)" />
+                                                [[[其他]]]
+                                            </label>
+                                            <div class="col-xs-9" ng-if="revision.Others=='Y'">
+                                                <textarea rows="5" maxlength="500" class="form-control" ng-model="revision.OthersDescription" name="OthersDescription" required ng-disabled="!editable || !contract.contractEditable"></textarea>
+                                                <err-msgs field="frmRevision.OthersDescription" submited="$parent.$parent.$parent.$submited"></err-msgs>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr ng-if="revision.Rent=='Y'||revision.Size=='Y'||revision.LeaseTerm=='Y'||revision.Entity=='Y'||revision.Others=='Y'">
+                                    <td colspan="3">
+                                        <div>[[[描述]]]</div>
+                                        <textarea rows="5" maxlength="500" class="form-control mg_t_10" name="Description" ng-model="revision.Description" required ng-disabled="!editable || !contract.contractEditable"></textarea>
+                                        <err-msgs field="frmRevision.Description" submited="$parent.$parent.$parent.$submited"></err-msgs>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-black mg_t_10">
+                    <div class="panel-heading">
+                        <span class="panel-icon"></span>
+                        <span class="panel-title">[[[附件]]]
+                        </span>
+                    </div>
+                    <div class="panel-body form-horizontal" role="form">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>[[[标题]]]</th>
+                                <th>[[[文件名]]]</th>
+                                <th></th>
+                            </tr>
+                            <tr ng-repeat="att in attachments.contract">
+                                <td><span>{{att.Title}}</span></td>
+                                <td><span>{{att.DocName}}</span></td>
+                                <td>
+                                    <a href="{{att.downloadLink}}">[[[ [下载] ]]]</a>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="att in attachments.project">
+                                <td><span>{{att.Title}}</span></td>
+                                <td><span>{{att.DocName}}</span></td>
+                                <td>
+                                    <a ng-href="{{attach.downloadLink}}">[[[ [下载] ]]]</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-black mg_t_10">
+                    <div class="panel-heading">
+                        <span class="panel-icon"></span>
+                        <span class="panel-title">[[[租赁历史]]]
+                        </span>
+                    </div>
+                    <div class="panel-body form-horizontal" role="form">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>[[[合同编号]]]</th>
+                                <th>[[[合同类型]]]</th>
+                                <th>[[[租赁面积]]]</th>
+                                <th>[[[租赁/土地购置期限]]]</th>
+                                <th>[[[预计合同起始]]]</th>
+                                <th>[[[预计合同到期]]]</th>
+                                <th>[[[合同起始年]]]</th>
+                                <th>[[[合同到期年]]]</th>
+                                <th>[[[租赁类型]]]</th>
+                                <th>[[[续租通知最迟提交日]]]</th>
+                                <th>[[[租金起付日]]]</th>
+                                <th>[[[附件]]]</th>
+                            </tr>
+
+                            <tr ng-repeat="history in contracts">
+                                <td><a ng-click="$parent.editContract(history)">{{history.StoreCode+'-'}}{{history.CreatedTime|date:'yyyy'}}</a></td>
+                                <td><span>{{history.LeasePurchase}}</span></td>
+                                <td><span>{{history.TotalLeasedArea}}</span></td>
+                                <td><span>{{history.LeasePurchaseTerm}}</span></td>
+                                <td><span>{{history.StartDate|date:'yyyy-MM-dd'}}</span></td>
+                                <td><span>{{history.EndDate|date:'yyyy-MM-dd'}}</span></td>
+                                <td><span>{{history.StartYear}}</span></td>
+                                <td><span>{{history.EndYear}}</span></td>
+                                <td><span>{{history.RentType}}</span></td>
+                                <td><span>{{history.DeadlineToNotice}}</span></td>
+                                <td><span>{{history.RentCommencementDate|date:'yyyy-MM-dd'}}</span></td>
+                                <td><a>附件(0)</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-actions ta_c">
+                    <button type="button" ng-show="editable && contract.contractEditable" class="btn btn-lg btn-orange" form-submit ng-click="save(formContract)"><span class="fa fa-paste"></span>[[[保存]]]</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="divOwnerContactInfo" style="display: none" class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[业主信息]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[物业所有人名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL0Contact"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[物业所有人联系人]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL0Title"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[物业所有人联系电话]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL0Tel"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[物业地址]]]</label>
+                <div class="col-xs-10 pd_t_7" id="divLL0Address"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主1名称]]]</label>
+                <div class="col-xs-10 pd_t_7" id="divLL1Contact"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主1关键联系人名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1Title"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主1关联联系人职称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1Tel"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主1关键联系人电话]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL1Mobile"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主2名称]]]</label>
+                <div class="col-xs-10 pd_t_7" id="divLL2Contact"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主2关键联系人名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2Title"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主2关联联系人职称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2Tel"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主2关键联系人电话]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL2Mobile"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主3名称]]]</label>
+                <div class="col-xs-10 pd_t_7" id="divLL3Contact"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主3关键联系人名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL3Title"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主3关联联系人职称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL3Tel"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主3关键联系人电话]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLL3Mobile"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[是否地产经纪]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divIsBroker"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[地产经纪]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divBrokerName"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[是否由联盟团队推荐]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSTLLRecordQueryIsAlliance"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[联盟名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSTLLRecordQueryAllianceName"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[指示性招牌的数量]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSTLLRecordQuerySignageCount"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[是否属于联盟企业]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSTLLRecordQueryIsBigLL"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[联盟名称]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSTLLRecordQueryBigLLName"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[进口数量]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSTLLRecordQueryOpenCount"></div>
+            </div>
+        </div>
+
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Pipeline来源]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[是否来源于产地（非Mapping结果）]]]</label>
+                <div class="col-xs-10 pd_t_7" id="divIsFromRE">是/否</div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[谈判记录]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[时间]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divDateTime"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[地点]]]</label>
+                <div class="col-xs-6 pd_t_7" id="divLocation"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[谈判主题]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divTopic"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[麦当劳方参与人]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divMcdParticipants"></div>
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[业主方参与人]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divLLparticipants"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-2 control-label">[[[谈判内容]]]</label>
+                <div class="col-xs-10 pd_t_7">
+                    <textarea rows="3" class="form-control" readonly id="divStoreOwnerContactInfoContent"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[历史谈判记录]]]</span>
+        </div>
+        <table id="tabOwnerContactInfo" style="table-layout: fixed;" class="table"></table>
+    </div>
+
+    <div id="divBE" style="display: none" class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[BE列表]]]
+            </span>
+        </div>
+        <table id="tabBEInfo" style="table-layout: fixed;" class="table"></table>
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[合同列表]]]
+            </span>
+        </div>
+        <table id="tabBEContractInfo" style="table-layout: fixed;" class="table"></table>
+    </div>
+
+    <div ng-controller="summaryController">
+        <div id="divSummaryList" style="display: none" class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">Info List</span>
+                <span class="pull-right panel-title" ng-if="enableEdit"><a class="btn-sm btn-warning active" href="#" ng-click="add()">+ New </a>
+                </span>
+            </div>
+            <div class="panel-body">
+                <table style="table-layout: fixed;" class="table" ng-hide="loadingList">
+                    <tr>
+                        <th>Push or Not</th>
+                        <th>Title</th>
+                        <th>Submitter</th>
+                        <th>Submit Date</th>
+                    </tr>
+                    <tr ng-repeat="summary in summaryList">
+                        <td>
+                            <a class="btn-sm btn-default" href="#" ng-show="summary.IsPushed">
+                                <span class="fa fa-check-circle-o"></span>
+                            </a>
+                            <a class="btn-sm btn-default" href="#" ng-hide="summary.IsPushed">
+                                <span class="fa fa-upload"></span>
+                            </a>
+                        </td>
+                        <td><a href="#" ng-click="LoadDetailData(summary.FlowCode, summary.Id)">{{summary.ProjectId}}</a></td>
+                        <td>{{summary.CreateUserAccount}}</td>
+                        <td>{{summary.CreateTime | date:"yyyy-MM-dd"}}</td>
+                    </tr>
+                </table>
+                <div class="ta_c" ng-show="loadingList">
+                    <img src="../../Content/Images/loading.gif" />
+                </div>
+            </div>
+            <div class="table-paginate">
+                <span>当前第{{pageIndex}}页/共{{numPages}}页 共{{totalItems}}条记录</span>
+                <pagination total-items="totalItems" boundary-links="true" max-size="5" items-per-page="pageSize" ng-model="pageIndex" class="pagination-sm" previous-text="上一页" next-text="下一页" first-text="首页" last-text="末页" num-pages="numPages"></pagination>
+            </div>
+        </div>
+        <div id="divSummaryDetails" class="panel panel-black mg_t_10">
+            <ng-include src="flowUrl"></ng-include>
+        </div>
+    </div>
+</div>

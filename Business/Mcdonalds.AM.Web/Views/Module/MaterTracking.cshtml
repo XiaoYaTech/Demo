@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+}
+<div>
+    <div class="panel panel-black mg_t_10" ng-show="IsShowMaterTracking">
+        {{JSON.stringify(reps)}}
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">资产跟进
+            </span>
+            <div class="panel-tools">
+                <button type="button" class="btn btn-sm btn-default" ng-if="!hasUnFinishFollow&&!isShowSend&&isLegal&&!isHistory" ng-click="showSendRep()"><span class="fa fa-cloud-upload"></span>添加项目</button>
+            </div>
+            <span class="clear"></span>
+        </div>
+        <div class="panel-body" ng-show="repsLoaded">
+            <div class="clearfix" ng-show="isShowSend">
+                <div class="col-xs-9">
+                    <textarea class="form-control" ng-model="trackInput" rows="5"></textarea>
+                </div>
+                <div class="col-xs-3">
+                    <p>{{now|date:"yyyy-MM-dd HH:mm:ss"}}</p>
+                    <p>{{currentUser.NameENUS}}</p>
+                    <button type="button" class="btn btn-sm btn-warning" ng-click="submitTrack()">[[[呈递]]]</button>
+                    <button type="button" class="btn btn-sm btn-danger" ng-click="cancleSendRep()">[[[取消]]]</button>
+                </div>
+            </div>
+            <div class="mg_t_10">
+                <div class="clearfix" ng-repeat="rep in reps">
+                    <div class="col-xs-9">
+                        <pre class="mh_100">{{rep.Content}}</pre>
+                    </div>
+                    <div class="col-xs-3">
+                        <p>
+                            {{rep.CreateTime|date:"yyyy-MM-dd HH:mm:ss"}}
+                        <p>
+                        <p>
+                            {{rep.CreatorENUS}}
+                        <p>
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="showReply(rep)" ng-if="!rep.IsFinish&&!rep.isShowSend&&isLegal&&!isHistory">回复</button>
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="finish()" ng-if="!rep.IsFinish&&!rep.isShowSend&&isLegal&&!isHistory">结束</button>
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="showReply(rep)" ng-if="!rep.IsFinish&&!rep.isShowSend&&isAssetActor&&!isHistory">反馈</button>
+                    </div>
+                    <div class="mg_t_10">
+                        <div class="clearfix" ng-repeat="reply in rep.Replies">
+                            <div class="col-xs-8 col-xs-offset-1">
+                                <pre class="mh_100">{{reply.Content}}</pre>
+                            </div>
+                            <div class="col-xs-3">
+                                <p>
+                                    {{reply.CreateTime|date:"yyyy-MM-dd HH:mm:ss"}}
+                                <p>
+                                <p>
+                                    {{reply.CreatorENUS}}
+                                <p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix" ng-show="rep.isShowSend">
+                        <div class="col-xs-8 col-xs-offset-1">
+                            <textarea class="form-control" ng-model="rep.trackInput" rows="5"></textarea>
+                        </div>
+                        <div class="col-xs-3">
+                            <p>{{now|date:"yyyy-MM-dd HH:mm:ss"}}</p>
+                            <p>{{currentUser.NameENUS}}</p>
+                            <button type="button" class="btn btn-sm btn-warning" ng-click="submitTrack(rep)">[[[呈递]]]</button>
+                            <button type="button" class="btn btn-sm btn-danger" ng-click="cancleReply(rep)">[[[取消]]]</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body ta_c" ng-show="!repsLoaded">
+            <img src="~/Content/Images/loading.gif" />
+        </div>
+    </div>
+</div>

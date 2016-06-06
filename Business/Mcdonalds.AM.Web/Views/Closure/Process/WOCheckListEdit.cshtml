@@ -1,0 +1,344 @@
+﻿@{
+    Layout = null;
+}
+<script type="text/javascript">
+    function showWoInfo() {
+        $("#divWOInfo")[0].style.display = "";
+    }
+
+
+</script>
+ 
+<div id="divInfo" class="container-fluid">
+    <closure-Nav projectId="{{projectId}}" code="wochecklist"></closure-Nav>
+    @*餐厅基础信息*@
+    <nav class="navbar navbar-default" role="navigation">
+        WorkFlow > closure > <b>FA Write-off Checklist</b>
+        <div>
+             @*    
+            <div>
+             处理情况：<span class=""></span>
+                <input type="radio" />未处理|<input type="radio" />已处理
+            </div>*@
+            <div>请下载模板——————————Write off 线下填写————————————结果上传 —————————————— Closing Cost ——————————————审批</div>
+        </div>
+    </nav>
+    <style>
+        li {
+            float: left;
+        }
+    </style>
+    <div>
+        <div class="popover-title">Upload WO CheckList</div>
+
+        <table>
+            <tr>
+                <td width="150">请先下载Write-off模板</td>
+                <td width="100">
+                    <a id="downLoadTemplate" href="">下载模板
+                    </a>
+
+                </td>
+
+             
+                <td>
+                    <div id="uploadTemplate" ng-model="uploadTemplate" class="btn"  snail-uploadify nluploadify="{auto:true,buttonText:'上传',uploader:'api/ClosureWOCheckList/UploadTemplate/{{projectId}}'}">
+                    </div>
+              
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+
+
+    <div id="divInfo" class="container-fluid ">
+        @*餐厅基础信息*@
+        <div>
+            <div class="popover-title">Basic Info</div>
+            <table class="table table-bordered table-striped" id="tbBasicInfo">
+
+                <tr>
+                    <td width="15%">US Code
+                    </td>
+                    <td width="20%">
+                        <label>{{storeBasicInfo.Code}}</label></td>
+                    <td width="15%">Store Name_CN
+                    </td>
+                    <td width="20%">{{storeBasicInfo.NameZHCN}}</td>
+                    <td width="15%">Store Name_EN</td>
+                    <td width="20%">{{storeBasicInfo.NameENUS}}</td>
+                </tr>
+                <tr>
+                    <td>Region
+                    </td>
+                    <td>{{storeBasicInfo.Region}}</td>
+                    <td>Market
+                    </td>
+                    <td>{{storeBasicInfo.Market}}</td>
+                    <td>City</td>
+                    <td>{{storeBasicInfo.City}}</td>
+                </tr>
+                <tr>
+                    <td>Address(CN)
+                    </td>
+                    <td>{{storeBasicInfo.AddressZHCN}}</td>
+                    <td>Open Date
+                    </td>
+                    <td>{{storeBasicInfo.OpenDate | date:"yyyy.MM.dd"}}</td>
+                    <td>Close Date</td>
+                    <td>{{storeBasicInfo.CloseDate | date:"yyyy.MM.dd"}}</td>
+                </tr>
+                <tr>
+                    <td>Assets Manager(CN)
+                    </td>
+                    <td>{{storeBasicInfo.GM}}</td>
+                    <td>AssetsRep
+                    </td>
+                    <td>{{storeBasicInfo.AssetsRep}}</td>
+                    <td>Assets Actor</td>
+                    <td>{{storeBasicInfo.Actor}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="divWOInfo" style="display: none;">
+           <div>
+           PMSupervisor: {{entity.PMSupervisorName}}
+           <button type="button" class=" btn btn-sm btn-warning" ng-click="selectEmployee(entity.PMSupervisorAccount,'PMSupervisor')">选择</button>
+            
+           </div>
+            <div>
+                MCCLApprover: {{entity.MCCLApproverName}}
+                <button type="button" class=" btn btn-sm btn-warning" ng-click="selectEmployee(entity.MCCLApproverAccount,'MCCLApprover')">选择</button>
+            </div>
+      
+            <table class="table table-bordered table-striped" id="tbBasicInfo">
+
+                <tr>
+                    <td width="15%">Item
+                    </td>
+                    <td width="20%">Remark</td>
+                    <td width="15%">Upload By
+                    </td>
+                    <td width="20%">Upload Date</td>
+                    <td width="15%">Status</td>
+                </tr>
+                <tr ng-repeat="att in templateList">
+                    <td><a ng-href="{{att.FileURL}}">{{att.Name}}</a>
+                    </td>
+                    <td>调整数据部分</td>
+                    <td>{{att.CreatorName}}
+                    </td>
+                    <td>{{att.CreateTime  | date:"yyyy.MM.dd"}}</td>
+                    <td>{{att.IsAvailable}}</td>
+                </tr>
+
+            </table>
+            @*餐厅基础信息*@
+            <div>
+                <div class="popover-title">Write Off Data</div>
+                <table class="table table-bordered table-striped" style="width: 800px; float: left;" id="tbBasicInfo">
+
+                    <tr>
+                        <td width="15%"></td>
+                        <td width="20%">Total Investments</td>
+                        <td width="15%">NBV(Closure data)
+                        </td>
+                        <td width="20%">Write off</td>
+                    </tr>
+                    <tr>
+                        <td>RE</td>
+                        <td>{{entity.RE_Original}}</td>
+                        <td>{{entity.RE_NBV}}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>LHI</td>
+                        <td>{{entity.LHI_Original}}</td>
+                        <td>{{entity.LHI_NBV}}</td>
+                        <td>{{entity.LHI_WriteOFF}}</td>
+                    </tr>
+                    <tr>
+                        <td>ESSD</td>
+                        <td>{{entity.ESSD_Original}}</td>
+                        <td>{{entity.ESSD_NBV}}</td>
+                        <td>{{entity.ESSD_WriteOFF}}</td>
+                    </tr>
+                    <tr>
+                        <td>Equipment</td>
+                        <td>{{entity.Equipment_Original}}</td>
+                        <td>{{entity.Equipment_NBV}}</td>
+                        <td>{{entity.Equipment_WriteOFF}}</td>
+                    </tr>
+                    <tr>
+                        <td>Signage</td>
+                        <td>{{entity.Signage_Original}}</td>
+                        <td>{{entity.Signage_NBV}}</td>
+                        <td>{{entity.Signage_WriteOFF}}</td>
+                    </tr>
+                    <tr>
+                        <td>Seating</td>
+                        <td>{{entity.Seating_Original}}</td>
+                        <td>{{entity.Seating_NBV}}</td>
+                        <td>{{entity.Seating_WriteOFF}}</td>
+                    </tr>
+                    <tr>
+                        <td>Decoration</td>
+                        <td>{{entity.Decoration_Original}}</td>
+                        <td>{{entity.Decoration_NBV}}</td>
+                        <td>{{entity.Decoration_WriteOFF}}</td>
+                    </tr>
+                    <tr>
+                        <td>Closing cost</td>
+                        <td></td>
+                        <td></td>
+                        <td>{{entity.RECost_WriteOFF}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{entity.TotalCost_Original}}</td>
+                        <td>{{entity.TotalCost_NBV}}</td>
+                        <td>{{entity.TotalWriteOFF}}</td>
+                    </tr>
+                </table>
+                <table class="table table-bordered table-striped" style="width: 400px; float: left;" id="tbBasicInfo">
+                    <tr>
+                        <td width="50%">Equipment Transfer</td>
+                        <td>{{entity.EquipmentTransfer}}</td>
+                    </tr>
+                    <tr>
+                        <td>Closing Costs</td>
+                        <td>{{entity.ClosingCost}}</td>
+                    </tr>
+
+                </table>
+                <div style="clear: both;"></div>
+            </div>
+
+            @*审批意见*@
+            <div>
+                <div class="popover-title">Submission and Approval Records</div>
+
+                <table class="table table-bordered table-striped" ng-repeat="closureCommer in closureCommers">
+
+                    <tr>
+                        <td width="15%">User:{{closureCommer.UserName}}
+                        </td>
+                        <td width="20%">Date:{{closureCommer.CreateTime}}</td>
+                        <td width="15%">Title:Asset {{closureCommer.TitleName}}
+                        </td>
+                        <td width="20%">Action:{{closureCommer.Action}}</td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="4">{{closureCommer.Content}}
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <p></p>
+            <div>
+                <div class="popover-title">Attachement</div>
+              
+                <div id="attFiles" ng-model="attFiles" class="btn" snail-uploadify nluploadify="{auto:true,buttonText:'上传',uploader:'api/ClosureWOCheckList/UploadAttachement/{{projectId}}'}">
+                </div>
+
+
+                <table class="table table-bordered table-striped" id="tbBasicInfo">
+
+                    <tr>
+                        <td width="15%">Item
+                        </td>
+                        <td width="15%">Upload By
+                        </td>
+                        <td width="20%">Upload Date</td>
+                        <td width="15%">Opration</td>
+                    </tr>
+                    <tr>
+                        <td><a ng-href="{{ClosingCosts.FileURL}}">*Closing Cost</a>
+                        </td>
+
+                        <td>
+                            {{ClosingCosts.CreatorName}}
+                            
+
+                        </td>
+                        <td>
+                            {{ClosingCosts.CreateTime}}
+                       
+
+                        </td>
+                        <td>
+                            
+                            <div id="closingCostFiles" ng-model="closingCostFiles" class="btn" snail-uploadify nluploadify="{auto:true,buttonText:'上传',uploader:'api/ClosureWOCheckList/UploadClosingCost/{{projectId}}'}">
+                            </div>
+                  
+                            <input type="button" ng-show="ClosingCosts" class="btn btn-default" ng-click="deleteAttachment(ClosingCosts.ID)" value="删除"/>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="att in attachementList">
+                        <td> <a ng-href="{{att.FileURL}}">{{att.Name}}</a>
+                        </td>
+
+                        <td>{{att.CreatorName}}
+                        </td>
+                        <td>{{att.CreateTime}}</td>
+                        <td></td>
+                    </tr>
+
+
+                </table>
+            </div>
+            <div>
+                <div class="popover-title">Comments</div>
+                <div>
+                    <input class="form-control" id="txtComments" />
+
+                </div>
+            </div>
+            <p></p>
+            @*历史记录*@
+            <div>
+                <div class="popover-title">WO CheckList History</div>
+                <table class="table table-bordered table-striped" id="tbBasicInfo">
+
+                    <tr ng-repeat="history in historyList">
+                        <td width="15%">Item
+                        </td>
+                        <td width="20%">Remark</td>
+                        <td width="15%">Upload By
+                        </td>
+                        <td width="20%">Upload Date</td>
+                        <td width="15%">Status</td>
+                        <td width="20%"></td>
+                    </tr>
+                    <tr ng-repeat="history in historyList">
+                        <td>FA Write-off Tools v2
+                        </td>
+                        <td></td>
+                        <td>{{history.CreateUserName}}
+                        </td>
+                        <td>{{history.CreateDate}}</td>
+                        <td>失效</td>
+                        <td>X</td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <table align="right">
+                <tr>
+                    <td>
+                        <div>
+                            <input type="button" class="btn btn-default" value="Submit" ng-click="PMSubmit()" />
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

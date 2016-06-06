@@ -1,0 +1,200 @@
+﻿@{
+    ViewBag.Title = "Lease Change Package";
+    Layout = null;
+}
+<style>
+    input.warning {
+        border: 1px solid red;
+        color: red;
+    }
+</style>
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="MajorLease" sub-code="MajorLease_Package" place-holder="11" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    <store-basic-info code="packageInfo.MajorInfo.USCode" workflow-type="MajorLease" project="packageInfo.MajorInfo" store="store"></store-basic-info>
+    @*<major-lease-change rental="packageInfo.ChangeRentalType"
+                            rental-desc="packageInfo.ChangeRentalTypeDESC"
+                            redline="packageInfo.ChangeRedLineType"
+                            redline-desc="packageInfo.ChangeRedLineTypeDESC"
+                            leaseterm="packageInfo.ChangeLeaseTermType"
+                            leaseterm-desc="packageInfo.ChangeLeaseTermDESC"
+                            project-id="{{projectId}}"
+                            is-edit="isPageEditable">
+        </major-lease-change>*@
+    <attachments-memo project-id="projectId"
+                      flow-code="MajorLease">
+    </attachments-memo>
+    <lease-change source="packageInfo.MajorInfo" is-edit="isPageEditable" title="[[[Major Lease Change]]]"></lease-change>
+
+    <notification-message project-id="projectId"
+                          flow-code="MajorLease"
+                          sub-flow-code="{{subFlowCode}}"
+                          node-id="packageInfo.Id"
+                          uscode="packageInfo.MajorInfo.USCode">
+    </notification-message>
+
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[Key Measures]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[Write-off (RMB)]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="number" class="form-control" ng-model="packageInfo.WriteOff" ng-disabled="true" />
+                </div>
+                <label class="col-xs-2 control-label">[[[Cash Compensation(RMB)]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" name="CashCompensation" valnumber class="form-control" ng-model="packageInfo.CashCompensation" ng-disabled="!isPageEditable" />
+                    <err-msgs field="frmMain.CashCompensation" submited="$submited"></err-msgs>
+                </div>
+                <label class="col-xs-2 control-label">[[[One Time OI Impact]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    @*<input type="number" class="form-control" ng-model="packageInfo.NetWriteOff" ng-class="WarningWOClass" ng-disabled="true" />*@
+                    <input type="number" class="form-control" ng-model="packageInfo.NetWriteOff" ng-disabled="true" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[New Investment (RMB)]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="number" class="form-control" ng-model="packageInfo.NewInvestment" ng-disabled="true" />
+                </div>
+                <label class="col-xs-2 control-label">[[[Cash Flow NPV_Current]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input name="CashFlowNVPCurrent" type="text" valnumber class="form-control" ng-model="packageInfo.CashFlowNVPCurrent" ng-disabled="!isPageEditable" />
+                    <err-msgs field="frmMain.CashFlowNVPCurrent" submited="$submited"></err-msgs>
+                </div>
+                <label class="col-xs-2 control-label">[[[Cash Flow NPV_After Change]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input name="CashFlowNVPAfterChange" valnumber type="text" class="form-control" ng-model="packageInfo.CashFlowNVPAfterChange" ng-disabled="!isPageEditable" />
+                    <err-msgs field="frmMain.CashFlowNVPAfterChange" submited="$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                @*<label class="col-xs-2 control-label">Other Compensation(RMB)</label>
+                    <div class="col-xs-2 pd_t_7">
+                        <input type="number" class="form-control" ng-model="packageInfo.OtherCompensation" ng-disabled="!isPageEditable" />
+                    </div>*@
+                <label class="col-xs-2 control-label">[[[Net CF NPV (RMB)]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="number" class="form-control" ng-model="packageInfo.NetGain" ng-class="WarningNGClass" ng-disabled="true" />
+                </div>
+                <label class="col-xs-2 control-label"></label>
+                <div class="col-xs-2 pd_t_7">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <comment ng-show="true" comments="packageInfo.ReasonDesc" editable="isPageEditable" title="Negative Net Cashflow NPV Reason Description"></comment>
+    @*<comment ng-show="false" comments="packageInfo.OtherCompenDesc" editable="isPageEditable" title="Other Compensation description"></comment>*@
+    <comment ng-show="true" comments="packageInfo.DecisionLogicRecomendation" editable="isPageEditable" title="Decision Logic and Recomendation"></comment>
+    <attachments ref-table-name="MajorLeaseChangePackage"
+                 project-id="{{projectId}}"
+                 flow-code="{{subFlowCode}}" 
+                 ref-table-id="{{entityId}}"
+                 is-history="isHistory"
+                 editable="{{isPageEditable}}"
+                 list="attachments"
+                 show-pack-download="true"
+                 upload-set="uploadSet"></attachments>
+    @*<div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">Attachment
+                </span>
+                <div class="panel-tools">
+                    <button class="btn btn-sm btn-default" ng-click="packageAttachment()"><span class="fa fa-cloud-download"></span>打包下载</button>
+                </div>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>No.</th>
+                    <th>Item</th>
+                    <th>Uploaded By</th>
+                    <th>Uploaded Date</th>
+                    <th>Operation</th>
+                </tr>
+                <tr ng-repeat="att in Attachment">
+                    <td>{{$index+1}}</td>
+                    <td><a ng-href="{{att.FileURL}}">{{att.Name}}</a></td>
+                    <td><span ng-show="att.CreatorNameZHCN">{{att.CreatorNameZHCN}}({{att.CreatorNameENUS}})</span></td>
+                    <td><span ng-show="att.CreatorNameZHCN">{{att.CreateTime | date:"yyyy-MM-dd"}}</span></td>
+                    <td class="table-operations" ng-switch on="att.TypeCode">
+                        <a ng-href="{{att.FileURL}}" ng-show="att.IsExist" class="fa fa-download">&nbsp;</a>
+                        <a plupload-simple
+                            upload-url="api/MajorLease/LegalClearanceReport/UploadContract/{{projectId}}"
+                            upload-finished="uploadFinished"
+                            errormsg="请上传正确的文件"
+                            class="fa fa-upload"
+                            ng-switch-when="LegalClearanceReport"
+                            ng-show="isPageEditable">&nbsp;
+                        </a>
+                        <a plupload-simple
+                            upload-url="api/MajorLease/Others/UploadContract/{{projectId}}"
+                            upload-finished="uploadFinished"
+                            errormsg="请上传正确的文件"
+                            class="fa fa-upload"
+                            ng-switch-when="Others"
+                            ng-show="isPageEditable">&nbsp;
+                        </a>
+                        <a plupload-simple
+                            upload-url="api/MajorLease/SignedApproval/UploadContract/{{projectId}}"
+                            upload-finished="uploadFinished"
+                            errormsg="请上传正确的文件"
+                            class="fa fa-upload"
+                            ng-switch-when="SignedApproval"
+                            ng-show="isPageEditable||pageType=='Upload'">&nbsp;
+                        </a>
+                        <a plupload-simple
+                            upload-url="api/MajorLease/SignedAgreement/UploadContract/{{projectId}}"
+                            upload-finished="uploadFinished"
+                            errormsg="请上传正确的文件"
+                            class="fa fa-upload"
+                            ng-switch-when="SignedAgreement"
+                            ng-show="isPageEditable||pageType=='Upload'">&nbsp;
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>*@
+
+    <approval-records ref-table-id="packageInfo.Id" ref-table-name="MajorLeaseChangePackage" workflow-type="MajorLease"></approval-records>
+    <div ng-show="pageType!='View'" id="divComments">
+        <comment comments="packageInfo.Comments" title="[[[意见]]]" editable="true"></comment>
+    </div>
+    <project-history project-id="projectId" table-name="MajorLeaseChangePackage" title="MajorLease Package History"
+                     page-url="/MajorLease/Main#/Package/Process/View?projectId={{projectId}}"
+                     title-name="Package" ng-show="!isHistory"></project-history>
+
+    @*<div ng-switch on="pageType" ng-show="!packageInfo.IsProjectFreezed">
+    *@
+    <div ng-switch on="pageType">
+        <div class="ta_c mg_t_10" ng-switch-default>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" form-submit ng-click="submit(frmMain)" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Approval">
+            <button type="button" class="btn btn-lg btn-red" ng-click="approve()" ng-disabled="IsClickApprove">[[[审批]]]</button>
+            <button type="button" class="btn btn-lg btn-warning" ng-click="reject()" ng-disabled="IsClickReject" ng-show="packageInfo.IsShowReject">[[[拒绝]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="returnToOriginator()" ng-disabled="IsClickReturn"><span class="fa fa-reply"></span>[[[退回]]]</button>
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="View" ng-hide="isUserAction">
+            <button type="button" class="btn btn-lg btn-warning" ng-click="save()" ng-show="packageInfo.IsShowSave"><span class="fa fa-check"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="recall()" ng-show="packageInfo.IsShowRecall && !isHistory">[[[撤销]]]</button>
+            <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="packageInfo.IsShowEdit && !isHistory"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="Upload">
+            <button type="button" class="btn btn-lg btn-red" ng-click="confirm()" ng-disabled="IsClickConfirm">Finish</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Resubmit">
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" form-submit ng-click="submit(frmMain)" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+    </div>
+</form>

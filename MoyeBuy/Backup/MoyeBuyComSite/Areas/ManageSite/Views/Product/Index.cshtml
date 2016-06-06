@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "商品管理";
+    ViewBag.PageTitle = "商品管理";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Areas/ManageSite/Scripts/Product.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";    
+}
+<div class="OptionContainer">
+    <table border="0">
+        <tr>
+            <td><span><a href ="@Url.Action("Add","Product")" >添加商品</a></span></td>
+        </tr>
+    </table>
+</div>
+<div class="ResultBody">
+@if (Model != null)
+{ 
+    <table border="0" width="80%" cellpadding="0" cellspacing="0" class="detailtable">
+        <tr>
+            <th>图片</th>
+            <th>名称</th>
+            <th>价格</th>
+            <th>市场价格</th>
+            <th>是否上架</th>
+            <th>是否热买商品</th>
+            <th>库存</th>
+            <th>更新时间</th>
+            <th>操作</th>
+        </tr>
+        @foreach (var prod in (IList<MoyeBuy.Com.Model.ProductInfo>)Model)
+        {
+            string strImg = "";
+            strImg = prod.ProductImgs;
+            if (string.IsNullOrEmpty(strImg))
+            {
+                strImg = "1.jpg";
+            }
+            <tr>
+                <td><img src="@Url.Content("~/Graphics/Prod/" + strImg + "")" width="60px" height="60px" title="@prod.ProductName" /></td>
+                <td><a href="@Url.Content("../Items/" + @prod.ProductId + ".html")" target="_blank">@prod.ProductName</a></td>
+                <td>@prod.MoyeBuyPrice</td>
+                <td>@prod.MarketPrice</td>
+                <td>@(prod.IsOnSell?"是":"否")</td>
+                <td>@(prod.IsSellHot?"是":"否")</td>
+                <td>@prod.PStore.ProductCount</td>
+                <td>@prod.LastUpdatedDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td><span ><a href="javascript:void(0);" onclick="javascript:delProd('@prod.ProductId');">删除</a></span><span ><a href="@Url.Action("Updt","Product")/@prod.ProductId">更新</a></span></td>
+            </tr>
+        }
+    </table>
+}
+</div>

@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="TempClosure" sub-code="TempClosure_ClosurePackage" place-holder="4" ng-show="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="TempClosure_ClosurePackage" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+<store-basic-info code="info.USCode" project="info" store="store"></store-basic-info>
+
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">[[[Closure Info]]]
+        </span>
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-xs-2 control-label">[[[Closure Start Date]]]</label>
+            <div class="col-xs-4 pd_t_7">
+                {{info.CreateTime | date:"yyyy-MM-dd"}}
+            </div>
+            <label class="col-xs-2 control-label">[[[Re-open Date]]]</label>
+            <div class="col-xs-4 pd_t_7">
+                {{info.ActualReopenDate | date:'yyyy-MM-dd'}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">[[[Lease Expire Date]]]</label>
+            <div class="col-xs-4 pd_t_7">
+                {{TPCLS.LeaseExpireDate | date:'yyyy-MM-dd'}}
+            </div>
+            <label class="col-xs-2 control-label">[[[Landlord Name]]]</label>
+            <div class="col-xs-4 pd_t_7">
+                {{TPCLS.LandlordName}}
+            </div>
+        </div>
+    </div>
+</div>
+<relief-rent editable="false" entity="closurePackage"></relief-rent>
+<attachments ref-table-name="TempClosurePackage"
+    project-id="{{projectId}}"
+    flow-code="TempClosure_ClosurePackage"
+    upload-finish="uploadAttachmentFinish()"
+    before-pack-download="beforePackDownload()"
+    show-pack-download="true"></attachments>
+<approval-records workflow-type="TempClosure" ref-table-id="closurePackage.Id" ref-table-name="TempClosurePackage"></approval-records>
+<comment id="divComments" comments="projectComment" title="意见" editable="true"></comment>
+<project-history project-id="projectId" table-name="TempClosurePackage" title="ClosurePackage History"
+    page-url="/TempClosure/Main#/ClosurePackage/Process/View?projectId={{projectId}}"
+    title-name="ClosurePackage" ng-show="!isHistory" has-template="false"></project-history>
+<notification-message project-id="projectId"
+    flow-code="TempClosure"
+    sub-flow-code="{{subFlowCode}}"
+    node-id="closurePackage.Id"
+    uscode="info.USCode"></notification-message>
+<div class="form-actions ta_c">
+    <button type="button" class="btn btn-lg btn-red" ng-disabled="acting" ng-click="approveClosurePackage()">[[[审批]]]</button>
+    <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-click="returnClosurePackage()"><span class="fa fa-reply"></span>[[[退回]]]</button>
+    <button type="button" class="btn btn-lg btn-yellow" ng-disabled="acting" ng-click="rejectClosurePackage()" ng-show="rejectable">[[[拒绝]]]</button>
+</div>

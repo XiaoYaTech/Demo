@@ -1,0 +1,32 @@
+﻿2015-04-05 10:18:29,124 ERROR Mcdonalds.AM.Web.Controllers.HomeController - Unhandled exception: Unable to connect to the remote server. Stack trace:    at System.Net.HttpWebRequest.GetResponse()
+   at Mcdonalds.AM.ApiCaller.ApiProxy.RequestUrl(String url, String method, NameValueCollection queryString, Byte[] formData) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\ApiProxy.cs:line 75
+   at Mcdonalds.AM.ApiCaller.ApiProxy.Call(String url, String method, NameValueCollection queryString, Byte[] formData) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\ApiProxy.cs:line 35
+   at Mcdonalds.AM.ApiCaller.ApiProxy.Call[T](String url, String method, NameValueCollection queryString, Byte[] formData) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\ApiProxy.cs:line 42
+   at Mcdonalds.AM.Web.Core.McdAMContext.Authenticate(String userId) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.Web\Core\McdAMContext.cs:line 100
+   at Mcdonalds.AM.Web.Controllers.HomeController.Login(String userCode) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.Web\Controllers\HomeController.cs:line 41
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: An established connection was aborted by the software in your host machine 172.24.130.43:10080
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetResponse()
+   at Mcdonalds.AM.ApiCaller.ApiProxy.RequestUrl(String url, String method, NameValueCollection queryString, Byte[] formData) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\ApiProxy.cs:line 75
+   at Mcdonalds.AM.ApiCaller.ApiProxy.Call(String url, String method, NameValueCollection queryString, Byte[] formData) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\ApiProxy.cs:line 35
+   at Mcdonalds.AM.ApiCaller.ApiProxy.Call[T](String url, String method, NameValueCollection queryString, Byte[] formData) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.ApiProxy\ApiProxy.cs:line 42
+   at Mcdonalds.AM.Web.Core.McdAMContext.Authenticate(String userId) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.Web\Core\McdAMContext.cs:line 100
+   at Mcdonalds.AM.Web.Controllers.HomeController.Login(String userCode) in d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.Web\Controllers\HomeController.cs:line 41
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()

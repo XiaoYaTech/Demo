@@ -1,0 +1,28 @@
+﻿<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Renewal" sub-code="Renewal_Package" place-holder="11" ng-show="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="Renewal_Package" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+<store-basic-info code="info.USCode" workflow-type="Renewal_Letter" project="info" store="store"></store-basic-info>
+<key-measures analysis="analysis" fmoutput="finMeasureOutput"></key-measures>
+<attachments ref-table-name="RenewalPackage"
+    list="attachments"
+    project-id="{{projectId}}"
+    ref-table-id="{{package.Id}}"
+    flow-code="Renewal_Package"
+    upload-set="['fdb19f00-496b-4e16-9a87-05cfd65ae7f3']"
+    show-pack-download="true"
+    editable="true"></attachments>
+<approval-records workflow-type="Renewal" ref-table-id="package.Id" ref-table-name="RenewalPackage"></approval-records>
+<project-history project-id="projectId" table-name="RenewalPackage" title="[[[Renewal Package History]]]"
+    page-url="/Renewal/Main#/Package/Process/View?projectId={{projectId}}"
+    title-name="[[[Renewal Package History]]]" ng-show="!isHistory" has-template="false"></project-history>
+<notification-message project-id="projectId"
+    flow-code="Renewal"
+    sub-flow-code="Renewal_Package"
+    node-id="package.Id"
+    uscode="info.USCode"></notification-message>
+<attachments-memo project-id="projectId"
+    flow-code="Renewal">
+</attachments-memo>
+<div class="form-actions ta_c">
+    <button type="button" class="btn btn-lg btn-yellow" ng-disabled="acting" ng-click="confirm()"><span class="fa fa-paste"></span>[[[确认]]]</button>
+</div>

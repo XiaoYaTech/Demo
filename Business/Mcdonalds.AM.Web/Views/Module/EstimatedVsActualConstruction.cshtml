@@ -1,0 +1,318 @@
+﻿@{
+    Layout = null;
+}
+<form name="esti">
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                Estimated Vs Actual_Construction
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" ng-switch on="flowCode">
+            <div class="pd_0_15" ng-switch-default>
+                <table class="table table-bordered">
+                    <tr>
+                        <td class="col-xs-2">GB Date</td>
+                        <td class="text-center col-xs-2">
+                            <p class="input-group">
+                                <input type="text" class="form-control" ng-model="source.GBDate" datepicker-popup="{{format}}" is-open="$parent.openedGBDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" disabled="true" />
+                                <span class="input-group-btn" ng-show="editable">
+                                    <button type="button" class="btn btn-default" ng-click="open($event,'openedGBDate')" disabled="disabled"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </td>
+                        <td class="col-xs-2">Completion Date</td>
+                        <td class="col-xs-2">
+                            <p class="input-group">
+                                <input type="text" class="form-control" ng-model="source.CompletionDate" datepicker-popup="{{format}}" is-open="$parent.openedCompletionDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" disabled="true" />
+                                <span class="input-group-btn" ng-show="editable">
+                                    <button type="button" class="btn btn-default" ng-click="open($event,'openedCompletionDate')" disabled="disabled"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </td>
+                        <td class="col-xs-2">Closure Days</td>
+                        <td class="col-xs-2">
+                            @*{{source.ClosureDays}}*@
+                        <input type="text" class="form-control" ng-model="source.ClosureDays" ng-disabled="!editable" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Original Operation Size</td>
+                    <td class="text-center">
+                        {{source.OriginalOperationSize}}
+                        @*<input type="text" class="form-control" ng-model="source.OriginalOperationSize" ng-disabled="!editable" />*@
+                    </td>
+                    <td>Original Seat Number</td>
+                    <td class="text-center">
+                        {{source.OriginalSeatNumber}}
+                        @*<input type="text" class="form-control" ng-model="source.OriginalSeatNumber" ng-disabled="!editable" />*@
+                    </td>
+                    <td>After {{flowCode}} Design Concept</td>
+                    <td class="text-center">
+                        @*<input type="text" class="form-control" name="ARDC" ng-required="true" valnumber ng-model="source.ARDC" ng-disabled="!editable" />*@
+                    <dict-selector parent-code="DesignType" selected-code="source.ARDC" selected-dict="InnerDesignDict" editable="editable"></dict-selector>
+                    <div ng-show="$parent.$submited||esti.EstimatedSeatNo.$dirty">
+                        <span class="ng-error" ng-show="esti.ARDC.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="esti.ARDC.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>New Operation Size</td>
+                <td class="text-center" ng-if="flowCode=='Reimage' && editable">
+                    <input type="text" valnumber ng-required="true" name="NewOperationSize" class="form-control" ng-model="source.NewOperationSize" />
+                    <div ng-show="$parent.$submited||esti.NewOperationSize.$dirty">
+                        <span class="ng-error" ng-show="esti.NewOperationSize.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="esti.NewOperationSize.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+
+                </td>
+                <td class="text-center" ng-if="flowCode!='Reimage' || !editable">{{source.NewOperationSize}}</td>
+                <td>After {{flowCode}} Seat Number</td>
+                <td class="text-center" ng-if="flowCode=='Reimage' && editable">
+                    <input type="text" valnumber ng-required="true" name="ARSN" class="form-control" ng-model="source.ARSN" />
+                    <div ng-show="$parent.$submited||esti.ARSN.$dirty">
+                        <span class="ng-error" ng-show="esti.ARSN.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="esti.ARSN.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </td>
+                <td class="text-center" ng-if="flowCode!='Reimage' || !editable">{{source.ARSN}}</td>
+                <td>After {{flowCode}} Price Tier</td>
+                <td class="text-center">
+                    <dict-selector parent-code="PriceTier" selected-code="source.ARPT" selected-dict="PriceTierDict" editable="editable"></dict-selector>
+                    @*<input type="text" valnumber ng-required="true" name="ARPT" class="form-control" ng-model="source.ARPT" ng-disabled="!editable" />*@
+                    @*<div ng-show="$parent.$submited||esti.ARPT.$dirty">
+                            <span class="ng-error" ng-show="esti.ARPT.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="esti.ARPT.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    *@
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pd_0_15" ng-switch-when="Rebuild">
+        <table class="table table-bordered">
+            <tr>
+                <td class="col-xs-2">GB Date</td>
+                <td class="text-center col-xs-2">
+                    <p class="input-group">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="source.GBDate"
+                               datepicker-popup="{{format}}"
+                               is-open="$parent.openedGBDate"
+                               min-date="minDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="true"
+                               close-text="Close" ng-disabled="!editable" />
+                        <span class="input-group-btn" ng-show="editable">
+                            <button type="button" class="btn btn-default"
+                                    ng-click="open($event,'openedGBDate')"
+                                    ng-disabled="!editable">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </td>
+                <td class="col-xs-2">Completion Date</td>
+                <td class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="source.CompletionDate"
+                               datepicker-popup="{{format}}"
+                               is-open="$parent.openedCompletionDate"
+                               min-date="minDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="true"
+                               close-text="Close" ng-disabled="!editable" />
+                        <span class="input-group-btn" ng-show="editable">
+                            <button type="button" class="btn btn-default" ng-click="open($event,'openedCompletionDate')"
+                                    ng-disabled="!editable">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </td>
+                <td class="col-xs-2">Closure Days</td>
+                <td class="text-center">
+                    @*{{source.ClosureDays}}*@
+                <input type="text"
+                       valnumber
+                       class="form-control"
+                       name="ClosureDays"
+                       ng-model="source.ClosureDays"
+                       ng-disabled="!editable" />
+                <div ng-show="$parent.$submited||esti.ClosureDays.$dirty">
+                    @*<span class="ng-error" ng-show="esti.ClosureDays.$error.required">[[[必须填写]]]</span>*@
+                    <span class="ng-error" ng-show="esti.ClosureDays.$error.valnumber">[[[请输入数字]]]</span>
+                </div>
+            </td>
+        </tr>
+        @*<tr>
+                <td>Actual GB Date</td>
+                <td class="text-center">
+                    <p class="input-group">
+                        <input type="text" class="form-control" name="ActualGBDate" ng-model="source.ActualGBDate" datepicker-popup="{{format}}" is-open="$parent.openedActualGBDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled="!editable" />
+                        <span class="input-group-btn" ng-show="editable">
+                            <button type="button" class="btn btn-default" ng-click="open($event,'openedActualGBDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <div ng-show="$parent.$submited||esti.ActualGBDate.$dirty">
+                        <span class="ng-error" ng-show="esti.ActualGBDate.$error.date">请输入日期</span>
+                    </div>
+                </td>
+                <td>Actual Completion Date</td>
+                <td>
+                    <p class="input-group">
+                        <input type="text" class="form-control" name="ActualCompletionDate" ng-model="source.ActualCompletionDate" datepicker-popup="{{format}}" is-open="$parent.openedActualCompletionDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled="!editable" />
+                        <span class="input-group-btn" ng-show="editable">
+                            <button type="button" class="btn btn-default" ng-click="open($event,'openedActualCompletionDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <div ng-show="$parent.$submited||esti.ActualCompletionDate.$dirty">
+                        <span class="ng-error" ng-show="esti.ActualCompletionDate.$error.date">请输入日期</span>
+                    </div>
+                </td>
+                <td>Actual Closure Days</td>
+                <td>
+                    <input type="text" valnumber ng-required="true" name="ActualClosureDays" class="form-control" ng-model="source.ActualClosureDays" ng-disabled="!editable" />
+                    <div ng-show="$parent.$submited||esti.ActualClosureDays.$dirty">
+                        <span class="ng-error" ng-show="esti.ActualClosureDays.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </td>
+            </tr>
+        *@
+        <tr>
+            <td>Initial Operation Size</td>
+            <td class="text-center">
+                {{source.OriginalOperationSize}}
+                @*<input type="text" class="form-control" ng-model="source.OriginalOperationSize" ng-disabled="!editable" />*@
+            </td>
+            <td>Initial Seat Number</td>
+            <td class="text-center">
+                {{source.OriginalSeatNumber}}
+                @*<input type="text" class="form-control" ng-model="source.OriginalSeatNumber" ng-disabled="!editable" />*@
+            </td>
+            <td>New Design Type</td>
+            <td class="text-center">
+                @*<input type="text" valnumber ng-required="true" name="ARDC" class="form-control" ng-model="source.ARDC" ng-disabled="!editable" />
+                    <div ng-show="$parent.$submited||esti.ARDC.$dirty">
+                        <span class="ng-error" ng-show="esti.ARDC.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+            *@
+            <dict-selector parent-code="InnerDesign" selected-code="source.ARDC" selected-dict="InnerDesignDict" editable="editable"></dict-selector>
+        </td>
+    </tr>
+    <tr>
+        <td>New Operation Size</td>
+        <td class="text-center">
+            @*<input type="text" valnumber ng-required="true" name="NewOperationSize" class="form-control" ng-model="source.NewOperationSize" ng-disabled="!editable" />*@
+        @*<div ng-show="$parent.$submited||esti.NewOperationSize.$dirty">
+                <span class="ng-error" ng-show="esti.NewOperationSize.$error.required">[[[必须填写]]]</span>
+                <span class="ng-error" ng-show="esti.NewOperationSize.$error.valnumber">[[[请输入数字]]]</span>
+            </div>
+        *@
+        {{source.NewOperationSize}}
+    </td>
+    <td>After Rebuild Seat Number</td>
+    <td class="text-center">
+        @*<input type="text" valnumber ng-required="true" class="form-control" ng-model="source.ARSN" ng-disabled="!editable" />
+            <div ng-show="$parent.$submited||esti.ARSN.$dirty">
+                <span class="ng-error" ng-show="esti.ARSN.$error.required">[[[必须填写]]]</span>
+                <span class="ng-error" ng-show="esti.ARSN.$error.valnumber">[[[请输入数字]]]</span>
+            </div>
+    *@
+    {{source.ARSN}}
+</td>
+<td>After Rebuild Price Tier</td>
+<td class="text-center">
+    @*<input type="text" valnumber ng-required="true" class="form-control" ng-model="source.ARPT" ng-disabled="!editable" />
+        <div ng-show="$parent.$submited||esti.ARPT.$dirty">
+            <span class="ng-error" ng-show="esti.ARPT.$error.valnumber">[[[请输入数字]]]</span>
+        </div>
+*@
+<div ng-disabled="!editable">
+    <dict-selector parent-code="PriceTier" editable="editable" selected-code="source.ARPT" selected-dict="priceTier"></dict-selector>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="pd_0_15" ng-switch-when="Renewal">
+    <table class="table table-bordered">
+        <tr>
+            <td class="col-xs-2">GB Date</td>
+            <td class="text-center col-xs-2">
+                <p class="input-group">
+                    <input type="text" class="form-control" ng-model="source.GBDate" datepicker-popup="{{format}}" is-open="$parent.openedGBDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" ng-disabled="true" />
+                    <span class="input-group-btn" ng-show="editable">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'openedGBDate')" disabled="disabled"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </td>
+            <td class="col-xs-2">Completion Date</td>
+            <td class="col-xs-2">
+                <p class="input-group">
+                    <input type="text" class="form-control" ng-model="source.CompletionDate" datepicker-popup="{{format}}" is-open="$parent.openedCompletionDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" ng-disabled="true" />
+                    <span class="input-group-btn" ng-show="editable">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'openedCompletionDate')" disabled="disabled"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </td>
+            <td class="col-xs-2">Closure Days</td>
+            <td>
+                {{source.ClosureDays}}
+                @*<input type="text" class="form-control" ng-model="source.ClosureDays" ng-disabled="!editable" />*@
+            </td>
+        </tr>
+        <tr>
+            <td>Initial Operation Size</td>
+            <td class="text-center">
+                {{source.OriginalOperationSize}}
+                @*<input type="text" class="form-control" ng-model="source.OriginalOperationSize" ng-disabled="!editable" />*@
+            </td>
+            <td>Initial Seat Number</td>
+            <td class="text-center">
+                {{source.OriginalSeatNumber}}
+                @*<input type="text" class="form-control" ng-model="source.OriginalSeatNumber" ng-disabled="!editable" />*@
+            </td>
+            <td>New Design Type</td>
+            <td class="text-center">
+                @*<input type="text" class="form-control" ng-model="source.ARDC" ng-disabled="!editable" />*@
+            <dict-selector parent-code="InnerDesign" selected-code="source.ARDC" selected-dict="InnerDesignDict" editable="editable"></dict-selector>
+        </td>
+    </tr>
+    <tr>
+        <td>New Operation Size</td>
+        <td class="text-center">
+            @*<input type="text" valnumber name="NewOperationSize" class="form-control" ng-model="source.NewOperationSize" ng-disabled="true" />
+                <div ng-show="$parent.$submited||esti.NewOperationSize.$dirty">
+                    <span class="ng-error" ng-show="esti.NewOperationSize.$error.valnumber">[[[请输入数字]]]</span>
+                </div>
+        *@
+        {{source.NewOperationSize}}
+    </td>
+    <td>After {{flowCode}} Seat Number</td>
+    <td class="text-center">
+        @*<input type="text" valnumber ng-required="true" name="ARSN" class="form-control" ng-model="source.ARSN" ng-disabled="true" />
+            <div ng-show="$parent.$submited||esti.ARSN.$dirty">
+                <span class="ng-error" ng-show="esti.ARSN.$error.required">[[[必须填写]]]</span>
+                <span class="ng-error" ng-show="esti.ARSN.$error.valnumber">[[[请输入数字]]]</span>
+            </div>
+    *@
+    {{source.ARSN}}
+</td>
+<td>After {{flowCode}} Price Tier</td>
+<td class="text-center">
+    <dict-selector parent-code="PriceTier" selected-code="source.ARPT" selected-dict="PriceTierDict" editable="editable"></dict-selector>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</form>

@@ -1,0 +1,46 @@
+﻿.logonTitle
+{
+    height:33px;
+    background-image:url("/Content/MoyeBuyComStyle1/Imgs/tit_regist.jpg");
+    background-attachment:scroll;
+    background-repeat:repeat-x;
+    background-position:0px -34px;
+    background-color:rgb(209, 209, 209);
+    line-height:33px;
+}
+.logonTitle span
+{
+    font-weight:bold;
+    margin-left:10px;
+}
+.lable
+{
+    width:100px;
+    height:26px;
+    line-height:26px;
+    float:left;
+}
+.item
+{
+    height:55px;
+    width:540px;
+}
+.fl
+{
+    width:274px;
+    height:53px;
+    float:left;    
+}
+.logonBtn,
+.registBtn
+{
+    background-image:url("/Content/MoyeBuyComStyle1/Imgs/reg-btn.gif");
+    width:207px;
+    height:34px;
+    background-repeat:no-repeat;
+    line-height:34px;
+    text-align:center;
+    font-size:15px;
+    font-weight:bold;
+    color:White;
+}

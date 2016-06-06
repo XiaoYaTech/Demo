@@ -1,0 +1,12 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Closure Memo";
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_ClosureMemo"  place-holder="8"></top-nav>
+<cheking-point project-id="projectId" flow-code="Closure_ClosureMemo" refresh="checkPointRefresh"></cheking-point>
+<closure-memo editable="{{editable}}" project-id="{{projectId}}" entity="entity"></closure-memo>
+<div class="form-actions ta_c">
+    <button type="button" ng-show="editable" class="btn btn-lg btn-red" ng-click="save()"><span class="fa fa-check"></span>[[[保存]]]</button>
+    <button type="button" class="btn btn-lg btn-warning" ng-show="unNotify" ng-click="notify()"><span class="fa fa-check"></span>[[[通知]]]</button>
+</div>

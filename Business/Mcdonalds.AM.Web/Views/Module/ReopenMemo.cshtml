@@ -1,0 +1,319 @@
+﻿@{
+    Layout = null;
+}
+
+<div ng-form="frmReinBasic" name="frmReinBasic">
+    <table class="table table-bordered" style="margin-top:10px;">
+        <tr>
+            <td class="text-left">
+                <label>Store Name/店铺名称</label>
+            </td>
+            <td class="text-center">{{ReopenMemo.Store.StoreBasicInfo.NameZHCN}}</td>
+            <td class="text-left" colspan="2">
+                <label>US Code/美国编号</label>
+            </td>
+            <td class="text-center" colspan="2">{{ReopenMemo.Store.StoreBasicInfo.StoreCode}}</td>
+        </tr>
+        <tr>
+            <td class="text-left">
+                <label>Region/区域</label>
+            </td>
+            <td class="text-center">{{ReopenMemo.Store.StoreBasicInfo.RegionZHCN}}</td>
+            <td class="text-left" colspan="2">
+                <label>Market/市场</label>
+            </td>
+            <td class="text-center" colspan="2">{{ReopenMemo.Store.StoreBasicInfo.MarketZHCN}}</td>
+        </tr>
+        <tr>
+            <td class="text-left">
+                <label>Province/省份</label>
+            </td>
+            <td class="text-center">{{ReopenMemo.Store.StoreBasicInfo.ProvinceZHCN}}</td>
+            <td class="text-left" colspan="2">
+                <label>City/城市</label>
+            </td>
+            <td class="text-center" colspan="2">{{ReopenMemo.Store.StoreBasicInfo.CityZHCN}}</td>
+        </tr>
+        <tr>
+            <td class="text-left">
+                <label>Re-open Date/重开日期</label>
+            </td>
+            <td class="text-center">
+                <p class="input-group">
+                    <input type="text" class="form-control" ng-required="false" ng-model="ReopenMemo.ReopenDate" datepicker-popup="{{format}}" is-open="openedReopenDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" ng-disabled="!editable" readonly />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-disabled="!editable" ng-click="open($event,'openedReopenDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </td>
+            <td class="text-left" colspan="2">
+                <label>Design Concept</label>
+            </td>
+            <td class="text-center" colspan="2">
+                <p class="input-group text-center" style="width:200px;display:inline-table;">
+                    <dict-selector parent-code="DesignType" required="true" selected-code="ReopenMemo.DesignConcept" selected-dict="DesignTypeDict" editable="editable"></dict-selector>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left">
+                <label>GB Date/开工日期</label>
+            </td>
+            <td class="text-center">{{ReopenMemo.GBDate | date:"yyyy-MM-dd"}}</td>
+            <td class="text-left" colspan="2">
+                <label>Completion Date/完工日期</label>
+            </td>
+            <td class="text-center" colspan="2">
+                <p class="input-group text-center" style="width:200px;display:inline-table;">
+                    <input type="text" class="form-control" ng-required="false" ng-model="ReopenMemo.CompletionDate" datepicker-popup="{{format}}" is-open="openedCompletionDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" ng-disabled="!editable" readonly />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-disabled="!editable" ng-click="open($event,'openedCompletionDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left" rowspan="2" colspan="2" width="40%">
+                <label>New Brand Extension</label>
+            </td>
+            <td class="text-left" width="15%">
+                <label>Mc Cafe</label>
+            </td>
+            <td class="text-center" width="15%">
+                <input type="checkbox" ng-model="ReopenMemo.NewMcCafe" ng-disabled="!editable" />
+            </td>
+            <td class="text-left" width="15%">
+                <label>Kiosk</label>
+            </td>
+            <td class="text-center" width="15%">
+                <input type="checkbox" ng-model="ReopenMemo.NewKiosk" ng-disabled="!editable" />
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left">
+                <label>MDS</label>
+            </td>
+            <td class="text-center">
+                <input type="checkbox" ng-model="ReopenMemo.NewMDS" ng-disabled="!editable" />
+            </td>
+            <td class="text-left">
+                <label>24H</label>
+            </td>
+            <td class="text-center">
+                <input type="checkbox" ng-model="ReopenMemo.Is24H" ng-disabled="!editable" />
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left">
+                <label>TTM Net Sales(RMB)</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <select id="asOf" ng-model="ReopenMemo.TTMNetSales" ng-options="m.Value as m.Name for m in ReopenMemo.YearMonthList" ng-disabled="!editable">
+                    <option>[[[-- 请选择 --]]]</option>
+                </select>
+            </td>
+            <td class="text-center">
+                {{ReopenMemo.TTMNetSales | money:2}}
+            </td>
+            <td class="text-left" colspan="2">
+                <label>Incremental Sales(%)</label>
+            </td>
+            <td class="text-center" colspan="2">
+                <input type="text"
+                       valnumber
+                       input-percent
+                       class="form-control" 
+                       name="IncrementalSales" 
+                       ng-model="ReopenMemo.IncrementalSales" 
+                       ng-disabled="!editable" />
+                <div ng-show="$parent.$submited||frmReinBasic.IncrementalSales.$dirty">
+                    @*<span class="ng-error" ng-show="frmReinBasic.AftOperationSize.$error.required">[[[必须填写]]]</span>*@
+                    <span class="ng-error" ng-show="frmReinBasic.IncrementalSales.$error.valnumber">[[[请输入数字]]]</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left">
+                <label>Total Write Off(RMB)</label>
+            </td>
+            <td class="text-center">{{ReopenMemo.WriteOff.TotalWriteOff | money:2}}</td>
+            <td class="text-left" colspan="2">
+                <label>Total Reinvesment(RMB)</label>
+            </td>
+            <td class="text-center" colspan="2">{{ReopenMemo.TotalReinvestmentBudget | money:2}}</td>
+        </tr>
+        <tr>
+            <td class="text-left" colspan="2">
+                <label>Before and After</label>
+            </td>
+            <td colspan="4" style="padding:0px;">
+                <table width="100%" class="table table-bordered" style="margin-bottom:0px;">
+                    <tr>
+                        <td width="30%">&nbsp;</td>
+                        <td class="text-center" width="35%">
+                            <label>Before</label>
+                        </td>
+                        <td class="text-center" width="35%">
+                            <label>After</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <label>Size(sq.m.)</label>
+                        </td>
+                        <td class="text-center">{{ReopenMemo.OriginalOperationSize}}</td>
+                        <td class="text-center">
+                            <input type="text" 
+                                   valnumber 
+                                   ng-required="true"
+                                   class="form-control text-center" 
+                                   name="AftOperationSize" 
+                                   ng-model="ReopenMemo.AftOperationSize" 
+                                   ng-disabled="!editable" />
+                            <div ng-show="$parent.$submited||frmReinBasic.AftOperationSize.$dirty">
+                                <span class="ng-error" ng-show="frmReinBasic.AftOperationSize.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmReinBasic.AftOperationSize.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <label>Seating</label>
+                        </td>
+                        <td class="text-center">{{ReopenMemo.OriginalSeatNumber}}</td>
+                        <td class="text-center">
+                            <input type="text" ng-required="true" valnumber class="form-control text-center" name="AftARSN" ng-model="ReopenMemo.AftARSN" ng-disabled="!editable" />
+                            <div ng-show="$parent.$submited||frmReinBasic.AftARSN.$dirty">
+                                <span class="ng-error" ng-show="frmReinBasic.AftARSN.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmReinBasic.AftARSN.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <label>Price Tier</label>
+                        </td>
+                        <td class="text-center">{{ReopenMemo.PriceTiter}}</td>
+                        <td class="text-center">
+                           @* <input type="text" class="form-control" name="AftARPT" ng-model="ReopenMemo.AftARPT" ng-disabled="!editable" />*@
+                            <div ng-disabled="!editable">
+                                <dict-selector parent-code="PriceTier" required="true" editable="editable" selected-code="source.AftARPT" selected-dict="priceTier"></dict-selector>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div style="padding:10px;">
+                    <div>
+                        <span style="display:block;float:left">
+                            <label>Exterior After</label>
+                        </span>
+                        <span style="display:block;float:right" ng-show="editable">
+                            <a plupload-simple
+                               class="btn btn-sm btn-default"
+                               errormsg="请上传正确的文件"
+                               upload-url="api/ReopenMemo/UploadImg/ExteriorAfterImg1/{{projectId}}"
+                               upload-finished="uploadFinished"
+                               mm-types="[{'title':'image files','extensions':'gif,jpg,jpeg'}]">
+                                Upload
+                            </a>
+                            <span style="margin-left:5px;margin-right:5px;">|</span>
+                            <button type="button" ng-click="DeleteImg('ExteriorAfterImg1')"
+                                    ng-disabled="IsClickDelete"
+                                    class="btn btn-sm btn-default">
+                                Delete
+                            </button>
+                        </span>
+                    </div>
+                    <div style="clear:left;margin-bottom:5px;"></div>
+                    <img style="margin-top:5px; width:500px; height:400px;" ng-src="{{ReopenMemo.ExteriorAfterImgURL1}}" />
+                </div>
+            </td>
+            <td colspan="3">
+                <div style="padding:10px;">
+                    <div>
+                        <span style="display:block;float:left">
+                            <label>Interior After</label>
+                        </span>
+                        <span style="display:block;float:right" ng-show="editable">
+                            <a plupload-simple
+                               class="btn btn-sm btn-default"
+                               errormsg="请上传正确的文件"
+                               upload-url="api/ReopenMemo/UploadImg/ExteriorAfterImg2/{{projectId}}"
+                               upload-finished="uploadFinished"
+                               mm-types="[{title:'image file',extensions:'gif,jpg,jpeg,png'}]">
+                                Upload
+                            </a>
+                            <span style="margin-left:5px;margin-right:5px;">|</span>
+                            <button type="button" ng-click="DeleteImg('ExteriorAfterImg2')"
+                                    ng-disabled="IsClickDelete"
+                                    class="btn btn-sm btn-default">
+                                Delete
+                            </button>
+                        </span>
+                    </div>
+                    <div style="clear:left;margin-bottom:5px;"></div>
+                    <img style="margin-top:5px; width:500px; height:400px;" ng-src="{{ReopenMemo.ExteriorAfterImgURL2}}" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div style="padding:10px;">
+                    <div>
+                        <span style="display:block;float:left">
+                            <label>Exterior Before</label>
+                        </span>
+                        <span style="display:block;float:right" ng-show="editable">
+                            <a plupload-simple
+                               class="btn btn-sm btn-default"
+                               errormsg="请上传正确的文件"
+                               upload-url="api/ReopenMemo/UploadImg/InteriorAfterImg1/{{projectId}}"
+                               upload-finished="uploadFinished"
+                               mm-types="[{title:'Image file',extensions:'gif,jpg,jpeg,png'}]">
+                                Upload
+                            </a>
+                            <span style="margin-left:5px;margin-right:5px;">|</span>
+                            <button type="button" ng-click="DeleteImg('InteriorAfterImg1')"
+                                    ng-disabled="IsClickDelete"
+                                    class="btn btn-sm btn-default">
+                                Delete
+                            </button>
+                        </span>
+                    </div>
+                    <div style="clear:left; margin-bottom:5px;"></div>
+                    <img style="margin-top:5px; width:500px; height:400px;" ng-src="{{ReopenMemo.InteriorAfterImgURL1}}" />
+                </div>
+            </td>
+            <td colspan="3">
+                <div style="padding:10px;">
+                    <div>
+                        <span style="display:block;float:left">
+                            <label>Interior Before</label>
+                        </span>
+                        <span style="display:block;float:right" ng-show="editable">
+                            <a plupload-simple
+                               class="btn btn-sm btn-default"
+                               errormsg="请上传正确的文件"
+                               upload-url="api/ReopenMemo/UploadImg/InteriorAfterImg2/{{projectId}}"
+                               upload-finished="uploadFinished"
+                               mm-types="[{title:'Image file',extensions:'gif,jpg,jpeg,png'}]">
+                                Upload
+                            </a>
+                            <span style="margin-left:5px;margin-right:5px;">|</span>
+                            <button type="button" ng-click="DeleteImg('InteriorAfterImg2')"
+                                    ng-disabled="IsClickDelete"
+                                    class="btn btn-sm btn-default">
+                                Delete
+                            </button>
+                        </span>
+                    </div>
+                    <div style="clear:left;"></div>
+                    <img style="margin-top:5px; width:500px; height:400px;" ng-src="{{ReopenMemo.InteriorAfterImgURL2}}" />
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

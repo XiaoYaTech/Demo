@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://172.24.130.43:10070/NTTMNC.BPM.Fx.EmailServices/EmailService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" />
+  <xs:element name="SendNotificationEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="emailMessage" nillable="true" type="q1:EmailMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendNotificationEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="SendNotificationEmailResult" nillable="true" type="q2:EmailSendingResultType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendGBMemoNotificationEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="emailMessage" nillable="true" type="q3:EmailMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendGBMemoNotificationEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="SendGBMemoNotificationEmailResult" nillable="true" type="q4:EmailSendingResultType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendRecallEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="emailMessage" nillable="true" type="q5:EmailMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendRecallEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="SendRecallEmailResult" nillable="true" type="q6:EmailSendingResultType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendCommentsEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="emailMessage" nillable="true" type="q7:EmailMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendCommentsEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="SendCommentsEmailResult" nillable="true" type="q8:EmailSendingResultType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendApprovalEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="emailMessage" nillable="true" type="q9:EmailMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendApprovalEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="SendApprovalEmailResult" nillable="true" type="q10:EmailSendingResultType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendApprovalWithRejectEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="emailMessage" nillable="true" type="q11:EmailMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendApprovalWithRejectEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="SendApprovalWithRejectEmailResult" nillable="true" type="q12:EmailSendingResultType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="to" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="subject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="content" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/NTTMNC.BPM.Fx.EmailServices" minOccurs="0" name="SendEmailResult" nillable="true" type="q13:EmailSendingResultType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

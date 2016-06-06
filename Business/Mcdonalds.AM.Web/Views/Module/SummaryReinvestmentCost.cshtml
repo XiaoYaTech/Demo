@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">Reinvestment Cost
+        </span>
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Sales Building investment</label>
+            <div class="col-xs-2 pd_t_7">
+                <p class="input-group">
+                    {{source.ReinCost.TotalSalBldingInvstBudget|money}}
+                </p>
+
+            </div>
+            <label class="col-xs-2 control-label">None-Sales Building investment</label>
+            <div class="col-xs-2 pd_t_7">
+                <p class="input-group">
+                    {{source.ReinCost.TotalNonSalBldingInvstBudget|money}}
+                </p>
+            </div>
+            <label class="col-xs-2 control-label">Total Investment</label>
+            <div class="col-xs-2 pd_t_7">
+                <p class="input-group">
+                    {{source.ReinCost.TotalReinvestmentBudget|money}}
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Write Off_LHI</label>
+            <div class="col-xs-2 pd_t_7">
+                {{source.WriteOff.LHIWriteOff|money}}
+            </div>
+            <label class="col-xs-2 control-label">Write Off_ESSD</label>
+            <div class="col-xs-2 pd_t_7">
+                {{source.WriteOff.ESSDWriteOff|money}}
+            </div>
+
+            <label class="col-xs-2 control-label">Total Write Off</label>
+            <div class="col-xs-2 pd_t_7">
+                {{source.WriteOff.TotalWriteOff|money}}
+            </div>
+        </div>
+    </div>
+</div>
+

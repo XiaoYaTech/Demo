@@ -1,0 +1,281 @@
+﻿@{
+    ViewBag.Title = "Rebuild Package";
+    Layout = null;
+}
+<style>
+    input.warning {
+        border: 1px solid red;
+        color: red;
+    }
+</style>
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Rebuild" sub-code="{{subFlowCode}}" place-holder="10"></top-nav>
+    <cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    <store-basic-info code="packageInfo.USCode" workflow-type="Rebuild" project="packageInfo.RbdInfo" store="store"></store-basic-info>
+    @*<rebuild-lease-change source="packageInfo" is-edit="isPageEditable"></rebuild-lease-change>*@
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[重建信息]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal">
+            <table class="table table-bordered">
+                <tr>
+                    <td width="20%">
+                        <label class="control-label">
+                            [[[临时关店日期]]]
+                        </label>
+                    </td>
+                    <td width="30%">
+                        <p class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="packageInfo.TempClosureDate"
+                                   datepicker-popup="{{format}}"
+                                   is-open="openedTempClosureDate"
+                                   min-date="minDate"
+                                   name="TempClosureDate"
+                                   datepicker-options="dateOptions"
+                                   date-disabled="disabled(date, mode)"
+                                   close-text="Close" ng-disabled="!isPageEditable" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-disabled="!isPageEditable" ng-click="open($event,'openedTempClosureDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </td>
+                    <td width="20%">
+                        <label class="control-label">
+                            [[[重开日期]]]
+                        </label>
+                    </td>
+                    <td width="30%">
+                        <p class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="packageInfo.ReopenDate"
+                                   datepicker-popup="{{format}}"
+                                   is-open="openedReopenDate"
+                                   min-date="minReopenDate"
+                                   datepicker-options="dateOptions"
+                                   date-disabled="disabled(date, mode)"
+                                   name="ReopenDate"
+                                   close-text="Close"
+                                   ng-disabled="!isPageEditable" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-disabled="!isPageEditable" ng-click="open($event,'openedReopenDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <lease-change source="packageInfo" is-edit="isPageEditable" title="[[[Lease Change due to Rebuild]]]"></lease-change>
+
+    <div ng-show="false">
+        <comment ng-show="false" comments="packageInfo.OtherCompenDesc" editable="isPageEditable" title="[[[Other Compensation description]]]"></comment>
+    </div>
+
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[Key Measures]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[Write-off(RMB)]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    @*<input type="text" class="form-control" valnumber name="WriteOff" ng-model="packageInfo.WriteOff" ng-required="true" ng-disabled="true" />*@
+                    <div class="form-control" ng-disabled="true">{{packageInfo.WriteOff}}</div>
+                </div>
+                <label class="col-xs-2 control-label">[[[Cash Compensation(RMB)]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" class="form-control" valnumber name="CashCompensation" ng-model="packageInfo.CashCompensation" ng-required="true" ng-disabled="!isPageEditable" />
+                    <div ng-show="$submited||frmMain.CashCompensation.$dirty">
+                        <span class="ng-error" ng-show="frmMain.CashCompensation.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmMain.CashCompensation.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[One Time OI Impact]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    @*<input type="number" class="form-control" ng-model="packageInfo.NetWriteOff" ng-class="WarningWOClass" ng-disabled="true" />*@
+                    <input type="text" class="form-control" ng-model="packageInfo.NetWriteOff" ng-disabled="true" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[New Investment(RMB)]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    @*<input type="text" class="form-control" valnumber name="NewInvestment" ng-model="packageInfo.NewInvestment" ng-required="true" ng-disabled="!isPageEditable" />
+                    <div ng-show="$submited||frmMain.NewInvestment.$dirty">
+                        <span class="ng-error" ng-show="frmMain.NewInvestment.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmMain.NewInvestment.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>*@
+                    <div class="form-control" ng-disabled="true">{{packageInfo.NewInvestment}}</div>
+                </div>
+                <label class="col-xs-2 control-label">[[[Cash Flow NPV_Current]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" class="form-control" valnumber name="CashFlowNVPCurrent" ng-model="packageInfo.CashFlowNVPCurrent" ng-required="true" ng-disabled="!isPageEditable" />
+                    <div ng-show="$submited||frmMain.CashFlowNVPCurrent.$dirty">
+                        <span class="ng-error" ng-show="frmMain.CashFlowNVPCurrent.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmMain.CashFlowNVPCurrent.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">Cash Flow NPV_After Change</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" class="form-control" valnumber name="CashFlowNVPAfterChange" ng-model="packageInfo.CashFlowNVPAfterChange" ng-required="true" ng-disabled="!isPageEditable" />
+                    <div ng-show="$submited||frmMain.CashFlowNVPAfterChange.$dirty">
+                        <span class="ng-error" ng-show="frmMain.CashFlowNVPAfterChange.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmMain.CashFlowNVPAfterChange.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @*<label class="col-xs-2 control-label">Other Compensation(RMB)</label>
+                    <div class="col-xs-2 pd_t_7">
+                        <input type="text" class="form-control" valnumber name="OtherCompensation" ng-model="packageInfo.OtherCompensation" ng-required="true" ng-disabled="!isPageEditable" />
+                        <div ng-show="$submited||frmMain.OtherCompensation.$dirty">
+                            <span class="ng-error" ng-show="frmMain.OtherCompensation.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmMain.OtherCompensation.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    </div>*@
+                <label class="col-xs-2 control-label">[[[Net CF NPV(RMB)]]]</label>
+                <div class="col-xs-2 pd_t_7">
+                    <input type="text" class="form-control" valnumber name="NetGain" ng-model="packageInfo.NetGain" ng-class="WarningNGClass" ng-required="true" ng-disabled="true" />
+                    <div ng-show="$submited||frmMain.NetGain.$dirty">
+                        <span class="ng-error" ng-show="frmMain.NetGain.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="frmMain.NetGain.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label"></label>
+                <div class="col-xs-2 pd_t_7">
+                </div>
+                <label class="col-xs-2 control-label"></label>
+                <div class="col-xs-2 pd_t_7">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <comment ng-show="true" id="divComments" comments="packageInfo.ReasonDesc" editable="isPageEditable" title="[[[Negative Net Cashflow NPV Reason Description]]]"></comment>
+
+    <comment ng-show="true" comments="packageInfo.DecisionLogicRecomendation" editable="isPageEditable" title="[[[Decision Logic and Recomendation]]]"></comment>
+
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[附件]]]
+            </span>
+            <div class="panel-tools">
+                @*<button class="btn btn-sm btn-default" ng-click="packageAttachment()"><span class="fa fa-cloud-download"></span> 打包下载</button>*@
+                <button class="btn btn-sm btn-default" file-downloader before-download="packageAttachment" file-link="{{packDownloadLink}}">
+                    <span class="fa fa-cloud-download"></span> [[[打包下载]]]
+                </button>
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>[[[序号]]]</th>
+                <th>[[[内容]]]</th>
+                <th>[[[文件名]]]</th>
+                <th>[[[上传人]]]</th>
+                <th>[[[上传时间]]]</th>
+                <th>[[[操作]]]</th>
+            </tr>
+            <tr ng-repeat="att in Attachment" ng-class="{'required':(att.Required && !att.ID)}">
+                <td>{{$index+1}}</td>
+                <td><i ng-show="(att.Required && !att.ID)" class="required-field">*</i><span class="{{att.Icon}}"></span> <a ng-href="{{att.downloadLink}}">{{att.Name}}</a></td>
+                <td><a title="{{att.FileName}}" ng- ng-href="{{att.downloadLink}}" style="display:inline-block;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{att.FileName}}</a></td>
+                <td><span ng-show="att.CreatorNameENUS">{{att.CreatorNameENUS}}</span></td>
+                <td><span ng-show="att.CreateTime">{{att.CreateTime | date:"yyyy-MM-dd"}}</span></td>
+                <td class="table-operations" ng-switch on="att.TypeCode">
+                    <a ng-show="att.downloadLink" ng-href="{{att.downloadLink}}">[[[下载]]]</a>
+                    <a plupload-simple
+                       upload-url="api/Rebuild/LegalClearanceReport/UploadContract/{{projectId}}"
+                       upload-finished="uploadFinished"
+                       errormsg="[[[请上传正确的文件]]]"
+                       ng-switch-when="LegalClearanceReport"
+                       ng-show="isPageEditable">
+                        [[[上传]]]
+                    </a>
+                    <a plupload-simple
+                       upload-url="api/Rebuild/Others/UploadContract/{{projectId}}"
+                       upload-finished="uploadFinished"
+                       errormsg="[[[请上传正确的文件]]]"
+                       ng-switch-when="Others"
+                       ng-show="isPageEditable">
+                        [[[上传]]]
+                    </a>
+                    <a plupload-simple
+                       upload-url="api/Rebuild/OthersCN/UploadContract/{{projectId}}"
+                       upload-finished="uploadFinished"
+                       errormsg="[[[请上传正确的文件]]]"
+                       ng-switch-when="OthersCN"
+                       ng-show="isPageEditable">
+                        [[[上传]]]
+                    </a>
+                    <a plupload-simple
+                       upload-url="api/Rebuild/SignedApproval/UploadContract/{{projectId}}"
+                       upload-finished="uploadFinished"
+                       errormsg="[[[请上传正确的文件]]]"
+                       ng-switch-when="SignedApproval"
+                       ng-show="isPageEditable||pageType=='Upload' || packageInfo.IsAssetMgr">
+                        [[[上传]]]
+                    </a>
+                    <a plupload-simple
+                       upload-url="api/Rebuild/SignedAgreement/UploadContract/{{projectId}}"
+                       upload-finished="uploadFinished"
+                       errormsg="[[[请上传正确的文件]]]"
+                       ng-switch-when="SignedAgreement"
+                       ng-show="isPageEditable||pageType=='Upload'">
+                        [[[上传]]]
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <approval-records ref-table-id="packageInfo.Id" ref-table-name="RebuildPackage" workflow-type="Rebuild"></approval-records>
+    <div ng-show="pageType!='View'">
+        <comment comments="packageInfo.Comments" title="[[[意见]]]" editable="true"></comment>
+    </div>
+    <project-history project-id="projectId" table-name="RebuildPackage" title="[[[Rebuild Package History]]]" has-template="false"
+                     page-url="/Rebuild/Main#/RebuildPackage/Process/View?projectId={{projectId}}"
+                     title-name="[[[Package]]]" ng-show="!isHistory"></project-history>
+
+    <notification-message project-id="projectId"
+                          flow-code="Rebuild"
+                          sub-flow-code="{{subFlowCode}}"
+                          node-id="packageInfo.Id"
+                          uscode="packageInfo.USCode"
+                          is-history="isHistory"></notification-message>
+
+    <div ng-switch on="pageType" ng-show="!packageInfo.IsProjectFreezed">
+        <div class="ta_c mg_t_10" ng-switch-default>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSave"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" ng-click="submit(frmMain)" form-submit ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Approval">
+            <button type="button" class="btn btn-lg btn-red" ng-click="approve()" ng-disabled="IsClickApprove">[[[审批]]]</button>
+            <button type="button" class="btn btn-lg btn-warning" ng-click="reject()" ng-disabled="IsClickReject" ng-show="packageInfo.IsShowReject">[[[拒绝]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="returnToOriginator()" ng-disabled="IsClickReturn"><span class="fa fa-reply"></span>[[[退回]]]</button>
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="View" ng-hide="isUserAction">
+            <button type="button" class="btn btn-lg btn-warning" ng-click="save()" ng-show="packageInfo.IsShowSave"><span class="fa fa-check"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="recall()" ng-show="packageInfo.IsShowRecall && !isHistory && (!packageInfo.IsShowSave)">[[[撤销]]]</button>
+            <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="packageInfo.IsShowEdit"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="Upload">
+            <button type="button" class="btn btn-lg btn-red" ng-click="confirm()" ng-disabled="IsClickApprove">[[[完成]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Resubmit">
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSave"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" ng-click="submit(frmMain)" form-submit ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+    </div>
+</form>

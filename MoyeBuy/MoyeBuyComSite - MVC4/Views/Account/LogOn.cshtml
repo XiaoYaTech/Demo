@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "登录";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Scripts/Account.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script><link href=\"" + @Url.Content("~/Content/logon.css?version=") + @DateTime.Now.Ticks + "\" rel=\"stylesheet\" type=\"text/css\" />";    
+}
+<div style=" border:1px solid #333333; width:990px; margin:auto; height:400px;">
+    <div class="logonTitle">
+        <span>用户登录</span>
+    </div>
+    <div style=" margin-left:50px; margin-top:50px;">
+        <div style=" width:540px; height:55px;">
+            <div class="item">
+                <span class="lable">账户名:</span>
+                <div class="fl">
+                    <input type="text" name="username" id="username" value="" maxlength="30" style="width:200px; height:20px;" />
+                </div>
+                @if (ViewBag.Error != "")
+                { 
+                    <span class="lable" style=" color:Red;">@ViewBag.Error</span>
+                }
+            </div>
+
+            <div class="item">
+                <span class="lable">密码:</span>
+                <div class="fl">
+                    <input type="password" name="pwd" id="pwd" value="" maxlength="30" style="width:200px;height:20px;" />
+                </div>
+            </div>
+
+            <div class="item">
+                <span class="lable">验证码:</span>
+                <div class="fl">
+                    <input type="text" name="authcode" id="authcode" value="" maxlength="30" style="width:100px;height:20px; float:left; margin-right:10px;" />
+                    <span class="lable"><img id="ImgValidateCode" src="@Url.Action("ValidateCode", "Account")" onclick ="javascript:RefreshValidateCode();" /></span>
+                </div>
+            </div>
+
+            <div class="item">
+                <span class="lable"></span>
+                <div class="fl">
+                    <input type="checkbox" name="chkRememberUsername" id="chkRememberUsername" value="1" />记住账户
+                    <input type="checkbox" name="chkRememberMe" id="chkRememberMe" value="1" />自动登录
+                </div>
+            </div>
+
+            <div class="item">
+                <span class="lable"></span>
+                <div class="fl">
+                    <a href="javascript:void(0);" name="submitbtn" id="submitbtn" onclick="javascript:submit();" /><div class="logonBtn">登录</div></a><span>&nbsp;</span>
+                    <a href="#" >找回密码</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

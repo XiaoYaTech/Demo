@@ -1,0 +1,160 @@
+﻿2015-04-29 16:37:58,541 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:11:34,184 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:12:24,536 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:13:29,283 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:17:33,427 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:20:48,867 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:24:24,338 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:25:58,438 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:34:43,739 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:36:29,238 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:46:11,194 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:46:16,831 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:49:29,449 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:52:32,298 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:54:48,549 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-04-29 17:57:29,492 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 17:59:07,212 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:00:18,598 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:01:50,889 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:06:49,364 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:09:11,426 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:13:53,688 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:14:54,602 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:15:44,220 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:16:22,637 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:18:58,071 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:19:59,537 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:20:51,006 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:22:24,836 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:23:47,699 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:24:26,216 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+
+2015-04-29 18:25:00,584 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Info]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column <filename unknown>:0:0
+

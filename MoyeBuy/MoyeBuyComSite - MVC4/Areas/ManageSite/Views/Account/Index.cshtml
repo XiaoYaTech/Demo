@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "账号管理";
+    ViewBag.PageTitle = "账号管理";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Areas/ManageSite/Scripts/Account.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";    
+}
+
+<div class="OptionContainer">
+    <table border="0">
+        <tr>
+            <td><span onclick="javascript:adduser();"><a href ="javascript:void(0);" >添加</a></span></td>
+        </tr>
+    </table>
+</div>
+<div class="ResultBody">
+@if (Model != null)
+{ 
+    <table border="0" width="80%" cellpadding="0" cellspacing="0" class="detailtable">
+        <tr>
+            <td>ID</td>
+            <th>用户名</th>
+            <th>登陆账号</th>
+            <th>用户手机</th>
+            <th>权限</th>
+            <th>是否有效</th>
+            <th>更新时间</th>
+            <th>操作</th>
+        </tr>
+        @foreach (var user in (IList<MoyeBuy.Com.Model.User>)Model)
+        {
+        <tr>
+            <td>@user.MoyeBuyComUserID</td>
+            <td>@user.MoyeBuyComUserName</td>
+            <td>@user.MoyeBuyComEmail</td>
+            <td>@user.UserPhoneNo</td>
+            <td>@user.RoleName</td>
+            <td>@(user.IsEffective ? "有效" : "无效")</td>
+            <td>@user.LastUpdatedDate.ToString("yyyy-MM-dd")</td>
+            <td><span onclick="javascript:delUser('@user.MoyeBuyComUserID');"><a href="javascript:void(0);">删除</a></span><span onclick="javascript:showAddWindow('@user.MoyeBuyComUserID');"><a href="javascript:void(0);">更新</a></span></td>
+        </tr>
+        }
+    </table>
+}
+    <div id="addUserDiv" name="addUserDiv" style="display:none;">
+        <input type="hidden" name="UID" id="UID" value="" />
+        <table id="addUserTabel" name="addUserTabel" border="0" cellpadding="5" cellspacing="0">
+            <tr>
+                <td>登陆账号</td>
+                <td><input type="text" id="UserEmail" name="UserEmail" maxlength="30" /></td>
+                <td><span style="color:Red;">*</span></td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td><input type="password" id="pwd" name="pwd" maxlength="30" /></td>
+                <td><span style="color:Red;">*</span></td>
+            </tr>
+            <tr>
+                <td>请重复密码</td>
+                <td><input type="password" id="pwdcomfirm" name="pwdcomfirm" maxlength="30" /></td>
+                <td><span style="color:Red;">*</span></td>
+            </tr>
+            <tr>
+                <td>用户名</td>
+                <td><input type="text" name="UserName" id="UserName" maxlength="30" value="" /></td>
+                <td><span style="color:Red;">*</span></td>
+            </tr>
+            
+            <tr>
+                <td>用户手机</td>
+                <td><input type="text" id="UserPhoneNo" name="UserPhoneNo" maxlength="30" /></td>
+                <td><span style="color:Red;">*</span></td>
+            </tr>
+            <tr>
+                <td>权限</td>
+                <td>
+                    <select id="role" name="role">
+                        <option value="">--请选择--</option>
+                        @foreach(var role in (IList<MoyeBuy.Com.Model.Role>)ViewBag.Role)
+                        {
+                            <option value="@role.RoleID">@role.RoleName</option>
+                        }
+                    </select>
+                </td>
+                <td><span style="color:Red;">*</span></td>
+            </tr>
+            <tr>
+                <td>是否有效账号</td>
+                <td>
+                    <select id="IsEffective" name="IsEffective">
+                        <option value="" >--请选择--</option>
+                        <option value="1" selected>是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.Prototype\bin\Mcdonalds.AM.Prototype.dll.config
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.Prototype\bin\Mcdonalds.AM.Prototype.dll
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.Prototype\bin\Mcdonalds.AM.Prototype.pdb
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.Prototype\obj\Debug\Mcdonalds.AM.Prototype.csprojResolveAssemblyReference.cache
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.Prototype\obj\Debug\Mcdonalds.AM.Prototype.dll
+D:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.Prototype\obj\Debug\Mcdonalds.AM.Prototype.pdb

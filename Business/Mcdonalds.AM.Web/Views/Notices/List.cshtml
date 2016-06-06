@@ -1,0 +1,132 @@
+﻿@{
+    Layout = null;
+}
+
+
+<style type="text/css">
+    li {
+        padding-left: 30px;
+    }
+</style>
+
+<task-reminder></task-reminder>
+<div class="panel panel-orange">
+    @*Block : Title*@
+    <div class="panel-heading clearfix">
+        <span class="panel-heading-title">Notice List</span>
+        <div class="panel-heading-tools">
+            @*<button type="button" class="btn btn-sm btn-warning" ng-click="showAdvanceSearch()">Advance Search</button>*@
+        </div>
+    </div>
+
+    <div class="panel-body">
+        @*Block : Search*@
+        <div class="form-horizontal" role="form">
+            <div class="form-group">
+                @*<label class="col-xs-2 control-label">Project ID:</label>
+                    <div class="col-xs-2">
+                        <input class="form-control" type="text" ng-model="searchCondition.ProcessId">
+                    </div>*@
+                <label class="col-xs-2 control-label">Title:</label>
+                <div class="col-xs-2">
+                    <input class="form-control" type="text" ng-model="searchCondition.Title">
+                </div>
+                <label class="col-xs-2 control-label">Sender:</label>
+                <div class="col-xs-2">
+                    <input class="form-control" type="text" ng-model="searchCondition.SenderName"></input>
+                </div>
+
+                <label class="col-xs-2 control-label">US Code:</label>
+                <div class="col-xs-2">
+                    <input type="text" id="usCode" class="form-control" placeholder="餐厅编号" ng-model="searchCondition.StoreCode" typeahead-loading="loadingPositions" typeahead="n.Code for n in searchStore($viewValue)" />
+                    <i ng-show="loadingPositions" class="glyphicon glyphicon-refresh"></i>
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="col-xs-2 control-label">Date From:</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control" ng-model="searchCondition.DateFrom" datepicker-popup="{{format}}" is-open="showFromDate" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event,'showFromDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+
+                <label class="col-xs-2 control-label">Date To:</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control" ng-model="searchCondition.DateTo" datepicker-popup="{{format}}" is-open="showToDate" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event,'showToDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="ta_c mg_t_10">
+                <input type="button" class="btn btn-lt btn-warning" value="Search" ng-click="search()" />
+            </div>
+        </div>
+        @*Block : Search End *@
+
+        @*Block : Search Values *@
+        <div class="advance-search-values clearfix mg_t_10" ng-show="isShowSearchValues">
+            <div class="col-xs-6" ng-repeat="cdt in conditionTable">
+                <div class="input-group">
+                    <span class="input-group-addon" ng-bind="cdt.key"></span>
+                    <span class="form-control" ng-bind="cdt.value"></span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="removeSearchCondition(cdt.key)">X</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        @*Block : End Search Values *@
+
+        @*Block : Data Table *@
+        <table class="table mg_t_10">
+            <tr>
+                @*<th width="10%">ID</th>*@
+                <th>Title</th>
+                @*<th width="10%">ProcessId</th>*@
+                <th width="20%">Created Time</th>
+                <th width="15%">Sender</th>
+
+                <th width="5%">Operation</th>
+            </tr>
+            <tbody ng-show="$parent.loadNoticeFinished" ng-repeat="_item in noticeList">
+                <tr>
+                    @*<td>
+                            <a ng-href="~/Notices/Main#/detail/{{_item.Id}}">{{_item.Id}}</a>
+                        </td>*@
+                    <td ng-bind="_item.Title"></td>
+                    @*<td ng-bind="_item.ProcessId"></td>*@
+                    <td>{{_item.CreatedTime | date:"yyyy.MM.dd h:mm"}}</td>
+                    <td ng-bind="_item.SenderNameENUS"></td>
+
+                    <td>
+                        <div class="pull-right handle">
+                            <a class="btn btn-default" ng-href="~/Notices/Main#/detail/{{_item.Id}}" target="_blank">Read</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-show="!loadNoticeFinished">
+                <tr>
+                    <td colspan="7" class="ta_c">
+                        <img src="~/Content/Images/loading.gif" />
+                    </td>
+                </tr>
+            </tbody>
+            <tr ng-show="noticeList.length==0">
+                <td colspan="8">Could not found data items!</td>
+            </tr>
+        </table>
+        <div class="ta_c">
+            <pagination total-items="totalItems" max-size="5" items-per-page="pageSize" ng-model="pageIndex" class="pagination-sm" previous-text="Previous" next-text="Next" first-text="First" last-text="Last"></pagination>
+        </div>
+        @*Block : End Data Table *@
+    </div>
+</div>

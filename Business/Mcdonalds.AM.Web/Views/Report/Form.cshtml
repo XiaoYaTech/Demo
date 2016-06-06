@@ -1,0 +1,193 @@
+﻿@using System.Web.Optimization;
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_KnockoutLayout.cshtml";
+}
+@section scripts{
+    @Scripts.Render("~/Scripts/Libs/moment/moment.js")
+    @Scripts.Render("~/Scripts/Reports/FormViewModel.js")
+}
+<div class="report-form">
+    <div style="width: 100%; height: 30px; background-color: #F5F5B2; line-height: 30px;" data-bind="visible:showTooltip">
+        <div style="float: left; margin-left: 15px; color: red">
+           <span data-bind="text:toolTip"></span>
+        </div>
+        <div style="float: right; margin-right: 20px; font-size: 16px; cursor: pointer" data-bind="click:closeTooltip">
+            X
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">Step1 选择字段
+            </span>
+            <div class="panel-tools">
+                <form id="formExport" method="post">
+                    <span class="panel-title" style="padding-right: 10px" data-bind="if: template">当前模板：<span data-bind="    text: template().TName"></span>
+                    </span>
+                    <dropdown-list params="Label:'1、选择模版',OnItemSelected:SelectTemplate,List:Templates,TextField:'TName',Width:200,Direction:'right'"></dropdown-list>
+                    <div class="btn-group">
+                        <input type="button" id="btnLoading" data-bind="click: BlockUI" class="btn btn-sm btn-red hide" value="loading" />
+                        <input type="button" id="btnUnLoading" data-bind="click: UnBlockUI" class="btn btn-sm btn-red hide" value="unloading" />
+                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            2、保存模板&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li data-bind="if: !!template() && !template().IsCommon"><a data-bind="    click: Save">保存</a></li>
+                            <li data-bind="if: !!template()"><a data-bind="    click: SaveAs">另存为</a></li>
+                            <li data-bind="if: !!template() && !template().IsCommon"><a data-bind="    click: Delete">删除</a></li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" data-bind="click: Export">
+                        &nbsp;&nbsp;&nbsp;&nbsp;3、导出&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
+                </form>
+            </div>
+            <span class="clear"></span>
+        </div>
+        <div class="panel-body form-horizontal" data-bind="if: template">
+            <div class="form-group">
+                <ul class="report-table-list" data-bind="foreach: Tables">
+                    <li>
+                        <span data-bind="if: TableType == 1">
+                            <input type="checkbox" data-bind="checked: Checked" />&nbsp;&nbsp;<!--ko text:DispENUS--><!--/ko-->
+                        </span>
+                        <span data-bind="if: TableType == 2">
+                            <input type="radio" name="selectflow" data-bind="checked: $root.selectflow, value: ID" />&nbsp;&nbsp;<!--ko text:DispENUS--><!--/ko-->
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="form-group report-tpl-left" data-bind="foreach: Tables">
+                <div class="col-xs-2" data-bind="if: DispENUS != 'StoreList', style: { display: Checked() ? '' : 'none' }">
+                    <dropdown-comboxes params="Judgement:'.form-group',Table:$data,Fields:Fields,Label:DispENUS,TextField:'FieldDispENUS',Width:'350px'"></dropdown-comboxes>
+                </div>
+            </div>
+            <div class="form-group report-tpl-right">
+                <button class="btn btn-sm btn-red" data-bind="click: Search">搜索</button>
+            </div>
+        </div>
+    </div>
+    <iframe id="frmData" src="~/Report/ReportData" style="border: 0; width: 100%; min-height: 550px"></iframe>
+</div>
+<script type="text/html" id="tpl-dropdown-comboxes">
+    <div class="dropdown-box dropdown-comboxes">
+        <p class="input-group dropdown-box-trigger">
+            <span class="form-control " data-bind="text: Label" style="white-space: nowrap"></span>
+            <span class="input-group-btn">
+                <button class="btn btn-default">
+                    <span class="fa fa-caret-down"></span>
+                </button>
+            </span>
+        </p>
+        <div class="dropdown-box-dialog" style="display: none">
+            <div class="row">
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" data-bind="value: fiterText, valueUpdate: 'keyup'" />
+                </div>
+                <div class="col-xs-6 text-right pd_t_7">
+                    <a data-bind="click: SelectAll">全选</a>
+                    &nbsp;&nbsp;
+                    <a data-bind="click: ClearAll">清空</a>
+                </div>
+            </div>
+            <div class="dropdown-box-content">
+                <ul data-bind="foreach: Fields">
+                    <!--ko if:Filtered-->
+                    <li>
+                        <input type="checkbox" class="dropdown-combox-check" data-bind="clickBubble: false, checked: Checked, valueUpdate: 'keyup'" />
+                        &nbsp;&nbsp;
+                        <span class="dropdown-combox-label">
+                            <!--ko text:$data[$parent.TextField]-->
+                            <!--/ko-->
+                        </span>
+                    </li>
+                    <!--/ko-->
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="tpl-dropdown-list">
+    <div class="dropdown-box">
+        <span class="btn btn-sm btn-primary dropdown-box-trigger">
+            <span class="fa fa-cloud-download"></span>
+            <!--ko text:Label-->
+            <!--/ko-->
+        </span>
+        <div class="dropdown-box-dialog" style="display: none">
+            <div class=" dropdown-box-content">
+                <ul class="dropdown-list" data-bind="foreach: List">
+                    <li class="cur_p" data-bind="clickBubble: false, text: $data[$parent.TextField], click: $parent.OnItemSelected"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<div id="modalTemplate" class="modal fade" role="dialog" tabindex="-1" aria-hidden='true'>
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top: 150px">
+            <div class="modal-body">
+                <table>
+                    <tr valign="middle">
+                        <td class="pd_0_15">模板名称
+                        </td>
+                        <td class="fs_14" style="width: 300px">
+                            <input type="text" class="form-control" data-bind="value: TemplateName" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-red" data-bind="click: SaveTemplate">[[[确定]]]</button>
+                &nbsp;&nbsp;
+                <button class="btn btn-sm btn-orange" data-bind="click: CloseTemplate">[[[取消]]]</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalMessage" class="modal fade" role="dialog" tabindex="-1" aria-hidden='true'>
+    <div class="modal-dialog modal-sm" style="margin-top: 150px">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table>
+                    <tr valign="middle">
+                        <td class="pd_0_15">
+                            <div data-bind="if: messageType() == 1">
+                                <span class="fa fs_30 fa-check c_green"></span>
+                            </div>
+                            <div data-bind="if: messageType() == 2">
+                                <span class="fa fs_30 fa-warning c_orange"></span>
+                            </div>
+                        </td>
+                        <td class="fs_14" data-bind="text: message"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-red" data-bind="click: CloseMessage">[[[确定]]]</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalBlock" class="modal fade" role="dialog" tabindex="-2" aria-hidden='true'>
+    <div class="modal-dialog modal-sm" style="margin-top: 150px">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table>
+                    <tr valign="middle">
+                        <td class="pd_0_15">
+                            <img src="../Content/Images/loading.gif" />
+                        </td>
+                        <td class="fs_14">正在处理中...</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

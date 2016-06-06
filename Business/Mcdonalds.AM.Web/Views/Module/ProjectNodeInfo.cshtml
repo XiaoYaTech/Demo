@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div>
+    <div class="ta_c" ng-show="!loaded">
+        <img src="~/Content/Images/loading.gif" />
+    </div>
+    <table width="100%" ng-show="loaded">
+        <tr>
+            <td width="{{100/nodes.length}}%" valign="bottom" ng-repeat="node in nodes">
+                <p class="node-title" ng-mouseenter="loadOperators(node)" tooltip-html-unsafe="{{node.operatorHTML}}" tooltip-placement="bottom">
+                    <a ng-href="{{node.Url}}">{{node.NameZHCN}}</a>
+                </p>
+                <div class="node-process" ng-class="{'success':node.ProgressRate===100&&!node.IsRejected,'halfdone':node.ProgressRate>=50&&node.ProgressRate<100,'rejected':node.IsRejected}">
+                    <div class="node-process-bg" ng-style="{width:'{{node.ProgressRate}}%'}">
+                        &nbsp;
+                        <span class="fa fa-check" ng-show="node.ProgressRate===100"></span>
+                        <div class="node-process-percent" ng-show="node.ProgressRate!==100">{{node.ProgressRate}}%</div>
+                    </div>
+                </div>
+                <div class="node-actions">
+                    <span class="fa fa-users c_green cur_p" title="edit approvers" ng-show="node.EditApproverable" ng-click="$parent.editApprover(node)"></span>
+                    &nbsp;
+                    <span class="fa fa-mail-reply c_orange cur_p" title="recall" ng-show="node.Recallable" ng-click="$parent.recall(node)"></span>
+                    &nbsp;
+                    <span class="fa fa-edit c_red cur_p" title="edit" ng-show="node.Editable" ng-click="$parent.edit(node)"></span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,109 @@
+﻿@{
+    Layout = null;
+}
+<form class="form-horizontal" name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_ClosurePackage" place-holder="8"></top-nav>
+    <cheking-point project-id="projectId" flow-code="Closure_ClosurePackage" refresh="checkPointRefresh"></cheking-point>
+
+    <store-basic-info project="ClosureInfo" code="ClosureInfo.USCode" store="store"></store-basic-info>
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Executive Summary]]]
+            </span>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <td>[[[关店类型]]]</td>
+                <td>{{ClosureInfo.ClosureTypeNameENUS}}</td>
+
+                <td>[[[Original CF NPV]]]</td>
+                <td>{{entity.OriginalCFNPV| money}}
+                </td>
+            </tr>
+            <tr>
+                <td>[[[租约到期日期]]]</td>
+                <td>{{store.StoreContractInfo.EndDate | date:"yyyy-MM-dd"}}</td>
+                <td>[[[LandloadName]]] </td>
+                <td colspan="3">{{ClosureInfo.LandlordName}}</td>
+
+            </tr>
+            <tr>
+                <th colspan="6">[[[OI Impact on Current Year]]]</th>
+            </tr>
+            <tr>
+                <td>[[[Total write off data]]]</td>
+                <td>{{ClosureTool.TotalOneOffCosts| money}}</td>
+                <td>[[[Compensation]]] </td>
+                <td>{{ClosureTool.Compensation| money}}</td>
+                <td>[[[Net Operating Income]]]</td>
+                <td>{{entity.NetOperatingIncome| money}}
+                </td>
+            </tr>
+            <tr>
+                <th colspan="6">[[[Current Future Impact]]]</th>
+            </tr>
+            <tr>
+                <td>[[[迁址?]]]</td>
+                <td>@*<select id="dicIsDirectory">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>*@
+                {{entity.IsRelocation|boolFilter}}
+                </td>
+                <td>[[[Relocation Pipeline ID]]] </td>
+                <td>{{entity.RelocationPipelineID}}
+                </td>
+                <td>[[[Pipeline Name]]]</td>
+                <td>{{entity.PipelineName}}
+                </td>
+            </tr>
+            <tr>
+                <td>[[[New Site Net CF NPV]]]</td>
+                <td>{{entity.NewSiteNetCFNPV| money}}
+                </td>
+                <td>[[[Other CF NPV]]]</td>
+                <td>{{entity.OtherCFNPV | money}}
+                </td>
+                <td>[[[Net CF NPV（RMB）]]]</td>
+                <td>
+                    <span id="spNetGain" ng-show="!!entity.NetGain">{{entity.NetGain |number}}
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Reason Description for Negative Net CF NPV]]]
+            </span>
+        </div>
+        <div class="panel-body">
+            <pre class="pre">{{entity.ReasonDescriptionForNegativeNetGain}}</pre>
+        </div>
+    </div>
+
+    <attachments ref-table-name="ClosurePackage"
+        project-id="{{projectId}}"
+        flow-code="Closure_ClosurePackage"
+        editable="false"
+        show-pack-download="true"
+        upload-set="['15570aac-42e5-4a75-880b-ec742fb4a92d']"></attachments>
+
+    <approval-records workflow-type="Closure" ref-table-id="entity.Id" ref-table-name="ClosurePackage"></approval-records>
+    <comment ng-show="!isFlowFinished" comments="entity.Comments" title="[[[意见]]]" editable="true"></comment>
+    <project-history page-url="/closure/Main#/ClosurePackage/Process/View?projectId={{projectId}}" project-id="projectId" table-name="ClosurePackage" title=" ClosurePackage History" has-template="false" title-name="ClosurePackage"></project-history>
+
+    <notification-message project-id="projectId"
+        flow-code="Closure"
+        sub-flow-code="Closure_ClosurePackage"
+        node-id="entity.Id"
+        uscode="ClosureInfo.USCode"></notification-message>
+
+    <div class="form-actions ta_c">
+        <button type="button" class="btn btn-lg btn-yellow" ng-click="FinishPackage(ClosureInfo)"><span class="fa fa-check"></span>[[[确认]]]</button>
+    </div>
+</form>

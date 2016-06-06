@@ -1,0 +1,159 @@
+﻿@{
+    Layout = null;
+}
+
+<script type="text/javascript">
+    //当前字典列表的父节点编码
+
+    function selAll() {
+
+    }
+    $(document).ready(function () {
+        formInit();
+    });
+
+    function formInit() {
+
+        $("#tbDicInfo")[0].style.display = "none";
+    }
+
+
+
+    function cbCheckAll_Click(checked) {
+
+        $("input[type=checkbox][name=cbSelID]", $("#tbDicList")).attr("checked", checked);
+    }
+    </script>
+<div class="dic-header">
+    字典管理
+
+</div>
+<div class="dic-Search">
+    <h1>查询</h1>
+    <hr />
+    <ul>
+        <li>名称：<input id="txtNameZHCN" />
+        </li>
+        <li>英文名称：<input id="txtNameENUS" /></li>
+        <li>编码：<input id="txtCode" /></li>
+        <li>
+            <input type="button" class="btn" value="查询" ng-click="search(dictionaryList)" />
+        </li>
+    </ul>
+    <div class="li-clear"></div>
+</div>
+<div class="dic-add">
+    <ul>
+        <li style="width: 1000px;">字典列表</li>
+        <li>
+
+            <input type="button" value="添加" class="btn" ng-click="showDicInfo(dictionaryList)" />
+            <input type="button" value="删除" class="btn" ng-click="delDic(dictionaryList.ParentCode)" />
+            <input type="button" value="排序" class="btn" ng-click="updateSeq(dictionaryList.ParentCode)" />
+            <input type="button" value="上一级" class="btn" ng-click="returnList(dictionaryList.ParentCode)" />
+      
+        </li>
+    </ul>
+    <div class="li-clear"></div>
+    <hr />
+
+
+    <table class="table" id="tbDicList">
+        <tr>
+            <th>类型</th>
+            <th>编号</th>
+            <th>中文名称</th>
+            <th>英文名称</th>
+            <th>值</th>
+            <th>父节点编号</th>
+
+            <th>操作</th>
+            <th>排序号</th>
+            <th>
+                <input type="checkbox" value="" onclick="cbCheckAll_Click(this.checked)" /></th>
+        </tr>
+        <tr ng-repeat="dic in dictionaryList">
+            <td>{{dic.IsDirectory | isDirectoryFilter}}
+            </td>
+            <td><span style="color: blue; cursor: pointer;" ng-click="toList(dic)">{{dic.Code}}</span></td>
+            <td>{{dic.NameZHCN}}</td>
+            <td>{{dic.NameENUS}}</td>
+            <td>{{dic.Value}}</td>
+            <td>{{dic.ParentCode}}</td>
+            <td><span style="color: blue; cursor: pointer;" ng-click="edit(dic)">编辑</span></td>
+            <td>
+                <input name="txtSequence" type="text" value="{{dic.Sequence}}" style="width: 30px;" />
+            </td>
+            <td>
+                <input type="checkbox" name="cbSelID" value="{{dic.Id}}" /></td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <input type="hidden" id="dicId" ng-model="dic.Id" />
+    <table class="table" id="tbDicInfo">
+        <tr>
+
+            <td>类型</td>
+            <td>
+                <select id="dicIsDirectory" ng-model="dic.IsDirectory">
+                    <option value="true" >目录</option>
+                    <option value="false">字典项</option>
+                </select>
+              
+
+
+            </td>
+     
+        </tr>
+        <tr>
+
+            <td>编号</td>
+            <td>
+                
+                <input type="text" id="dicCode" ng-model="dic.Code" />
+            </td>
+        
+        </tr>
+        <tr>
+            <td>中文名称</td>
+            <td>
+                <input type="text" id="dicNameZHCN" ng-model="dic.NameZHCN" /></td>
+            <td align="left">*</td>
+        </tr>
+        <tr>
+            <td>英文名称</td>
+            <td>
+                <input type="text" id="dicNameENUS" ng-model="dic.NameENUS" /></td>
+            <td align="left">*</td>
+        </tr>
+        <tr>
+            <td>值</td>
+            <td>
+                <input type="text" id="dicValue" ng-model="dic.Value" /></td>
+            <td align="left">*</td>
+        </tr>
+        <tr>
+            <td>父节点编号</td>
+            <td><span id="dicParentCode">{{parentCode}}</span></td>
+            <td></td>
+        </tr>
+        <tr>
+           <td>扩展字段1</td>
+            <td>
+                <input type="text" value="0" id="dicSequence" ng-model="dic.ExtendField0" /></td>
+            <td align="left">*</td>  
+        </tr>
+        <tr>
+            <td>排序号</td>
+            <td>
+                <input type="text" value="0" id="dicSequence" ng-model="dic.Sequence" /></td>
+            <td align="left">*</td>
+        </tr>
+        <tr>
+            <td align="center">
+                <input type="button" ng-click="save(dic)" value="提交" class="btn" /><input type="button" value="取消" ng-click="cancel(dic)" class="btn" /></td>
+        </tr>
+    </table>
+</div>

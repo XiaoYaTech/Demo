@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "生成礼品卡";
+    ViewBag.PageTitle = "礼品卡管理 -->> 新生成礼品卡";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Areas/ManageSite/Scripts/GiftCard.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";    
+}
+
+<div class="OptionContainer">
+    <table border="0">
+        <tr>
+            <td><span><a href ="@Url.Action("Index", "GiftCard")">返回</a></span></td>
+        </tr>
+    </table>
+</div>
+<div class="ResultBody">
+    <div class="CardConfigDiv">
+        <ul>
+            <li>生成张数:</li>
+            <li>
+                <select id="cardcount" name="cardcount">
+                    <option value="0">---请选择---</option>
+                    <option value="10">10张</option>
+                    <option value="50">50张</option>
+                    <option value="100">100张</option>
+                    <option value="150">150张</option>
+                    <option value="200">200张</option>
+                    <option value="250">250张</option>
+                    <option value="300">300张</option>
+                    <option value="1000">1000张</option>
+                    <option value="2000">2000张</option>
+                </select>
+            </li>
+            <li>卡号前4位数字：</li>
+            <li><input type="text" id="preNum" name="preNum" value="" size="5" maxlength="4" style=" width:40px;" /></li>
+            <li>密码:</li>
+            <li>
+                <select id="pwdtype" name="pwdtype">
+                    <option value="">---请选择---</option>
+                    <option value="0">随机生成</option>
+                </select>
+            </li>
+        </ul>
+        <ul>
+            <li>金额：</li>
+            <li><input type="text" name="cardAmount" id="cardAmount" value="" maxlength="10"/> 元</li>
+            <li>生效日期:</li>
+            <li><input type="text" name="startDate" id="startDate" value="" maxlength="10" readonly="readonly" /></li>
+            <li>截止有效日期：</li>
+            <li><input type="text" name="expireDate" id="expireDate" value="" maxlength="10"  readonly="readonly" /></li>
+        </ul>
+        <ul>
+            <li>
+                <span><a href="javascript:void(0);" id="gener" onclick="javascript:Generate();" >开始生成</a></span>
+            </li>
+        </ul>
+    </div>
+    <div class="CardContainer">
+        
+    </div>
+</div>

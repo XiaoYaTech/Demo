@@ -1,0 +1,83 @@
+﻿
+@{
+    Layout = null;
+}
+
+<task-reminder></task-reminder>
+
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            Notice Info
+        </span>       
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-xs-2 control-label">
+                Title
+            </label>
+            <div class="col-xs-10 pd_t_7">
+                {{detail.Title}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-2 control-label">
+                US Code
+            </label>
+            <div class="col-xs-2 pd_t_7">
+                {{detail.USCode}}
+            </div>
+
+            <label class="col-xs-2 control-label">
+                Project ID
+            </label>
+            <div class="col-xs-2 pd_t_7">
+                {{detail.ProjectID}}
+            </div>
+
+            <label class="col-xs-2 control-label">
+                ProcInstID
+            </label>
+            <div class="col-xs-2 pd_t_7">
+                {{detail.ProcInstID}}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-xs-2 control-label">
+                Sender EN
+            </label>
+            <div class="col-xs-2 pd_t_7">
+                {{detail.SenderNameENUS}}
+            </div>
+
+             <label class="col-xs-2 control-label">
+                Sender CN
+            </label>
+            <div class="col-xs-2 pd_t_7">
+                {{detail.SenderNameZHCN}}
+            </div>
+
+            <label class="col-xs-2 control-label">
+                Created Time
+            </label>
+            <div class="col-xs-2 pd_t_7">
+                {{detail.CreatedTime|date:'yyyy-MM-dd'}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-2 control-label">
+                Content
+            </label>
+            <div class="col-xs-10 pd_t_7">
+                {{detail.Content}}
+            </div>
+        </div>
+
+        
+    </div>
+</div>

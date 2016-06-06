@@ -1,0 +1,194 @@
+﻿@{
+    ViewBag.Title = "LegalReview";
+    Layout = null;
+}
+
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Rebuild" sub-code="{{subFlowCode}}" place-holder="10" ng-show="!isHistory"></top-nav>
+<cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+<store-basic-info code="RebuildInfo.USCode" workflow-type="Rebuild" project="RebuildInfo" store="store"></store-basic-info>
+<contact-info uscode="RebuildInfo.USCode" project-id="projectId"></contact-info>
+
+<comment comments="legalView.LegalComments" editable="isEditLegalReviewComments" title="[[[法律意见]]]"></comment>
+
+<mater-tracking workflow-id="projectId"
+                workflow-type="Rebuild"
+                node-id="legalView.Id"
+                node-type="{{subFlowCode}}">
+</mater-tracking>
+
+<attachments ref-table-name="RebuildLegalReview"
+             ref-table-id="{{legalView.Id}}"
+             project-id="{{projectId}}"
+             flow-code="{{subFlowCode}}" 
+             editable="{{isPageEditable}}"
+             list="attachments"
+             show-contract="true"
+             upload-set="upLoadSet"
+             is-history="isHistory">
+</attachments>
+
+@*<div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                Attachment
+            </span>
+            <div class="panel-tools">
+                <a plupload-simple
+                   upload-url="api/Rebuild/LegalReview/UploadContract/{{projectId}}"
+                   upload-finished="uploadAttachFinished"
+                   error-msg="请上传正确的文件"
+                   ng-show="isPageEditable">
+                    <span class='fa fa-upload'></span>
+                    上传
+                </a>
+            </div>
+            <span class="clear"></span>
+        </div>
+        <table class="table">
+            <tr>
+                <th>No.</th>
+                <th>Item</th>
+                <th>Uploaded By</th>
+                <th>Uploaded Date</th>
+                <th>Operation</th>
+            </tr>
+            <tr class="required">
+                <td>1</td>
+                <td>
+                    <i class="required-field">*</i>
+                    <span class="{{LegalClearanceReport.Icon}}"></span>
+                    <a ng-href="{{LegalClearanceReport.downloadLink}}">Legal clearance report</a>
+                </td>
+                <td>
+                    <span ng-show="LegalClearanceReport.ID">
+                        {{LegalClearanceReport.CreatorNameZHCN}}({{LegalClearanceReport.CreatorNameENUS}})
+                    </span>
+                </td>
+                <td>{{LegalClearanceReport.CreateTime | date:"yyyy-MM-dd"}}</td>
+                <td class="table-operations">
+                    <div ng-show="!AssetActor">
+                        <a plupload-simple
+                           upload-url="api/Rebuild/LegalClearanceReport/UploadContract/{{projectId}}"
+                           upload-finished="uploadFinished"
+                           errormsg="请上传正确的文件"
+                           class="fa fa-upload"
+                           ng-show="isPageEditable">
+                            &nbsp;
+                        </a>
+                        <a class="fa fa-trash-o" ng-show="LegalClearanceReport.ID && isPageEditable" ng-click="deleteAttachment(LegalClearanceReport.ID,'LegalClearanceReport')">&nbsp;</a>
+                    </div>
+                </td>
+            </tr>
+            <tr class="required">
+                <td>2</td>
+                <td>
+                    <i class="required-field">*</i>
+                    <span class="{{Agreement.Icon}}"></span>
+                    <a ng-href="{{Agreement.downloadLink}}">Lease Agreement</a>
+                </td>
+                <td>
+                    <span ng-show="Agreement.ID">
+                        {{Agreement.CreatorNameZHCN}}({{Agreement.CreatorNameENUS}})
+                    </span>
+                </td>
+                <td>{{Agreement.CreateTime | date:"yyyy-MM-dd"}}</td>
+                <td class="table-operations">
+                    <div ng-show="!AssetActor">
+                        <a plupload-simple
+                           upload-url="api/Rebuild/Agreement/UploadContract/{{projectId}}"
+                           upload-finished="uploadFinished"
+                           errormsg="请上传正确的文件"
+                           class="fa fa-upload"
+                           ng-show="isPageEditable">
+                            &nbsp;
+                        </a>
+                        <a class="fa fa-trash-o" ng-show="Agreement.ID && isPageEditable" ng-click="deleteAttachment(Agreement.ID,'Agreement')">&nbsp;</a>
+                    </div>
+                </td>
+            </tr>
+            <tr class="required">
+                <td><span>3</span></td>
+                <td>
+                    <i ng-show="!AssetActor">*</i>
+                    <span class="{{Others.Icon}}"></span>
+                    <a ng-href="{{Others.downloadLink}}">Others（如往来函件，业主证明)</a>
+                </td>
+                <td>
+                    <span ng-show="Others.ID">
+                        {{Others.CreatorNameZHCN}}({{Others.CreatorNameENUS}})
+                    </span>
+                </td>
+                <td>{{Others.CreateTime | date:"yyyy-MM-dd"}}</td>
+                <td class="table-operations">
+                    <a plupload-simple
+                       upload-url="api/Rebuild/Others/UploadContract/{{projectId}}"
+                       upload-finished="uploadFinished"
+                       errormsg="请上传正确的文件"
+                       class="fa fa-upload"
+                       ng-show="isPageEditable">
+                        &nbsp;
+                    </a>
+                    <a class="fa fa-trash-o" ng-show="Others.ID && isPageEditable" ng-click="deleteAttachment(Others.ID,'Others')">&nbsp;</a>
+                </td>
+            </tr>
+            <tr>
+                <td>{{$index+4}}</td>
+                <td><a ng-click="showContractAttachments()">Contract Info({{contractAttachCount}})</a></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td ng-show="editable">&nbsp;</td>
+            </tr>
+            <tr ng-repeat="att in Contract">
+                <td>{{$index+5}}</td>
+                <td>
+                    <span class="{{att.Icon}}"></span>
+                    <a ng-href="{{att.downloadLink}}">{{att.Name}}</a>
+                </td>
+                <td>{{att.CreatorNameZHCN}}({{att.CreatorNameENUS}})</td>
+                <td>{{att.CreateTime | date:"yyyy-MM-dd"}}</td>
+                <td class="table-operations">
+                    <a ng-href="{{att.downloadLink}}" class="fa fa-download">&nbsp;</a>
+                    <a class="fa fa-trash-o" ng-show="att.ID && isPageEditable" ng-click="deleteAttachment(att.ID,'contract')">&nbsp;</a>
+                </td>
+            </tr>
+        </table>
+    </div>*@
+
+<approval-records ref-table-id="legalView.Id" ref-table-name="RebuildLegalReview" workflow-type="Rebuild"></approval-records>
+<div ng-show="pageType!='View'">
+    <comment comments="legalView.Comments" title="[[[意见]]]" editable="true"></comment>
+</div>
+<project-history project-id="projectId" table-name="RebuildLegalReview" title="[[[Rebuild Legal Review History]]]" has-template="false"
+                 page-url="/Rebuild/Main#/LegalReview/Process/View?projectId={{projectId}}"
+                 title-name="[[[Legal Review]]]" ng-show="!isHistory"></project-history>
+
+<notification-message project-id="projectId"
+                      flow-code="Rebuild"
+                      sub-flow-code="Rebuild_LegalReview"
+                      node-id="legalView.Id"
+                      uscode="RebuildInfo.USCode"
+                      is-history="isHistory"></notification-message>
+
+<div ng-switch on="pageType" ng-show="!legalView.IsProjectFreezed">
+    <div class="ta_c mg_t_10" ng-switch-default>
+        <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSave"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-click="submit()" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+    <div class="form-actions ta_c" ng-switch-when="Approval">
+        <button type="button" class="btn btn-lg btn-red" ng-click="approve()" ng-disabled="IsClickApprove">[[[完成]]]</button>
+        <button type="button" class="btn btn-lg btn-orange" ng-click="returnToOriginator()" ng-disabled="IsClickReturn"><span class="fa fa-reply"></span>[[[退回]]]</button>
+    </div>
+    <div class="ta_c mg_t_10" ng-switch-when="View" ng-hide="isUserAction">
+        <button type="button" class="btn btn-lg btn-warning" ng-click="save()" ng-show="legalView.IsShowSave"><span class="fa fa-check"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-orange" ng-click="recall()" ng-show="legalView.IsShowRecall && !isHistory">[[[撤销]]]</button>
+        <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="legalView.IsShowEdit"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+    </div>
+    <div class="form-actions ta_c" ng-switch-when="Resubmit">
+        <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSave"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-click="submit()" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</div>
+
+

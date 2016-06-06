@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+}
+<div>
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[主要合同信息]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">
+                    [[[项目类型]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    [[[MajorLease]]]
+                </div>
+                <label class="col-xs-2 control-label">
+                    [[[美国编号]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    {{detail.USCode}}
+                </div>
+                @*<label class="col-xs-2 control-label">
+                    Project ID
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    {{projectId}}
+                </div>*@
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">
+                    [[[开工日期]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    {{detail.GBDate|date:'yyyy-MM-dd'}}
+                </div>
+                <label class="col-xs-2 control-label">
+                    [[[重新开业时间]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    {{detail.ReopenDate|date:'yyyy-MM-dd'}}
+                </div>
+                <label class="col-xs-2 control-label">
+                    [[[项目创建时间]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    {{detail.CreateTime|date:'yyyy-MM-dd'}}
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    Major Lease Change
+                </span>
+            </div>
+            <div class="form-group">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="30%">Major Lease Changes Type</th>
+                            <th width="70%">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" id="rental" ng-model="detail.ChangeRentalType" ng-disabled="!isEdit" /> The Change of the rental</td>
+                            <td><input type="text" class="form-control" ng-model="detail.ChangeRentalTypeDESC" ng-disabled="!isEdit" /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="redline" ng-model="detail.ChangeRedLineType" ng-disabled="!isEdit" /> The Change of red line</td>
+                            <td><input type="text" class="form-control" ng-model="detail.ChangeRedLineTypeDESC" ng-disabled="!isEdit" /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="leaseterm" ng-model="detail.ChangeLeaseTermType" ng-disabled="!isEdit" /> The Change of lease term</td>
+                            <td><input type="text" class="form-control" ng-model="detail.ChangeLeaseTermDESC" ng-disabled="!isEdit" /></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>*@
+    <lease-change source="detail" is-edit="false" title="[[[Major Lease Change]]]"></lease-change>
+</div>

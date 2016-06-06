@@ -1,0 +1,19 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Reimage" sub-code="Reimage_ReopenMemo" place-holder="10"></top-nav>
+    <cheking-point project-id="projectId" flow-code="Reimage_ReopenMemo" refresh="checkPointRefresh"></cheking-point>
+
+    <reopen-memo project-id="{{projectId}}" editable="isPageEditable" source="entity"></reopen-memo>
+    <notification-message project-id="projectId"
+                          flow-code="Reimage"
+                          sub-flow-code="Reimage_ReopenMemo"
+                          node-id="entity.Id"
+                          uscode="entity.RmgInfo.USCode"></notification-message>
+    <div class="form-actions ta_c" ng-show="isPageEditable">
+        <button type="button" class="btn btn-lg btn-orange" ng-click="save()" ng-disabled="acting"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-show="unNotify" ng-click="notify(frmMain)" form-submit ng-disabled="acting"><span class="fa fa-check"></span>[[[通知]]]</button>
+    </div>
+</form>

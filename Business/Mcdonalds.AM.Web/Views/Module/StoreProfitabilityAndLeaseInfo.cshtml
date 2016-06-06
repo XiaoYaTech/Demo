@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            Store Profitability & Lease Information
+        </span>
+    </div>
+    <div class="panel-body form-horizontal">
+        <div class="pd_0_15">
+            <table class="table table-bordered">
+                <tr>
+                    <td>Last Remodel Date</td>
+                    <td class="text-center">
+                        @*<p class="input-group">
+                                <input type="text" class="form-control" ng-model="source.LastRemodelDate" datepicker-popup="{{format}}" is-open="openedLastRemodelDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled="!editable" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-disabled="!editable" ng-click="open($event,'openedLastRemodelDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        *@
+                        <span ng-if="filterDefaultDate(source.LastRemodelDate)">
+                            {{source.LastRemodelDate | date:"yyyy-MM-dd"}}
+                        </span>
+                        <span ng-if="!filterDefaultDate(source.LastRemodelDate)">
+                            无
+                        </span>
+                    </td>
+                    <td>Remaining Lease Years</td>
+                    <td class="text-center" colspan="3">
+                        {{source.RemainingLeaseYears}}
+
+                        @*<input type="text" class="form-control" ng-model="source.RemainingLeaseYears" ng-disabled="!editable" />*@
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        TTM Sales (RMB)
+                    </td>
+                    <td class="text-center">
+                        {{ttmSales|money}}
+                    </td>
+                    <td>As of</td>
+                    <td class="text-center">
+                        <p class="input-group">
+                            <select id="asOf" ng-show="editable" ng-model="source.AsOf" ng-options="m.value as m.name for m in yearMonthList">
+                                <option>[[[-- 请选择 --]]]</option>
+                            </select>
+                        </p>
+                        <span ng-show="!editable">{{source.AsOf}}</span>
+                        @*<input type="text" class="form-control" ng-model="source.AsOf" ng-disabled="!editable" />*@
+                    </td>
+                    <td>TTM SOI%</td>
+                    <td class="text-center">
+                        @*<input type="text" class="form-control" ng-model="source.TTMSOIPercent" ng-disabled="!editable" />*@
+                        {{source.TTMSOIPercent|numberCustom:1}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[续约信息]]]
+        </span>
+        <div class="panel-tools" ng-show="canInnerEdit">
+            <button class="btn btn-sm" ng-show="!innerEditing" ng-click="edit()">
+                <span class="fa fa-edit"></span> [[[编辑]]]
+            </button>
+            <button class="btn btn-sm" ng-show="innerEditing" ng-click="save()">
+                <span class="fa fa-save"></span> [[[保存]]]
+            </button>
+        </div>
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[项目类型]]]</label>
+            <div class="col-xs-2 pd_t_7">[[[续约]]]</div>
+            <label class="control-label col-xs-2">[[[美国编号]]]</label>
+            <div class="col-xs-2 pd_t_7">{{detail.USCode}}</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[原租约起始日期]]]</label>
+            <div class="col-xs-2 pd_t_7">{{store.StoreContractInfo.StartDate|date:'yyyy-MM-dd'}}</div>
+            <label class="control-label col-xs-2">[[[原租约到期日期]]]</label>
+            <div class="col-xs-2 pd_t_7">{{store.StoreContractInfo.EndDate|date:'yyyy-MM-dd'}}</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[新租约起始日期]]]</label>
+            <div class="col-xs-2">
+                <p class="input-group">
+                    <input type="text" class="form-control" name="NewLeaseStartDate" ng-model="detail.NewLeaseStartDate" datepicker-popup="{{format}}" is-open="$parent.showNewLeaseStartDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled="!innerEditing" />
+                    <span class="input-group-btn">
+                        <button type="button" ng-disabled="!innerEditing" class="btn btn-default" ng-click="openDate($event,'showNewLeaseStartDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+                <err-msgs field="frmMain.NewLeaseStartDate" submited="$submited"></err-msgs>
+            </div>
+            <label class="control-label col-xs-2">[[[新租约到期日期]]]</label>
+            <div class="col-xs-2">
+                <p class="input-group">
+                    <input type="text" class="form-control" name="NewLeaseEndDate" ng-model="detail.NewLeaseEndDate" datepicker-popup="{{format}}" is-open="$parent.showNewLeaseEndDate" min-date="detail.NewLeaseStartDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled="!innerEditing" />
+                    <span class="input-group-btn">
+                        <button type="button" ng-disabled="!innerEditing" class="btn btn-default" ng-click="openDate($event,'showNewLeaseEndDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+                <err-msgs field="frmMain.NewLeaseStartDate" submited="$submited"></err-msgs>
+            </div>
+            <label class="control-label col-xs-2">[[[租赁年数]]]</label>
+            <div class="col-xs-2">
+                <input type="text" class="form-control" value="{{detail.RenewalYears}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">[[[优先级]]]</label>
+            <div class="col-xs-2">
+                <dict-selector parent-code="youxianji" selected-code="detail.Priority" selected-dict="RenewalPriority" editable="innerEditing"></dict-selector>
+            </div>
+            <label class="control-label col-xs-2">[[[是否需要工程费用预估]]]</label>
+            <div class="col-xs-2 pd_t_7">
+                <label><input type="radio" ng-model="detail.NeedProjectCostEst" ng-value="true" ng-disabled="!innerEditing" /> &nbsp;Yes</label>
+                &nbsp;&nbsp;
+                <label><input type="radio" ng-model="detail.NeedProjectCostEst" ng-value="false" ng-disabled="!innerEditing" /> &nbsp;No</label>
+            </div>
+        </div>
+    </div>
+</div>

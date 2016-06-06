@@ -1,0 +1,335 @@
+﻿@{
+    Layout = null;
+}
+<form class="form-horizontal" name="frmMLC">
+    <approved-package entity-id="entity.Id" flow-code="MajorLease" us-code="usCode" before-upload="beforeUpload()"></approved-package>
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">Major Lease Change</span>
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-xs-2 control-label">US Code</label>
+            <div class="col-xs-2 pd_t_7">{{usCode}}</div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-10">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="5">Changes Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%" valign="top">
+                                <input type="checkbox" ng-model="entity.ChangeLandlordType" ng-disabled="!editable" />
+                                <label class="control-label">
+                                    The Change of the Landlord
+                                </label>
+                            </td>
+                            <td>
+                                <label class="control-label" ng-show="entity.ChangeLandlordType">
+                                    Description
+                                </label>
+                                <textarea class="form-control" rows="5" ng-show="entity.ChangeLandlordType" ng-model="entity.ChangeLandLordDESC" ng-disabled="!editable"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" ng-model="entity.ChangeRentalType" ng-disabled="!editable" />
+                                <label class="control-label">
+                                    The Change of the Rental
+                                </label>
+                            </td>
+                            <td>
+                                <label class="control-label" ng-show="entity.ChangeRentalType">
+                                    Description
+                                </label>
+                                <textarea class="form-control" rows="5" ng-show="entity.ChangeRentalType" ng-model="entity.ChangeRentalTypeDESC" ng-disabled="!editable"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" ng-model="entity.ChangeRedLineType" ng-disabled="!editable" />
+                                <label class="control-label">
+                                    The Change of the Red Line
+                                </label>
+                            </td>
+                            <td>
+                                <label class="control-label" ng-show="entity.ChangeRedLineType">
+                                    Description
+                                </label>
+                                <textarea class="form-control" rows="5" ng-show="entity.ChangeRedLineType" ng-model="entity.ChangeRedLineTypeDESC" ng-disabled="!editable"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" ng-model="entity.ChangeLeaseTermType" ng-disabled="!editable" />
+                                <label class="control-label">
+                                    The Change of the Lease Term
+                                </label>
+                            </td>
+                            <td>
+                                <label class="control-label" ng-show="entity.ChangeLeaseTermType">
+                                    Description
+                                </label>
+                                <textarea class="form-control" rows="5" ng-show="entity.ChangeLeaseTermType" ng-model="entity.ChangeLeaseTermDESC" ng-disabled="!editable"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">MLC Net Write Off_Act.</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.MLCNetWriteOff_Act" ng-disabled="!editable" />
+            </div>
+            <label class="col-xs-2 control-label">MLC_Total Reinvestment_Act.</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.MLC_TotalReinvestment_Act" ng-disabled="!editable" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">编辑选项</label>
+            <div class="col-xs-2 pd_t_7">
+                <div>
+                    <label>
+                        <input type="radio" name="EditMode" value="EDIT" ng-model="entity.EditMode" ng-disabled="!editable" />
+                        编辑</label>&nbsp;&nbsp;
+                            <label>
+                                <input type="radio" name="EditMode" value="ADD" ng-model="entity.EditMode" ng-disabled="!editable" />
+                                新增</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Landlord Name(Party A)</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.PartyAFullName" ng-disabled="!editable" />
+            </div>
+            <label class="col-xs-2 control-label">Contract Entity Name (McD)</label>
+            <div class="col-xs-2 pd_t_7">
+                <dict-selector name="McDLegalEntity" parent-code="175" selected-code="entity.ContractEntityName" selected-dict="McDLegalEntityDict" editable="editable"></dict-selector>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Mcd Ownership</label>
+            <div class="col-xs-2 pd_t_7">
+                <dict-selector name="McDOwnership" parent-code="302" selected-code="entity.McdOwnership" selected-dict="McDOwnershipDict" editable="editable"></dict-selector>
+            </div>
+            <label class="col-xs-2 control-label">Contact Person</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.ContactPerson" ng-disabled="!editable" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Contact Mode</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.ContactMode" ng-disabled="!editable" />
+            </div>
+            <label class="col-xs-2 control-label">Rent Type</label>
+            <div class="col-xs-2 pd_t_7">
+                <select chosen="{{editable?'{disable_search:true,width:\'100%\'}':'{disable_search:true,disabled:true,width:\'100%\'}'}}"
+                    name="RentType"
+                    ng-if="editable"
+                    class="form-control"
+                    ng-model="entity.RentType">
+                    <option value="">[[[-- 请选择 --]]]</option>
+                    <option>Fixed Rent</option>
+                    <option>Fixed Rent Plus Rent Percent</option>
+                    <option>Rent Percent</option>
+                    <option>Rent Percent with Sales Hurdles</option>
+                    <option>The Higher of Base Rent or Rent Percent</option>
+                    <option>Others</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Rent Size</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" valnumber ng-model="entity.RentSize" ng-disabled="!editable" />
+            </div>
+            <label class="col-xs-2 control-label">Contract Term</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.ContractTerm" ng-disabled="!editable" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Contract Type</label>
+            <div class="col-xs-2 pd_t_7">
+                <dict-selector name="LeasePurchase" parent-code="148" selected-code="entity.ContractType" selected-dict="LeasePurchaseDict" editable="editable"></dict-selector>
+            </div>
+            <label class="col-xs-2 control-label">Contract Start Date</label>
+            <div class="col-xs-2 pd_t_7">
+                <p class="input-group">
+                    <input type="text" class="form-control" name="StartDate" aria-readonly="true" ng-disabled="!editable"
+                        onfocus="this.blur()" ng-model="entity.ContractStartDate" datepicker-popup="{{format}}" is-open="showStartDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                    <span class="input-group-btn" ng-show="editable">
+                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showStartDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Contrace End Date</label>
+            <div class="col-xs-2 pd_t_7">
+                <p class="input-group">
+                    <input type="text" class="form-control" name="EndDate" onfocus="this.blur()" ng-model="entity.ContraceEndDate" datepicker-popup="{{format}}" is-open="showEndDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                    <span class="input-group-btn" ng-show="editable">
+                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showEndDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+            <label class="col-xs-2 control-label">Contract Start Year</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.ContractStartYear" ng-disabled="!editable" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Contract End Year</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.ContraceEndYear" ng-disabled="!editable" />
+            </div>
+            <label class="col-xs-2 control-label">Rent Payment Start Date</label>
+            <div class="col-xs-2 pd_t_7">
+                <p class="input-group">
+                    <input type="text" class="form-control" name="RentCommencementDate" ng-disabled="!editable" onfocus="this.blur()" ng-model="entity.RentPaymentStartDate" datepicker-popup="{{format}}" is-open="showRentCommencementDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                    <span class="input-group-btn" ng-show="editable">
+                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showRentCommencementDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Deadline to Notice LL</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.DeadlineToNoticeLL" ng-disabled="!editable" />
+            </div>
+            <label class="col-xs-2 control-label">Changed After 2010</label>
+            <div class="col-xs-2 pd_t_7">
+                <label>
+                    <input type="radio" name="Changedafter2010" ng-disabled="!editable" ng-value="1" ng-model="entity.ChangedAfter2010" />
+                    Yes</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label>
+                    <input type="radio" name="Changedafter2010" ng-disabled="!editable" ng-value="0" ng-model="entity.ChangedAfter2010" />
+                    No</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Rent Structure</label>
+            <div class="col-xs-6 pd_t_7">
+                <textarea class="form-control" rows="5" ng-model="entity.RentStructure" ng-disabled="!editable"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Early Termination Clause</label>
+            <div class="col-xs-2 pd_t_7">
+                <label>
+                    <input type="radio" ng-disabled="!editable" name="WithEarlyTerminationClause" ng-value="1" ng-model="entity.EarlyTerminationClause" />
+                    Yes</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label>
+                    <input type="radio" ng-disabled="!editable" name="WithEarlyTerminationClause" ng-value="0" ng-model="entity.EarlyTerminationClause" />
+                    No</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Early Termination Clause Description</label>
+            <div class="col-xs-6 pd_t_7">
+                <textarea class="form-control" rows="5" ng-model="entity.EarlyTerminationClauseDescription" ng-disabled="!editable"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Rent Paid to</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.RentPaidTo" ng-disabled="!editable" />
+            </div>
+            <label class="col-xs-2 control-label">Rent Payment Arrangement</label>
+            <div class="col-xs-2 pd_t_7">
+                <dict-selector name="RentPaymentArrangement" parent-code="303" selected-code="entity.RentPaymentArrangement" selected-dict="RentPaymentArrangementDict" editable="editable"></dict-selector>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Deposit</label>
+            <div class="col-xs-2 pd_t_7">
+                <label>
+                    <input type="radio" name="HasDeposit" ng-disabled="!editable" ng-value="1" ng-model="entity.Deposit" />
+                    Yes</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label>
+                    <input type="radio" name="HasDeposit" ng-disabled="!editable" ng-value="0" ng-model="entity.Deposit" />
+                    No</label>
+            </div>
+            <label class="col-xs-2 control-label">Deposit Amount</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" number-show="money" valnumber ng-model="entity.DepositAmount" ng-disabled="!editable" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">When Refund</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.WhenRefund" ng-disabled="!editable" />
+            </div>
+            <label class="col-xs-2 control-label">with Penalty Clause</label>
+            <div class="col-xs-2 pd_t_7">
+                <label>
+                    <input type="radio" name="WithPenaltyClause" ng-disabled="!editable" ng-value="1" ng-model="entity.withPenaltyClause" />
+                    Yes</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label>
+                    <input type="radio" name="WithPenaltyClause" ng-disabled="!editable" ng-value="0" ng-model="entity.withPenaltyClause" />
+                    No</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Bank Guarantee</label>
+            <div class="col-xs-2 pd_t_7">
+                <label>
+                    <input type="radio" name="HasBankGuarantee" ng-disabled="!editable" ng-value="1" ng-model="entity.BankGuarantee" />
+                    Yes</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label>
+                    <input type="radio" name="HasBankGuarantee" ng-disabled="!editable" ng-value="0" ng-model="entity.BankGuarantee" />
+                    No</label>
+            </div>
+            <label class="col-xs-2 control-label">Bank Guarantee Number</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" ng-model="entity.BankGuaranteeNumber" ng-disabled="!editable" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Bank Guarantee Amount</label>
+            <div class="col-xs-2 pd_t_7">
+                <input type="text" class="form-control" number-show="money" valnumber ng-model="entity.BankGuaranteeAmount" ng-disabled="!editable" />
+            </div>
+            <label class="col-xs-2 control-label">BG Commencement Date</label>
+            <div class="col-xs-2 pd_t_7">
+                <p class="input-group">
+                    <input type="text" class="form-control" ng-disabled="!editable" name="BGCommencementDate" onfocus="this.blur()" aria-readonly="true" is-open="$parent.showBGCommencementDate" ng-model="entity.BGCommencementDate" datepicker-popup="{{format}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                    <span class="input-group-btn" ng-show="editable">
+                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showBGCommencementDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">BG End Date</label>
+            <div class="col-xs-2 pd_t_7">
+                <p class="input-group">
+                    <input type="text" class="form-control" ng-disabled="!editable" name="BGEndDate" onfocus="this.blur()" aria-readonly="true" is-open="$parent.showBGEndDate" ng-model="entity.BGEndDate" datepicker-popup="{{format}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                    <span class="input-group-btn" ng-show="editable">
+                        <button type="button" class="btn btn-default" ng-click="openDate($event,'showBGEndDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="form-actions ta_c" ng-show="editable">
+        <button type="button" ng-disabled="submiting" class="btn btn-lg btn-orange" ng-click="save(frmMLC,false)" form-submit><span class="fa fa-paste"></span>暂存</button>
+        <button type="button" class="btn btn-lg btn-red" form-submit ng-click="save(frmMLC,true)"><span class="fa fa-check" form-submit></span>推送</button>
+    </div>
+</form>
+

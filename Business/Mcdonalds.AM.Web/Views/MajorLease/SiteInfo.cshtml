@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Site Info";
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="MajorLease" sub-code="MajorLease_SiteInfo" place-holder="11" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh"></cheking-point>
+
+    <site-info source="siteInfo"
+               editable="isPageEditable"
+               us-code="majorLeaseInfo.USCode"
+               identifier="majorLeaseInfo.Id"
+               project-id="{{projectId}}"
+               flow-code="MajorLease_SiteInfo"></site-info>
+    <attachments-memo project-id="projectId"
+                      flow-code="MajorLease">
+    </attachments-memo>
+    <notification-message project-id="projectId"
+                          flow-code="MajorLease"
+                          sub-flow-code="{{subFlowCode}}"
+                          node-id="siteInfo.Id"
+                          uscode="majorLeaseInfo.USCode"></notification-message>
+    @*<div ng-switch="pageType" ng-show="!consInfo.IsProjectFreezed">*@
+    <div ng-switch on="pageType">
+        <div class="ta_c mg_t_10" ng-switch-default>
+            @*<button type="button" class="btn btn-lg btn-orange" ng-click="save()" ng-disabled="IsClickSave"><span class="fa fa-paste"></span>[[[保存]]]</button>
+                <button type="button" class="btn btn-lg btn-red" ng-click="submit()" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>*@
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="Approval">
+            <button type="button" class="btn btn-lg btn-red" form-submit ng-disabled="confirmed" ng-click="confirm(frmMain)"><span class="fa fa-check"></span>[[[确认]]]</button>
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="View">
+            <button type="button" class="btn btn-lg btn-warning" ng-click="save()" ng-show="majorLeaseInfo.IsSiteInfoSaveable"><span class="fa fa-check"></span>[[[保存]]]</button>
+        </div>
+    </div>
+</form>

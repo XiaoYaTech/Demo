@@ -1,0 +1,35 @@
+﻿2015-05-07 16:30:36,575 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-05-07 16:47:10,060 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 323 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-05-07 16:47:27,998 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 323 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-05-07 16:47:44,669 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 323 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-05-07 16:50:10,639 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 323 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-05-07 16:55:57,063 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 323 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+
+2015-05-07 16:57:00,615 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042901","toolId":"8d2cca0e-33ef-485b-bad0-1c6a68524f3f","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 323 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+

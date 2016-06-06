@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Rebuild" sub-code="{{subFlowCode}}" place-holder="10"></top-nav>
+    <cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh"></cheking-point>
+    <contract-info project-id="{{projectId}}" editable="isPageEditable" contract="contract" revisions="revisions" flow-code="Rebuild_ContractInfo" trans-att-list="attlist"></contract-info>
+    <notification-message project-id="projectId"
+                          flow-code="Rebuild"
+                          sub-flow-code="{{subFlowCode}}"
+                          node-id="contract.Id"
+                          uscode="contract.StoreCode"></notification-message>
+
+    @*<div class="form-actions ta_c" ng-show="isPageEditable">
+        <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-click="save()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" ng-disabled="acting" ng-click="submit(frmMain)"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>*@
+    <div ng-switch on="pageType">
+        <div class="form-actions ta_c" ng-switch-when="View" ng-hide="isUserAction">
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" ng-disabled="acting" ng-show="IsShowSave"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-default>
+            <button type="button" class="btn btn-lg btn-orange" ng-disabled="acting" ng-click="save()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" form-submit ng-disabled="acting" ng-click="submit(frmMain)"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+    </div>
+</form>

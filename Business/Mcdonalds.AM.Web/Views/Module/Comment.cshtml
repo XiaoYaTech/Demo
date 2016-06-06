@@ -1,0 +1,14 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel {{!!panelStyle?panelStyle:'panel-orange mg_t_10'}}">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">{{title}}
+        </span>
+    </div>
+    <div class="panel-body">
+        <textarea ng-show="editable" class="form-control {{(!comments||comments=='')?'input-required':'input-notrequired'}}" rows="4" ng-model="comments"></textarea>
+        <pre class="pre" ng-show="!editable" ng-if="comments">{{comments}}</pre>
+    </div>
+</div>

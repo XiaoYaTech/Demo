@@ -1,0 +1,66 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">[[[附件]]]
+        </span>
+        <div class="panel-tools">
+            <button plupload-simple
+                upload-url="api/attachment/upload/{{projectId}}/{{refTableName}}"
+                upload-finished="uploadAttachFinished"
+                error-msg="[[[请上传正确的文件]]]"
+                ng-if="editable"
+                class="btn btn-sm btn-default">
+                <span class="fa fa-paperclip"></span>
+                [[[上传其他附件]]]
+            </button>
+            &nbsp;
+            <button class="btn btn-sm btn-default" ng-if="showPackDownload" pack-downloader before-download="beforePackDownload" ref-table-name="{{refTableName}}" project-id="{{projectId}}">
+                <span class="fa fa-cloud-download"></span>[[[打包下载]]]
+            </button>
+        </div>
+        <span class="clear"></span>
+    </div>
+    <div class="panel-body pd_0">
+        <table class="table">
+            <tr>
+                <th width="5%">[[[序号]]]</th>
+                <th>[[[内容]]]</th>
+                <th width="25%">[[[文件名]]]</th>
+                <th width="13%">[[[上传人]]]</th>
+                <th width="14%">[[[上传时间]]]</th>
+                <th width="18%">[[[操作]]]</th>
+            </tr>
+            <tr ng-repeat="attach in list" ng-class="{'required':attach.Required&&uploadable(attach)&&requireable(attach)}">
+                <td>{{$index+1}}</td>
+                <td style="min-width: 160px;"><i ng-show="attach.Required&&uploadable(attach) &&requireable(attach)" class="required-field">*</i><span class="{{attach.Icon}}"></span> <a ng-href="{{attach.downloadLink}}">{{attach.RequireName}}</a></td>
+                <td><a title="{{attach.FileName}}" ng-href="{{attach.downloadLink}}" class="attach-filename">{{attach.FileName}}</a></td>
+                <td>{{attach.CreatorNameENUS||attach.CreatorNameZHCN}}</td>
+                <td>{{attach.CreateTime | date:"yyyy-MM-dd"}}</td>
+                <td class="table-operations">
+                    <div>
+                        <a plupload-simple
+                            multi-selection="{{!!attach.RequirementId?false:true}}"
+                            upload-url="api/attachment/upload/{{$parent.projectId}}/{{$parent.refTableName}}/{{attach.RequirementId}}"
+                            upload-finished="uploadAttachFinished"
+                            errormsg="[[[请上传正确的文件]]]"
+                            ng-if="!!attach.RequirementId && uploadable(attach)">[[[上传]]]
+                        </a>
+                        <a ng-if="!!attach.FileURL" ng-href="{{attach.downloadLink}}">[[[下载]]]</a>
+                        <a ng-if="!!attach.FileURL &&(attach.RequirementId?uploadable(attach):editable) " ng-click="$parent.deleteAttachment(attach.ID,attach.RequirementId)">[[[删除]]]</a>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-if="showContract">
+                <td>{{list.length+1}}</td>
+                <td><a ng-click="showContractAttachments()">[[[Original Contract Info]]]({{contractAttachCount}})</a></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td ng-show="editable">&nbsp;</td>
+            </tr>
+
+        </table>
+    </div>
+</div>

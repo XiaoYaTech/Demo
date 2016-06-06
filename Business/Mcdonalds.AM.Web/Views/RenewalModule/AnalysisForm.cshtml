@@ -1,0 +1,459 @@
+﻿@{
+    Layout = null;
+}
+
+<form name="frmAnalysisForm">
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[STORE CHARACTER]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-xs-4">[[[Item]]]</label>
+                <label class="control-label col-xs-4">[[[Current]]]</label>
+                <label class="control-label col-xs-4">[[[Future (Renewed Lease Period)]]]</label>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Mini Market Priority]]]</div>
+                <div class="col-xs-4">
+                    <dict-selector parent-code="114" selected-code="storeInfo.MinimarketPriority" selected-dict="MinimarketPriorityDict" editable="false"></dict-selector>
+                </div>
+                <div class="col-xs-4">
+                    <dict-selector parent-code="114" selected-code="storeInfo.MinimarketPriority" selected-dict="MinimarketPriorityNewDict" editable="false"></dict-selector>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Trade Area Desirability]]]</div>
+                <div class="col-xs-4">
+                    <dict-selector parent-code="143" selected-code="storeInfo.TADesrability" selected-dict="StoreTADesrabilityDict" editable="false"></dict-selector>
+                </div>
+                <div class="col-xs-4">
+                    <dict-selector parent-code="143" name="TADesirability" selected-code="entity.TADesirability" selected-dict="EntityTADesirabilityDict" required editable="editable"></dict-selector>
+                    <err-msgs field="frmAnalysisForm.TADesirability" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[MM & TA Description]]]</div>
+                <div class="col-xs-4">
+                    <textarea rows="3" ng-model="entity.MMTADescription" class="form-control" name="MMTADescription" required ng-disabled="!editable"></textarea>
+                    <err-msgs field="frmAnalysisForm.MMTADescription" submited="$parent.$submited"></err-msgs>
+                </div>
+                <div class="col-xs-4">
+                    <textarea rows="3" ng-model="entity.MMTADescriptionNew" class="form-control" name="MMTADescriptionNew" required ng-disabled="!editable"></textarea>
+                    <err-msgs field="frmAnalysisForm.MMTADescriptionNew" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Major Generator(s)]]]</div>
+                <div class="col-xs-4">
+                    <dict-muti-selector parent-code="major generators" selected-codes="entity.MajorGeneratorArray" selected-dicts="MajorGeneratorsDict" editable="editable"></dict-muti-selector>
+                    <err-msgs field="frmAnalysisForm.MajorGenerators" submited="$parent.$submited"></err-msgs>
+                </div>
+                <div class="col-xs-4">
+                    <dict-muti-selector parent-code="major generators" selected-codes="entity.MajorGeneratorArrayNew" selected-dict="MajorGeneratorsNewDict" editable="editable"></dict-muti-selector>
+                    <err-msgs field="frmAnalysisForm.MajorGeneratorsNew" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Site Portfolio Type]]]</div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="storeInfo.SitePortfolioType" class="form-control" ng-disabled="true" />
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="storeInfo.SitePortfolioType" class="form-control" ng-disabled="true" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Site RE Rating]]]</div>
+                <div class="col-xs-4">
+                    <dict-selector parent-code="141" selected-code="storeInfo.SiteRerating" selected-dict="StoreSiteReratingDict" editable="false"></dict-selector>
+                </div>
+                <div class="col-xs-4">
+                    <dict-selector parent-code="141" selected-code="entity.SiteRERating" required selected-dict="EntitySiteReratingDict" editable="editable"></dict-selector>
+                    <err-msgs field="frmAnalysisForm.SiteRERating" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Site Description]]]</div>
+                <div class="col-xs-4">
+                    <textarea rows="3" ng-model="entity.SiteDescription" class="form-control" name="SiteDescription" required ng-disabled="!editable"></textarea>
+                    <err-msgs field="frmAnalysisForm.SiteDescription" submited="$parent.$submited"></err-msgs>
+                </div>
+                <div class="col-xs-4">
+                    <textarea rows="3" ng-model="entity.SiteDescription" class="form-control" disabled="disabled"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[LEASE ABSTRACT]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-xs-4">[[[Item]]]</label>
+                <label class="control-label col-xs-4">[[[Original Lease]]]</label>
+                <label class="control-label col-xs-4">[[[Upon Renewal]]]</label>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Leased Area (SQM)]]]</div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="storeInfo.LeasedArea" class="form-control" ng-disabled="true" />
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="entity.LeasedArea" class="form-control" name="LeasedArea" valnumber required ng-disabled="!editable" />
+                    <err-msgs field="frmAnalysisForm.LeasedArea" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Operation Size (SQM)]]]</div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="storeInfo.OperationSize" class="form-control" ng-disabled="true" />
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="entity.OperationSize" class="form-control" name="OperationSize" valnumber required ng-disabled="!editable" />
+                    <err-msgs field="frmAnalysisForm.OperationSize" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Floor Level(s) Incl. FC level]]]</div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="storeInfo.Floors" class="form-control" ng-disabled="true" />
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="entity.Floors" class="form-control" name="Floors" required ng-disabled="!editable" />
+                    <err-msgs field="frmAnalysisForm.Floors" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Seats (No., Indoor/Outdoor)]]]</div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="storeInfo.Seats" class="form-control" ng-disabled="true" />
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="entity.Seats" class="form-control" name="Seats" required ng-disabled="!editable" />
+                    <err-msgs field="frmAnalysisForm.Seats" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[B.E. (Type)]]]</div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="storeInfo.BEType" class="form-control" ng-disabled="true" />
+                </div>
+                <div class="col-xs-4">
+                    @*<am-muti-select options="beTypes" name="BEType" ng-model="entity.BEType" required editable="{{editable}}"></am-muti-select>*@
+                    <select chosen="{{editable?'{disable_search: true, width: \'100%\'}' :'{disable_search: true, width: \'100%\',disabled:true}'}}" class="form-control" multiple ng-model="entity.BETypes" ng-if="editable" name="BEType">
+                        <option value="" class="hide"></option>
+                        <option>[[[Attach Kiosk]]]</option>
+                        <option>[[[Remote kiosk]]]</option>
+                        <option>[[[MDS]]]</option>
+                        <option>[[[McCafe]]]</option>
+                        <option>[[[24H]]]</option>
+                    </select>
+                    <pre ng-if="!editable">{{entity.BEType}}</pre>
+                    <err-msgs field="frmAnalysisForm.BEType" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Lease Tenure & Term]]]</div>
+                <div class="col-xs-4">
+                    <textarea type="text" ng-model="storeInfo.LeaseTenureAndTerm" class="form-control" ng-disabled="true"></textarea>
+                </div>
+                <div class="col-xs-4">
+                    <textarea type="text" ng-model="entity.LeaseTenureAndTerm" class="form-control" ng-disabled="true"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Free Rental Period]]]</div>
+                <div class="col-xs-4">
+                    <pre>{{storeInfo.FreeRentalPeriod}}</pre>
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="entity.FreeRentalPeriod" class="form-control" name="FreeRentalPeriod" required ng-disabled="!editable" />
+                    <err-msgs field="frmAnalysisForm.FreeRentalPeriod" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Rent Structure (Whole lease term)]]]</div>
+                <div class="col-xs-4">
+                    <textarea rows="3" class="form-control" disabled="disabled">{{storeInfo.RentStructure}}</textarea>
+                </div>
+                <div class="col-xs-4">
+                    <textarea rows="3" ng-model="entity.RentStructure" class="form-control" name="RentStructure" required ng-disabled="!editable"></textarea>
+                    <err-msgs field="frmAnalysisForm.RentStructure" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Management Fee Structure]]]</div>
+                <div class="col-xs-4">
+                    <textarea rows="3" type="text" ng-model="entity.MFStructure" maxlength="200" class="form-control" name="MFStructure" required ng-disabled="!editable"></textarea>
+                    <err-msgs field="frmAnalysisForm.MFStructure" submited="$parent.$submited"></err-msgs>
+                </div>
+                <div class="col-xs-4">
+                    <textarea rows="3" type="text" ng-model="entity.MFStructureNew" maxlength="200" class="form-control" name="MFStructureNew" required ng-disabled="!editable"></textarea>
+                    <err-msgs field="frmAnalysisForm.MFStructureNew" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Due Rent + M. Fee  for the Last Tenancy Year (Original) / 1st Tenancy Year (New) (RMB)]]]</div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <input type="text" ng-model="entity.DRMFLastTY" number-show="money" class="form-control" name="DRMFLastTY" required valnumber ng-disabled="!editable" />
+                            <err-msgs field="frmAnalysisForm.DRMFLastTY" submited="$parent.$submited"></err-msgs>
+                        </div>
+                        <div class="col-xs-4 pd_t_7">
+                            [[[% of Sales（%）]]]
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="text" ng-model="entity.DRMFLastTYSales" input-percent class="form-control" name="DRMFLastTYSales" required valnumber ng-disabled="!editable" />
+                            <err-msgs field="frmAnalysisForm.DRMFLastTYSales" submited="$parent.$submited"></err-msgs>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <input type="text" ng-model="entity.DRMF1stTY" number-show="money" class="form-control" name="DRMF1stTY" required valnumber ng-disabled="!editable" />
+                            <err-msgs field="frmAnalysisForm.DRMF1stTY" submited="$parent.$submited"></err-msgs>
+                        </div>
+                        <div class="col-xs-4 pd_t_7">
+                            [[[% of Sales（%）]]]
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="text" ng-model="entity.DRMF1stTYSales" input-percent class="form-control" name="DRMF1stTYSales" required valnumber ng-disabled="!editable" />
+                            <err-msgs field="frmAnalysisForm.DRMF1stTYSales" submited="$parent.$submited"></err-msgs>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Straight-line Rent+M.Fee for the Last Tenancy Year（Original)/1st Tenancy Year(New) (RMB)]]]</div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <input type="text" ng-model="storeInfo.SRMFLastTY" class="form-control" number-show="money" disabled="disabled" />
+                        </div>
+                        <div class="col-xs-4 pd_t_7">
+                            [[[% of Sales（%）]]]
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="text" ng-model="storeInfo.SRMFLastTYSales" input-percent class="form-control" disabled="disabled" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <input type="text" ng-model="storeInfo.SRMF1stTY" class="form-control" number-show="money" disabled="disabled" />
+                        </div>
+                        <div class="col-xs-4 pd_t_7">
+                            [[[% of Sales（%）]]]
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="text" ng-model="storeInfo.SRMF1stTYSales" input-percent class="form-control" disabled="disabled" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Fair Market Rent (RMB) per appraisal]]]</div>
+                <div class="col-xs-2">
+                    [[[Amount:]]]
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" ng-model="entity.FairMarketRentAmount" number-show="money" class="form-control" name="FairMarketRentAmount" required valnumber ng-disabled="!editable" />
+                    <err-msgs field="frmAnalysisForm.FairMarketRentAmount" submited="$parent.$submited"></err-msgs>
+                </div>
+                <div class="col-xs-2">
+                    [[[Agent:]]]
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" ng-model="entity.FairMarketRentAgent" class="form-control" name="FairMarketRentAgent" required ng-disabled="!editable" />
+                    <err-msgs field="frmAnalysisForm.FairMarketRentAgent" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Due Rent for 1st Tenancy Year (New) (RMB)]]]</div>
+                <div class="col-xs-2">
+                    [[[Amount(New Tenancy):]]]
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" ng-model="entity.DR1stTYAmount" number-show="money" class="form-control" name="DR1stTYAmount" required valnumber ng-disabled="!editable" />
+                    <err-msgs field="frmAnalysisForm.DR1stTYAmount" submited="$parent.$submited"></err-msgs>
+                </div>
+                <div class="col-xs-2">
+                    [[[Rent Deviation(%):]]]
+                </div>
+                <div class="col-xs-2 pd_t_7">
+                    {{entity.RentDeviation*100|numberCustom:1}}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Annual SOI (% & RMB)]]]</div>
+                <div class="col-xs-2">
+                    [[[Last Tenancy Year:]]]
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" ng-model="storeInfo.AnnualSOILastTY" input-percent class="form-control" disabled="disabled" />
+                </div>
+                <div class="col-xs-2">
+                    [[[Total Renewal Period Average:]]]
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" ng-model="storeInfo.AnnualSOIAvg" input-percent class="form-control" ng-disabled="true" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Cash ROI (%)]]]</div>
+                <div class="col-xs-2">
+                    [[[Last Tenancy Year:]]]
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" ng-model="storeInfo.CashROILastTY" input-percent class="form-control" disabled="disabled" />
+                </div>
+                <div class="col-xs-2">
+                    [[[Total Renewal Period Average:]]]
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" ng-model="storeInfo.CashROIAvg" input-percent class="form-control" ng-disabled="true" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Last Remodeling (Date, Investment Cost, Work Scope)]]]</div>
+                <div class="col-xs-4">
+                    @*<input type="text" ng-model="storeInfo.LastRemodeling" class="form-control" disabled="disabled" />*@
+                    <textarea rows="3" type="text" class="form-control" ng-model="entity.LastRemodeling" ng-disabled="!editable"></textarea>
+                </div>
+                <div class="col-xs-4 ta_c pd_t_7">
+                    /
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Original Investment (RMB)]]]</div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="storeInfo.OriginalInvestment" number-show="money" class="form-control" ng-disabled="true" />
+                </div>
+                <div class="col-xs-4 ta_c pd_t_7">
+                    /
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[NBV（RMB）as of Lease End]]]</div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="storeInfo.NBV" class="form-control" number-show="money" ng-disabled="true" />
+                </div>
+                <div class="col-xs-4 ta_c pd_t_7">
+                    /
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Additional Investment Cost (RMB)]]]</div>
+                <div class="col-xs-4 ta_c pd_t_7">
+                    /
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="storeInfo.AdditionalInvestmentCost" number-show="money" class="form-control" ng-disabled="true" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Exclusivity Clause (Y/N)]]]</div>
+                <div class="col-xs-4 ta_c pd_t_7">
+                    {{storeInfo.ExclusivityClause?"Y":"N"}}
+                </div>
+                <div class="col-xs-4">
+                    <select chosen="{{editable?'{disable_search: true, width: \'100%\'}' :'{disable_search: true, width: \'100%\',disabled:true}'}}" style="width:110%" ng-model="entity.ExclusivityClauseNew" class="form-control" name="ExclusivityClauseNew" ng-required="true" ng-options="item for item in boolVals">
+                        <option value="">[[[请选择]]]</option>
+                    </select>
+                    <err-msgs field="frmAnalysisForm.ExclusivityClauseNew" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[McD's Early Termination Right  (Y/N)]]]</div>
+                <div class="col-xs-4 ta_c pd_t_7">
+                    {{storeInfo.McDsEarlyTerminationRight}}
+                </div>
+                <div class="col-xs-4">
+                    <select chosen="{{editable?'{disable_search: true, width: \'100%\'}' :'{disable_search: true, width: \'100%\',disabled:true}'}}" class="form-control" ng-model="entity.McDsEarlyTerminationRightNew" name="McDsEarlyTerminationRightNew" ng-required="true" ng-options="item for item in boolVals">
+                        <option value="">[[[请选择]]]</option>
+                    </select>
+                    <err-msgs field="frmAnalysisForm.McDsEarlyTerminationRightNew" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[McD's EP Right  (Y/N)]]]</div>
+                <div class="col-xs-4">
+                    <select chosen="{{editable?'{disable_search: true, width: \'100%\'}' :'{disable_search: true, width: \'100%\',disabled:true}'}}" class="form-control" style="width:110%" ng-model="entity.McDsEPRight" name="McDsEPRight" required ng-options="item for item in boolVals">
+                        <option value="">[[[请选择]]]</option>
+                    </select>
+                    <err-msgs field="frmAnalysisForm.McDsEPRight" submited="$parent.$submited"></err-msgs>
+                </div>
+                <div class="col-xs-4">
+                    <select chosen="{{editable?'{disable_search: true, width: \'100%\'}' :'{disable_search: true, width: \'100%\',disabled:true}'}}" class="form-control" ng-model="entity.McDsEPRightNew" name="McDsEPRightNew" required ng-options="item for item in boolVals">
+                        <option value="">[[[请选择]]]</option>
+                    </select>
+                    <err-msgs field="frmAnalysisForm.McDsEPRightNew" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Landlord Entity (Name)]]]</div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" ng-model="storeInfo.LandlordEntity" ng-disabled="true" />
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" ng-model="entity.LandlordEntityNew" maxlength="80" name="LandlordEntityNew" required ng-disabled="!editable" />
+                    <err-msgs field="frmAnalysisForm.LandlordEntityNew" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Special Clauses (Pls specify)]]]</div>
+                <div class="col-xs-4">
+                    <textarea rows="3" type="text" class="form-control" ng-model="entity.SpecialClauses" ng-disabled="!editable"></textarea>
+                </div>
+                <div class="col-xs-4">
+                    <textarea rows="3" type="text" class="form-control" ng-model="entity.SpecialClausesNew" ng-disabled="!editable"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 pd_t_7">[[[Other Issues (Pls specify)]]]</div>
+                <div class="col-xs-4">
+                    <textarea rows="3" class="form-control" ng-model="entity.OtherIssues" ng-disabled="!editable"></textarea>
+                </div>
+                <div class="col-xs-4">
+                    <textarea rows="3" class="form-control" ng-model="entity.OtherIssuesNew" ng-disabled="!editable"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[DECISION LOGIC & RECOMMENDATION]]]
+            </span>
+        </div>
+        <div class="panel-body">
+            <textarea class="form-control" rows="3" name="DecisionLogic" ng-model="entity.DecisionLogic" required ng-disabled="!editable"></textarea>
+            <err-msgs field="frmAnalysisForm.DecisionLogic" submited="$parent.$submited"></err-msgs>
+        </div>
+    </div>
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[SPECIAL APPROVAL REQUIRED (Y/N, if yes, please specify)]]]
+            </span>
+        </div>
+        <div class="panel-body">
+            <textarea class="form-control" rows="3" name="SpecialApprovalRequired" ng-model="entity.SpecialApprovalRequired" required ng-disabled="!editable"></textarea>
+            <err-msgs field="frmAnalysisForm.SpecialApprovalRequired" submited="$parent.$submited"></err-msgs>
+        </div>
+    </div>
+</form>

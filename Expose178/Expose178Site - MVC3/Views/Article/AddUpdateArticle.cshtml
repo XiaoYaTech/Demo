@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "新加揭露的内容";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Scripts/Article.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";
+}
+<div>
+    <div>
+        <table border="0" cellpadding="5" cellspacing="0">
+            <tr>
+                <td>&nbsp;</td>
+                <td><h1>新加揭露</h1></td>
+            </tr>
+            <tr>
+                <td>标题:</td>
+                <td><input type="text" id="title" name="title" value="" maxlength="150" style="width:700px;"/></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>草稿:</td>
+                            <td><select id="IsDraft" name="IsDraft"><option value="1">是</option><option value="0" selected>否</option></select></td>
+                            <td>揭露类型:</td>
+                            <td>
+                                <select id="AritcleType" name="AritcleType">
+                                <option value="">--请选择--</option>
+                                @{
+                                    foreach (var AritcleType in (IList<Expose178.Com.Model.AritcleType>)Model["ListArticleType"])
+                                {
+                                    <option value="@AritcleType.AritcleTypeCode">@AritcleType.AritcleTypeDesc</option>
+                                }
+                             }
+                                </select>
+                            </td>
+                            <td>阅读权限:</td>
+                            <td>
+                             <select id="ReadRole" name="ReadRole">
+                             <option value="">--请选择--</option>
+                            @{
+                                foreach (var ReadRole in (IList<Expose178.Com.Model.ReadRoleType>)Model["ListReadRole"])
+                                {
+                                    <option value="@ReadRole.ReadRoleTypeCode">@ReadRole.ReadRoleTypeDesc</option>
+                                }
+                             }
+                             </select>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">内容:</td>
+                <td>
+                    <textarea id="id_editor" style="width:800px;height:300px;visibility:hidden;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="button" id="btnSubmitArt" name="btnSubmitArt" onclick="javascript:SubmitArt();" value="提交" /></td>
+            </tr>
+        </table>
+    </div>
+
+</div>

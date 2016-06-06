@@ -1,0 +1,12 @@
+﻿@using System.Web.Optimization;
+@{
+    //ViewBag.Title = "Main";
+    Layout = "~/Views/Shared/_AngularLayout.cshtml";
+}
+
+@section scripts{  
+    
+    @Scripts.Render("~/Scripts/Notices")
+
+}
+<div ng-view></div>

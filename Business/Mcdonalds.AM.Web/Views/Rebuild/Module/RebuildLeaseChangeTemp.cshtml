@@ -1,0 +1,117 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmLease">
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[Lease Change due to Rebuild]]]
+            </span>
+        </div>
+        <div class="form-group">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th width="20%">[[[Changes Type]]]</th>
+                        <th width="20%">[[[New Lease Change Expirary(Date)]]]</th>
+                        <th width="20%">[[[New Redline Area (sqm)]]]</th>
+                        <th width="40%">[[[Description]]]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="rental" ng-model="source.ChangeRentalType" ng-disabled="!isEdit" />
+                            <label class="control-label">
+                                [[[The Change of the rental]]]
+                            </label>
+                        </td>
+                        <td>
+                            <p class="input-group">
+                                <input type="text" class="form-control" name="ChangeRentalExpiraryDate" ng-model="source.ChangeRentalExpiraryDate" datepicker-popup="{{format}}" is-open="openedChangeRentalExpiraryDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="source.ChangeRentalType" close-text="Close" ng-disabled="!isEdit" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-disabled="!isEdit" ng-click="open($event,'openedChangeRentalExpiraryDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                            <div ng-show="$parent.$submited||frmLease.ChangeRentalExpiraryDate.$dirty">
+                                <span class="ng-error" ng-show="frmLease.ChangeRentalExpiraryDate.$error.required">[[[必须填写]]]</span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" valnumber name="ChangeRentalRedLineArea" id="ChangeRentalRedLineArea"
+                                   ng-model="source.ChangeRentalRedLineArea" ng-disabled="!isEdit"
+                                   ng-required="source.ChangeRentalType" />
+                            <div ng-show="$parent.$submited||frmLease.ChangeRentalRedLineArea.$dirty">
+                                <span class="ng-error" ng-show="frmLease.ChangeRentalRedLineArea.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmLease.ChangeRentalRedLineArea.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control" ng-model="source.ChangeRentalTypeDESC" ng-disabled="!isEdit" ng-show="source.ChangeRentalType" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="redline" ng-model="source.ChangeRedLineType" ng-disabled="!isEdit" />
+                            <label class="control-label">
+                                [[[The Change of red line]]]
+                            </label>
+                        </td>
+                        <td>
+                            <p class="input-group">
+                                <input type="text" class="form-control" name="ChangeRedLineExpiraryDate" ng-model="source.ChangeRedLineExpiraryDate" datepicker-popup="{{format}}" is-open="openedChangeRedLineExpiraryDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="source.ChangeRedLineType" close-text="Close" ng-disabled="!isEdit" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-disabled="!isEdit" ng-click="open($event,'openedChangeRedLineExpiraryDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                            <div ng-show="$parent.$submited||frmLease.ChangeRedLineExpiraryDate.$dirty">
+                                <span class="ng-error" ng-show="frmLease.ChangeRedLineExpiraryDate.$error.required">[[[必须填写]]]</span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" valnumber name="ChangeRedLineRedLineArea"
+                                   id="ChangeRedLineRedLineArea" ng-model="source.ChangeRedLineRedLineArea"
+                                   ng-disabled="!isEdit"
+                                   ng-required="source.ChangeRedLineType" />
+                            <div ng-show="$parent.$submited||frmLease.ChangeRedLineRedLineArea.$dirty">
+                                <span class="ng-error" ng-show="frmLease.ChangeRedLineRedLineArea.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmLease.ChangeRedLineRedLineArea.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control" ng-model="source.ChangeRedLineTypeDESC" ng-disabled="!isEdit" ng-show="source.ChangeRedLineType" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="leaseterm" ng-model="source.ChangeLeaseTermType" ng-disabled="!isEdit" />
+                            <label class="control-label">
+                                [[[The Change of lease term]]]
+                            </label>
+                        </td>
+                        <td>
+                            <p class="input-group">
+                                <input type="text" class="form-control" name="ChangeLeaseTermExpiraryDate" ng-model="source.ChangeLeaseTermExpiraryDate" datepicker-popup="{{format}}" is-open="openedChangeLeaseTermExpiraryDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="source.ChangeLeaseTermType" close-text="Close" ng-disabled="!isEdit" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-disabled="!isEdit" ng-click="open($event,'openedChangeLeaseTermExpiraryDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                            <div ng-show="$parent.$submited||frmLease.ChangeLeaseTermExpiraryDate.$dirty">
+                                <span class="ng-error" ng-show="frmLease.ChangeLeaseTermExpiraryDate.$error.required">[[[必须填写]]]</span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" valnumber name="ChangeLeaseTermRedLineArea"
+                                   id="ChangeLeaseTermRedLineArea"
+                                   ng-model="source.ChangeLeaseTermRedLineArea"
+                                   ng-disabled="!isEdit"
+                                   ng-required="source.ChangeLeaseTermType" />
+                            <div ng-show="$parent.$submited||frmLease.ChangeLeaseTermRedLineArea.$dirty">
+                                <span class="ng-error" ng-show="frmLease.ChangeLeaseTermRedLineArea.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="frmLease.ChangeLeaseTermRedLineArea.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control" ng-model="source.ChangeLeaseTermDESC" ng-disabled="!isEdit" ng-show="source.ChangeLeaseTermType" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>

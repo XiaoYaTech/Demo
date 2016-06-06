@@ -1,0 +1,152 @@
+﻿@{
+    Layout = null;
+}
+<div ng-form name="frmLDR">
+    <div class="panel panel-black mg_t_10 legal_dept_review">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[Legal Department Review]]]
+            </span>
+        </div>
+        <div class="panel-body">
+            <table cellspacing="2">
+                <colgroup>
+                    <col width="20" />
+                    <col />
+                </colgroup>
+                <tr>
+                    <td colspan="2">
+                        <input type="radio" value="Endorsed" ng-model="entity.ReviewStatus" ng-disabled="!editable" />&nbsp;&nbsp;Endorsed
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" ng-class="{'ng-invalid':frmLDR.ReviewStatus.$error}">
+                        <input type="radio" value="LegalComments" ng-model="entity.ReviewStatus" ng-disabled="!editable" />&nbsp;&nbsp;Legal comments:
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <table width="100%">
+                            <tr>
+                                <td width="30">
+                                    <input type="checkbox" ng-model="entity.SubmitBeforeSign" ng-disabled="entity.ReviewStatus != 'LegalComments'||!editable" />
+                                </td>
+                                <td>
+                                    [[[the following must be submited to legal before signing the lease:]]]<br />
+                                    @*签约前取得以下文件并交法律部确认并存档：*@
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <textarea rows="3" class="form-control" ng-model="entity.SubmitBeforeSignDesc" ng-show="entity.SubmitBeforeSign&&editable"></textarea>
+                                    <pre ng-show="!editable">{{entity.SubmitBeforeSignDesc}}</pre>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <table width="100%">
+                            <tr>
+                                <td width="30">
+                                    <input type="checkbox" ng-model="entity.LandlordFormLeaseUserd" ng-disabled="entity.ReviewStatus != 'LegalComments'||!editable" />
+                                </td>
+                                <td>
+                                    [[[Landlord's form lease used - Unusual terms must be alerted by the Rep. in writing to other McD departments.]]]
+                                    @*使用出租方格式合同，资产管理代表必须列出书面注意事项清单交给具体执行部门。*@
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <table width="100%">
+                            <tr>
+                                <td width="30">
+                                    <input type="checkbox" ng-model="entity.OwnerRefuseToHonorLease" ng-disabled="entity.ReviewStatus != 'LegalComments'||!editable" />
+                                </td>
+                                <td>
+                                    [[[Owner refuses to honor the lease in place of landlord,so there is a risk that our lease will be terminated if the original lease contract is terminated.]]]
+                                    @*转租，但大业主不同意代位，如果出租人与大业主之间租赁合同解除，我们的租赁合同也可能相应解除。*@
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <table width="100%">
+                            <tr>
+                                <td width="30">
+                                    <input type="checkbox" ng-model="entity.MortgageeRefuseToGuarantee" ng-disabled="entity.ReviewStatus != 'LegalComments'||!editable" />
+                                </td>
+                                <td>
+                                    [[[Mortgagee refuses to guarantee the continue performance of our lease,so there is a risk that our lease will be terminated if the mortgage right is realized.]]]
+                                    @*有抵押，但无法取得银行同意函，如银行行使抵押权，可能导致租赁合同被解除。*@
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <table width="100%">
+                            <tr>
+                                <td width="30">
+                                    <input type="checkbox" ng-model="entity.OtherLegalComment" ng-disabled="entity.ReviewStatus != 'LegalComments'||!editable" />
+                                </td>
+                                <td>
+                                    [[[Others]]]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <textarea rows="3" class="form-control" ng-model="entity.OtherLegalCommentDesc" ng-show="entity.OtherLegalComment&&editable"></textarea>
+                                    <pre ng-show="!editable">{{entity.OtherLegalCommentDesc}}</pre>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="radio" value="NotEndorsed" ng-model="entity.ReviewStatus" ng-disabled="!editable" />
+                        &nbsp;&nbsp;
+                        [[[Not endorsed due to above legal issure(s) No.]]]<input type="text" name="NotEndorsedIssureNo" required valnumber ng-maxlength="20" class="form-control ib" style="width:250px" ng-model="entity.NotEndorsedIssureNo" ng-disabled="!editable" ng-if="entity.ReviewStatus=='NotEndorsed'" />
+                        <err-msgs field="" submited=""></err-msgs>
+                        <div ng-show="$root.$submited||frmLDR.NotEndorsedIssureNo.$dirty">
+                            <span class="ng-error" ng-show="frmLDR.NotEndorsedIssureNo.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="frmLDR.NotEndorsedIssureNo.$error.valnumber">[[[请输入数字]]]</span>
+                            <span class="ng-error" ng-show="frmLDR.NotEndorsedIssureNo.$error.maxlength">[[[可输入至多20个字符]]]</span>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-black mg_t_10 legal_dept_review">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[Legal Comments]]]
+            </span>
+        </div>
+        <div class="panel-body">
+            <textarea rows="3" required class="form-control" name="LegalComments" ng-model="entity.LegalComments" ng-if="editable"></textarea>
+            <pre ng-show="!editable">{{entity.LegalComments}}</pre>
+            <err-msgs field="frmLDR.LegalComments" submited="$parent.$submited"></err-msgs>
+        </div>
+    </div>
+</div>
+

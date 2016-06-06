@@ -1,0 +1,12 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_ContractInfo" place-holder="8"></top-nav>
+    <cheking-point project-id="projectId" flow-code="Closure_ContractInfo" refresh="checkPointRefresh"></cheking-point>
+    <contract-info project-id="{{projectId}}" flow-code="Closure_ContractInfo" editable="savable" contract="contract" revisions="revisions"></contract-info>
+    <div class="form-actions ta_c" ng-hide="isUserAction">
+        <button type="button" class="btn btn-lg btn-orange" form-submit ng-if="savable"  ng-disabled="saved" ng-click="save()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+    </div>
+</form>

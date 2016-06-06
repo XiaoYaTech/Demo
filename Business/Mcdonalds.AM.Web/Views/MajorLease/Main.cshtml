@@ -1,0 +1,24 @@
+﻿@using System.Web.Optimization;
+@{
+    Layout = "~/Views/Shared/_AngularLayout.cshtml";
+}
+
+@section scripts{
+
+    @Scripts.Render("~/Scripts/Apps/MajorLeaseApp.js")
+    @Scripts.Render("~/Scripts/Services/MajorLease/MajorLeaseService.js")
+    @Scripts.Render("~/Scripts/Services/SiteInfoService.js")
+    @Scripts.Render("~/Scripts/Modules/MajorLease.js")
+    @Scripts.Render("~/Scripts/Controllers/MajorLease/MajorLeaseCreateController.js")
+    @Scripts.Render("~/Scripts/Controllers/MajorLease/LegalReviewController.js")
+    @Scripts.Render("~/Scripts/Controllers/MajorLease/FinanceAnalysisController.js")
+    @Scripts.Render("~/Scripts/Controllers/MajorLease/ConsInfoController.js")
+    @Scripts.Render("~/Scripts/Controllers/MajorLease/leaseChangePackageController.js")
+    @Scripts.Render("~/Scripts/Controllers/MajorLease/ContractInfoController.js")
+    @Scripts.Render("~/Scripts/Controllers/MajorLease/SiteInfoController.js")
+    @Scripts.Render("~/Scripts/Controllers/MajorLease/ConsInvtCheckingController.js")
+@Scripts.Render("~/Scripts/Controllers/MajorLease/ClosureMemoController.js")
+@Scripts.Render("~/Scripts/Controllers/MajorLease/ReopenMemoController.js")
+@Scripts.Render("~/Scripts/Controllers/MajorLease/GBMemoController.js")
+}
+<div ng-view></div>

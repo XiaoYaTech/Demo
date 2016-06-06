@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[Reinvestment Type (再投资类型）]]]
+        </span>          
+    </div>
+    <div class="form-group">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td align="center" ng-repeat="amount in arrAmountType">
+                        <input type="radio" ng-model="$parent.amountType" ng-disabled="!isEdit" name="amountType" value="{{amount.Id}}" />
+                        &nbsp;&nbsp;&nbsp;
+                        {{amount.DisNameZHCN}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

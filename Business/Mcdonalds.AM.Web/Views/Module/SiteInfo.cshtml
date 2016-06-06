@@ -1,0 +1,663 @@
+﻿@{
+    Layout = null;
+}
+<form name="siteInfo">
+    <div id="divConstruction" class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">
+                [[[招牌和停车位]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[是否有立杆招牌]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divPoleSign">
+                    <label><input type="radio" name="IsPoleSign" ng-disabled="!editable" value="1" ng-model="source.PoleSign" />  Yes</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="IsPoleSign" ng-disabled="!editable" value="0" ng-model="source.PoleSign" />  No</label>
+                </div>
+                <label class="col-xs-2 control-label">[[[立杆招牌数量]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divPoleSignageCount">
+                    <input type="text" valnumber name="PoleSignageCount"
+                           ng-required="source.PoleSign==1"
+                           class="form-control"
+                           ng-disabled="!editablePoleSign"
+                           ng-model="source.PoleSignageCount" />
+                    <div ng-show="$parent.$submited||siteInfo.PoleSignageCount.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.PoleSignageCount.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.PoleSignageCount.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[招牌有效性]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divDirectionalEffect">
+                    <select chosen="{{editable?'{disable_search:true}':'{disable_search:true,disabled:true}'}}" ng-show="dataLoaded" class="form-control" ng-model="source.DirectionalEffect" ng-options="m.NameZHCN as m.NameZHCN for m in DirectionalEffects">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[是否有指示性招牌]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSignage">
+                    <label><input type="radio" name="IsSignage" ng-disabled="!editable" value="1" ng-model="source.Signage" />  [[[Yes]]]</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="IsSignage" ng-disabled="!editable" value="0" ng-model="source.Signage" />  [[[No]]]</label>
+                </div>
+                <label class="col-xs-2 control-label">[[[指示性招牌的数量]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSignageCount">
+                    <input type="text" valnumber
+                           name="SignageCount"
+                           ng-required="source.Signage==1"
+                           class="form-control"
+                           ng-disabled="!editableSignage"
+                           ng-model="source.SignageCount" />
+                    <div ng-show="$parent.$submited||siteInfo.SignageCount.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.SignageCount.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.SignageCount.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[展示面长度（米）]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divFacadeLenth">
+                    <input type="text" valnumber name="FacadeLenth" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.FacadeLenth" />
+                    <err-msgs field="siteInfo.FacadeLenth" submited="$parent.$submited"></err-msgs>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[出口数量]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divEgressCount" ng-switch="store.StoreTypeName">
+                    <div ng-switch-when="DT">
+                        <input type="text" valnumber name="EgressCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.EgressCount" />
+                        <err-msgs field="siteInfo.EgressCount" submited="$root.$submited"></err-msgs>
+                    </div>
+                    <div ng-switch-when="IS">
+                        <input class="form-control" disabled="disabled" />
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[进口数量]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divIngressCount" ng-switch="store.StoreTypeName">
+                    <div ng-switch-when="DT">
+                        <input type="text" valnumber name="IngressCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.IngressCount" />
+                        <err-msgs field="siteInfo.IngressCount" submited="$root.$submited"></err-msgs>
+                    </div>
+                    <div ng-switch-when="IS">
+                        <input class="form-control" disabled="disabled" />
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[开口数量]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divOpenCount" ng-switch="store.StoreTypeName">
+                    <div ng-switch-when="DT">
+                        <input type="text" valnumber name="OpenCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.OpenCount" />
+                        <err-msgs field="siteInfo.OpenCount" submited="$root.$submited"></err-msgs>
+                    </div>
+                    <div ng-switch-when="IS">
+                        <input class="form-control" disabled="disabled" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[麦当劳停车位]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divMcdCarParkCount" ng-switch="store.StoreTypeName">
+                    <div ng-switch-when="DT">
+                        <input type="text" valnumber name="McdCarParkCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.McdCarParkCount" />
+                        <err-msgs field="siteInfo.McdCarParkCount" submited="$root.$submited"></err-msgs>
+                    </div>
+                    <div ng-switch-when="IS">
+                        <input class="form-control" disabled="disabled" />
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[公用停车位]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divPublicCarParkCount" ng-switch="store.StoreTypeName">
+                    <div ng-switch-when="DT">
+                        <input type="text" valnumber name="PublicCarParkCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.PublicCarParkCount" />
+                        <err-msgs field="siteInfo.PublicCarParkCount" submited="$root.$submited"></err-msgs>
+                    </div>
+                    <div ng-switch-when="IS">
+                        <input class="form-control" disabled="disabled" />
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[路边停车位]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divRoadCarParkCount" ng-switch="store.StoreTypeName">
+                    <div ng-switch-when="DT">
+                        <input type="text" valnumber name="RoadCarParkCount" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.RoadCarParkCount" />
+                        <err-msgs field="siteInfo.RoadCarParkCount" submited="$root.$submited"></err-msgs>
+                    </div>
+                    <div ng-switch-when="IS">
+                        <input class="form-control" disabled="disabled" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[停车位合计]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divCarParkTotal" ng-switch="store.StoreTypeName">
+                    <div ng-switch-when="DT">
+                        @*<input type="text" valnumber name="CarParkTotal" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.CarParkTotal" />
+                            <div ng-show="$parent.$submited||siteInfo.CarParkTotal.$dirty">
+                                <span class="ng-error" ng-show="siteInfo.CarParkTotal.$error.required">[[[必须填写]]]</span>
+                                <span class="ng-error" ng-show="siteInfo.CarParkTotal.$error.valnumber">[[[请输入数字]]]</span>
+                            </div>*@
+                        {{source.CarParkTotal}}
+                    </div>
+                    <div ng-switch-when="IS">
+                        @*<input class="form-control" disabled="disabled" />*@
+                        {{source.CarParkTotal}}
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[投资组合]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divInvestmentPortfolio" ng-switch="store.StoreTypeName">
+                    <div ng-switch-when="DT">
+                        <dict-selector parent-code="InvestmentPortfolio"
+                                       selected-code="source.PortfolioTypeName"
+                                       selected-dict="InvestmentPortfolioDict"
+                                       dict-filter="['FSDT_GS','FSDT_NonGS','Attached DT','Highway']"
+                                       editable="editable"></dict-selector>
+                    </div>
+                    <div ng-switch-when="IS">
+                        {{source.PortfolioTypeNameDisplay}}
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[DT型号]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divDTTypeName" ng-switch="store.StoreTypeName">
+                    <div ng-switch-when="DT">
+                        <select chosen="{{editable?'{disable_search:true}':'{disable_search:true,disabled:true}'}}" ng-disabled="!editable" ng-show="dataLoaded" class="form-control" ng-model="source.DTTypeName" ng-options="m.NameZHCN as m.NameZHCN for m in DTTypeNames">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                    </div>
+                    <div ng-switch-when="IS">
+                        @*<input class="form-control" disabled="disabled" />*@
+                        {{source.DTTypeNameDisplay}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[楼层及座位]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[共楼层数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divFloor">
+                    <select chosen="{{editable?'{disable_search:true}':'{disable_search:true,disabled:true}'}}"
+                            ng-show="dataLoaded" class="form-control" ng-model="source.Floor" ng-options="m as m for m in FloorsCount"
+                            ng-change="floorChange()">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                </div>
+                <label class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+                <label class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[楼层1]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divFloor1">
+                    <select chosen="{{editable&&source.Floor>=1?'{disable_search:true}':'{disable_search:true,disabled:true}'}}"
+                            name="Floor1" ng-required="source.Floor>=1" ng-show="dataLoaded" class="form-control" ng-model="source.Floor1" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||siteInfo.Floor1.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Floor1.$error.required">[[[必须选择]]]</span>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                </div>
+                <label class="col-xs-2 control-label">[[[面积（sqm）]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSize1" ng-show="source.Floor>=1">
+                    <input type="text" valnumber name="Size1" ng-required="source.Floor>=1" class="form-control" ng-disabled="!editable" ng-model="source.Size1" />
+                    <div ng-show="$parent.$submited||siteInfo.Size1.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Size1.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.Size1.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <div class="col-xs-2 pd_t_7" ng-if="source.Floor<1">
+                    <input type="text" name="Size1" class="form-control" ng-disabled="true" ng-model="source.Size1" />
+                </div>
+                <label class="col-xs-2 control-label">[[[座位数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSeats1" ng-show="source.Floor>=1">
+                    <input type="text" valnumber name="Seats1" ng-required="source.Floor>=1" class="form-control" ng-disabled="!editable" ng-model="source.Seats1" />
+                    <div ng-show="$parent.$submited||siteInfo.Seats1.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Seats1.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.Seats1.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <div class="col-xs-2 pd_t_7" ng-if="source.Floor<1">
+                    <input type="text" class="form-control" ng-disabled="true" ng-model="source.Seats1" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[楼层2]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divFloor2">
+                    <select chosen="{{editable&&source.Floor>=2?'{disable_search:true}':'{disable_search:true,disabled:true}'}}"
+                            name="Floor2" ng-required="source.Floor>=2" ng-show="dataLoaded" class="form-control" ng-model="source.Floor2" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||siteInfo.Floor2.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Floor2.$error.required">[[[必须选择]]]</span>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                </div>
+                <label class="col-xs-2 control-label">[[[面积（sqm）]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSize2" ng-show="source.Floor>=2">
+                    <input type="text" valnumber name="Size2" ng-required="source.Floor>=2" class="form-control" ng-disabled="!editable" ng-model="source.Size2" />
+                    <div ng-show="$parent.$submited||siteInfo.Size2.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Size2.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.Size2.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <div class="col-xs-2 pd_t_7" ng-if="source.Floor<2">
+                    <input type="text" class="form-control" ng-disabled="true" ng-model="source.Size2" />
+                </div>
+                <label class="col-xs-2 control-label">[[[座位数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSeats2" ng-show="source.Floor>=2">
+                    <input type="text" valnumber name="Seats2" ng-required="source.Floor>=2" class="form-control" ng-disabled="!editable" ng-model="source.Seats2" />
+                    <div ng-show="$parent.$submited||siteInfo.Seats2.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Seats2.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.Seats2.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <div class="col-xs-2 pd_t_7" ng-if="source.Floor<2">
+                    <input type="text" class="form-control" ng-disabled="true" ng-model="source.Seats2" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[楼层3]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divFloor3">
+                    <select chosen="{{editable&&source.Floor>=3?'{disable_search:true}':'{disable_search:true,disabled:true}'}}"
+                            ng-show="dataLoaded" name="Floor3" ng-required="source.Floor>=3" class="form-control" ng-model="source.Floor3" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||siteInfo.Floor3.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Floor3.$error.required">[[[必须选择]]]</span>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                </div>
+                <label class="col-xs-2 control-label">[[[面积（sqm）]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSize3" ng-show="source.Floor>=3">
+                    <input type="text" valnumber name="Size3" ng-required="source.Floor>=3" class="form-control" ng-disabled="!editable" ng-model="source.Size3" />
+                    <div ng-show="$parent.$submited||siteInfo.Size3.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Size3.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.Size3.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <div class="col-xs-2 pd_t_7" ng-if="source.Floor<3">
+                    <input type="text" class="form-control" ng-disabled="true" ng-model="source.Size3" />
+                </div>
+                <label class="col-xs-2 control-label">[[[座位数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSeats3" ng-show="source.Floor>=3">
+                    <input type="text" valnumber name="Seats3" ng-required="source.Floor>=3" class="form-control" ng-disabled="!editable" ng-model="source.Seats3" />
+                    <div ng-show="$parent.$submited||siteInfo.Seats3.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Seats3.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.Seats3.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <div class="col-xs-2 pd_t_7" ng-if="source.Floor<3">
+                    <input type="text" class="form-control" ng-disabled="true" ng-model="source.Seats3" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[楼层4]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divFloor4">
+                    <select chosen="{{editable&&source.Floor>=4?'{disable_search:true}':'{disable_search:true,disabled:true}'}}"
+                            name="Floor4" ng-required="source.Floor>=4" ng-show="dataLoaded" class="form-control" ng-model="source.Floor4" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||siteInfo.Floor4.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Floor4.$error.required">[[[必须选择]]]</span>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                </div>
+                <label class="col-xs-2 control-label">[[[面积（sqm）]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSize4" ng-show="source.Floor>=4">
+                    <input type="text" valnumber name="Size4" ng-required="source.Floor>=4" class="form-control" ng-disabled="!editable" ng-model="source.Size4" />
+                    <div ng-show="$parent.$submited||siteInfo.Size4.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Size4.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.Size4.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <div class="col-xs-2 pd_t_7" id="divSize4" ng-if="source.Floor<4">
+                    <input type="text" class="form-control" ng-disabled="true" ng-model="source.Size4" />
+                </div>
+                <label class="col-xs-2 control-label">[[[座位数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSeats4" ng-show="source.Floor>=4">
+                    <input type="text" valnumber name="Seats4" ng-required="source.Floor>=4" class="form-control" ng-disabled="!editable" ng-model="source.Seats4" />
+                    <div ng-show="$parent.$submited||siteInfo.Seats4.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Seats4.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.Seats4.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <div class="col-xs-2 pd_t_7" id="divSize4" ng-if="source.Floor<4">
+                    <input type="text" class="form-control" ng-disabled="true" ng-model="source.Seats4" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[楼层5]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divFloor5">
+                    <select chosen="{{editable&&source.Floor>=5?'{disable_search:true}':'{disable_search:true,disabled:true}'}}"
+                            ng-show="dataLoaded" name="Floor5" ng-required="source.Floor>=5" class="form-control" ng-model="source.Floor5" ng-options="m.NameZHCN as m.NameZHCN for m in Floors">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||siteInfo.Floor5.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Floor5.$error.required">[[[必须选择]]]</span>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                </div>
+                <label class="col-xs-2 control-label">[[[面积（sqm）]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSize5" ng-show="source.Floor>=5">
+                    <input type="text" valnumber name="Size5" ng-required="source.Floor>=5" class="form-control" ng-disabled="!editable" ng-model="source.Size5" />
+                    <div ng-show="$parent.$submited||siteInfo.Size5.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Size5.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.Size5.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <div class="col-xs-2 pd_t_7" ng-if="source.Floor<5">
+                    <input type="text" class="form-control" ng-disabled="true" ng-model="source.Size5" />
+                </div>
+                <label class="col-xs-2 control-label">[[[座位数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSeats5" ng-show="source.Floor>=5">
+                    <input type="text" valnumber name="Seats5" ng-required="source.Floor>=5" class="form-control" ng-disabled="!editable" ng-model="source.Seats5" />
+                    <div ng-show="$parent.$submited||siteInfo.Seats5.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.Seats5.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.Seats5.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <div class="col-xs-2 pd_t_7" ng-if="source.Floor<5">
+                    <input type="text" class="form-control" ng-disabled="true" ng-model="source.Seats5" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[Seating Ratio]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSeatingRatio">
+                    @*<input type="text" class="form-control" valnumber name="SeatingRatio" ng-required="true" ng-disabled="!editable" ng-model="source.SeatingRatio" />
+                        <div ng-show="$parent.$submited||siteInfo.SeatingRatio.$dirty">
+                            <span class="ng-error" ng-show="siteInfo.SeatingRatio.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="siteInfo.SeatingRatio.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>*@
+                    {{source.SeatingRatio | numberCustom:2}}
+                </div>
+                <label class="col-xs-2 control-label">[[[总面积]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divTotalArea">
+                    @*<input type="text" valnumber name="TotalArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.TotalArea">
+                        <div ng-show="$parent.$submited||siteInfo.TotalArea.$dirty">
+                            <span class="ng-error" ng-show="siteInfo.TotalArea.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="siteInfo.TotalArea.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>*@
+                    {{source.TotalArea}}
+                </div>
+                <label class="col-xs-2 control-label">[[[总座位数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divTotalSeatsNo">
+                    @*<input type="text" valnumber name="TotalSeatsNo" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.TotalSeatsNo" />
+                        <div ng-show="$parent.$submited||siteInfo.TotalSeatsNo.$dirty">
+                            <span class="ng-error" ng-show="siteInfo.TotalSeatsNo.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="siteInfo.TotalSeatsNo.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>*@
+                    {{source.TotalSeatsNo}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[是否分体厨房]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSplitKitchen">
+                    <label><input type="radio" name="IsSplitKitchen" ng-disabled="!editable" value="1" ng-model="source.SplitKitchen" />  Yes</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="IsSplitKitchen" ng-disabled="!editable" value="0" ng-model="source.SplitKitchen" />  No</label>
+                </div>
+                <label class="col-xs-2 control-label">[[[厨房楼层]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divKitchenFloor">
+                    <select chosen="{{editable?'{disable_search:true}':'{disable_search:true,disabled:true}'}}"
+                            ng-show="dataLoaded" class="form-control" ng-model="source.KitchenFloor" ng-options="m.NameZHCN as m.NameZHCN for m in KitchenFloors">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                </div>
+                <label class="col-xs-2 control-label">[[[柜台楼层1]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divFrontCounterFloor1">
+                    <select chosen="{{editable?'{disable_search:true}':'{disable_search:true,disabled:true}'}}" ng-disabled="!editable" ng-show="dataLoaded" class="form-control" ng-model="source.FrontCounterFloor1" ng-options="m.NameZHCN as m.NameZHCN for m in FrontCounterFloors">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[柜台楼层座位数]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divFrontCounterSeats">
+                    <input type="text" valnumber name="FrontCounterSeats" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.FrontCounterSeats" />
+                    <div ng-show="$parent.$submited||siteInfo.FrontCounterSeats.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.FrontCounterSeats.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.FrontCounterSeats.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[座位数量-室外]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divOutsideSeats">
+                    <input type="text" valnumber name="OutsideSeats" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.OutsideSeats" />
+                    <div ng-show="$parent.$submited||siteInfo.OutsideSeats.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.OutsideSeats.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.OutsideSeats.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[柜台楼层2]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divFrontCounterFloor2">
+                    <select chosen="{{editable?'{disable_search:true}':'{disable_search:true,disabled:true}'}}" ng-disabled="!editable" ng-show="dataLoaded" class="form-control" ng-model="source.FrontCounterFloor2" ng-options="m.NameZHCN as m.NameZHCN for m in FrontCounterFloors">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[面积]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[DT场地面积(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divDTSize" ng-switch="store.StoreTypeName">
+                    <div ng-switch-when="DT">
+                        <input type="text" valnumber name="DTSize" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.DTSize" />
+                        <div ng-show="$parent.$submited||siteInfo.DTSize.$dirty">
+                            <span class="ng-error" ng-show="siteInfo.DTSize.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="siteInfo.DTSize.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>
+                    </div>
+                    <div ng-switch-when="IS">
+                        @*<input class="form-control" disabled="disabled" />*@
+                        {{source.DTSize}}
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[餐区面积(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divDiningArea">
+                    @*<input type="text" valnumber name="DiningArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.DiningArea" />
+                        <div ng-show="$parent.$submited||siteInfo.DiningArea.$dirty">
+                            <span class="ng-error" ng-show="siteInfo.DiningArea.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="siteInfo.DiningArea.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>*@
+                    {{source.DiningArea}}
+                </div>
+                <label class="col-xs-2 control-label">[[[厨房面积(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divKitchenArea">
+                    @*<input type="text" valnumber name="KitchenArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.KitchenArea" />
+                        <div ng-show="$parent.$submited||siteInfo.KitchenArea.$dirty">
+                            <span class="ng-error" ng-show="siteInfo.KitchenArea.$error.required">[[[必须填写]]]</span>
+                            <span class="ng-error" ng-show="siteInfo.KitchenArea.$error.valnumber">[[[请输入数字]]]</span>
+                        </div>*@
+                    {{source.KitchenArea}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[店外kiosk面积(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divRemoteKioskArea">
+                    <input type="text" name="RemoteKioskArea" class="form-control" ng-disabled="!editable" ng-model="source.RemoteKioskArea" />
+
+                </div>
+                <label class="col-xs-2 control-label">[[[排队等侯区(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divWaitingArea">
+                    <input type="text" valnumber name="WaitingArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.WaitingArea" />
+                    <div ng-show="$parent.$submited||siteInfo.WaitingArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.WaitingArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.WaitingArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[服务区(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divServiceArea">
+                    <input type="text" valnumber name="ServiceArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.ServiceArea" />
+                    <div ng-show="$parent.$submited||siteInfo.ServiceArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.ServiceArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.ServiceArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[Play Place]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divPlayPlace">
+                    <label><input type="radio" name="IsPlayPlace" ng-disabled="!editable" value="1" ng-model="source.PlayPlace" />  Yes</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="IsPlayPlace" ng-disabled="!editable" value="0" ng-model="source.PlayPlace" />  No</label>
+                </div>
+                <label class="col-xs-2 control-label">[[[座位区(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divSeatArea">
+                    <input type="text" valnumber name="SeatArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.SeatArea" />
+                    <div ng-show="$parent.$submited||siteInfo.SeatArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.SeatArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.SeatArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[产区(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divProducingArea">
+                    <input type="text" valnumber name="ProducingArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.ProducingArea" />
+                    <div ng-show="$parent.$submited||siteInfo.ProducingArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.ProducingArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.ProducingArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[Party Room]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divPartyRoom">
+                    <label><input type="radio" name="IsPartyRoom" ng-disabled="!editable" value="1" ng-model="source.PartyRoom" />  Yes</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="IsPartyRoom" ng-disabled="!editable" value="0" ng-model="source.PartyRoom" />  No</label>
+                </div>
+                <label class="col-xs-2 control-label">[[[游乐场(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divPlayPlaceArea">
+                    <input type="text" valnumber name="PlayPlaceArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.PlayPlaceArea" />
+                    <div ng-show="$parent.$submited||siteInfo.PlayPlaceArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.PlayPlaceArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.PlayPlaceArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[后区(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divBackArea">
+                    <input type="text" valnumber name="BackArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.BackArea" />
+                    <div ng-show="$parent.$submited||siteInfo.BackArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.BackArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.BackArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+                <label class="col-xs-2 control-label">[[[卫生间(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divToiletArea">
+                    <input type="text" valnumber name="ToiletArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.ToiletArea" />
+                    <div ng-show="$parent.$submited||siteInfo.ToiletArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.ToiletArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.ToiletArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[冷库(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divColdStorageArea">
+                    <input type="text" valnumber name="ColdStorageArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.ColdStorageArea" />
+                    <div ng-show="$parent.$submited||siteInfo.ColdStorageArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.ColdStorageArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.ColdStorageArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+                <label class="col-xs-2 control-label">[[[楼梯(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divStairArea">
+                    <input type="text" valnumber name="StairArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.StairArea" />
+                    <div ng-show="$parent.$submited||siteInfo.StairArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.StairArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.StairArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[千仓(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divDryArea">
+                    <input type="text" valnumber name="DryArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.DryArea" />
+                    <div ng-show="$parent.$submited||siteInfo.DryArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.DryArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.DryArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label"></label>
+                <div class="col-xs-2"></div>
+                <label class="col-xs-2 control-label">[[[其他(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divOtherArea">
+                    <input type="text" valnumber name="OtherArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.OtherArea" />
+                    <div ng-show="$parent.$submited||siteInfo.OtherArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.OtherArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.OtherArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+                <label class="col-xs-2 control-label">[[[员工室(sqm)]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divStaffroomArea">
+                    <input type="text" valnumber name="StaffroomArea" ng-required="true" class="form-control" ng-disabled="!editable" ng-model="source.StaffroomArea" />
+                    <div ng-show="$parent.$submited||siteInfo.StaffroomArea.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.StaffroomArea.$error.required">[[[必须填写]]]</span>
+                        <span class="ng-error" ng-show="siteInfo.StaffroomArea.$error.valnumber">[[[请输入数字]]]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[设计风格]]]</span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[内部设计]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divInnerDesign">
+                    @*<dict-selector parent-code="InnerDesign" selected-code="source.DesignStyle" selected-dict="InnerDesignDict" editable="editable"></dict-selector>*@
+                    <select chosen="{{editable && !isInnerDesignDisable?'{disable_search:true}':'{disable_search:true,disabled:true}'}}"
+                            name="InnerDesign"
+                            ng-required="true"
+                            ng-show="dataLoaded"
+                            class="form-control"
+                            ng-model="source.DesignStyle"
+                            ng-options="m.Code as m.NameENUS for m in InnerDesign">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||siteInfo.InnerDesign.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.InnerDesign.$error.required">[[[必须选择]]]</span>
+                    </div>
+                    <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                </div>
+                <label class="col-xs-2 control-label">[[[外观设计]]]</label>
+                <div class="col-xs-2 pd_t_7" id="divAppearDesign">
+                    @*<dict-selector parent-code="AppearDesign" selected-code="source.ExteriorDesign" selected-dict="AppearDesignDict" editable="editable"></dict-selector>*@
+                    <select chosen="{{editable?'{disable_search:true}':'{disable_search:true,disabled:true}'}}"
+                            ng-disabled="!editable"
+                            name="AppearDesign"
+                            ng-required="true"
+                            ng-show="dataLoaded"
+                            class="form-control"
+                            ng-model="source.ExteriorDesign"
+                            ng-options="m.Code as m.NameENUS for m in AppearDesign">
+                        <option value="">[[[-- 请选择 --]]]</option>
+                    </select>
+                    <div ng-show="$parent.$submited||siteInfo.AppearDesign.$dirty">
+                        <span class="ng-error" ng-show="siteInfo.AppearDesign.$error.required">[[[必须选择]]]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

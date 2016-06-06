@@ -1,0 +1,247 @@
+﻿@{
+    Layout = null;
+}
+    <div class="panel panel-green mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Executive Summary]]]
+            </span>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-12 control-label">[[[A) Mini-market, Trade Area and Site]]]</label>
+                <div class="col-xs-12 pd_t_7">
+                    [[[（简述该小型市场、商圈和点portfolio的现状及未来发展趋势，relocation的计划）]]]
+                </div>
+                <div class="col-xs-12 pd_t_7">
+                    <textarea class="form-control" rows="8" ng-model="entity.MiniMarket" ng-show="editable"></textarea>
+                    <pre class="pre" ng-show="!editable">{{entity.MiniMarket}}</pre>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 control-label">[[[B)  Store Briefing / Characteristics]]]</label>
+                <div class="col-xs-12 pd_t_7">
+                    [[[（餐厅历史简述，B.E.，楼层、面积、座位数及其他物理特征描述）]]]
+                </div>
+                <div class="col-xs-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="30%">[[[餐厅位于/The Store]]]</th>
+                            <td>
+                                <input type="text" class="form-control" ng-model="entity.StoreLocation" ng-show="editable" />
+                                <span ng-show="!editable">{{entity.StoreLocation}}</span></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="30%">[[[餐厅开业日/Opening Date]]]</th>
+                            <td>{{Store.StoreBasicInfo.OpenDate|date:"yyyy-MM-dd"}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[餐厅楼层/Floor]]]</th>
+                            <td>{{Store.StoreSTLocation.Floor}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[餐厅面积/Store Area]]]</th>
+                            <td>{{Store.StoreSTLocation.TotalArea}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[座位数/Seating]]]</th>
+                            <td>{{Store.StoreSTLocation.TotalSeatsNo}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[B.E]]]</th>
+                            <td>{{Store.StoreBEInfoList.length}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 control-label">[[[C)  Lease Terms, Rent Structure and Other Special Clause]]]</label>
+                <div class="col-xs-12 pd_t_7">
+                    [[[（简述租赁合同中关键条款，租金的组成、数额、营业额占比等）]]]
+                </div>
+                <div class="col-xs-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="30%">[[[租赁合同租期/Leasing Term]]]</th>
+                            <td>{{Store.StoreContractInfo.LeasePurchaseTerm}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[起租日/Rent Commencement Date]]]</th>
+                            <td>{{Store.StoreContractInfo.RentCommencementDate|date:"yyyy-MM-dd"}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[到期日/Lease Expiration Date]]]</th>
+                            <td>{{Store.StoreContractInfo.EndDate|date:"yyyy-MM-dd"}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[租金类型/Rent Type]]]</th>
+                            <td>{{Store.StoreContractInfo.RentType}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">[[[租金结构描述/Rent Structure]]]</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{Store.StoreContractInfo.RentStructure}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 control-label">[[[D)  Store Performance & Financial Index]]]</label>
+                <div class="col-xs-12 pd_t_7">
+                    [[[（对餐厅营业额、利润、现金流、来客数的现状及递增趋势的简述，NBV，B.E.的组成及开发时间、投资额等）]]]
+                </div>
+                <div class="col-xs-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="30%"></th>
+                            <th>[[[TTM]]]</th>
+                            <th>[[[Pre.Y1]]]</th>
+                            <th>[[[Pre.Y2]]]</th>
+                        </tr>
+                        <tr>
+                            <th>[[[Total Sales (RMB)]]]</th>
+                            <td>{{ClosureTool.TotalSales_Adjustment_RMB|money}}</td>
+                            <td>{{ClosureTool.TotalSales_TTMY1|money}}</td>
+                            <td>{{ClosureTool.TotalSales_TTMY2|money}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[Sales Comp%]]]</th>
+                            <td>{{ClosureTool.CompSales_Adjustment|numberDisplay:'percent'}}</td>
+                            <td>{{ClosureTool.CompSales_TTMY1|numberDisplay:'percent'}}</td>
+                            <td>{{ClosureTool.CompSales_TTMY2|numberDisplay:'percent'}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[GC Comp%]]]</th>
+                            <td>{{ClosureTool.CompCG_Adjustment|numberDisplay:'percent'}}</td>
+                            <td>{{ClosureTool.CompGC_TTMY1|numberDisplay:'percent'}}</td>
+                            <td>{{ClosureTool.CompGC_TTMY2|numberDisplay:'percent'}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[PAC%]]]</th>
+                            <td>{{ClosureTool.PAC_Adjustment|numberDisplay:'percent'}}</td>
+                            <td>{{ClosureTool.PAC_TTMY1|numberDisplay:'percent'}}</td>
+                            <td>{{ClosureTool.PAC_TTMY2|numberDisplay:'percent'}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[SOI%]]]</th>
+                            <td>{{ClosureTool.SOI_Adjustment|numberDisplay:'percent'}}</td>
+                            <td>{{ClosureTool.SOI_TTMY1|numberDisplay:'percent'}}</td>
+                            <td>{{ClosureTool.SOI_TTMY2|numberDisplay:'percent'}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[CASH FLOW(RMB)]]]</th>
+                            <td>{{ClosureTool.CashFlow_RMB_Adjustment|money}}</td>
+                            <td>{{ClosureTool.CashFlow_TTMY1|money}}</td>
+                            <td>{{ClosureTool.CashFlow_TTMY2|money}}</td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>[[[LHI_NBV]]]</th>
+                            <td>{{WOCheckList.LHI_NBV|money}}</td>
+                            <th>[[[ESSD_NBV]]]</th>
+                            <td>{{WOCheckList.ESSD_NBV|money}}</td>
+                            <th>[[[Total NBV]]]</th>
+                            <td>{{WOCheckList.TotalCost_NBV|money}}</td>
+                        </tr>
+                    </table>
+                    <label class="col-xs-12 control-label">[[[Brand Extension]]]</label>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="30%">[[[BE Type]]]</th>
+                            <th>[[[Status]]]</th>
+                            <th>[[[Open Date]]]</th>
+                        </tr>
+                        <tr>
+                            <th>[[[Remote Kiosk 1]]]</th>
+                            <td>{{RemoteKiosk1_Status}}</td>
+                            <td>{{RemoteKiosk1_OpenDate}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[Remote Kiosk 2]]]</th>
+                            <td>{{RemoteKiosk2_Status}}</td>
+                            <td>{{RemoteKiosk2_OpenDate}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[Remote Kiosk 3]]]</th>
+                            <td>{{RemoteKiosk3_Status}}</td>
+                            <td>{{RemoteKiosk3_OpenDate}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[Attached Kiosk 1]]]</th>
+                            <td>{{AttachedKiosk1_Status}}</td>
+                            <td>{{AttachedKiosk1_OpenDate}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[Attached Kiosk 2]]]</th>
+                            <td>{{AttachedKiosk2_Status}}</td>
+                            <td>{{AttachedKiosk2_OpenDate}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[Attached Kiosk 3]]]</th>
+                            <td>{{AttachedKiosk3_Status}}</td>
+                            <td>{{AttachedKiosk3_OpenDate}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[MDS]]]</th>
+                            <td>{{MDS_Status}}</td>
+                            <td>{{MDS_OpenDate}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[McCafe]]]</th>
+                            <td>{{McCafe_Status}}</td>
+                            <td>{{McCafe_OpenDate}}</td>
+                        </tr>
+                        <tr>
+                            <th>[[[24 Hour]]]</th>
+                            <td>{{TwentyFourHour_Status}}</td>
+                            <td>{{TwentyFourHour_OpenDate}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 control-label">[[[E)  Current Situation/Background]]]</label>
+                <div class="col-xs-12 pd_t_7">
+                    [[[（事件的起因，发展及背景描述）]]]
+                </div>
+                <div class="col-xs-12 pd_t_7">
+                    <textarea class="form-control" rows="8" ng-model="entity.CurrentSituation" ng-show="editable"></textarea>
+                    <pre class="pre" ng-show="!editable">{{entity.CurrentSituation}}</pre>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 control-label">[[[F) Negotiation History]]]</label>
+                <div class="col-xs-12 pd_t_7">
+                    [[[（会议、往来函件和电话沟通的时间、内容、相关部门等）]]]
+                </div>
+                <div class="col-xs-12 pd_t_7">
+                    <textarea class="form-control" rows="8" ng-model="entity.NegotiationHistory" ng-show="editable"></textarea>
+                    <pre class="pre" ng-show="!editable">{{entity.NegotiationHistory}}</pre>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 control-label">[[[G) Proposed Solution and Decision Logics]]]</label>
+                <div class="col-xs-12 pd_t_7">
+                    [[[（最后的建议，做出该建议的判断逻辑，包括Profitability Analysis，法律意见，发展、营运方面的考量等）]]]
+                </div>
+                <div class="col-xs-12 pd_t_7">
+                    <textarea class="form-control" rows="8" ng-model="entity.ProposedSolution" ng-show="editable"></textarea>
+                    <pre class="pre" ng-show="!editable">{{entity.ProposedSolution}}</pre>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 control-label">[[[H) Sales Transfer after Closure &Assets Write-Off]]]</label>
+                <div class="col-xs-12 pd_t_7">
+                    [[[关店后的销售额转移及资产报废情况]]]
+                </div>
+                <div class="col-xs-12 pd_t_7">
+                    <textarea class="form-control" rows="8" ng-model="entity.SalesTransfer" ng-show="editable"></textarea>
+                    <pre class="pre" ng-show="!editable">{{entity.SalesTransfer}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,153 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_ConsInvtChecking" place-holder="8"></top-nav>
+<cheking-point project-id="projectId" flow-code="Closure_ConsInvtChecking" refresh="checkPointRefresh"></cheking-point>
+<notification-message project-id="projectId"
+    flow-code="Closure"
+    sub-flow-code="Closure_ConsInvtChecking"
+    node-id="entity.Id"
+    uscode="entity.USCode"></notification-message>
+<closure-upload-cons-invt editable="false" panel-title="上传WO Checklist" project-id="projectId" entity-id="entity.Id"></closure-upload-cons-invt>
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading" ng-show="!editable">
+        <span class="panel-icon"></span>
+        <span class="panel-title">[[[Write Off Actual Checking]]]
+        </span>
+    </div>
+    <div class="panel-body">
+        [[[TTM Financial Data]]]
+            <br />
+        <br />
+        <table class="table table-bordered">
+            <tr>
+                <th width="20%" colspan="2" style="text-align: center"></th>
+                <th width="20%" style="text-align: center">[[[Budget]]]</th>
+                <th width="20%" style="text-align: center">[[[Finance Actual]]]</th>
+                <th width="20%" style="text-align: center">[[[Actual VS Budget]]]</th>
+                <th width="20%" style="text-align: center">[[[Variance %]]]</th>
+            </tr>
+            <tr>
+                <td colspan="2">[[[RE Cost（地产费用）]]]</td>
+                <td>{{entity.RECostBudget | money}}</td>
+                <td>{{entity.RECostActual | money}}</td>
+                <td>{{entity.RECostActual-entity.RECostBudget | money}}</td>
+                <td>
+                    <span>{{recostVar | numberDisplay:'percent'}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">[[[LHI（工程装修）]]]</td>
+                <td>{{entity.LHIBudget | money}}</td>
+                <td>{{entity.LHIActual | money}}</td>
+                <td>{{entity.LHIActual-entity.LHIBudget | money}}</td>
+                <td>
+                    <span>{{recostVar2 | numberDisplay:'percent'}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-tree-branch" colspan="2">[[[ESSD]]]</td>
+                <td>{{entity.ESSDBudget | money}}</td>
+                <td>{{entity.EquipmentActual+entity.SignageActual+entity.SeatingActual+entity.DecorationActual |money}}</td>
+                <td>{{entity.EquipmentActual+entity.SignageActual+entity.SeatingActual+entity.DecorationActual-entity.ESSDBudget| money}}</td>
+                <td>
+                    <span>{{recostVar3 | numberDisplay:'percent'}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-tree-leaf" width="5%"></td>
+                <td width="15%" class="table-tree-leaf-node">[[[Equipment（设备）]]]</td>
+                <td>{{entity.EquipmentBudget | money}}</td>
+                <td>{{entity.EquipmentActual | money}}</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td class="table-tree-leaf"></td>
+                <td class="table-tree-leaf-node">[[[Signage（招牌）]]]</td>
+                <td>{{entity.SignageBudget | money}}</td>
+                <td>{{entity.SignageActual | money}}</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td class="table-tree-leaf"></td>
+                <td class="table-tree-leaf-node">[[[Seating（桌椅）]]]</td>
+                <td>{{entity.SeatingBudget | money}}</td>
+                <td>{{entity.SeatingActual | money}}</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td class="table-tree-leaf-last"></td>
+                <td class="table-tree-leaf-node-last">[[[Decoration（装饰）]]]</td>
+                <td>{{entity.DecorationBudget | money}}</td>
+                <td>{{entity.DecorationActual | money}}</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td colspan="2">[[[Closing Cost（拆店费用）]]]</td>
+                <td>{{entity.ClosingCostBudegt | money}}</td>
+                <td>{{entity.ClosingCostActual | money}}</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td colspan="2">[[[Total]]]</td>
+                <td>{{entity.TotalWriteoffBudget | money}}</td>
+                <td>{{entity.TotalActual | money}}</td>
+                <td>{{entity.TotalActual-entity.TotalWriteoffBudget | money}}</td>
+                <td>
+                    <span>{{recostVar4 | numberDisplay:'percent'}}
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">[[[Write Off Variance Explanation]]]
+        </span>
+    </div>
+    <div class="panel-body form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-xs-4 control-label">[[[FA Actual vs Budget (RE Cost)> +-5%]]]</label>
+            <div class="col-xs-8">
+                {{entity.REExplanation}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">[[[FA Actual vs Budget (LHI)> +-5%]]]</label>
+            <div class="col-xs-8">
+                {{entity.LHIExplanation}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">[[[FA Actual vs Budget (ESSD)> +-5%]]]</label>
+            <div class="col-xs-8">
+                {{entity.ESSDExplanation}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">[[[FA Actual vs Budget (Total)> +-5%]]]</label>
+            <div class="col-xs-8">
+                {{entity.TotalExplanation}}
+            </div>
+        </div>
+    </div>
+</div>
+<approval-records ref-table-id="entity.Id" ref-table-name="ClosureConsInvtChecking" workflow-type="Closure"></approval-records>
+<comment comments="entity.Comments" title="Comments and Conclusion" editable="true"></comment>
+<project-history page-url="/closure/Main#/ConsInvtChecking/Process/View?projectId={{projectId}}" project-id="projectId" table-name="ClosureConsInvtChecking" title=" ConsInvtChecking History" has-template="false" title-name="ConsInvtChecking"></project-history>
+
+<div class="form-actions ta_c">
+    <button type="button" class="btn btn-lg btn-red" ng-click="ApproverSubmit('Approve')">[[[审批]]]</button>
+    <button type="button" class="btn btn-lg btn-orange" ng-click="ApproverSubmit('Return')"><span class="fa fa-mail-reply"></span>[[[退回]]]</button>
+</div>

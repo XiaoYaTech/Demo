@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="modal-header">
+    <h3 class="modal-title">合同附件</h3>
+</div>
+<div class="modal-body">
+    <table class="table">
+        <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Operation</th>
+        </tr>
+        <tr ng-repeat="attach in list" ng-show="attachLoaded">
+            <td>{{$index+1}}</td>
+            <td><a ng-href="{{attach.downloadLink}}">{{attach.Title}}</a></td>
+            <td class="table-operations">
+                <a ng-href="{{attach.downloadLink}}">[下载]</a>
+            </td>
+        </tr>
+        <tr ng-show="!attachLoaded">
+            <td colspan="3" class="ta_c">
+                <img src="~/Content/Images/loading.gif" alt="" />
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sn btn-warning" ng-click="cancel()">关闭</button>
+</div>

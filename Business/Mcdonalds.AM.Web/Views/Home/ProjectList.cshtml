@@ -1,0 +1,320 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">Search <i class="fa fa-search panel-title-fa"></i>
+        </span>
+        <div class="panel-tools">
+            <button type="button" class="btn btn-sm btn-default" ng-click="outputExcel()">
+                <span class="fa fa-file-excel-o"></span>
+                [[[导出]]]
+            </button>
+            <button type="button" ng-show="showAdvanceSearch" class="btn btn-sm btn-default" ng-click="showAdvanceSearch()">
+                <span class="fa fa-search-plus"></span>
+                [[[高级搜索]]]
+            </button>
+        </div>
+    </div>
+    <div class="panel-body" ng-show="showSearch">
+        <div class="form-horizontal mg_t_10" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[餐厅编号]]]</label>
+                <div class="col-xs-2">
+                    <input class="form-control" type="text" ng-model="searchCondition.USCode" />
+                </div>
+                <label class="col-xs-2 control-label">[[[餐厅名称]]]</label>
+                <div class="col-xs-6">
+                    <input class="form-control" type="text" ng-model="searchCondition.StoreName" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">[[[项目类型]]]</label>
+                <div class="col-xs-2">
+                    <select chosen="{disable_search:true}" ng-model="searchCondition.ProjectType" class="form-control" ng-options="t.key as t.value for t in projectTypes">
+                        <option value="">[[[请选择]]]</option>
+                    </select>
+                </div>
+                <label class="col-xs-2 control-label">[[[项目状态]]]</label>
+                <div class="col-xs-2">
+                    <select chosen multiple ng-model="searchCondition.Status" class="form-control">
+                        <option value="Active">Active</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Killed">Killed</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+
+                <label class="col-xs-2 control-label">[[[Asset Actor]]]</label>
+                <div class="col-xs-2">
+                    <input class="form-control" type="text" ng-model="searchCondition.AssetActor" />
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[Create Date]]]</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                            ng-model="searchCondition.CreateDateFrom"
+                            is-open="searchCondition._IsOpenCreateDateFrom"
+                            datepicker-popup="yyyy-MM-dd"
+                               min-date="minDate"
+                               placeholder="From"
+                            datepicker-options="dateOptions"
+                            date-disabled="disabled(date, mode)" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenCreateDateFrom')"><span class="fa fa-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               ng-model="searchCondition.CreateDateTo"
+                               is-open="searchCondition._IsOpenCreateDateTo"
+                               datepicker-popup="yyyy-MM-dd"
+                               min-date="searchCondition.CreateDateFrom"
+                               datepicker-options="dateOptions"
+                               placeholder="To"
+                               date-disabled="disabled(date, mode)" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenCreateDateTo')"><span class="fa fa-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+                <label class="control-label col-xs-2">[[[Reimage Date]]]</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               ng-model="searchCondition.ReImagingDateFrom"
+                               is-open="searchCondition._IsOpenReImagingDateFrom"
+                               datepicker-popup="yyyy-MM-dd"
+                               min-date="minDate"
+                               placeholder="From"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenReImagingDateFrom')"><span class="fa fa-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               ng-model="searchCondition.ReImagingDateTo"
+                               is-open="searchCondition._IsOpenReImagingDateTo"
+                               datepicker-popup="yyyy-MM-dd"
+                               min-date="searchCondition.ReImagingDateFrom"
+                               datepicker-options="dateOptions"
+                               placeholder="To"
+                               date-disabled="disabled(date, mode)" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenReImagingDateTo')"><span class="fa fa-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[Reopen Date]]]</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               ng-model="searchCondition.ReOpenDateFrom"
+                               is-open="searchCondition._IsOpenReOpenDateFrom"
+                               datepicker-popup="yyyy-MM-dd"
+                               min-date="minDate"
+                               placeholder="From"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenReOpenDateFrom')"><span class="fa fa-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               ng-model="searchCondition.ReOpenDateTo"
+                               is-open="searchCondition._IsOpenReOpenDateTo"
+                               datepicker-popup="yyyy-MM-dd"
+                               min-date="searchCondition.ReOpenDateFrom"
+                               datepicker-options="dateOptions"
+                               placeholder="To"
+                               date-disabled="disabled(date, mode)" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenReOpenDateTo')"><span class="fa fa-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+                <label class="control-label col-xs-2">[[[GB Date]]]</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               ng-model="searchCondition.GBDateFrom"
+                               is-open="searchCondition._IsOpenGBDateFrom"
+                               datepicker-popup="yyyy-MM-dd"
+                               min-date="minDate"
+                               datepicker-options="dateOptions"
+                               placeholder="From"
+                               date-disabled="disabled(date, mode)" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenGBDateFrom')"><span class="fa fa-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               ng-model="searchCondition.GBDateTo"
+                               is-open="searchCondition._IsOpenGBDateTo"
+                               datepicker-popup="yyyy-MM-dd"
+                               min-date="searchCondition.GBDateFrom"
+                               datepicker-options="dateOptions"
+                               placeholder="To"
+                               date-disabled="disabled(date, mode)" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenGBDateTo')"><span class="fa fa-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">[[[Construction Finish Date]]]</label>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               ng-model="searchCondition.CFDateFrom"
+                               is-open="searchCondition._IsOpenCFDateFrom"
+                               datepicker-popup="yyyy-MM-dd"
+                               min-date="minDate"
+                               datepicker-options="dateOptions"
+                               placeholder="From"
+                               date-disabled="disabled(date, mode)" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenCFDateFrom')"><span class="fa fa-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-xs-2">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               ng-model="searchCondition.CFDateTo"
+                               is-open="searchCondition._IsOpenCFDateTo"
+                               datepicker-popup="yyyy-MM-dd"
+                               min-date="searchCondition.CFDateFrom"
+                               datepicker-options="dateOptions"
+                               placeholder="To"
+                               date-disabled="disabled(date, mode)" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatepicker($event,'_IsOpenCFDateTo')"><span class="fa fa-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+                <label class="col-xs-2 control-label">[[[Reimage 1st Rd Filter]]]</label>
+                <div class="col-xs-2">
+                    <select chosen="{disable_search:true}" ng-model="searchCondition.HoldingStatus" ng-options="s as s for s in holdStatuses" class="form-control">
+                        <option value="">--[[[请选择]]]--</option>
+                    </select>
+                </div>
+                <div class="col-xs-1 pd_l_5 col-xs-offset-1">
+                    <button type="button" class="btn btn-sm btn-warning" ng-click="search()">[[[搜索]]]</button>
+                </div>
+            </div>
+        </div>
+        <div class="advance-search-values clearfix mg_t_10" ng-show="isShowSearchValues">
+            <div class="col-xs-6" ng-repeat="cdt in conditionTable">
+                <div class="input-group">
+                    <span class="input-group-addon">{{cdt.key}}</span>
+                    <span class="form-control">{{cdt.value}}</span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="removeSearchCondition(cdt.key)">
+                            <span class="fa fa-trash-o"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-orange mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">[[[项目列表]]] <i class="fa fa-list panel-title-fa"></i></span>
+    </div>
+    <div class="panel-body pd_0">
+        <table class="table">
+            <thead>
+                <tr>
+                    @*<th width="15%">ID</th>
+                    *@
+                    <th width="12%">[[[项目类型]]]</th>
+                    <th width="10%">[[[餐厅编号]]]</th>
+                    <th width="18%">[[[餐厅名称]]]</th>
+                    <th width="12%">[[[Asset Actor]]]</th>
+                    <th width="8%">[[[城市]]]</th>
+                    <th width="12%">[[[Create Time]]]</th>
+                    <th width="10%">[[[项目状态]]]</th>
+                    <th width="7%"></th>
+                    <th width="11%">[[[Reimage 1st Rd Filter]]]</th>
+                </tr>
+            </thead>
+            <tbody ng-show="$parent.ajaxFinished" ng-repeat="project in list">
+                <tr>
+                    @*<td>
+                        <a ng-href="~/Home/Main#/project/detail/{{project.ProjectId}}?flowCode={{project.FlowCode}}&linkFromList=true">{{project.ProjectId}}</a>
+                    </td>
+                    *@
+                    <td>{{project.FlowCode}}</td>
+                    <td>{{project.USCode}}</td>
+                    <td><a ng-href="~/Home/Main#/project/detail/{{project.ProjectId}}?flowCode={{project.FlowCode}}&linkFromList=true">{{project.StoreNameZHCN}}</a></td>
+                    <td>{{project.AssetActorNameENUS}}</td>
+                    <td>{{project.CityZHCN}}</td>
+                    <td>{{project.CreateTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                    <td>{{project.Status|projectStatusFilter}}</td>
+                    <td>@*<a ng-click="$parent.pending(project)" ng-show="(project.Status==0 ||!project.Status) && project.HasPendingRight" class="btn btn-sm btn-red">中止</a>
+                        <a ng-click="$parent.resume(project)" ng-show="project.Status==3" class="btn btn-sm btn-success">恢复</a>*@
+                        <span ng-click="$parent.expand(project)" class="fa fs_20 c_orange cur_p" ng-class="project.expendClass||'fa-chevron-circle-down'"></span>
+                        &nbsp;
+                        <span class="fa fa-list-alt fs_20 c_red cur_p" ng-show="[0,3,7].indexOf(project.Status)>-1&& project.HasPendingRight" ng-click="changeProjectStatus(project)" title="Change Status"></span>
+                    </td>
+                    <td>
+                        <select style="width: 70px; display: inline-block"
+                            chosen="{disable_search:true}"
+                            ng-if="project.PackageHoldingDto.HasRight && userHoldable"
+                            ng-show="dataLoaded" class="form-control"
+                            ng-model="project.PackageHoldingDto.Status"
+                            ng-options="m.IntValue as m.Name for m in project.PackageHoldingDto.HoldingStatusList"
+                            ng-change="holdingStatusChange(project.PackageHoldingDto)">
+                        </select>
+                        <span ng-if="project.PackageHoldingDto.HasRight && !userHoldable">{{project.PackageHoldingDto.Status|holdStatusFilter}}</span>
+                    </td>
+                </tr>
+                <tr class="table-project-detail" ng-show="project.showDetail">
+                    <td colspan="8" style="border-top: none; border-bottom: none;">
+                        <project-node-info project-id="{{project.ProjectId}}" flow-code="{{project.FlowCode}}" us-code="{{project.USCode}}" visible="project.showDetail"></project-node-info>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-show="!ajaxFinished">
+                <tr>
+                    <td colspan="8" class="ta_c">
+                        <img src="~/Content/Images/loading.gif" />
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-show="ajaxFinished && list.length==0">
+                <tr>
+                    <td colspan="8">[[[当前没有数据]]]</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="table-paginate" ng-show="ajaxFinished && list.length>0">
+            <span>[[[当前第]]]{{pageIndex}}[[[页]]]/[[[共]]]{{numPages}}[[[页]]] [[[共]]]{{totalItems}}[[[条记录]]]</span>
+            <pagination total-items="totalItems" boundary-links="true" max-size="5" items-per-page="pageSize" ng-model="pageIndex" class="pagination-sm" previous-text="[[[上一页]]]" next-text="[[[下一页]]]" first-text="[[[首页]]]" last-text="[[[末页]]]" num-pages="numPages"></pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>netfx-System.IO.Packaging.StreamUnpack.Tests.xUnit</id>
+    <version>1.1.0.0</version>
+    <title>NETFx Stream.Unpack Extension Method xUnit Tests</title>
+    <authors>Daniel Cazzulino,  kzu,  Clarius</authors>
+    <owners>Daniel Cazzulino,  kzu,  Clarius</owners>
+    <licenseUrl>http://netfx.codeplex.com/license</licenseUrl>
+    <projectUrl>http://netfx.codeplex.com/</projectUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=netfx&amp;DownloadId=199201</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>xUnit Tests for netfx-System.IO.Packaging.StreamUnpack</description>
+    <summary>xUnit Tests for netfx-System.IO.Packaging.StreamUnpack</summary>
+    <tags>netfx io packaging opc unzip</tags>
+    <dependencies>
+      <dependency id="netfx-System.IO.StreamWriteTo" version="1.0.0.3" />
+      <dependency id="netfx-Guard" version="1.2.0.4" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="WindowsBase" targetFramework=".NETFramework4.0" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

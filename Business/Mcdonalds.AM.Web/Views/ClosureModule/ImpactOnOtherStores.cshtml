@@ -1,0 +1,105 @@
+﻿@{
+    Layout = null;
+}
+
+<form class="form-horizontal" name="frmImpact" novalidate>
+
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Impact On Other Stores(RMB)]]]
+            </span>
+        </div>
+        <div class="panel-body clearfix">
+            <table class="table table-bordered" id="tbBasicInfo">
+                <tr>
+                    <th width="15%">[[[Store Code]]]</th>
+                    <th width="20%">[[[Store Name]]]</th>
+                    <th width="25%">[[[Impact Sales]]] </th>
+                    <td width="30%">[[[Contribution Margin to MCOPCO MARGIN(%)*]]]</td>
+                    <td width="10%" class="text-right">
+                        <input type="text" valnumber input-percent class="form-control text-right" ng-model="entity.McppcoMargin" ng-show="editable" name="mcppcoMargin" />
+                        <err-msgs field="frmImpact.mcppcoMargin" submited="$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.McppcoMargin| numberDisplay:'percent'}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-inline" role="form">
+                            <input type="text" id="step1Input" ng-show="editable" class="form-control" placeholder="[[[餐厅编号]]]" ng-model="impactStore1.StoreCode" typeahead-loading="loadingPositions1" typeahead="n.StoreCode for n in searchStore($viewValue,'',1)" />
+                            <i ng-show="loadingPositions1" class="glyphicon glyphicon-refresh"></i>
+                        </div>
+                        <span ng-show="!editable">{{impactStore1.StoreCode}}</span>
+                    </td>
+                    <td>@*              
+                        <select class="form-control" ng-show="editable" ng-model="impactStore1" ng-change="changeStore()" ng-options="m.StoreName for m in storeList">
+                            <option value="">[[[-- 请选择 --]]]</option>
+                        </select>*@
+                        <div class="form-inline" role="form">
+                            <input type="text" id="step1Input" ng-show="editable" class="form-control" placeholder="[[[餐厅名称]]]" ng-model="impactStore1.NameZHCN" typeahead-loading="loadingPositions2" typeahead="n.NameZHCN for n in searchStore('',$viewValue,1)" />
+                            <i ng-show="loadingPositions2" class="glyphicon glyphicon-refresh"></i>
+                        </div>
+                        <span ng-show="!editable">{{impactStore1.NameZHCN}}</span>
+                    </td>
+                    <td class="text-right">
+                        <input class="form-control text-right" ng-model="impactStore1.ImpactSaltes" ng-show="editable" name="impactSaltes" type="text" valnumber />
+                        <err-msgs field="frmImpact.impactSaltes" submited="$submited"></err-msgs>
+                        <span ng-show="!editable">{{impactStore1.ImpactSaltes| money}}</span>
+
+
+                    </td>
+                    <td>[[[Contribution Margin to Cashflow(%)*]]]
+                    </td>
+                    <td class="text-right">
+                        <input type="text" valnumber input-percent name="mccpcoCashFlow" class="form-control text-right" ng-model="entity.MccpcoCashFlow" ng-show="editable" />
+                        <err-msgs field="frmImpact.mccpcoCashFlow" submited="$submited"></err-msgs>
+                        <span ng-show="!editable">{{entity.MccpcoCashFlow| numberDisplay:'percent'}}</span>
+                    </td>
+                </tr>
+                <tr ng-hide="!editable && !impactStore2">
+                    <td>
+                        <div class="form-inline" role="form">
+                            <input type="text" 
+                                   id="step1Input" 
+                                   ng-show="editable" 
+                                   class="form-control" 
+                                   placeholder="[[[餐厅编号]]]" 
+                                   ng-model="impactStore2.StoreCode" 
+                                   typeahead-loading="loadingPositions3" 
+                                   typeahead="n.StoreCode for n in searchStore($viewValue,'',2)" />
+                            <i ng-show="loadingPositions3" class="glyphicon glyphicon-refresh"></i>
+                        </div>
+                        <span ng-show="!editable">{{impactStore2.StoreCode}}</span>
+                    </td>
+                    <td>
+                        <div class="form-inline" role="form">
+                            <input type="text" 
+                                   id="step1Input" 
+                                   ng-show="editable" 
+                                   class="form-control" 
+                                   placeholder="[[[餐厅名称]]]" 
+                                   ng-model="impactStore2.NameZHCN" 
+                                   typeahead-loading="loadingPositions4" 
+                                   typeahead="n.NameZHCN for n in searchStore('',$viewValue,2)" />
+                            <i ng-show="loadingPositions4" class="glyphicon glyphicon-refresh"></i>
+                        </div>
+                        <span ng-show="!editable">{{impactStore2.NameZHCN}}</span>
+                    </td>
+                    <td>
+                        <input type="text" 
+                               valnumber 
+                               name="impactSaltes2" 
+                               class="form-control" 
+                               ng-model="impactStore2.ImpactSaltes" 
+                               ng-show="editable" />
+                        <err-msgs field="frmImpact.impactSaltes2" submited="$submited"></err-msgs>
+                        <span ng-show="!editable">{{impactStore2.ImpactSaltes| money}}</span>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>

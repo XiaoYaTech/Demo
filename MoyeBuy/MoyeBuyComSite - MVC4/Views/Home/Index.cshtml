@@ -1,0 +1,312 @@
+﻿@{
+    ViewBag.Title = "首页";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Scripts/Home.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";
+    Dictionary<string, IList<MoyeBuy.Com.Model.ProductInfo>> dicProd = null;
+}
+@if (Model != null)
+{
+    dicProd = (Dictionary<string, IList<MoyeBuy.Com.Model.ProductInfo>>)Model;
+}
+<div class="AdSection">
+    <div class="LeftAd">
+        
+    </div>
+    <div class="CenterScrollAd">
+        <div id="banner">    
+            <div id="banner_bg"></div>  <!--标题背景-->
+            <div id="banner_info"></div> <!--标题-->
+            <ul>
+                <li class="on">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+           <div id="banner_list">
+                <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Ads/1.jpg")" title="" alt="1" /></a>
+                <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Ads/2.jpg")" title="" alt="2" /></a>
+                <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Ads/3.jpg")" title="" alt="3" /></a>
+                <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Ads/4.jpg")" title="" alt="4" /></a>
+            </div>
+        </div>
+    </div>
+    <div class="RightAd">
+        <div class="GiftCardDiv">
+            <div class="GiftCardTitleDiv">卡券兑换区</div>
+            <div class="DuiHuanBtn" onclick="javascript:goDuihuan();"></div>
+            <div style=" margin:10px;">请输入您的卡号和密码进行产品兑换 提领,客服电话021-65236123。</div>
+        </div>
+    </div>
+
+    <div class="HotProdContainer">
+        <div class="HotProdTitle"><span>热卖商品</span><span class="MoreProdTitle"><a href="@Url.Content("/Categorys/hotprod.html")" target="_self">更多>></a></span></div>
+        <div class="HotProd">
+            <ul>
+                @*<li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/1.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test1</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/2.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test2</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/3.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test3</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>*@
+                @if (dicProd.Count != null && dicProd.Count > 0 && dicProd["listHotProd"]!=null)
+                {
+                    int count = 0;
+                    foreach (var prod in dicProd["listHotProd"])
+                    {
+                        string strImg = "";
+                        strImg = prod.ProductImgs;
+                        if (string.IsNullOrEmpty(strImg))
+                        {
+                            strImg = "1.jpg";
+                        }
+                        <li>
+                            <div class="pimg">
+                                <a href="@Url.Content("/Items/" + @prod.ProductId + ".html")" target="_blank"><img src="@Url.Content("~/Graphics/Prod/" + strImg)" alt="@prod.ProductName" width="130px" height="130px"/></a>
+                            </div>
+                            <div class="pname">
+                                <a href="@Url.Content("/Items/" + @prod.ProductId + ".html")" target="_blank" title="@prod.ProductName" target="_blank">@prod.ProductName</a>
+                            </div>
+                            <div class="pprice">
+                                本站价格:<strong>￥@prod.MoyeBuyPrice</strong>
+                            </div>
+                        </li>
+                        count++;
+                        if (count > 7)
+                        {
+                            break;
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="HotProdContainer">
+        <div class="HotProdTitle"><span>新品上架</span><span class="MoreProdTitle"><a href="@Url.Content("/Categorys/newprod.html")" target="_self">更多>></a></span></div>
+        <div class="HotProd">
+            <ul>
+                @*<li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/1.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test1</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/2.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test2</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/3.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test3</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>*@
+                @if (dicProd.Count != null && dicProd.Count > 0 && dicProd["listNewProd"] != null)
+                {
+                    int count = 0;
+                    foreach (var prod in dicProd["listNewProd"])
+                    {
+                        string strImg = "1.jpg";
+                        strImg = prod.ProductImgs;
+                        if (string.IsNullOrEmpty(strImg))
+                        {
+                            strImg = "1.jpg";
+                        }
+                        <li>
+                            <div class="pimg">
+                                <a href="@Url.Content("/Items/" + @prod.ProductId + ".html")" target="_blank"><img src="@Url.Content("~/Graphics/Prod/" + strImg)" alt="@prod.ProductName" width="130px"/></a>
+                            </div>
+                            <div class="pname">
+                                <a href="@Url.Content("/Items/" + @prod.ProductId + ".html")" target="_blank" title="@prod.ProductName" target="_blank">@prod.ProductName</a>
+                            </div>
+                            <div class="pprice">
+                                本站价格:<strong>￥@prod.MoyeBuyPrice</strong>
+                            </div>
+                        </li>
+                        count++;
+                        if (count > 7)
+                        {
+                            break;
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="CenterProdContainer">
+        <div class="HotProdTitle"><span></span>类别名称<span class="MoreProdTitle"><a href="@Url.Content("/Categorys/list.html")" target="_self">更多>></a></span></div>
+        <div class = "CenterProd">
+            <ul>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/1.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test1</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/2.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test2</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/3.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test3</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/1.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test1</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/2.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test2</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/3.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test3</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/1.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test1</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/2.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test2</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+                <li>
+                    <div class="pimg">
+                        <a href="#" target="_blank"><img src="@Url.Content("~/Graphics/Prod/3.jpg")" alt="" width="130px"/></a>
+                    </div>
+                    <div class="pname">
+                        <a href="#" target="_blank" title="" target="_blank">test3</a>
+                    </div>
+                    <div class="pprice">
+                        本站价格:<strong>￥100.0</strong>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    @*<div class="mallMiddleBox">
+		<span class="mallLeftImg">上一页</span>
+		<div class="mallUl">
+			<ul>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/1.jpg")" alt="" /></a></li>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/2.jpg")" alt="" /></a></li>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/3.jpg")" alt="" /></a></li>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/4.jpg")" alt="" /></a></li>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/1.jpg")" alt="" /></a></li>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/2.jpg")" alt="" /></a></li>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/1.jpg")" alt="" /></a></li>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/2.jpg")" alt="" /></a></li>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/3.jpg")" alt="" /></a></li>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/4.jpg")" alt="" /></a></li>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/1.jpg")" alt="" /></a></li>
+				<li><a href=""><img src="@Url.Content("~/Graphics/Ads/2.jpg")" alt="" /></a></li>
+			</ul>	
+		</div>
+		<span class="mallRightImg">下一页</span>
+	</div>*@	
+
+    
+
+    <div class="CenterScrollAd"></div>
+</div>
+

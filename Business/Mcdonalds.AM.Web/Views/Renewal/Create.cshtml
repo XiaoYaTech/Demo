@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <step1 code="entity.USCode" store-valid="step1Finished" flow-code="Renewal"></step1>
+    <div ng-style="{visibility:!step1Finished?'hidden':''}">
+        <store-basic-info code="entity.USCode" editable="true" store="store" workflow-type="Renewal"></store-basic-info>
+        <div class="panel panel-black">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    [[[续约信息]]]
+                </span>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[项目类型]]]</label>
+                    <div class="col-xs-2 pd_t_7">[[[Renewal]]]</div>
+                    <label class="control-label col-xs-2">[[[美国编号]]]</label>
+                    <div class="col-xs-2 pd_t_7">{{entity.USCode}}</div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[原租约起始日期]]]</label>
+                    <div class="col-xs-2 pd_t_7">{{store.StoreContractInfo.StartDate|date:'yyyy-MM-dd'}}</div>
+                    <label class="control-label col-xs-2">[[[原租约到期日期]]]</label>
+                    <div class="col-xs-2 pd_t_7">{{store.StoreContractInfo.EndDate|date:'yyyy-MM-dd'}}</div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[新租约起始日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control" name="NewLeaseStartDate" ng-model="entity.NewLeaseStartDate" datepicker-popup="{{format}}" is-open="showNewLeaseStartDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDate($event,'showNewLeaseStartDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <err-msgs field="frmMain.NewLeaseStartDate" submited="$submited"></err-msgs>
+                    </div>
+                    <label class="control-label col-xs-2">[[[新租约到期日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control" name="NewLeaseEndDate" ng-model="entity.NewLeaseEndDate" datepicker-popup="{{format}}" is-open="showNewLeaseEndDate" min-date="entity.NewLeaseStartDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDate($event,'showNewLeaseEndDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <err-msgs field="frmMain.NewLeaseStartDate" submited="$submited"></err-msgs>
+                    </div>
+                    <label class="control-label col-xs-2">[[[租赁年数]]]</label>
+                    <div class="col-xs-2">
+                        <input type="text" class="form-control" value="{{entity.RenewalYears}}" disabled="disabled"></div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[优先级]]]</label>
+                    <div class="col-xs-2">
+                        <dict-selector parent-code="youxianji" editable="true" selected-code="entity.Priority" selected-dict="RenewalPriority"></dict-selector>
+                    </div>
+                    <label class="control-label col-xs-2">[[[是否需要工程费用预估]]]</label>
+                    <div class="col-xs-2 pd_t_7">
+                        <label><input type="radio" name="NeedProjectCostEst" required ng-model="entity.NeedProjectCostEst" ng-value="true" /> &nbsp;Yes</label>
+                        &nbsp;&nbsp; 
+                        <label><input type="radio" name="NeedProjectCostEst" required ng-model="entity.NeedProjectCostEst" ng-value="false" /> &nbsp;No</label>
+                        <err-msgs field="frmMain.NeedProjectCostEst" submited="$submited"></err-msgs>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <project-team us-code="entity.USCode" team="team" views="views" editable="true"></project-team>
+        <div class="form-actions ta_c pd_b_100">
+            <button type="button" class="btn btn-lg btn-warning" form-submit ng-click="selectNoticeUsers(frmMain)"><span class="fa fa-check"></span>[[[下一步]]]</button>
+        </div>
+        <notify-users-modal visible="ShowNotifyUserModalDialog" us-code="entity.USCode" editable='true'  flow-code="Renewal" team="team" on-submit="submit(notifyUsersInfo)"></notify-users-modal>
+    </div>
+</form>

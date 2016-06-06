@@ -1,0 +1,62 @@
+﻿@{
+    Layout = null;
+}
+<form class="form-horizontal" name="frmMain">
+    <task-reminder></task-reminder>
+    <step1 code="entity.USCode" store-valid="step1Finished" flow-code="TempClosure"></step1>
+    <div ng-style="{visibility:!step1Finished?'hidden':''}">
+        <store-basic-info code="entity.USCode" editable="true" store="storeBasicInfo" workflow-type="TempClosure"></store-basic-info>
+        <div class="panel panel-black">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">[[[临时关店信息]]]
+                </span>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[项目类型]]]</label>
+                    <div class="col-xs-2 pd_t_7">TempClosure</div>
+                    <label class="control-label col-xs-2">[[[餐厅编号]]]</label>
+                    <div class="col-xs-2 pd_t_7">{{entity.USCode}}</div>
+                    <label class="control-label col-xs-2">[[[临时关店日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" name="actualTempClosureDate" class="form-control" ng-model="entity.ActualTempClosureDate" datepicker-popup="{{format}}" is-open="showActualTempClosureDate" min-date="now" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" onfocus="this.blur()" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDate($event,'showActualTempClosureDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <err-msgs field="frmMain.actualTempClosureDate" submited="$submited"></err-msgs>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[重开日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" name="actualReopenDate" class="form-control" ng-model="entity.ActualReopenDate" datepicker-popup="{{format}}" is-open="showActualReopenDate" min-date="entity.ActualTempClosureDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" onfocus="this.blur()" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDate($event,'showActualReopenDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <err-msgs field="frmMain.actualReopenDate" submited="$submited"></err-msgs>
+                    </div>
+                    <label class="control-label col-xs-2">[[[关店原因]]]</label>
+                    <div class="col-xs-3">
+                        <dict-selector parent-code="ClosureReasons" selected-code="entity.ClosureReasonCode" selected-dict="closureReason" editable="true" required="true"></dict-selector>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="entity.ClosureReasonCode==='Others'">
+                    <div class="col-xs-12">
+                        <textarea rows="4" id="closureReasonRemark" ng-model="$parent.entity.ClosureReasonRemark" class="form-control" required name="closureReasonRemark" />
+                        <err-msgs field="frmMain.closureReasonRemark" submited="$parent.$submited"></err-msgs>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <project-team us-code="entity.USCode" team="team" views="views" editable="true"></project-team>
+        <div class="form-actions ta_c pd_b_100">
+            <button type="button" class="btn btn-lg btn-warning" form-submit ng-click="selectNoticeUsers(frmMain)"><span class="fa fa-check"></span>[[[下一步]]]</button>
+        </div>
+        <notify-users-modal visible="ShowNotifyUserModalDialog" us-code="entity.USCode" editable='true' team="team" flow-code="TempClosure" on-submit="submit(notifyUsersInfo)"></notify-users-modal>
+    </div>
+</form>

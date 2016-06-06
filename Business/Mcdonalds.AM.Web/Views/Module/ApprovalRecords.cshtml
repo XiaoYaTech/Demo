@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-yellow mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[呈递审批记录]]]
+            <span class="fa fa-copy panel-title-fa"></span>
+        </span>
+    </div>
+    <div class="panel-body">
+        <div class="panel panel-grey mg_t_10" ng-repeat="record in records">
+            <div class="panel-heading">
+                <div class="col-xs-3">[[[用户:]]]{{record.UserNameENUS}}</div>
+                <div class="col-xs-3">[[[日期:]]]{{record.CreateTime  | date:"yyyy-MM-dd HH:mm:ss"}}</div>
+                <div class="col-xs-3">[[[职位:]]]{{record.PositionName}}</div>
+                <div class="col-xs-3">[[[操作:]]]{{record.ActionDesc}}</div>
+            </div>
+            <div class="panel-body">
+                <pre class="pre" ng-if="record.Content">{{record.Content}}</pre>
+            </div>
+        </div>
+    </div>
+</div>

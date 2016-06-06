@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">
+            [[[Financial Measures]]]
+        </span>
+    </div>
+    <div class="panel-body pd_0">
+        <table class="table table-form table-noborder">
+            <colgroup>
+                <col width="22%" />
+                <col width="26%" />
+                <col width="26%" />
+                <col width="26%" />
+            </colgroup>
+            <tr>
+                <th>&nbsp;</th>
+                <th>[[[Last Year]]]</th>
+                <th>[[[Yr1]]]</th>
+                <th>[[[Avg Renewal Period]]]</th>
+            </tr>
+            <tr>
+                <td>[[[Annual Rent Expense]]]</td>
+                <td>{{finMeasureOutput.AnnualRentExpenseLY|money}}</td>
+                <td>{{finMeasureOutput.AnnualRentExpenseYr1|money}}</td>
+                <td>{{finMeasureOutput.AnnualRentExpenseAvg|money}}</td>
+            </tr>
+            <tr>
+                <td>[[[Rent as % Of Prod Sales]]]</td>
+                <td>{{finMeasureOutput.RentAsProdSalesLY|numberDisplay:'percent'}}</td>
+                <td>{{finMeasureOutput.RentAsProdSalesYr1|numberDisplay:'percent'}}</td>
+                <td>{{finMeasureOutput.RentAsProdSalesAvg|numberDisplay:'percent'}}</td>
+            </tr>
+            <tr>
+                <td>[[[Occupancy as % Of Prod Sales]]]</td>
+                <td>{{finMeasureOutput.OccupancyProdSalesLY|numberDisplay:'percent'}}</td>
+                <td>{{finMeasureOutput.OccupancyProdSalesYr1|numberDisplay:'percent'}}</td>
+                <td>{{finMeasureOutput.OccupancyProdSalesAvg|numberDisplay:'percent'}}</td>
+            </tr>
+            <tr>
+                <td>[[[SOI as % Of Prod Sales]]]</td>
+                <td>{{finMeasureOutput.SOIProdSalesLY|numberDisplay:'percent'}}</td>
+                <td>{{finMeasureOutput.SOIProdSalesYr1|numberDisplay:'percent'}}</td>
+                <td>{{finMeasureOutput.SOIProdSalesAvg|numberDisplay:'percent'}}</td>
+            </tr>
+            <tr>
+                <td>[[[CASH ROI%]]]</td>
+                <td>{{finMeasureOutput.CashROILY|numberDisplay:'percent'}}</td>
+                <td>{{finMeasureOutput.CashROIYr1|numberDisplay:'percent'}}</td>
+                <td>{{finMeasureOutput.CashROIAvg|numberDisplay:'percent'}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

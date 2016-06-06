@@ -1,0 +1,506 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="Content/font-awesome.css" />
+    <link type="text/css" rel="stylesheet" href="Content/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="Content/bootstrap-theme.css" />
+    <!--[IF IE 7]>
+        <link type="text/css" rel="stylesheet" href="Content/font-awesome-ie7.css" />        
+    <![ENDIF]-->
+    <link type="text/css" rel="stylesheet" href="Content/site.css" />
+    <!--[IF IE 7]>
+        <link type="text/css" rel="stylesheet" href="Content/site.IE7.css" />
+    <![ENDIF]-->
+    <!--[if lte IE 8]>
+        <script src="Scripts/LowIE/json2.js" type="text/javascript"></script>
+        <script src="Scripts/LowIE/html5shiv.min.js" type="text/javascript"></script>        
+        <script src="Scripts/LowIE/matchmedia.polyfill.js" type="text/javascript"></script>   
+        <script src="Scripts/LowIE/matchmedia.addListener.js" type="text/javascript"></script> 
+        <script src="Scripts/LowIE/respond.min.js" type="text/javascript"></script> 
+	    <link href="respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+	    <link href="Content/Images/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+	    <script src="Scripts/LowIE/respond.proxy.js" type="text/javascript"></script>  
+    <![endif]-->
+</head>
+<body>
+    <div class="main">
+        <div class="nav-project">
+            <a class="nav-project-item first">
+                <span class="fa fa-check"></span>
+                WOCheckList
+            </a>
+            <a class="nav-project-item">
+                <span class="fa fa-check"></span>
+                Closure Tool
+            </a>
+            <a class="nav-project-item">
+                <span class="fa fa-check"></span>
+                Legal Review
+            </a>
+            <a class="nav-project-item">
+                <span class="fa fa-check"></span>
+                Executive Summary
+            </a>
+            <a class="nav-project-item">
+                <span class="fa fa-check"></span>
+                Closure Package
+            </a>
+            <a class="nav-project-item">
+                <span class="fa fa-check"></span>
+                Contract Info
+            </a>
+            <a class="nav-project-item">
+                <span class="fa fa-check"></span>
+                ClosureMemo
+            </a>
+            <a class="nav-project-item">
+                <span class="fa fa-check"></span>
+                Cons Invt Checking
+            </a>
+            <a class="clear"></a>
+        </div>
+        <div class="step-project">
+            <a class="step-project-item passed">
+                请下载模板
+            </a>
+            <a class="step-project-item passed">
+                <span class="step-project-icon">
+                    <span class="fa fa-chevron-right"></span>
+                    <span class="fa fa-chevron-right fa-mid"></span>
+                    <span class="fa fa-chevron-right"></span>
+                </span>
+                Write Off 线下填写               
+            </a>
+            <a class="step-project-item passed">
+                <span class="step-project-icon">
+                    <span class="fa fa-chevron-right"></span>
+                    <span class="fa fa-chevron-right fa-mid"></span>
+                    <span class="fa fa-chevron-right"></span>
+                </span>
+                结果上传            
+            </a>
+            <a class="step-project-item current">
+                <span class="step-project-icon">
+                    <span class="fa fa-chevron-right"></span>
+                    <span class="fa fa-chevron-right fa-mid"></span>
+                    <span class="fa fa-chevron-right"></span>
+                </span>
+                Closing Cost               
+            </a>
+            <a class="step-project-item">
+                <span class="step-project-icon">
+                    <span class="fa fa-chevron-right"></span>
+                    <span class="fa fa-chevron-right fa-mid"></span>
+                    <span class="fa fa-chevron-right"></span>
+                </span>
+                审批
+            </a>
+            <a class="clear"></a>
+        </div>
+        <div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    Upload WO Checklist
+                </span>            
+                <div class="panel-tools">
+                    <a>
+                        <span class="fa fa-cloud-download"></span>
+                        请先下载Write Off模板
+                    </a>
+                    <a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="fa fa-cloud-upload"></span>
+                        结果上传
+                    </a>
+                </div>
+                <span class="clear"></span>
+            </div>
+            <table class="table table-striped">
+                <tr>
+                    <th>Item</th>
+                    <th>Remark</th>
+                    <th>Uploaded By</th>
+                    <th>Uploaded Date</th>
+                    <th>Approval By</th>
+                    <th>Approval By</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td><a>FA Write-of Tool V1.5</a></td>
+                    <td>调整部分数据</td>
+                    <td>PM</td>
+                    <td>2014-06-06</td>
+                    <td>Asset Rep</td>
+                    <td>Asset Rep</td>
+                    <td>生效</td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    Basic Info
+                </span>     
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">US Code</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 control-label">Store Name CN</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 control-label">Store Name EN</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Region</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 control-label">Market</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 control-label">City</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Address(CN)</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 control-label">Open Date</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 control-label">Close Date</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Assets Manager</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 control-label">Assets Rep</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 control-label">Assets Actor</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Current Lease End Year</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    Write Off Data
+                </span>                  
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">&nbsp;</label>
+                    <div class="col-sm-2 pd_t_7">
+                        Total Investments
+                    </div>
+                    <div class="col-sm-2 pd_t_7">
+                      NBV(Closure Data)
+                    </div>
+                    <div class="col-sm-2 pd_t_7">
+                      Write off
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 control-label">Equipment Transfer</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">RE</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 control-label">Closing Costs</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">LHI</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">ESSD</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Equipment</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Signage</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Seating</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Decoration</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Closing Cost</label>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <hr class="col-sm-8" />
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Total</label>
+                    <div class="col-sm-10 pd_t_7"></div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    Attachment
+                </span>          
+                <div class="panel-tools">
+                    <a>
+                        <span class="fa fa-upload"></span>
+                        上传附件
+                    </a>
+                </div>
+                <span class="clear"></span>
+            </div>
+            <table class="table table-striped">
+                <tr>
+                    <th>No.</th>
+                    <th>Item</th>
+                    <th>Uploaded By</th>
+                    <th>Uploaded Date</th>
+                    <th>Operation</th>
+                </tr>
+                <tr class="required">
+                    <td>1</td>
+                    <td><i>*</i>Current Store</td>
+                    <td>Linda</td>
+                    <td>2014-06-06</td>
+                    <td class="table-operations">
+                        <a class="fa fa-download"></a>
+                        <a class="fa fa-trash-o"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>FA Write off tool</td>
+                    <td>Linda</td>
+                    <td>2014-06-06</td>
+                    <td class="table-operations">
+                        <a class="fa fa-download"></a>
+                        <a class="fa fa-trash-o"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="15%">1</td>
+                    <td width="35%">FA Write off tool</td>
+                    <td width="20%">Linda</td>
+                    <td width="15%">2014-06-06</td>
+                    <td class="table-operations" width="10%">
+                        <a class="fa fa-download"></a>
+                        <a class="fa fa-trash-o"></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel panel-orange mg_t_10">
+            <div class="panel-heading clearfix">
+                Comments
+            </div>
+            <div class="panel-body">
+                <textarea class="form-control" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="panel panel-yellow">
+            <div class="panel-heading clearfix">
+                Submittal and Approval Records
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-grey">
+                    <div class="panel-heading clearfix">
+                        <div class="col-sm-3 pd_t_7">User:Cindy</div>
+                        <div class="col-sm-3 pd_t_7">Date:2014-08-07</div>
+                        <div class="col-sm-3 pd_t_7">Title:Assets Rep</div>
+                        <div class="col-sm-3 pd_t_7">Action:Submit</div>
+                    </div>
+                    <div class="panel-body">
+                        Over a dozen reusable components built to provide iconography, dropdowns, input groups, navigation, alerts, and much more.
+                    </div>
+                </div>
+                <div class="panel panel-grey mg_t_10">
+                    <div class="panel-heading clearfix">
+                        <div class="col-sm-3 pd_t_7">User:Cindy</div>
+                        <div class="col-sm-3 pd_t_7">Date:2014-08-07</div>
+                        <div class="col-sm-3 pd_t_7">Title:Assets Rep</div>
+                        <div class="col-sm-3 pd_t_7">Action:Submit</div>
+                    </div>
+                    <div class="panel-body">
+                        Over a dozen reusable components built to provide iconography, dropdowns, input groups, navigation, alerts, and much more.
+                    </div>
+                </div>
+                <div class="panel panel-grey mg_t_10">
+                    <div class="panel-heading clearfix">
+                        <div class="col-sm-3 pd_t_7">User:Cindy</div>
+                        <div class="col-sm-3 pd_t_7">Date:2014-08-07</div>
+                        <div class="col-sm-3 pd_t_7">Title:Assets Rep</div>
+                        <div class="col-sm-3 pd_t_7">Action:Submit</div>
+                    </div>
+                    <div class="panel-body">
+                        Over a dozen reusable components built to provide iconography, dropdowns, input groups, navigation, alerts, and much more.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-orange">
+            <div class="panel-heading clearfix">
+                Wo check list history
+            </div>
+            <table class="table table-striped">
+                <tr>
+                    <th>No.</th>
+                    <th>Item</th>
+                    <th>Remark</th>
+                    <th>Upload By</th>
+                    <th>Uploaded Date</th>
+                    <th>Aprroval By</th>
+                    <th>Aprroval Date</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><a>Current Store</a></td>
+                    <td>调整部分数据</td>
+                    <td>PM</td>
+                    <td>2014-06-06</td>
+                    <td>Linda</td>
+                    <td>2014-07-01</td>
+                    <td>
+                        失效
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><a>Current Store</a></td>
+                    <td>调整部分数据</td>
+                    <td>PM</td>
+                    <td>2014-06-06</td>
+                    <td>Linda</td>
+                    <td>2014-07-01</td>
+                    <td>
+                        失效
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><a>Current Store</a></td>
+                    <td>调整部分数据</td>
+                    <td>PM</td>
+                    <td>2014-06-06</td>
+                    <td>Linda</td>
+                    <td>2014-07-01</td>
+                    <td>
+                        失效
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="ta_c mg_t_10">
+            <button type="button" class="btn btn-lg btn-red"><span class="fa fa-check"></span>Submit</button>
+        </div>
+    </div>
+</body>
+</html>

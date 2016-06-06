@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>netfx-System.IO.StreamWriteTo</id>
+    <version>1.0.0.11</version>
+    <title>NETFx Stream.WriteTo Extension Method</title>
+    <authors>Daniel Cazzulino,  kzu,  Clarius</authors>
+    <owners>Daniel Cazzulino,  kzu,  Clarius</owners>
+    <licenseUrl>http://netfx.codeplex.com/license</licenseUrl>
+    <projectUrl>http://netfx.codeplex.com/</projectUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=netfx&amp;DownloadId=199201</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Copies an arbitrary stream to another stream or an output file (buffered).</description>
+    <summary>Copies an arbitrary stream to another stream or an output file (buffered).</summary>
+    <tags>netfx io stream</tags>
+  </metadata>
+</package>

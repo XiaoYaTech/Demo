@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_WOCheckList" place-holder="8"></top-nav>
+<cheking-point project-id="projectId" refresh="checkPointRefresh" flow-code="Closure_WOCheckList"></cheking-point>
+<closure-upload-wochecklist editable="true" project-id="projectId"></closure-upload-wochecklist>
+<store-basic-info project="ClosureInfo" code="ClosureInfo.USCode"></store-basic-info>
+
+<notification-message project-id="projectId"
+    flow-code="Closure"
+    sub-flow-code="Closure_WOCheckList"
+    node-id="entity.Id"
+    uscode="ClosureInfo.USCode"></notification-message>
+
+<div ng-style="{visibility:!isUploadTemplate?'hidden':''}">
+    <closure-write-off-data datas="entity"></closure-write-off-data>
+
+    <attachments ref-table-name="ClosureWOCheckList"
+        project-id="{{projectId}}"
+        flow-code="Closure_WOCheckList"
+        editable="true"
+        list="WOAttachments"
+        upload-set="['5ef6f0f9-0177-4f1e-bf84-f081462dc6d7']"
+        upload-finish="uploadFinFinish(up,files)"
+        delete-finish="deleteAttachmentFinish(id,requirementId)"
+        reload="reloadAtt"></attachments>
+
+
+    <approval-records workflow-type="Closure" ref-table-id="entity.Id" ref-table-name="ClosureWOCheckList"></approval-records>
+    <comment comments="entity.Comments" editable="true" title="[[[意见]]]" valid="commentValid"></comment>
+    <project-history page-url="/closure/Main#/WOCheckList/Process/View?projectId={{projectId}}" project-id="projectId" table-name="ClosureWOCheckList" title=" WO Checklist History" has-template="false" title-name="WOCheckList"></project-history>
+
+    <div class="form-actions ta_c">
+        <button type="button" ng-disabled="submiting" class="btn btn-lg btn-orange" ng-click="PMSave()"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        <button type="button" class="btn btn-lg btn-red" id="btnSubmit" ng-click="beginSelApprover(ClosureInfo, entity)"><span class="fa fa-check"></span>[[[呈递]]]</button>
+    </div>
+</div>

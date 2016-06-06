@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <step1 code="storeCode" store-valid="step1Finished" flow-code="MajorLease"></step1>
+    <div ng-style="{visibility:!step1Finished?'hidden':''}">
+        <store-basic-info code="storeCode" editable="true" store="storeBasicInfo"></store-basic-info>
+        <div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    [[[主要合同信息]]]
+                </span>
+            </div>
+            <div class="panel-body form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[项目类型]]]</label>
+                    <div class="col-xs-2 pd_t_7">[[[MajorLease]]]</div>
+                    <label class="control-label col-xs-2">[[[美国编号]]]</label>
+                    <div class="col-xs-2 pd_t_7">{{entity.USCode}}</div>
+                    @*<label class="control-label col-xs-2">Project ID</label>
+                        <div class="col-xs-2 pd_t_7">{{entity.projectID}}</div>*@
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2">[[[开工日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control" ng-model="entity.GBDate" datepicker-popup="{{format}}" is-open="openedGBDate" min-date="now" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event,'openedGBDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <label class="control-label col-xs-2">[[[重开业日期]]]</label>
+                    <div class="col-xs-2">
+                        <p class="input-group">
+                            <input type="text" class="form-control" ng-model="entity.ReopenDate" datepicker-popup="{{format}}" is-open="openedReopenDate" min-date="MinReopenDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event,'openedReopenDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <label class="control-label col-xs-2">[[[项目创建时间]]]</label>
+                    <div class="col-xs-2 pd_t_7">{{entity.CreateDate | date:format}}</div>
+                </div>
+            </div>
+        </div>
+        @*<major-lease-change rental="entity.rental"
+                                rental-desc="entity.ChangeRentalTypeDESC"
+                                redline="entity.redline"
+                                redline-desc="entity.ChangeRedLineTypeDESC"
+                                leaseterm="entity.leaseterm"
+                                leaseterm-desc="entity.ChangeLeaseTermDESC"
+                                landlord="entity.landlord"
+                                landlord-desc="entity.ChangeLandLordDESC"
+                                others="entity.others"
+                                others-desc="entity.ChangeOthersDESC"
+                                is-edit="true">
+            </major-lease-change>*@
+        <lease-change source="entity" is-edit="true" title="Major Lease Change"></lease-change>
+        <project-team us-code="storeCode" team="team" views="views" editable="true"></project-team>
+        <div class="form-actions ta_c pd_b_100">
+            <button type="button" ng-click="selectNoticeUsers(frmMain)" form-submit class="btn btn-lg btn-red"><span class="fa fa-check"></span>[[[下一步]]]</button>
+        </div>
+        <notify-users-modal visible="ShowNotifyUserModalDialog" team="team" us-code="storeCode" editable='true' flow-code="MajorLease" on-submit="submit(notifyUsersInfo)"></notify-users-modal>
+    </div>
+</form>

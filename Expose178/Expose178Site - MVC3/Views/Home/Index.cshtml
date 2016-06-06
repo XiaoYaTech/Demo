@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    <div>
+        <table>
+            <tr>
+                <td><a href="@Url.Action("AddUpdateArticle","Article")">添加</a></td>
+                <td><a href="@Url.Action("MyArticleList","TitleList")">列表 </a></td>
+            </tr>
+            <tr>
+                <td><a href="@Url.RouteUrl("MangeSite_default")">管理</a></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>

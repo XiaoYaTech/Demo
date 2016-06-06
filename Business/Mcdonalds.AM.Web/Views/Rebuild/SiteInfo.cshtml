@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Site Info";
+    Layout = null;
+}
+<form name="frm">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="Rebuild" sub-code="{{subFlowCode}}" place-holder="10"></top-nav>
+    <cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh"></cheking-point>
+    <estimated-vs-actual-construction source="estimatedVsActualConstruction" editable="isPageEditable" flow-code="Rebuild"></estimated-vs-actual-construction>
+    <site-info source="siteInfo"
+               editable="isPageEditable"
+               us-code="rebuildInfo.USCode"
+               identifier="rebuildInfo.Id"
+               flow-code="Rebuild_SiteInfo"
+               is-inner-design-disable="true"></site-info>
+    <notification-message project-id="projectId"
+                          flow-code="Rebuild"
+                          sub-flow-code="{{subFlowCode}}"
+                          node-id="siteInfo.Id"
+                          uscode="rebuildInfo.USCode"></notification-message>
+
+    <div ng-switch on="pageType">
+        <div class="form-actions ta_c" ng-switch-default>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" ng-disabled="acting" ng-show="isPageEditable"><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" ng-disabled="acting" ng-click="confirm(frm)" form-submit ng-show="isPageEditable"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="View" ng-hide="isUserAction">
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" ng-disabled="acting" ng-show="IsShowSave"><span class="fa fa-paste"></span>[[[保存]]]</button>
+        </div>
+    </div>
+
+</form>

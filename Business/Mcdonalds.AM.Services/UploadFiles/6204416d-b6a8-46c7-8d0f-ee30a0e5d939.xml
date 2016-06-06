@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file contains job definitions in schema version 2.0 format -->
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+    <job>
+      <name>LabOutOfDateNotificationJob</name>
+      <group>WorkflowCenter</group>
+      <description>实验室设备到期后每隔七天发送一封邮件提醒给设备借用人</description>
+      <job-type>Spreadtrum.WorkflowCenter.Web.Jobs.LabOutOfDateNotificationJob, Spreadtrum.WorkflowCenter.Web</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>LabOutOfDateNotificationJobTrigger</name>
+        <group>WorkflowCenter</group>
+        <description>每天执行一次</description>
+        <job-name>LabOutOfDateNotificationJob</job-name>
+        <job-group>WorkflowCenter</job-group>
+        <cron-expression>0 0 0/24 * * ?</cron-expression>
+      </cron>
+    </trigger>
+  </schedule>
+</job-scheduling-data>

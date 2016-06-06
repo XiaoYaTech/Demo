@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = null;
+}
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+        formInit();
+    });
+
+    function formInit() {
+        $("#tbInfo")[0].style.display = "none";
+    }
+
+    function cbCheckAll_Click(checked) {
+
+        $("input[type=checkbox][name=cbSelID]", $("#tbDicList")).attr("checked", checked);
+    }
+    </script>
+
+<div class="dic-Search">
+    <h1>查询</h1>
+    <hr />
+    <ul>
+        <li>名称：<input id="txtName" />
+        </li>  <li>编码：<input id="txtCode" /></li>
+        <li>模块名称：<input id="txtModuleName" /></li>
+        <li>模块编码：<input id="txtModuleCode" /></li>
+        <li>
+            <input type="button" class="btn" value="查询" ng-click="search(dictionaryList)" />
+        </li>
+    </ul>
+    <div class="li-clear"></div>
+</div>
+        <div>
+            <div style="width:1000px;float: left;">提醒管理列表</div>
+            <div style="float: left;">
+         <ul>
+ 
+        <li>
+
+            <input type="button" value="添加" class="btn" ng-click="showDicInfo(remindRegisterList)" />
+            <input type="button" value="删除" class="btn" ng-click="deleteEntity(remindRegisterList)" />
+        </li>
+    </ul></div>
+            <table border="1" class="table" id="tbDicList">
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                     <th>模块编码</th>
+                    <th>模块名称</th>
+                    <th>创建日期</th>
+                    <th>操作</th>
+                    <th>  <input type="checkbox" value="" onclick="cbCheckAll_Click(this.checked)" /></th>
+                </tr>
+                <tr ng-repeat="task in remindRegisterList">
+                    <td>{{task.Code}}</td>
+                    <td>{{task.Name}}</td>
+                    <td>{{task.ModuleCode}}</td>
+                    <td>{{task.ModuleName}}</td>
+                    <td>{{task.CreateTime | date:"yyyy-MM-dd" }}</td>
+                    <td><span style="color: blue; cursor: pointer;" ng-click="edit(task)">编辑</span></td>
+                    <td>   <input type="checkbox" name="cbSelID" value="{{task.Id}}" /></td>
+                </tr>
+                <tr ng-show="remindRegisterList.length==0">
+                    <td colspan="7">当前没有数据</td>
+                </tr>
+            </table>
+        </div>
+     
+<div>
+    <input type="hidden" id="dicId" ng-model="entity.Id" />
+    <table class="table" id="tbInfo">
+      
+        <tr>
+
+            <td>编号</td>
+            <td>
+                <input id="entityCode" ng-model="entity.Code" type="text" /><td align="left">*</td>
+            </td>
+        </tr>
+        <tr>
+            <td>名称</td>
+            <td>
+                <input type="text" id="entityName" ng-model="entity.Name" /></td>
+            <td align="left">*</td>
+        </tr>
+        <tr>
+            <td>模块编号</td>
+            <td>
+                <input type="text" id="entityModuleCode" ng-model="entity.ModuleCode" /></td>
+            <td align="left">*</td>
+        </tr>
+                <tr>
+            <td>模块名称</td>
+            <td>
+            <input type="text" id="entityModuleName" ng-model="entity.ModuleName" /></td>
+            <td align="left">*</td>
+        </tr>
+        <tr>
+            <td>排序号</td>
+            <td>
+                <input type="text" value="0" id="entitySequence" ng-model="entity.Sequence" /></td>
+            <td align="left">*</td>
+        </tr>
+        <tr>
+            <td align="center">
+                <input type="button" ng-click="save(dic)" value="提交" class="btn" /><input type="button" value="取消" ng-click="cancel(dic)" class="btn" /></td>
+        </tr>
+    </table>
+</div>
+  

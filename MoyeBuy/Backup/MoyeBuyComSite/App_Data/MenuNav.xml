@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuNav>
+  <MainMenu>
+    <Navgation disq="1" url="http://www.moyebuy.com" target="_self" >首页</Navgation>
+    <Navgation disq="2" url="http://www.moyebuy.com" target="_blank" >标题1</Navgation>
+    <Navgation disq="3" url="http://www.moyebuy.com" target="_blank" >标题2</Navgation>
+    <Navgation disq="4" url="http://www.moyebuy.com" target="_blank" >标题3</Navgation>
+    <Navgation disq="5" url="http://www.moyebuy.com" target="_blank" >标题4</Navgation>
+    <Navgation disq="6" url="http://www.moyebuy.com" target="_blank" >标题5</Navgation>
+  </MainMenu>
+  <Categorys>
+    <category disq="1" url="http://www.moyebuy.com" target="_self">全部商品分类</category>
+    <category disq="2" url="http://www.moyebuy.com" target="_self">食品、饮料、酒水</category>
+    <category disq="3" url="http://www.moyebuy.com" target="_self">厨房用品、个人护理</category>
+  </Categorys>
+</MenuNav>

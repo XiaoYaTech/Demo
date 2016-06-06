@@ -1,0 +1,12 @@
+﻿@using System.Web.Optimization;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section head{
+    @RenderSection("head", false)
+}
+@section scripts{
+    @Scripts.Render("~/Scripts/Knockout")
+    @RenderSection("scripts", false)
+}
+@RenderBody()

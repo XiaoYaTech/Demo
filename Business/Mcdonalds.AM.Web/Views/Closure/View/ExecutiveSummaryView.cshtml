@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+<task-reminder></task-reminder>
+<top-nav project-id="{{projectId}}" flow-code="Closure" sub-code="Closure_ExecutiveSummary" place-holder="8"></top-nav>
+<cheking-point project-id="projectId" flow-code="Closure_ExecutiveSummary" refresh="checkPointRefresh"></cheking-point>
+
+<notification-message project-id="projectId"
+    flow-code="Closure"
+    sub-flow-code="Closure_ExecutiveSummary"
+    node-id="entity.Id"
+    uscode="ClosureInfo.USCode"></notification-message>
+
+<store-basic-info project="ClosureInfo" code="ClosureInfo.USCode"></store-basic-info>
+<executive-summary entity="entity" project-id="projectId" editable="enableSave"></executive-summary>
+
+<attachments ref-table-name="ClosureExecutiveSummary"
+    project-id="{{projectId}}"
+    flow-code="Closure_ExecutiveSummary"
+    editable="{{enableSave}}"
+    ref-table-id="{{entityId}}"
+    is-history="isHistory"></attachments>
+
+<div ng-hide="isHistory">
+    <project-history page-url="/closure/Main#/ExecutiveSummary/Process/View?projectId={{projectId}}" project-id="projectId" table-name="ClosureExecutiveSummary" title=" Closure Executive Summary History" has-template="false" title-name="ClosureExecutiveSummary"></project-history>
+    <div class="form-actions ta_c" ng-hide="isUserAction">
+        <button type="button" ng-show="enableEdit" class="btn btn-lg btn-yellow" ng-click="editExecuiveSummary()"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        <button type="button" ng-show="enableReCall" class="btn btn-lg btn-orange" ng-click="recallExecuiveSummary()">[[[撤销]]]</button>
+        <button type="button" class="btn btn-lg btn-warning" ng-show="enableSave" ng-click="saveExecutiveSummary()"><span class="fa fa-check"></span>[[[保存]]]</button>
+    </div>
+</div>

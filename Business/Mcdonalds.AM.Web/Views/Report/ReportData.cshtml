@@ -1,0 +1,279 @@
+﻿@using System.Web.Optimization;
+@{
+    ViewBag.Title = "FormData";
+    Layout = "~/Views/Shared/_KnockoutLayout.cshtml";
+}
+@section scripts{
+    <link rel="stylesheet" href="~/Content/datepicker.css" />
+    @Scripts.Render("~/Scripts/Libs/Bootstrap/bootstrap-datepicker.js")
+    @Scripts.Render("~/Scripts/Reports/DataViewModel.js")
+}
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">Results
+            <input type="button" id="btnLoad" data-bind="click: load" class="btn btn-sm btn-red hide" value="load" />
+        </span>
+        <div class="panel-tools">
+        </div>
+        <span class="clear"></span>
+    </div>
+    <div class="panel-body">
+        <am-datagrid params="IsLoading:isLoading,LoadData:loadData,TotalItems:totalItems,PageIndex:pageIndex,PageSize:pageSize,LockedTables:LockedTables,UnLockedTables:UnLockedTables,LockedDatas:LockedDatas,UnLockedDatas:UnLockedDatas"></am-datagrid>
+    </div>
+</div>
+
+<script type="text/template" id="tpl-am-datagrid">
+    <div class="report-grid clearfix">
+
+        <div class="grid-locked">
+            <table class="table table-bordered">
+                <tr data-bind="foreach: lockedTables">
+                    <th class="report-table-header" valign="top" data-bind="text: DispENUS,
+    attr: {
+        colspan: Fields.length,
+        class: 'report_unlocked_' + TableName
+    }"></th>
+                </tr>
+                <tr>
+                    <!--ko foreach:{data:lockedTables,as:'tb'}-->
+                    <!--ko foreach:Fields-->
+                    <th>
+                        <!--ko if:ConditionType==1-->
+                        <dropdown-string params="Update:$root.UpdateCondition,Field:$data,Judgement:'.grid-locked',Width:'150px'"></dropdown-string>
+                        <!--/ko-->
+                        <!--ko if:ConditionType==2-->
+                        <dropdown-date-range params="Update:$root.UpdateCondition,Field:$data,Judgement:'.grid-locked',Width:'150px'"></dropdown-date-range>
+                        <!--/ko-->
+                        <!--ko if:ConditionType==3||ConditionType==5||ConditionType==6-->
+                        <dropdown-number params="Update:$root.UpdateCondition,Field:$data,Judgement:'.grid-locked',Width:'150px'"></dropdown-number>
+                        <!--/ko-->
+                        <!--ko if:ConditionType==4-->
+                        <dropdown-dictionary params="Update:$root.UpdateCondition,Field:$data,Api:'api/report/field/stringfilter?TableName='+tb.TableName+'&FieldName='+FieldName,Judgement:'.grid-locked',Width:'150px'"></dropdown-dictionary>
+                        <!--/ko-->
+                        <!--ko if:ConditionType==7-->
+                        <dropdown-bool params="Update:$root.UpdateCondition,Field:$data,Judgement:'.grid-locked',Width:'150px'"></dropdown-bool>
+                        <!--/ko-->
+                        <!--ko if:ConditionType==0-->
+                        <!--ko text:FieldDispENUS-->
+                        <!--/ko-->
+                        <!--/ko-->
+                    </th>
+                    <!--/ko-->
+                    <!--/ko-->
+                </tr>
+                <!--ko ifnot:isLoading-->
+                <!--ko foreach:lockedDatas-->
+                <tr data-bind="html: $data">
+                </tr>
+                <!--/ko-->
+                <!--/ko-->
+            </table>
+            <!--ko if:isLoading-->
+            <div class="ta_c">
+                <img src="../Content/Images/loading.gif" />
+            </div>
+            <!--/ko-->
+        </div>
+        <div class="grid-unlocked">
+            <table class="table table-bordered">
+                <tr data-bind="foreach: unLockedTables">
+                    <th class="report-table-header" valign="top" data-bind="text: DispENUS,
+    attr: {
+        colspan: Fields.length,
+        class: 'report_unlocked_' + TableName
+    }"></th>
+                </tr>
+                <tr>
+                    <!--ko foreach:{data:unLockedTables,as:'tb'}-->
+                    <!--ko foreach:Fields-->
+                    <th>
+                        <!--ko if:ConditionType==1-->
+                        <dropdown-string params="Update:$root.UpdateCondition,Field:$data,Judgement:'.grid-locked',Width:'150px'"></dropdown-string>
+                        <!--/ko-->
+                        <!--ko if:ConditionType==2-->
+                        <dropdown-date-range params="Update:$root.UpdateCondition,Field:$data,Judgement:'.grid-locked',Width:'150px'"></dropdown-date-range>
+                        <!--/ko-->
+                        <!--ko if:ConditionType==3||ConditionType==5||ConditionType==6-->
+                        <dropdown-number params="Update:$root.UpdateCondition,Field:$data,Judgement:'.grid-locked',Width:'150px'"></dropdown-number>
+                        <!--/ko-->
+                        <!--ko if:ConditionType==4-->
+                        <dropdown-dictionary params="Update:$root.UpdateCondition,Field:$data,Api:'api/report/field/stringfilter?TableName='+tb.TableName+'&FieldName='+FieldName,Judgement:'.grid-locked',Width:'150px'"></dropdown-dictionary>
+                        <!--/ko-->
+                        <!--ko if:ConditionType==7-->
+                        <dropdown-bool params="Update:$root.UpdateCondition,Field:$data,Judgement:'.grid-locked',Width:'150px'"></dropdown-bool>
+                        <!--/ko-->
+                        <!--ko if:ConditionType==0-->
+                        <!--ko text:FieldDispENUS-->
+                        <!--/ko-->
+                        <!--/ko-->
+                    </th>
+                    <!--/ko-->
+                    <!--/ko-->
+                </tr>
+                <!--ko ifnot:isLoading-->
+                <!--ko foreach:unlockedDatas-->
+                <tr data-bind="html: $data">
+                </tr>
+                <!--/ko-->
+                <!--/ko-->
+            </table>
+            <!--ko if:isLoading-->
+            <div class="ta_c">
+                <img src="../Content/Images/loading.gif" />
+            </div>
+            <!--/ko-->
+        </div>
+    </div>
+    <pager params="PageIndex:pageIndex,TotalItems:totalItems,NumPages:5,PageSize:pageSize,OnPageChanged:loadData"></pager>
+</script>
+<script type="text/html" id="tpl-dropdown-string">
+    <div class="dropdown-box dropdown-string">
+        <span class="dropdown-box-trigger" data-bind="text: Label"></span>
+        <div class="dropdown-box-dialog" style="display: none">
+            <div>
+                <div class="text-left">筛选条件：</div>
+                <div>
+                    <input type="text" class="form-control" data-bind="clickBubble: false, value: fiterText, valueUpdate: 'keyup'" />
+                </div>
+                <div class="pd_t_7">
+                    <button class="btn btn-sm btn-default" data-bind="click: UpdateSearch">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="tpl-dropdown-dictionary">
+    <div class="dropdown-box dropdown-string">
+        <span class="dropdown-box-trigger" data-bind="text: Label"></span>
+        <div class="dropdown-box-dialog" style="display: none">
+            <div>
+                <div class="text-left">筛选条件：</div>
+                <div>
+                    <input type="text" class="form-control" data-bind="clickBubble: false, value: fiterText, valueUpdate: 'keyup'" />
+                </div>
+                <div class="pd_t_7">
+                    <a data-bind="click: SelectAll">全选</a>
+                    &nbsp;&nbsp;
+                    <a data-bind="click: InvertAll">反选</a>
+                    &nbsp;&nbsp;
+                    <a data-bind="click: ClearAll">清空</a>
+                </div>
+                <div class="pd_t_7">
+                    <button class="btn btn-sm btn-default" data-bind="click: UpdateSearch">确认</button>
+                </div>
+            </div>
+            <!--ko ifnot:Loading-->
+            <div class="dropdown-box-content">
+                <ul data-bind="foreach: Fields">
+                    <li data-bind="css: { 'hide': !Filtered() }">
+                        <input type="checkbox" class="dropdown-combox-check" data-bind="clickBubble: false, checked: $data.Checked, valueUpdate: 'keyup'" />
+                        &nbsp;&nbsp;
+                        <span class="dropdown-combox-label">
+                            <!--ko text:$data.Text-->
+                            <!--/ko-->
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <!--/ko-->
+            <!--ko if:Loading-->
+            <div class="ta_c">
+                <img src="../Content/Images/loading.gif" />
+            </div>
+            <!--/ko-->
+        </div>
+    </div>
+</script>
+<script type="text/html" id="tpl-dropdown-date-range">
+    <div class="dropdown-box dropdown-date">
+        <span class="dropdown-box-trigger" data-bind="text: Label"></span>
+        <div class="dropdown-box-dialog" style="display: none">
+            <div class="text-left">筛选条件：</div>
+            <div>
+                <p style="text-align: left">StartDate</p>
+                <p class="input-group">
+                    <input type="text" class="form-control" style="width:110px" data-bind="datePicker: StartDate" />
+                    <button class="btn btn-default" data-bind="click:clearStart">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </p>
+                <p style="text-align: left">EndDate</p>
+                <p class="input-group">
+                    <input type="text" class="form-control" style="width:110px" data-bind="datePicker: EndDate" />
+                    <button class="btn btn-default" data-bind="click: clearEnd">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </p>
+                <div class="pd_t_7">
+                    <button class="btn btn-sm btn-default" data-bind="click: UpdateSearch">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="tpl-dropdown-number">
+    <div class="dropdown-box dropdown-number">
+        <span class="dropdown-box-trigger" data-bind="text: Label"></span>
+        <div class="dropdown-box-dialog" style="display: none">
+            <div class="text-left">筛选条件：</div>
+            <input type="text" class="form-control" data-bind="value: LessValue" />
+            ~
+            <input type="text" class="form-control" data-bind="value: GreatValue" />
+            <div class="pd_t_7">
+                <button class="btn btn-sm btn-default" data-bind="click: UpdateSearch">确认</button>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="tpl-dropdown-bool">
+    <div class="dropdown-box dropdown-bool">
+        <span class="dropdown-box-trigger" data-bind="text: Label"></span>
+        <div class="dropdown-box-dialog" style="display: none">
+            <div class="text-left">筛选条件：</div>
+            <div style="margin-top: 10px">
+                <label>
+                    <input type="radio" value="1" data-bind="checked: IsCheck" />&nbsp;Yes</label>
+                &nbsp;&nbsp;
+                <label>
+                    <input type="radio" value="0" data-bind="checked: IsCheck" />&nbsp;No</label>
+            </div>
+            <div class="pd_t_7">
+                <button class="btn btn-sm btn-default" data-bind="click: UpdateSearch">确认</button>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="tpl-pager">
+    <div class="table-paginate">
+        <span class="ng-binding">当前第<!--ko text: pageIndex()+1--><!--/ko-->页/共<!--ko text: totalPages--><!--/ko-->页 共<!--ko text: totalItems--><!--/ko-->条记录</span>
+        <ul class="pagination-sm pagination">
+            <li><a data-bind="    click: selectPage.bind($data, 0)">首页</a></li>
+            <li data-bind="if: !noPrevious()"><a data-bind="    click: selectPage.bind($data, pageIndex() - 1)">上一页</a></li>
+            <!--ko foreach:pages-->
+            <li data-bind="css: { active: $data == $parent.pageIndex() }"><a class="ng-binding" data-bind="    click: $parent.selectPage.bind($parent, $data), text: $data + 1"></a></li>
+            <!--/ko-->
+            <li data-bind="if: !noNext()"><a data-bind="    click: selectPage.bind($data, pageIndex() + 1)">下一页</a></li>
+            <li><a data-bind="    click: selectPage.bind($data, totalPages() - 1)">末页</a></li>
+        </ul>
+    </div>
+</script>
+<div id="modalMessage" class="modal fade" role="dialog" tabindex="-1" aria-hidden='true'>
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table>
+                    <tr valign="middle">
+                        <td class="pd_0_15">
+                            <span class="fa fs_30 fa-warning c_orange"></span>
+                        </td>
+                        <td class="fs_14" data-bind="text: message"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-red" data-bind="click: CloseMessage">[[[确定]]]</button>
+            </div>
+        </div>
+    </div>
+</div>

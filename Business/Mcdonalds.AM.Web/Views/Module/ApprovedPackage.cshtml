@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+<div class="panel panel-black mg_t_10">
+    <div class="panel-heading">
+        <span class="panel-icon"></span>
+        <span class="panel-title">Attachments(Approved Package)
+        </span>
+        <span class="clear"></span>
+    </div>
+    <div class="panel-body pd_0">
+        <table class="table">
+            <tr>
+                <th>No.</th>
+                <th>Item</th>
+                <th>Uploaded By</th>
+                <th>Uploaded Date</th>
+                <th>Operation</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><span class="{{approvedPackage.Icon}}"></span><a ng-href="{{approvedPackage.FileURL}}">Approved Package</a></td>
+                <td>{{approvedPackage.CreatorNameENUS||approvedPackage.CreatorNameZHCN}}</td>
+                <td>{{approvedPackage.CreateTime | date:"yyyy-MM-dd"}}</td>
+                <td class="table-operations">
+                    <div>
+                        <a plupload-simple
+                            upload-url="api/DL/Attachments/Upload/{{flowCode}}/{{usCode}}/ApprovedPackage/{{entityId}}"
+                            upload-finished="uploadAttachFinished"
+                            errormsg="请上传正确的文件">[上传]
+                        </a>
+                        <a ng-if="!!approvedPackage.FileURL" ng-href="{{approvedPackage.FileURL}}">[下载]</a>
+                        <a ng-if="!!approvedPackage.FileURL" ng-click="$parent.deleteAttachment(approvedPackage.ID)">[删除]</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

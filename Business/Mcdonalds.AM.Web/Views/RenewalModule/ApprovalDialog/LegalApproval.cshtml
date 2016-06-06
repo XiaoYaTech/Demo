@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+<form class="form-horizontal" name="frmApprovalDialog">
+    <div class="modal-header">
+        <h3 class="modal-title">[[[选择任务接收人]]]</h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            <ng-switch on="ApprovalType">
+                <div class="form-group" ng-switch-when="Asset_Actor">
+                    <label class="col-xs-3 control-label">[[[Legal]]]</label>
+                    <div class="col-xs-3">
+                        <div ng-show="dataLoaded">
+                            <select chosen="" required class="form-control" name="Legal" ng-model="Approvers.Legal" ng-options="m.NameENUS for m in Legals">
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                        @*<div>{{Approvers.FM.Code}}</div>*@
+                        <err-msgs field="frmApprovalDialog.Legal" submited="$root.$submited"></err-msgs>
+                    </div>
+                </div>
+                <div class="form-group" ng-switch-when="Legal">
+                    <label class="col-xs-3 control-label">[[[General Counsel]]]</label>
+                    <div class="col-xs-3">
+                        <div ng-show="dataLoaded">
+                            <select chosen="" required class="form-control" name="GeneralCounsel" ng-model="Approvers.GeneralCounsel" ng-options="m.NameENUS for m in GeneralCounsels">
+                                <option value="">[[[-- 请选择 --]]]</option>
+                            </select>
+                        </div>
+                        <img src="~/Content/Images/loading.gif" ng-show="!dataLoaded" />
+                        @*<div>{{Approvers.FM.Code}}</div>*@
+                        <err-msgs field="frmApprovalDialog.GeneralCounsel" submited="$root.$submited"></err-msgs>
+                    </div>
+                </div>
+            </ng-switch>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" form-submit ng-click="ok(frmApprovalDialog)">[[[确定]]]</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-sm btn-warning" ng-click="cancel()">[[[取消]]]</button>
+    </div>
+</form>

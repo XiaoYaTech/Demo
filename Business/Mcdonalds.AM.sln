@@ -1,0 +1,95 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcdonalds.AM.Services", "Mcdonalds.AM.Services\Mcdonalds.AM.Services.csproj", "{81337CC1-8771-4BCD-A30C-C5C4E76FEF68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{73D45F7D-0B79-42AA-84FE-2B686E76DA01}"
+	ProjectSection(SolutionItems) = preProject
+		packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll = packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll
+		packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll = packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll
+		References\ephtmltopdf.dll = References\ephtmltopdf.dll
+		References\HtmlRenderer.dll = References\HtmlRenderer.dll
+		packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll = packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll
+		packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll = packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll
+		packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll = packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll
+		packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll = packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll
+		packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll = packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll
+		packages\WebGrease.1.6.0\lib\WebGrease.dll = packages\WebGrease.1.6.0\lib\WebGrease.dll
+		References\项目相关的DLL.txt = References\项目相关的DLL.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{4EF391A2-844F-4B67-AE1E-CE2DEC874F12}"
+	ProjectSection(SolutionItems) = preProject
+		Documents\2014-11-3 ReimagePackage Update.sql = Documents\2014-11-3 ReimagePackage Update.sql
+		Documents\需要初始化数据的基础表清单.txt = Documents\需要初始化数据的基础表清单.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcdonalds.AM.Web", "Mcdonalds.AM.Web\Mcdonalds.AM.Web.csproj", "{B2DC87B1-7B93-4CF3-A8C0-FEEEBE0CF280}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcdonalds.AM.Prototype", "Mcdonalds.AM.Prototype\Mcdonalds.AM.Prototype.csproj", "{B0892C92-3E00-4D23-A78F-984E045CE66D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcdonalds.AM.ApiCaller", "Mcdonalds.AM.ApiProxy\Mcdonalds.AM.ApiCaller.csproj", "{8E6ACC7B-79B6-4FB0-99C2-E4B9C31A8D5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{141C406E-8765-4BC8-B879-CD3FF165ECAA}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcdonalds.AM.UnitTest", "Mcdonalds.AM.UnitTest\Mcdonalds.AM.UnitTest.csproj", "{1281E48F-5D01-4801-95DE-934E11C0CB4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcdonalds.AM.DataAccess", "Mcdonalds.AM.DataAccess\Mcdonalds.AM.DataAccess.csproj", "{FA8B1A33-73F0-46DF-A880-77AA86F4B4E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C70004CE-C80D-46C9-8AFA-C0DE3D39F1F8}"
+	ProjectSection(SolutionItems) = preProject
+		WE-Palette.css = WE-Palette.css
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcdonalds.AM.ScheduleService", "Mcdonalds.AM.ScheduleService\Mcdonalds.AM.ScheduleService.csproj", "{86EF77B5-2970-48BB-97BA-E0DF94F205C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81337CC1-8771-4BCD-A30C-C5C4E76FEF68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81337CC1-8771-4BCD-A30C-C5C4E76FEF68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81337CC1-8771-4BCD-A30C-C5C4E76FEF68}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{81337CC1-8771-4BCD-A30C-C5C4E76FEF68}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{B2DC87B1-7B93-4CF3-A8C0-FEEEBE0CF280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2DC87B1-7B93-4CF3-A8C0-FEEEBE0CF280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2DC87B1-7B93-4CF3-A8C0-FEEEBE0CF280}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2DC87B1-7B93-4CF3-A8C0-FEEEBE0CF280}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{B0892C92-3E00-4D23-A78F-984E045CE66D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0892C92-3E00-4D23-A78F-984E045CE66D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0892C92-3E00-4D23-A78F-984E045CE66D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0892C92-3E00-4D23-A78F-984E045CE66D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E6ACC7B-79B6-4FB0-99C2-E4B9C31A8D5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E6ACC7B-79B6-4FB0-99C2-E4B9C31A8D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E6ACC7B-79B6-4FB0-99C2-E4B9C31A8D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E6ACC7B-79B6-4FB0-99C2-E4B9C31A8D5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1281E48F-5D01-4801-95DE-934E11C0CB4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1281E48F-5D01-4801-95DE-934E11C0CB4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1281E48F-5D01-4801-95DE-934E11C0CB4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1281E48F-5D01-4801-95DE-934E11C0CB4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA8B1A33-73F0-46DF-A880-77AA86F4B4E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA8B1A33-73F0-46DF-A880-77AA86F4B4E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA8B1A33-73F0-46DF-A880-77AA86F4B4E8}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA8B1A33-73F0-46DF-A880-77AA86F4B4E8}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{86EF77B5-2970-48BB-97BA-E0DF94F205C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86EF77B5-2970-48BB-97BA-E0DF94F205C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86EF77B5-2970-48BB-97BA-E0DF94F205C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86EF77B5-2970-48BB-97BA-E0DF94F205C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{141C406E-8765-4BC8-B879-CD3FF165ECAA} = {4EF391A2-844F-4B67-AE1E-CE2DEC874F12}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal

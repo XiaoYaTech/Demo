@@ -1,0 +1,25 @@
+﻿@using System.Configuration
+<div class="HeaderBannerStyle">
+    <div class="HeaderInner">
+        <div class="HeaderPositionCtr">
+            <div class="HeaderLeft">
+                <b>&nbsp;&nbsp;</b><a href="javascript:addToFavorite();">收藏&nbsp;@ConfigurationManager.AppSettings["SiteName"].ToString()</a>
+            </div>
+            <div class="HeaderRight">
+                <div class="" style="float:left;">您好，欢迎来到&nbsp;@ConfigurationManager.AppSettings["SiteName"].ToString()！ &nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="" style="float:left;"><a href="/account/index">[@User.Identity.Name]</a>&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                    <div style="float:left;"><a href="javascript:logout();">[退出]</a>&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                }
+                else
+                { 
+                    <div class="" style="float:left;"><a href="javascript:gologin();">[登录]</a>&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                    <div style="float:left;"><a href="javascript:goregist();">[免费注册]</a>&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                }
+                <div style="float:left;"><a href="javascript:void(0);" onclick="javascript:GoToCart();">我的订单</a>&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                <div style="float:left;"><a href="javascript:void(0);">客户服务</a></div>
+            </div>
+        </div>
+    </div>
+</div>

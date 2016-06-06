@@ -1,0 +1,5 @@
+﻿2015-04-28 15:58:43,850 INFO  Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost  - [Ln 24]: {"desc":"write off and rein cost","projectId":"Renewal15042701","toolId":"ccd41b9f-57e3-4122-91d6-280741c96ea6","nodeInfo":null}
+[Method]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost Get(System.String, System.Guid, Mcdonalds.AM.DataAccess.NodeInfo)
+[Class]: Mcdonalds.AM.DataAccess.RenewalToolWriteOffAndReinCost
+[Stack Trace]: Get at offset 350 in file:line:column d:\Projects\SVN\MCD_AM\trunk\Business\Mcdonalds.AM.DataAccess\Entities\Renewal\RenewalToolWriteOffAndReinCost.cs:24:13
+

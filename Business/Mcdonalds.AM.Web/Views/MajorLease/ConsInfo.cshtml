@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "ConsInfo";
+    Layout = null;
+}
+
+<form name="frmMain">
+    <task-reminder></task-reminder>
+    <top-nav project-id="{{projectId}}" flow-code="MajorLease" sub-code="MajorLease_ConsInfo" place-holder="11" ng-show="!isHistory"></top-nav>
+    <cheking-point project-id="projectId" flow-code="{{subFlowCode}}" refresh="checkPointRefresh" ng-show="!isHistory"></cheking-point>
+    <store-basic-info code="MajorLeaseInfo.USCode" workflow-type="MajorLease" project="MajorLeaseInfo" store="store"></store-basic-info>
+    <reinvenstment-amount-type is-edit="isEditAmountType" amount-type="consInfo.ReinvenstmentType" amount="Amount"></reinvenstment-amount-type>
+    <reinvestment-basic-info flow-code="MajorLease_ConsInfo"
+                             store-type-name="{{store.StoreBasicInfo.StoreTypeName}}"
+                             editable="isEditReinvenstmentBasicInfo" ng-if="isShowReinvenstmentBasicInfo" source="consInfo.ReinBasicInfo" code="MajorLeaseInfo.USCode"></reinvestment-basic-info>
+
+    <notification-message project-id="projectId"
+                          flow-code="MajorLease"
+                          sub-flow-code="{{subFlowCode}}"
+                          node-id="consInfo.Id"
+                          uscode="MajorLeaseInfo.USCode"
+                          is-history="isHistory"></notification-message>
+
+    <reinvestment-cost ng-if="isShowReinvenstmentCost"
+                       editable="isPageEditable"
+                       template-url="api/ExcelTemplate/DownLoadTemplate/ReinvestmentCost/{{projectId}}/MajorLease_ConsInfo"
+                       upload-api="api/ExcelTemplate/UploadReinvestmentCostTpl/MajorLeaseConsInfo/{{projectId}}"
+                       source="consInfo.ReinCost"
+                       before-download="saveReinvestmentBasicInfo(redirectUrl)"
+                       upload-finish="uploadFAFinish"
+                       norm-type-filter="['Major Lease Change (no morm)']"
+                       is-check-page="false">
+    </reinvestment-cost>
+
+    <write-off-amount ng-if="isShowWriteOffAmount"
+                      editable="isPageEditable"
+                      template-url="api/ExcelTemplate/DownLoadTemplate/WriteOffAmount/{{projectId}}/MajorLease_ConsInfo"
+                      upload-api="api/ExcelTemplate/UploadWriteOffTpl/MajorLeaseConsInfo/{{projectId}}"
+                      source="consInfo.WriteOff"
+                      upload-finish="uploadWOFinish"
+                      is-check-page="false">
+    </write-off-amount>
+
+    <reinvstcost-and-writeoff editable="isEditReinvstAndWriteOff" ng-if="isShowReinvstAndWriteOff" write-off-source="consInfo.WriteOff" invent-cost-source="consInfo.ReinCost" reinvenstment-type="consInfo.ReinvenstmentType"></reinvstcost-and-writeoff>
+    <attachments ref-table-name="MajorLeaseConsInfo"
+                 project-id="{{projectId}}"
+                 flow-code="{{subFlowCode}}" 
+                 ref-table-id="{{entityId}}"
+                 is-history="isHistory"
+                 editable="{{isPageEditable}}"
+                 list="attachments"
+                 upload-set="uploadSet"
+                 require-set="requireSet"></attachments>
+    @*<div class="panel panel-black mg_t_10">
+            <div class="panel-heading">
+                <span class="panel-icon"></span>
+                <span class="panel-title">
+                    Attachment
+                </span>
+                <div class="panel-tools" ng-show="isPageEditable">
+                    <a plupload-simple
+                       upload-url="api/MajorLease/ConsInfoAttach/UploadContract/{{projectId}}"
+                       upload-finished="uploadAttachFinished"
+                       error-msg="请上传正确的文件">
+                        <span class='fa fa-upload'></span>
+                        上传
+                    </a>
+                </div>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>No.</th>
+                    <th>Item</th>
+                    <th>Uploaded By</th>
+                    <th>Uploaded Date</th>
+                    <th>Operation</th>
+                </tr>
+                <tr class="required">
+                    <td>1</td>
+                    <td><i>*</i><a ng-href="{{ConsAgreement.FileURL}}">Store Layout</a></td>
+                    <td>
+                        <span ng-show="ConsAgreement.ID">
+                            {{ConsAgreement.CreatorNameZHCN}}({{ConsAgreement.CreatorNameENUS}})
+                        </span>
+                    </td>
+                    <td>{{ConsAgreement.CreateTime | date:"yyyy-MM-dd"}}</td>
+                    <td class="table-operations">
+                        <a plupload-simple
+                           upload-url="api/MajorLease/ConsInfo/UploadContract/{{projectId}}"
+                           upload-finished="uploadFinished"
+                           errormsg="请上传正确的文件"
+                           ng-show="isPageEditable"
+                           class="fa fa-upload">
+                            &nbsp;
+                        </a>
+                        <a ng-href="{{ConsAgreement.FileURL}}" ng-show="(ConsAgreement.ID && isPageEditable)" class="fa fa-download">&nbsp;</a>
+                        <a class="fa fa-trash-o" ng-show="(ConsAgreement.ID && isPageEditable)" ng-click="deleteAttachment(ConsAgreement.ID,'ConsInfoAgreement')"></a>
+                    </td>
+                </tr>
+                <tr class="required" ng-show="consInfo.ReinvenstmentType==3">
+                    <td>2</td>
+                    <td><i>*</i><a ng-href="{{WriteOffAgreement.FileURL}}">FA Write - off Tool</a></td>
+                    <td>
+                        <span ng-show="WriteOffAgreement.ID">
+                            {{WriteOffAgreement.CreatorNameZHCN}}({{WriteOffAgreement.CreatorNameENUS}})
+                        </span>
+                    </td>
+                    <td>{{WriteOffAgreement.CreateTime | date:"yyyy-MM-dd"}}</td>
+                    <td class="table-operations">
+                        <a ng-href="{{WriteOffAgreement.FileURL}}" ng-show="(WriteOffAgreement.ID && isPageEditable)" class="fa fa-download">&nbsp;</a>
+                    </td>
+                </tr>
+                <tr class="required" ng-show="consInfo.ReinvenstmentType==3">
+                    <td>3</td>
+                    <td><i>*</i><a ng-href="{{InvestAgreement.FileURL}}">FA Investment Tool</a></td>
+                    <td>
+                        <span ng-show="InvestAgreement.ID">
+                            {{InvestAgreement.CreatorNameZHCN}}({{InvestAgreement.CreatorNameENUS}})
+                        </span>
+                    </td>
+                    <td>{{InvestAgreement.CreateTime | date:"yyyy-MM-dd"}}</td>
+                    <td class="table-operations">
+                        <a ng-href="{{InvestAgreement.FileURL}}" ng-show="(InvestAgreement.ID && isPageEditable)" class="fa fa-download">&nbsp;</a>
+                    </td>
+                </tr>
+                <tr ng-repeat="att in Attachment">
+                    <td>
+                        <span ng-show="consInfo.ReinvenstmentType==3">{{$index+4}}</span>
+                        <span ng-show="consInfo.ReinvenstmentType!=3">{{$index+2}}</span>
+                    </td>
+                    <td><a ng-href="{{att.FileURL}}">{{att.Name}}</a></td>
+                    <td>{{att.CreatorNameZHCN}}({{att.CreatorNameENUS}})</td>
+                    <td>{{att.CreateTime | date:"yyyy-MM-dd"}}</td>
+                    <td class="table-operations">
+                        <a ng-href="{{att.FileURL}}" ng-show="(att.ID && isPageEditable)" class="fa fa-download">&nbsp;</a>
+                        <a class="fa fa-trash-o" ng-show="(att.ID && isPageEditable)" ng-click="deleteAttachment(att.ID,'Attachment')">&nbsp;</a>
+                    </td>
+                </tr>
+            </table>
+        </div>*@
+    <attachments-memo project-id="projectId"
+                      flow-code="MajorLease">
+    </attachments-memo>
+    <approval-records ref-table-id="consInfo.Id" ref-table-name="MajorLeaseConsInfo" workflow-type="MajorLease"></approval-records>
+    <div ng-show="pageType!='View'">
+        <comment comments="consInfo.Comments" title="[[[意见]]]" editable="true"></comment>
+    </div>
+    <project-history project-id="projectId" table-name="MajorLeaseConsInfo" title="MajorLease ConsInfo History"
+                     page-url="/MajorLease/Main#/ConsInfo/Process/View?projectId={{projectId}}"
+                     title-name="ConsInfo" ng-show="!isHistory"></project-history>
+
+    @*<div ng-switch on="pageType" ng-show="!consInfo.IsProjectFreezed">*@
+    <div ng-switch on="pageType">
+        <div class="ta_c mg_t_10" ng-switch-default>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSave"*@><span class="fa fa-edit"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" form-submit ng-click="submit(frmMain)" ng-show="isRedLine" ng-disabled="IsClickSubmit">
+                <span class="fa fa-check"></span>Submit
+            </button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Approval">
+            <button type="button" class="btn btn-lg btn-red" ng-click="approve()" ng-disabled="IsClickApprove">[[[审批]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="returnToOriginator()" ng-disabled="IsClickReturn"><span class="fa fa-reply"></span>[[[退回]]]</button>
+        </div>
+        <div class="ta_c mg_t_10" ng-switch-when="View" ng-hide="isUserAction">
+            <button type="button" class="btn btn-lg btn-warning" ng-click="save()" ng-show="consInfo.IsShowSave"><span class="fa fa-check"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-orange" ng-click="recall()" ng-show="consInfo.IsShowRecall && !isHistory">[[[撤销]]]</button>
+            <button type="button" class="btn btn-lg btn-yellow" ng-click="edit()" ng-show="consInfo.IsShowEdit && !isHistory"><span class="fa fa-edit"></span>[[[编辑]]]</button>
+        </div>
+        <div class="form-actions ta_c" ng-switch-when="Resubmit">
+            <button type="button" class="btn btn-lg btn-orange" ng-click="save()" @*ng-disabled="IsClickSubmit"*@><span class="fa fa-paste"></span>[[[保存]]]</button>
+            <button type="button" class="btn btn-lg btn-red" ng-click="submit(frmMain)" ng-disabled="IsClickSubmit"><span class="fa fa-check"></span>[[[呈递]]]</button>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,93 @@
+﻿@{
+    Layout = null;
+}
+<form name="frmProject">
+    <div class="panel panel-black mg_t_10">
+        <div class="panel-heading">
+            <span class="panel-icon"></span>
+            <span class="panel-title">[[[Closure Info]]]
+            </span>
+            <div class="panel-tools" ng-show="canInnerEdit">
+                <button class="btn btn-sm" ng-show="!innerEditing" ng-click="edit()">
+                    <span class="fa fa-edit"></span>[[[编辑]]]
+                </button>
+                <button class="btn btn-sm" ng-show="innerEditing" ng-click="save()">
+                    <span class="fa fa-save"></span>[[[保存]]]
+                </button>
+            </div>
+        </div>
+        <div class="panel-body form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">
+                    [[[Project Type]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    [[[Closure]]]
+                </div>
+                <label class="col-xs-2 control-label">
+                    [[[US Code]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    {{detail.USCode}}
+                </div>
+                <label class="col-xs-2 control-label">
+                    [[[Project Create Date]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    {{detail.CreateDate|date:'yyyy-MM-dd'}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">
+                    [[[Close Date]]]
+                </label>
+                <div class="col-xs-2 pd_t_7" ng-show="innerEditing">
+                    <p class="input-group">
+                        <input type="text" class="form-control" ng-model="detail.ActualCloseDate" datepicker-popup="{{format}}" is-open="$parent.showCloseDate" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDate($event,'showCloseDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+                <div ng-show="!innerEditing" class="col-xs-2 pd_t_7">
+                    {{detail.ActualCloseDate|date:'yyyy-MM-dd'}}
+                </div>
+                <label class="col-xs-2 control-label">
+                    [[[Closure Type]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    <dict-selector parent-code="ClosureType" editable="innerEditing" selected-code="detail.ClosureTypeCode" selected-dict="closureType"></dict-selector>
+                </div>
+                <label class="col-xs-2 control-label">
+                    [[[Relocation]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    {{detail.RelocationNameZHCN}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">
+                    [[[Risk Status]]]
+                </label>
+                <div class="col-xs-2 pd_t_7">
+                    <dict-selector parent-code="RiskStatus" editable="innerEditing" selected-code="detail.RiskStatusCode" selected-dict="riskStatus"></dict-selector>
+                </div>
+                <label class="col-xs-2 control-label">
+                    [[[Closure Reason]]]
+                </label>
+                <div class="col-xs-6 pd_t_7">
+                    <dict-selector parent-code="ClosureReasons" editable="innerEditing" selected-code="detail.ClosureReasonCode" selected-dict="closureReason"></dict-selector>
+                    <div ng-show="innerEditing && detail.ClosureReasonCode=='Others'" class="pd_t_7">
+                        <textarea id="closureReasonRemark" rows="4" ng-model="detail.ClosureReasonRemark" class="form-control input-required" />
+                    </div>
+                    <div ng-show="!innerEditing && detail.ClosureReasonCode=='Others'" class="pd_t_7">
+                        {{detail.ClosureReasonRemark}}
+                    </div>
+                </div>
+                <div class="col-xs-4 pd_t_7">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

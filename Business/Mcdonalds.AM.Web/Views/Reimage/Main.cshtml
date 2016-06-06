@@ -1,0 +1,22 @@
+﻿@using System.Web.Optimization;
+@{
+    Layout = "~/Views/Shared/_AngularLayout.cshtml";
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/Apps/ReimageApp.js")
+    @Scripts.Render("~/Scripts/Modules/Reimage.js")
+    @Scripts.Render("~/Scripts/Services/SiteInfoService.js")
+    @Scripts.Render("~/Scripts/Services/Reimage/ReimageService.js")
+    @Scripts.Render("~/Scripts/Controllers/Reimage/ReimageCreateController.js")
+    @Scripts.Render("~/Scripts/Controllers/Reimage/ConsInfoController.js")
+    @Scripts.Render("~/Scripts/Controllers/Reimage/ReimageSummaryController.js")
+    @Scripts.Render("~/Scripts/Controllers/Reimage/ReimagePackageController.js")
+    @Scripts.Render("~/Scripts/Controllers/Reimage/ConsInvtCheckingController.js")
+    @Scripts.Render("~/Scripts/Controllers/Reimage/ReopenMemoController.js")
+    @Scripts.Render("~/Scripts/Controllers/Reimage/GBMemoController.js")
+@Scripts.Render("~/Scripts/Controllers/Reimage/SiteInfoController.js")
+    @Scripts.Render("~/Scripts/Controllers/Reimage/SelectPackageController.js")
+@Scripts.Render("~/Scripts/Controllers/Reimage/TempClosureMemoController.js")
+}
+<div ng-view></div>

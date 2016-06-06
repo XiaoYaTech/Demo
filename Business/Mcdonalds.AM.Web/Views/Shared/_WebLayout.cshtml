@@ -1,0 +1,19 @@
+﻿@using System.Web.Optimization;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section head{
+    @RenderSection("head",false)
+}
+@section scripts{
+    @RenderSection("scripts",false)
+}
+
+<script src="~/Scripts/Libs/bootstrap-typeahead.js"></script>
+
+@RenderBody()
+@*<hr />
+<footer>
+    <p>&copy; @DateTime.Now.Year - MCD AM</p>
+</footer>*@
+

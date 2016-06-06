@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "我的购物车";
+    ViewBag.ScriptPath = "<script src =\"" + Url.Content("~/Scripts/Cart.js?version=") + DateTime.Now.Ticks + "\" type=\"text/javascript\" ></script>";    
+}
+
+<div class="CartDiv">
+    <div class="MyCartTitle">
+        <img src="@Url.Content("/Content/MoyeBuyComStyle1/Imgs/cart_001.gif")" width="190px" height="50px" alt="我的购物车" />
+        <ul>
+            <li class="step1">1.我的购物车</li>
+            <li class="step2">2.填写核对订单信息</li>
+            <li class="step3">3.成功提交订单</li>
+        </ul>
+    </div>
+    <div class="CartDetail">
+        <h2><span style=" margin-left:10px;">我挑选的商品</span></h2>
+        <div class="ListCart">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>序号</th>
+                    <th>商品名称</th>
+                    <th>单价</th>
+                    <th>总价</th>
+                    <th>获赠积分</th>
+                    <th>商品数量</th>
+                    <th>操作</th>
+                </tr>
+                @if (Model != null)
+                {
+                    int i = 1;
+                    decimal allMoney = 0;
+                    decimal price = 0;
+                    IList<MoyeBuy.Com.Model.ProductInfo> ListProd = (IList<MoyeBuy.Com.Model.ProductInfo>)Model["ListProd"];
+                    List<MoyeBuy.Com.Model.CartItem> ListCartItem = (List<MoyeBuy.Com.Model.CartItem>)Model["ListCartItem"];
+                    foreach (var prod in ListProd)
+                    {
+                        int intProdCount = 1;
+                        foreach (var item in ListCartItem)
+                        {
+                            if (item.ProductId == prod.ProductId)
+                            {
+                                intProdCount = item.Count;
+                                price = item.Price;
+                                break;
+                            }
+                        }
+                        <tr>
+                            <td>@i</td>
+                            <td>@prod.ProductName</td>
+                            <td>@prod.MoyeBuyPrice</td>
+                            <td><span id="AllPrice+@i">@price</span></td>
+                            <td>0</td>
+                            <td align="center"><span onclick="javascript:subProd();" style="cursor:pointer;display:block;">-</span><input type="text" value="@intProdCount" id="ProdCount" name="ProdCount" maxlength="5" size="5" onblur="javascript:checknum(this);" style="text-align:center;" /><span onclick="javascript:addProd();" style="cursor:pointer;display:block;">+</span></td>
+                            <td><a href="javascript:void(0);" onclick="javascript:delProd('@prod.ProductId');">删除</a></td>
+                        </tr>
+                        i++;
+                        allMoney = allMoney + Convert.ToDecimal(prod.MoyeBuyPrice);
+                    }
+                    <tr>
+                        <td><a href="javascript:clear();" target="_self">清空购物车</a></td>
+                        <td colspan="6" align="right" style=" text-align:right;">总价:<span style="color:Red;"><strong>@allMoney</strong></span> ；注：低于100元附加8元运费(如下一步选择上门店取货可免运费)!</td>
+                    </tr>
+                }
+            </table>
+            <div class="ListCartFooter">
+                <a href="/Home/Index"><img src="@Url.Content("/Content/MoyeBuyComStyle1/Imgs/jixu.gif")" /></a>
+                <div style="float:right;">
+                    <a href="/Cart/CheckOutGuest" target="_self" ><img src="@Url.Content("/Content/MoyeBuyComStyle1/Imgs/nouserbuy.jpg")" /></a>
+                    <a href="/Cart/CheckOutGuest" target="_self" ><img src="@Url.Content("/Content/MoyeBuyComStyle1/Imgs/userbuy.jpg")" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

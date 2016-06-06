@@ -1,0 +1,17 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="modal-body">
+    <table>
+        <tr valign="middle">
+            <td ng-show="!!iconClass" class="pd_0_15">
+                <span class="fa fs_30 {{iconClass}}"></span>
+            </td>
+            <td class="fs_14" ng-bind-html="content"></td>
+        </tr>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-red" ng-click="ok()">[[[确定]]]</button>
+</div>
