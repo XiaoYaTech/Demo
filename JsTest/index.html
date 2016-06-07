@@ -1,0 +1,135 @@
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<style>
+.container
+{
+	margin:auto;
+	width:1000px;
+	border:1px solid red;
+}
+.c-center
+{
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	top:0;
+	background:red;
+}
+.center
+{
+	width:500px;
+	height:400px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-left:-250px;
+	margin-top:-200px;
+	border:1px solid gray;
+	z-index:10;
+}
+
+.full-page
+{
+	position:absolute;
+	background:#000;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	background-size:cover;
+	transition:all 2s ease;
+}
+video
+{
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+.desc
+{
+	position:absolute;
+	color:white;
+	margin:auto;
+	top:20%;
+	left:50%;
+	right:50%;
+	font-size:18px;
+	font-weight:bold;
+	z-index:10;
+}
+#page1
+{
+	background-image:url(http://s.cn.bing.net/az/hprichbg/rb/WhitePocket_ZH-CN12539562230_1920x1080.jpg);
+	z-index:1;
+}
+#page2
+{
+	background-image:url("http://s.cn.bing.net/az/hprichbg/rb/WestBow_ZH-CN11767628474_1920x1080.jpg");
+	z-index:2;
+}
+#page3
+{
+	background-image:url("http://s.cn.bing.net/az/hprichbg/rb/MesseHall_ZH-CN8032841463_1920x1080.jpg");
+	z-index:3;
+}
+#page4
+{
+	z-index:4;
+}
+#page5
+{
+	background:#000;
+	z-index:5;
+}
+#page6
+{
+	background:#000;
+	z-index:6;
+}
+#page7
+{
+	background:#000;
+	z-index:7;
+}
+</style>
+</head>
+<body>
+<!--
+	<div class="center"></div>
+	<div class="container">
+		<div class="c-center"></div>
+	</div>
+	-->
+	<div id="page1" class="full-page">
+		
+	</div>
+	<div id="page2" class="full-page">2</div>
+	<div id="page3" class="full-page">
+		<p class="desc"  >在异乡的</p>
+	</div>
+	<div class="full-page" id="page4" >
+		<p class="desc" >有时候 我们也会找点乐子 比如跳舞</p>
+		<video id="page4_video" loop="loop"  src="http://101.44.1.122/mp4files/5162000004C54B1C/az29176.vo.msecnd.net/videocontent/Puffins_Full_noUI_1080_HD_ZH-CN.mp4" preload="auto"></video>
+	</div>
+	<div class="full-page" id="page5" >
+		<p class="desc" >云</p>
+		<video id="page5_video"  loop="loop" src="../vedio/水下鱼.mp4" preload="auto"></video>
+	</div>
+	<div class="full-page" id="page6" >
+		<p class="desc" >云</p>
+		<video id="page6_video" loop="loop" src="../vedio/云.mp4" preload="auto"></video>
+	</div>
+	<div class="full-page" id="page7" >
+		<p class="desc"style="width:320px;margin-left:-160px;top:10%;" >繁华的都市中，我们都在努力<strong style="font-size:30px;color:#EF0606;">奋斗</strong>！</p>
+		<video id="page7_video" autoplay="autoplay" loop="loop" src="../vedio/车流.mp4" preload="auto"></video>
+	</div>
+	<script src="jTool.js" ></script>
+	<script src="index.js" ></script>
+</body>
+</html>
